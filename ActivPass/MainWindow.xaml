@@ -4,9 +4,20 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ActivPass"
+        Background="#494A52"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="ActivPass" Height="830" Width="1640" FontSize="18" WindowStartupLocation="CenterScreen">
+    <Grid ShowGridLines="True">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="200"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Button x:Name="AddSecretButton" Content="Add secret" Grid.Column="2" HorizontalAlignment="Left" Margin="30,0,0,0" VerticalAlignment="Center" Width="140"/>
+        <TextBox x:Name="SearchBox" Text="Search Box" Grid.Column="1" Width="450" Height="70" Margin="0,0,0,0" TextWrapping="NoWrap" HorizontalAlignment="Center" VerticalAlignment="Top"/>
     </Grid>
 </Window>
