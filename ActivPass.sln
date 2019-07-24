@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2027
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ActivPass", "ActivPass\ActivPass.csproj", "{264AB062-52CC-4ADE-ADC4-B6C9FC3E0FE4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{264AB062-52CC-4ADE-ADC4-B6C9FC3E0FE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{264AB062-52CC-4ADE-ADC4-B6C9FC3E0FE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{264AB062-52CC-4ADE-ADC4-B6C9FC3E0FE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{264AB062-52CC-4ADE-ADC4-B6C9FC3E0FE4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {56BB0CCF-E207-45D3-B578-CF68DFFBBA90}
+	EndGlobalSection
+EndGlobal
