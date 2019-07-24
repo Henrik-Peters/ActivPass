@@ -1,0 +1,66 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Style x:Key="SearchBox" TargetType="{x:Type TextBox}">
+        <Setter Property="Background" Value="#444444"/>
+        <Setter Property="BorderBrush" Value="#353535"/>
+        <Setter Property="Foreground" Value="#F7F7F7"/>
+        <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="AllowDrop" Value="true"/>
+        <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
+        <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TextBox}">
+                    <Border x:Name="border" CornerRadius="3,3,0,0" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0,0,0,3" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="45"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Viewbox Height="27" HorizontalAlignment="Right" Margin="0,0,6,0" Stretch="Uniform">
+                                <Canvas Name="SVGRoot" Width="64" Height="64">
+                                    <Path Fill="#BBC0C4" StrokeThickness="2.83464575" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Opacity="1">
+                                        <Path.Data>
+                                            <PathGeometry Figures="M 25.902344 2.2753906 A 22.936777 22.936777 0 0 0 2.9667969 25.210938 22.936777 22.936777 0 0 0 25.902344 48.148438 22.936777 22.936777 0 0 0 39.083984 43.966797 L 56.539062 61.939453 61.3125 57.519531 43.886719 39.445312 A 22.936777 22.936777 0 0 0 48.839844 25.210938 22.936777 22.936777 0 0 0 25.902344 2.2753906 Z m 0 5.7011719 A 17.235727 17.235727 0 0 1 43.138672 25.210938 17.235727 17.235727 0 0 1 25.902344 42.447266 17.235727 17.235727 0 0 1 8.6679688 25.210938 17.235727 17.235727 0 0 1 25.902344 7.9765625 Z" FillRule="NonZero"/>
+                                        </Path.Data>
+                                    </Path>
+                                </Canvas>
+                            </Viewbox>
+                            <Label x:Name="HintLabel" Content="{TemplateBinding Tag}" Foreground="#BBC0C4" Visibility="Hidden" Grid.Column="1" VerticalAlignment="Center" Margin="-3,0,0,0"/>
+                            <ScrollViewer x:Name="PART_ContentHost" Grid.Column="1" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Text}" Value="">
+                            <Setter TargetName="HintLabel" Property="Visibility" Value="Visible"/>
+                        </DataTrigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="BorderBrush" TargetName="border" Value="#44AAFF"/>
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="true">
+                            <Setter Property="BorderBrush" TargetName="border" Value="#3399FF"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsInactiveSelectionHighlightEnabled" Value="true"/>
+                    <Condition Property="IsSelectionActive" Value="false"/>
+                </MultiTrigger.Conditions>
+                <Setter Property="SelectionBrush" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>
+            </MultiTrigger>
+        </Style.Triggers>
+    </Style>
+
+</ResourceDictionary>

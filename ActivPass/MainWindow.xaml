@@ -17,7 +17,7 @@
             <RowDefinition Height="80"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Button x:Name="AddSecretButton" Content="Add secret" Grid.Column="2" HorizontalAlignment="Left" Margin="30,0,0,0" VerticalAlignment="Center" Width="140"/>
-        <TextBox x:Name="SearchBox" Text="Search Box" Grid.Column="1" Width="450" Height="70" Margin="0,0,0,0" TextWrapping="NoWrap" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Button x:Name="AddSecretButton" Content="Add secret" Grid.Column="2" Width="140" Style="{StaticResource NormalButton}" HorizontalAlignment="Left" Margin="30,0,0,0" VerticalAlignment="Center"/>
+        <TextBox x:Name="SearchBox" Tag="Search" Text="" Grid.Column="1" Width="700" Height="70" Margin="0,0,0,0" Style="{StaticResource SearchBox}" TextWrapping="NoWrap" HorizontalAlignment="Center" VerticalAlignment="Top"/>
     </Grid>
 </Window>
