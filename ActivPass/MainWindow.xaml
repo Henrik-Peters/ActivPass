@@ -9,7 +9,7 @@
         Title="ActivPass" Height="830" Width="1640" FontSize="18" WindowStartupLocation="CenterScreen">
     <Grid ShowGridLines="True">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="200"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="200"/>
         </Grid.ColumnDefinitions>
@@ -19,5 +19,6 @@
         </Grid.RowDefinitions>
         <Button x:Name="AddSecretButton" Content="Add secret" Grid.Column="2" Width="140" Style="{StaticResource NormalButton}" HorizontalAlignment="Left" Margin="30,0,0,0" VerticalAlignment="Center"/>
         <TextBox x:Name="SearchBox" Tag="Search" Text="" Grid.Column="1" Width="700" Height="70" Margin="0,0,0,0" Style="{StaticResource SearchBox}" TextWrapping="NoWrap" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Button x:Name="MenuButton" Content="Menu" Grid.Column="0" Grid.Row="0" Style="{StaticResource MenuButton}" HorizontalAlignment="Left" Margin="40,0,0,0" VerticalAlignment="Center" Width="110" Height="40"/>
     </Grid>
 </Window>
