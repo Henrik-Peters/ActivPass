@@ -1,0 +1,226 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <!-- Context menu color definitions -->
+    <sys:Double x:Key="ContextMenu.Opacity">1.0</sys:Double>
+    <SolidColorBrush x:Key="ContextMenu.Text.Color" Color="#F0F0F0"/>
+    <SolidColorBrush x:Key="ContextMenu.Background.Color" Color="#2B2B2B"/>
+    <SolidColorBrush x:Key="ContextMenu.Background.Hover" Color="#404040"/>
+    <SolidColorBrush x:Key="ContextMenu.Background.Pressed" Color="#555555"/>
+    <SolidColorBrush x:Key="ContextMenu.Background.Submenu" Color="#2A5F8B"/>
+    <SolidColorBrush x:Key="ContextMenu.ChildrenArrow.Color" Color="#C2C2C2"/>
+    <SolidColorBrush x:Key="ContextMenu.Seperator.Color" Color="#686868"/>
+    <SolidColorBrush x:Key="ContextMenu.Border.Color" Color="#3B3B3B"/>
+
+    <!-- Separator style for Context menus -->
+    <Style x:Key="{x:Static MenuItem.SeparatorStyleKey}" TargetType="{x:Type Separator}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Separator}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="6"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="6"/>
+                        </Grid.ColumnDefinitions>
+                        <Rectangle Height="1.5" Grid.Column="1" Fill="{StaticResource ContextMenu.Seperator.Color}"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Outer context menu style -->
+    <Style TargetType="{x:Type ContextMenu}">
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="Grid.IsSharedSizeScope" Value="true"/>
+        <Setter Property="Foreground" Value="{StaticResource ContextMenu.Text.Color}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ContextMenu}">
+                    <Border x:Name="Border" BorderThickness="1" Opacity="{StaticResource ContextMenu.Opacity}" Background="{StaticResource ContextMenu.Background.Color}" BorderBrush="{StaticResource ContextMenu.Border.Color}">
+                        <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ContextMenu item style -->
+    <ControlTemplate x:Key="{x:Static MenuItem.SubmenuItemTemplateKey}" TargetType="{x:Type MenuItem}">
+        <Border Name="Border" Padding="0,5,0,5" Background="{StaticResource ContextMenu.Background.Color}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" SharedSizeGroup="Icon"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto" SharedSizeGroup="ItemText"/>
+                    <ColumnDefinition Width="13"/>
+                </Grid.ColumnDefinitions>
+                <ContentPresenter Name="Icon" MaxWidth="20" MaxHeight="20" Margin="6,0,6,0" VerticalAlignment="Center" ContentSource="Icon"/>
+                <Border Name="Check" Width="20" Height="20" Visibility="Collapsed" Margin="5,0,5,0" Background="{StaticResource ContextMenu.Background.Color}" BorderThickness="1" BorderBrush="Transparent">
+                    <Path Name="CheckMark" Width="17" Height="17" Visibility="Hidden" SnapsToDevicePixels="False" Stroke="#578EB2" StrokeThickness="3" Data="M 1.5 9 L 6 13 16 3" />
+                </Border>
+                <ContentPresenter Name="HeaderHost" Grid.Column="1" ContentSource="Header"/>
+                <TextBlock x:Name="InputGestureText" Grid.Column="2" Margin="0,0,0,2" Text="{TemplateBinding InputGestureText}" DockPanel.Dock="Right"/>
+            </Grid>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="Icon" Value="{x:Null}">
+                <Setter TargetName="Icon" Property="Visibility" Value="Hidden"/>
+            </Trigger>
+            <Trigger Property="IsChecked" Value="True">
+                <Setter TargetName="CheckMark" Property="Visibility" Value="Visible"/>
+            </Trigger>
+            <Trigger Property="IsCheckable" Value="True">
+                <Setter TargetName="Check" Property="Visibility" Value="Visible"/>
+                <Setter TargetName="Icon" Property="Visibility" Value="Hidden"/>
+            </Trigger>
+            <Trigger Property="IsHighlighted" Value="True">
+                <Setter TargetName="Border" Property="Background" Value="{StaticResource ContextMenu.Background.Hover}"/>
+                <Setter TargetName="Check" Property="Background" Value="{StaticResource ContextMenu.Background.Hover}"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter TargetName="Border" Property="Background" Value="{StaticResource ContextMenu.Background.Pressed}"/>
+                <Setter TargetName="Check" Property="Background" Value="{StaticResource ContextMenu.Background.Pressed}"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Foreground" Value="DarkGray"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <!-- ContextMenu item style when it contains sub items -->
+    <ControlTemplate x:Key="{x:Static MenuItem.SubmenuHeaderTemplateKey}" TargetType="{x:Type MenuItem}">
+        <Border Name="Border" Padding="0,5,0,5" Background="{StaticResource ContextMenu.Background.Color}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" SharedSizeGroup="Icon"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto" SharedSizeGroup="ItemText"/>
+                    <ColumnDefinition Width="13"/>
+                </Grid.ColumnDefinitions>
+                <ContentPresenter Name="Icon" MaxWidth="20" MaxHeight="20" Margin="5,0,5,0" VerticalAlignment="Center" ContentSource="Icon"/>
+                <ContentPresenter Name="HeaderHost" Grid.Column="1" ContentSource="Header" RecognizesAccessKey="True"/>
+                <TextBlock x:Name="InputGestureText" Grid.Column="2" Text="{TemplateBinding InputGestureText}" Margin="0,0,0,2" DockPanel.Dock="Right"/>
+                <Path Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" Data="M 0 0 L 0 7 L 4 3.5 Z" Fill="{StaticResource ContextMenu.ChildrenArrow.Color}"/>
+                <Popup Name="Popup" Placement="Right" HorizontalOffset="0" IsOpen="{TemplateBinding IsSubmenuOpen}" AllowsTransparency="True" Focusable="False" PopupAnimation="Fade">
+                    <Border Name="SubmenuBorder" Opacity="{StaticResource ContextMenu.Opacity}" BorderThickness="1" SnapsToDevicePixels="True"
+                            Background="{StaticResource ContextMenu.Background.Color}"
+                            BorderBrush="{StaticResource ContextMenu.Border.Color}">
+                        <StackPanel IsItemsHost="True"/>
+                    </Border>
+                </Popup>
+            </Grid>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="Icon" Value="{x:Null}">
+                <Setter TargetName="Icon" Property="Visibility" Value="Collapsed"/>
+            </Trigger>
+            <Trigger Property="IsHighlighted" Value="true">
+                <Setter TargetName="Border" Property="Background" Value="{StaticResource ContextMenu.Background.Submenu}"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Foreground" Value="LightGray"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+
+    <!-- Alternative styles -->
+    <!-- ContextMenu item style with radio button instead of a checkbox -->
+    <ControlTemplate x:Key="RadioMenuItemTemplate" TargetType="{x:Type MenuItem}">
+        <Border Name="Border" Padding="0,5,0,5" Background="{StaticResource ContextMenu.Background.Color}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" SharedSizeGroup="Icon"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto" SharedSizeGroup="ItemText"/>
+                    <ColumnDefinition Width="13"/>
+                </Grid.ColumnDefinitions>
+                <ContentPresenter Name="Icon" MaxWidth="20" MaxHeight="20" Margin="6,0,6,0" VerticalAlignment="Center" ContentSource="Icon"/>
+
+                <!-- Radio button instead of a checkbox -->
+                <Border Name="Check" Width="20" Height="20" Visibility="Collapsed" Margin="5,0,5,0" Background="{StaticResource ContextMenu.Background.Color}" BorderThickness="1" BorderBrush="Transparent">
+                    <Grid Name="CheckMark" Visibility="Hidden">
+                        <Ellipse Name="OuterCircle" Width="17" Height="17" Fill="#578EB2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Ellipse Name="MidCircle" Width="14" Height="14" Fill="{StaticResource ContextMenu.Background.Color}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Ellipse Name="InnerCircle" Width="9" Height="9" Fill="#578EB2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Grid>
+                </Border>
+
+                <ContentPresenter Name="HeaderHost" Grid.Column="1" ContentSource="Header"/>
+                <TextBlock x:Name="InputGestureText" Grid.Column="2" Margin="0,0,0,2" Text="{TemplateBinding InputGestureText}" DockPanel.Dock="Right"/>
+            </Grid>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="Icon" Value="{x:Null}">
+                <Setter TargetName="Icon" Property="Visibility" Value="Hidden"/>
+            </Trigger>
+            <Trigger Property="IsChecked" Value="True">
+                <Setter TargetName="CheckMark" Property="Visibility" Value="Visible"/>
+            </Trigger>
+            <Trigger Property="IsCheckable" Value="True">
+                <Setter TargetName="Check" Property="Visibility" Value="Visible"/>
+                <Setter TargetName="Icon" Property="Visibility" Value="Hidden"/>
+            </Trigger>
+            <Trigger Property="IsHighlighted" Value="True">
+                <Setter TargetName="Border" Property="Background" Value="{StaticResource ContextMenu.Background.Hover}"/>
+                <Setter TargetName="Check" Property="Background" Value="{StaticResource ContextMenu.Background.Hover}"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter TargetName="Border" Property="Background" Value="{StaticResource ContextMenu.Background.Pressed}"/>
+                <Setter TargetName="Check" Property="Background" Value="{StaticResource ContextMenu.Background.Pressed}"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Foreground" Value="DarkGray"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <!-- ContextMenu item style with another SharedSizeGroup (useful when sub items should be checkable but the parent items not) -->
+    <ControlTemplate x:Key="OtherSizeGroupMenuItemTemplate" TargetType="{x:Type MenuItem}">
+        <Border Name="Border" Padding="0,5,0,5" Background="{StaticResource ContextMenu.Background.Color}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" SharedSizeGroup="IconSubGroup"/>
+                    <!-- Size group changed here -->
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto" SharedSizeGroup="ItemText"/>
+                    <ColumnDefinition Width="13"/>
+                </Grid.ColumnDefinitions>
+                <ContentPresenter Name="Icon" MaxWidth="20" MaxHeight="20" Margin="6,0,6,0" VerticalAlignment="Center" ContentSource="Icon"/>
+                <Border Name="Check" Width="20" Height="20" Visibility="Collapsed" Margin="5,0,5,0" Background="{StaticResource ContextMenu.Background.Color}" BorderThickness="1" BorderBrush="Transparent">
+                    <Path Name="CheckMark" Width="17" Height="17" Visibility="Hidden" SnapsToDevicePixels="False" Stroke="#578EB2" StrokeThickness="3" Data="M 1.5 9 L 6 13 16 3" />
+                </Border>
+                <ContentPresenter Name="HeaderHost" Grid.Column="1" ContentSource="Header"/>
+                <TextBlock x:Name="InputGestureText" Grid.Column="2" Margin="0,0,0,2" Text="{TemplateBinding InputGestureText}" DockPanel.Dock="Right"/>
+            </Grid>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="Icon" Value="{x:Null}">
+                <Setter TargetName="Icon" Property="Visibility" Value="Hidden"/>
+            </Trigger>
+            <Trigger Property="IsChecked" Value="True">
+                <Setter TargetName="CheckMark" Property="Visibility" Value="Visible"/>
+            </Trigger>
+            <Trigger Property="IsCheckable" Value="True">
+                <Setter TargetName="Check" Property="Visibility" Value="Visible"/>
+                <Setter TargetName="Icon" Property="Visibility" Value="Hidden"/>
+            </Trigger>
+            <Trigger Property="IsHighlighted" Value="True">
+                <Setter TargetName="Border" Property="Background" Value="{StaticResource ContextMenu.Background.Hover}"/>
+                <Setter TargetName="Check" Property="Background" Value="{StaticResource ContextMenu.Background.Hover}"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter TargetName="Border" Property="Background" Value="{StaticResource ContextMenu.Background.Pressed}"/>
+                <Setter TargetName="Check" Property="Background" Value="{StaticResource ContextMenu.Background.Pressed}"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Foreground" Value="DarkGray"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+</ResourceDictionary>

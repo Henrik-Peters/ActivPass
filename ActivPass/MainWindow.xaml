@@ -7,6 +7,16 @@
         Background="#494A52"
         mc:Ignorable="d"
         Title="ActivPass" Height="830" Width="1640" FontSize="18" WindowStartupLocation="CenterScreen">
+    
+    <Window.Resources>
+        <ContextMenu x:Key="MainMenu" Width="150" FontSize="18" FontFamily="Segoue UI" FontWeight="Normal">
+            <MenuItem x:Name="NewMenuItem" Header="New"/>
+            <MenuItem x:Name="OpenMenuItem" Header="Open"/>
+            <Separator/>
+            <MenuItem x:Name="ExitMenuItem" Header="Exit"/>
+        </ContextMenu>
+    </Window.Resources>
+    
     <Grid ShowGridLines="True">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
