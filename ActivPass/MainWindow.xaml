@@ -4,10 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ActivPass"
+        xmlns:ViewModels="clr-namespace:ActivPass.ViewModels"
         Background="#494A52"
         mc:Ignorable="d"
         Title="ActivPass" Height="830" Width="1640" FontSize="18" WindowStartupLocation="CenterScreen">
-    
+
+    <Window.DataContext>
+        <ViewModels:MainViewModel/>
+    </Window.DataContext>
+
     <Window.Resources>
         <ContextMenu x:Key="MainMenu" Width="150" FontSize="18" FontFamily="Segoue UI" FontWeight="Normal">
             <MenuItem x:Name="NewMenuItem" Header="New"/>
