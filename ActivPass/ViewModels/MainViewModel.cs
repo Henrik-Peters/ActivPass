@@ -3,10 +3,10 @@
 // Copyright 2019 Henrik Peters
 // See LICENSE file in the project root for full license information
 #endregion
-using System;
 using System.Windows;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
+using System.Windows.Input;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 
 namespace ActivPass.ViewModels
 {
@@ -15,9 +15,24 @@ namespace ActivPass.ViewModels
     /// </summary>
     public class MainViewModel : ViewModel
     {
+        public ContextMenu MainMenu { private get; set; }
+        public ICommand ShowMainMenu { get; set; }
+
+        /// <summary>
+        /// Show the application main menu which
+        /// should be binded to the MainMenu property.
+        /// </summary>
+        /// <param name="placementTarget">Target for the menu</param>
+        private void DisplayMainMenu(UIElement placementTarget)
+        {
+            this.MainMenu.PlacementTarget = placementTarget;
+            this.MainMenu.Placement = PlacementMode.Bottom;
+            this.MainMenu.IsOpen = true;
+        }
+
         public MainViewModel()
         {
-
+            this.ShowMainMenu = new RelayCommand<UIElement>(DisplayMainMenu);
         }
     }
 }

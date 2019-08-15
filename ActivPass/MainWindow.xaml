@@ -9,19 +9,19 @@
         mc:Ignorable="d"
         Title="ActivPass" Height="830" Width="1640" FontSize="18" WindowStartupLocation="CenterScreen">
 
-    <Window.DataContext>
-        <ViewModels:MainViewModel/>
-    </Window.DataContext>
-
     <Window.Resources>
-        <ContextMenu x:Key="MainMenu" Width="150" FontSize="18" FontFamily="Segoue UI" FontWeight="Normal">
+        <ContextMenu x:Key="MainMenu" Width="150" VerticalOffset="-2" FontSize="18" FontFamily="Segoue UI" FontWeight="Normal">
             <MenuItem x:Name="NewMenuItem" Header="New"/>
             <MenuItem x:Name="OpenMenuItem" Header="Open"/>
             <Separator/>
             <MenuItem x:Name="ExitMenuItem" Header="Exit"/>
         </ContextMenu>
     </Window.Resources>
-    
+
+    <Window.DataContext>
+        <ViewModels:MainViewModel MainMenu="{StaticResource MainMenu}"/>
+    </Window.DataContext>
+
     <Grid ShowGridLines="True">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
@@ -34,6 +34,6 @@
         </Grid.RowDefinitions>
         <Button x:Name="AddSecretButton" Content="Add secret" Grid.Column="2" Width="140" Style="{StaticResource NormalButton}" HorizontalAlignment="Left" Margin="30,0,0,0" VerticalAlignment="Center"/>
         <TextBox x:Name="SearchBox" Tag="Search" Text="" Grid.Column="1" Width="700" Height="70" Margin="0,0,0,0" Style="{StaticResource SearchBox}" TextWrapping="NoWrap" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <Button x:Name="MenuButton" Content="Menu" Grid.Column="0" Grid.Row="0" Style="{StaticResource MenuButton}" HorizontalAlignment="Left" Margin="40,0,0,0" VerticalAlignment="Center" Width="110" Height="40"/>
+        <Button x:Name="MenuButton" Content="Menu" Command="{Binding ShowMainMenu}" CommandParameter="{Binding ElementName=MenuButton}" Grid.Column="0" Grid.Row="0" Style="{StaticResource MenuButton}" HorizontalAlignment="Left" Margin="40,0,0,0" VerticalAlignment="Center" Width="110" Height="40"/>
     </Grid>
 </Window>
