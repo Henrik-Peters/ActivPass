@@ -36,5 +36,15 @@ namespace ActivPass.ViewModels
             field = value;
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        /// <summary>
+        /// Notify the PropertyChanged event. Should only
+        /// be called when the value of the property changed.
+        /// </summary>
+        /// <param name="propertyName">Leave empty to use the callers name</param>
+        protected void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

@@ -27,6 +27,18 @@ namespace ActivPass.ViewModels
         public TranslateManager Localize => TranslateManager.GetTranslateManager();
 
         /// <summary>
+        /// Store a new language setting in the
+        /// translate manager singleton and update
+        /// the translations bindings of the view.
+        /// </summary>
+        /// <param name="language">New language</param>
+        private void SetLanguage(Language language)
+        {
+            Localize.Language = language;
+            NotifyPropertyChanged(nameof(Localize));
+        }
+
+        /// <summary>
         /// Show the application main menu which
         /// should be binded to the MainMenu property.
         /// </summary>
