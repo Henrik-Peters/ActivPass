@@ -11,10 +11,10 @@
 
     <Window.Resources>
         <ContextMenu x:Key="MainMenu" Width="150" VerticalOffset="-2" FontSize="18" FontFamily="Segoue UI" FontWeight="Normal">
-            <MenuItem x:Name="NewMenuItem" Header="New"/>
-            <MenuItem x:Name="OpenMenuItem" Header="Open"/>
+            <MenuItem x:Name="LockMenuItem" Header="{Binding Localize[Lock]}"/>
+            <MenuItem x:Name="ExportMenuItem" Header="{Binding Localize[Export]}"/>
             <Separator/>
-            <MenuItem x:Name="ExitMenuItem" Header="Exit" Command="{Binding ExitApp}"/>
+            <MenuItem x:Name="ExitMenuItem" Header="{Binding Localize[Exit]}" Command="{Binding ExitApp}"/>
         </ContextMenu>
     </Window.Resources>
 
@@ -32,8 +32,8 @@
             <RowDefinition Height="80"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Button x:Name="AddSecretButton" Content="{Binding Localize[AddSecret]}" Grid.Column="2" Width="140" Style="{StaticResource NormalButton}" HorizontalAlignment="Left" Margin="30,0,0,0" VerticalAlignment="Center"/>
-        <TextBox x:Name="SearchBox" Tag="Search" Text="" Grid.Column="1" Width="700" Height="70" Margin="0,0,0,0" Style="{StaticResource SearchBox}" TextWrapping="NoWrap" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Button x:Name="AddSecretButton" Content="{Binding Localize[AddSecret]}" Grid.Column="2" Width="150" Style="{StaticResource NormalButton}" HorizontalAlignment="Left" Margin="25,0,0,0" VerticalAlignment="Center"/>
+        <TextBox x:Name="SearchBox" Tag="{Binding Localize[Search]}" Text="" Grid.Column="1" Width="700" Height="70" Margin="0,0,0,0" Style="{StaticResource SearchBox}" TextWrapping="NoWrap" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <Button x:Name="MenuButton" Content="{Binding Localize[Menu]}" Command="{Binding ShowMainMenu}" CommandParameter="{Binding ElementName=MenuButton}" Grid.Column="0" Grid.Row="0" Style="{StaticResource MenuButton}" HorizontalAlignment="Left" Margin="40,0,0,0" VerticalAlignment="Center" Width="110" Height="40"/>
     </Grid>
 </Window>
