@@ -14,7 +14,7 @@
             <MenuItem x:Name="NewMenuItem" Header="New"/>
             <MenuItem x:Name="OpenMenuItem" Header="Open"/>
             <Separator/>
-            <MenuItem x:Name="ExitMenuItem" Header="Exit"/>
+            <MenuItem x:Name="ExitMenuItem" Header="Exit" Command="{Binding ExitApp}"/>
         </ContextMenu>
     </Window.Resources>
 

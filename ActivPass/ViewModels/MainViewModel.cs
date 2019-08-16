@@ -16,7 +16,9 @@ namespace ActivPass.ViewModels
     public class MainViewModel : ViewModel
     {
         public ContextMenu MainMenu { private get; set; }
+
         public ICommand ShowMainMenu { get; set; }
+        public ICommand ExitApp { get; set; }
 
         /// <summary>
         /// Show the application main menu which
@@ -33,6 +35,7 @@ namespace ActivPass.ViewModels
         public MainViewModel()
         {
             this.ShowMainMenu = new RelayCommand<UIElement>(DisplayMainMenu);
+            this.ExitApp = new RelayCommand(() => Application.Current.Shutdown());
         }
     }
 }
