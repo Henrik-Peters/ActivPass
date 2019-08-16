@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using ActivPass.Localization;
 
 namespace ActivPass.ViewModels
 {
@@ -19,6 +20,11 @@ namespace ActivPass.ViewModels
 
         public ICommand ShowMainMenu { get; set; }
         public ICommand ExitApp { get; set; }
+
+        /// <summary>
+        /// Reference for bindings to the translate singleton.
+        /// </summary>
+        public TranslateManager Localize => TranslateManager.GetTranslateManager();
 
         /// <summary>
         /// Show the application main menu which
