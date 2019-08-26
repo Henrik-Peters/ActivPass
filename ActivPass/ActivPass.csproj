@@ -58,6 +58,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Configuration\ConfigData.cs" />
+    <Compile Include="Configuration\ConfigProvider.cs" />
     <Compile Include="Configuration\WindowStartupState.cs" />
     <Compile Include="Localization\Language.cs" />
     <Compile Include="Localization\TranslateManager.cs" />

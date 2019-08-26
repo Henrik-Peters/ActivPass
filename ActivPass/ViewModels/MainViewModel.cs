@@ -8,6 +8,7 @@ using System.Windows.Input;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using ActivPass.Localization;
+using ActivPass.Configuration;
 
 namespace ActivPass.ViewModels
 {
@@ -16,6 +17,8 @@ namespace ActivPass.ViewModels
     /// </summary>
     public class MainViewModel : ViewModel
     {
+        public static ConfigData Config { get; set; }
+
         public ContextMenu MainMenu { private get; set; }
 
         public ICommand ShowMainMenu { get; set; }
@@ -52,6 +55,14 @@ namespace ActivPass.ViewModels
 
         public MainViewModel()
         {
+            //Create a default config when no config exists
+            if (!ConfigProvider.ConfigExists) {
+                ConfigProvider.SaveConfig(ConfigData.DefaultConfig);
+            }
+
+            Config = ConfigProvider.LoadConfig();
+
+            //Command bindings
             this.ShowMainMenu = new RelayCommand<UIElement>(DisplayMainMenu);
             this.ExitApp = new RelayCommand(() => Application.Current.Shutdown());
         }
