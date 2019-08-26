@@ -8,6 +8,7 @@
                 <ResourceDictionary Source="Styles/Buttons.xaml"/>
                 <ResourceDictionary Source="Styles/SearchBox.xaml"/>
                 <ResourceDictionary Source="Styles/ContextMenus.xaml"/>
+                <ResourceDictionary Source="Styles/PasswordBox.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
