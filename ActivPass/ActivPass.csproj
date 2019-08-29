@@ -60,6 +60,8 @@
     <Compile Include="Configuration\ConfigData.cs" />
     <Compile Include="Configuration\ConfigProvider.cs" />
     <Compile Include="Configuration\WindowStartupState.cs" />
+    <Compile Include="Crypto\FileSystemProvider.cs" />
+    <Compile Include="Crypto\IContainerProvider.cs" />
     <Compile Include="Localization\Language.cs" />
     <Compile Include="Localization\TranslateManager.cs" />
     <Compile Include="Models\PasswordContainer.cs" />
