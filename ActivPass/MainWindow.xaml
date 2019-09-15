@@ -37,6 +37,12 @@
         <Button x:Name="MenuButton" Content="{Binding Localize[Menu]}" Command="{Binding ShowMainMenu}" CommandParameter="{Binding ElementName=MenuButton}" Grid.Column="0" Grid.Row="0" Style="{StaticResource MenuButton}" HorizontalAlignment="Left" Margin="40,0,0,0" VerticalAlignment="Center" Width="110" Height="40"/>
 
         <Grid x:Name="LoginGrid" Background="#494A52" Width="700" Height="200" Margin="0,0,0,0" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <ComboBox Grid.Row="1" Width="300" Height="35" HorizontalAlignment="Center" Margin="0,0,0,0" Style="{StaticResource ComboBoxStyle}">
+                <ComboBoxItem Content="BoxItem A"/>
+                <ComboBoxItem Content="BoxItem B"/>
+                <ComboBoxItem Content="BoxItem C"/>
+                <ComboBoxItem Content="BoxItem D"/>
+            </ComboBox>
             <PasswordBox x:Name="MasterPassword" Tag="" Style="{StaticResource PasswordBoxStyle}" Margin="0,0,0,0" Grid.Row="1" Width="400" Height="50" VerticalAlignment="Top" HorizontalAlignment="Center"/>
         </Grid>
     </Grid>
