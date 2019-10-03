@@ -24,7 +24,8 @@ namespace ActivPass.Localization
             ["Search"] = new List<string> { "Search", "Suchen" },
             ["Lock"] = new List<string> { "Lock", "Sperren" },
             ["Export"] = new List<string> { "Export", "Exportieren" },
-            ["Exit"] = new List<string> { "Exit", "Beenden" }
+            ["Exit"] = new List<string> { "Exit", "Beenden" },
+            ["ContainerInitTitle"] = new List<string> { "ActivPass - Create container", "ActivPass - Neuen Container anlegen" }
         };
 
         /// <summary>

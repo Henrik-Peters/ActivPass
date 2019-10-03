@@ -9,6 +9,7 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using ActivPass.Localization;
 using ActivPass.Configuration;
+using ActivPass.Views;
 
 namespace ActivPass.ViewModels
 {
@@ -65,6 +66,9 @@ namespace ActivPass.ViewModels
             //Command bindings
             this.ShowMainMenu = new RelayCommand<UIElement>(DisplayMainMenu);
             this.ExitApp = new RelayCommand(() => Application.Current.Shutdown());
+
+            ContainerInit containerInitView = new ContainerInit();
+            containerInitView.ShowDialog();
         }
     }
 }
