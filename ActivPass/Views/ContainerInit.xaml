@@ -14,6 +14,39 @@
     </Window.DataContext>
     
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="190"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="15"/>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="15"/>
+        </Grid.RowDefinitions>
+        
+        <!-- Container name box -->
+        <Label x:Name="ContainerNameLabel" Content="{Binding Localize[ContainerName]}" Foreground="White" FontFamily="Tahoma" FontSize="14" FontWeight="Bold" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="7,2,0,0"/>
+        <TextBox x:Name="ContainerNameBox" Text="" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="0,0,0,0" Height="40" VerticalAlignment="Bottom" HorizontalAlignment="Stretch"/>
+
+        <!-- Password boxes -->
+        <Label x:Name="FirstPasswordLabel" Content="{Binding Localize[MasterPassword]}" Foreground="White" FontFamily="Tahoma" FontSize="14" FontWeight="Bold" Grid.Row="3" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="7,2,0,0"/>
+        <PasswordBox x:Name="FirstPasswordBox" Tag="" Style="{StaticResource PasswordBoxStyle}" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Margin="0,0,0,0" Height="40" VerticalAlignment="Bottom" HorizontalAlignment="Stretch"/>
+
+        <Label x:Name="SecondPasswordLabel" Content="{Binding Localize[MasterPasswordRepeat]}" Foreground="White" FontFamily="Tahoma" FontSize="14" FontWeight="Bold" Grid.Row="5" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="7,2,0,0"/>
+        <PasswordBox x:Name="SecondPasswordBox" Tag="" Style="{StaticResource PasswordBoxStyle}" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" Margin="0,0,0,0" Height="40" VerticalAlignment="Bottom" HorizontalAlignment="Stretch"/>
+
+        <!-- Dialog buttons -->
+        <Button x:Name="CreateContainerButton" Content="{Binding Localize[CreateContainer]}" Style="{StaticResource NormalButton}" Grid.Row="7" Grid.Column="3" Margin="15,0,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        <Button x:Name="CancelButton" Content="{Binding Localize[Cancel]}" Style="{StaticResource NormalButton}" Grid.Row="7" Grid.Column="2" Margin="0,0,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
         
     </Grid>
 </Window>

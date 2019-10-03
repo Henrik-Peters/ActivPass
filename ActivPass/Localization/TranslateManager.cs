@@ -25,7 +25,12 @@ namespace ActivPass.Localization
             ["Lock"] = new List<string> { "Lock", "Sperren" },
             ["Export"] = new List<string> { "Export", "Exportieren" },
             ["Exit"] = new List<string> { "Exit", "Beenden" },
-            ["ContainerInitTitle"] = new List<string> { "ActivPass - Create container", "ActivPass - Neuen Container anlegen" }
+            ["ContainerInitTitle"] = new List<string> { "ActivPass - Create container", "ActivPass - Neuen Container anlegen" },
+            ["Cancel"] = new List<string> { "Cancel", "Abbrechen" },
+            ["CreateContainer"] = new List<string> { "Create container", "Container erstellen" },
+            ["ContainerName"] = new List<string> { "Container name", "Containername" },
+            ["MasterPassword"] = new List<string> { "Master password", "Master Passwort" },
+            ["MasterPasswordRepeat"] = new List<string> { "Repeat master password", "Master Passwort wiederholen" }
         };
 
         /// <summary>
