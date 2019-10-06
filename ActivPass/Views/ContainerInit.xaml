@@ -6,14 +6,11 @@
         xmlns:local="clr-namespace:ActivPass.Views"
         xmlns:ViewModels="clr-namespace:ActivPass.ViewModels"
         Background="#494A52"
+        x:Name="ContainerInitWindow"
         mc:Ignorable="d"
         FocusManager.FocusedElement="{Binding ElementName=ContainerNameBox}"
         Title="{Binding Localize[ContainerInitTitle]}" Height="450" Width="800" FontSize="18" WindowStartupLocation="CenterScreen">
 
-    <Window.DataContext>
-        <ViewModels:ContainerInitViewModel/>
-    </Window.DataContext>
-    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="120"/>
@@ -39,18 +36,18 @@
         
         <!-- Container name box -->
         <Label x:Name="ContainerNameLabel" Content="{Binding Localize[ContainerName]}" Foreground="White" FontFamily="Tahoma" FontSize="14" FontWeight="Bold" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="7,2,0,0"/>
-        <TextBox x:Name="ContainerNameBox" Text="" Style="{StaticResource NormalTextBox}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Margin="0,0,90,0" Height="40" VerticalAlignment="Bottom" HorizontalAlignment="Stretch"/>
+        <TextBox x:Name="ContainerNameBox" Text="{Binding ContainerName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource NormalTextBox}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Margin="0,0,90,0" Height="40" VerticalAlignment="Bottom" HorizontalAlignment="Stretch"/>
 
         <!-- Password boxes -->
         <Label x:Name="FirstPasswordLabel" Content="{Binding Localize[MasterPassword]}" Foreground="White" FontFamily="Tahoma" FontSize="14" FontWeight="Bold" Grid.Row="3" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="7,2,0,0"/>
-        <PasswordBox x:Name="FirstPasswordBox" Tag="" Style="{StaticResource PasswordBoxStyle}" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" Margin="0,0,90,0" Height="40" VerticalAlignment="Bottom" HorizontalAlignment="Stretch"/>
+        <PasswordBox x:Name="FirstPasswordBox" Style="{StaticResource PasswordBoxStyle}" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" Margin="0,0,90,0" Height="40" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" PasswordChanged="FirstPasswordBox_PasswordChanged"/>
 
         <Label x:Name="SecondPasswordLabel" Content="{Binding Localize[MasterPasswordRepeat]}" Foreground="White" FontFamily="Tahoma" FontSize="14" FontWeight="Bold" Grid.Row="5" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="7,2,0,0"/>
-        <PasswordBox x:Name="SecondPasswordBox" Tag="" Style="{StaticResource PasswordBoxStyle}" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3" Margin="0,0,90,0" Height="40" VerticalAlignment="Bottom" HorizontalAlignment="Stretch"/>
+        <PasswordBox x:Name="SecondPasswordBox" Tag="" Style="{StaticResource PasswordBoxStyle}" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3" Margin="0,0,90,0" Height="40" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" PasswordChanged="SecondPasswordBox_PasswordChanged"/>
 
         <!-- Dialog buttons -->
-        <Button x:Name="CreateContainerButton" Content="{Binding Localize[CreateContainer]}" Style="{StaticResource NormalButton}" Grid.Row="7" Grid.Column="3" Margin="15,0,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-        <Button x:Name="CancelButton" Content="{Binding Localize[Cancel]}" Style="{StaticResource NormalButton}" Grid.Row="7" Grid.Column="2" Margin="0,0,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        <Button x:Name="CreateContainerButton" Command="{Binding InitContainer}" CommandParameter="{Binding ElementName=ContainerInitWindow}" IsEnabled="{Binding ValidInput}" Content="{Binding Localize[CreateContainer]}" Style="{StaticResource NormalButton}" Grid.Row="7" Grid.Column="3" Margin="15,0,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        <Button x:Name="CancelButton" Command="{Binding Close}" CommandParameter="{Binding ElementName=ContainerInitWindow}" Content="{Binding Localize[Cancel]}" Style="{StaticResource NormalButton}" Grid.Row="7" Grid.Column="2" Margin="0,0,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
 
     </Grid>
 </Window>
