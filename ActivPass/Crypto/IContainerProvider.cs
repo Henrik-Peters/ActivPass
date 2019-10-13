@@ -10,6 +10,13 @@ namespace ActivPass.Crypto
     public interface IContainerProvider
     {
         /// <summary>
+        /// Create a list with all available
+        /// container names for loading.
+        /// </summary>
+        /// <returns>Array with container names</returns>
+        string[] ListContainers();
+
+        /// <summary>
         /// Load an encrypted container from the storage
         /// and decrypt it with the master key. When the
         /// operation has failed null will be returned.

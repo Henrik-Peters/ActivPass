@@ -67,8 +67,8 @@ namespace ActivPass.ViewModels
             this.ShowMainMenu = new RelayCommand<UIElement>(DisplayMainMenu);
             this.ExitApp = new RelayCommand(() => Application.Current.Shutdown());
 
-            ContainerInit containerInitView = new ContainerInit();
-            containerInitView.ShowDialog();
+            //ContainerInit containerInitView = new ContainerInit();
+            //containerInitView.ShowDialog();
         }
     }
 }
