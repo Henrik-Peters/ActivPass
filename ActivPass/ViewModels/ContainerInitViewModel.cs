@@ -4,10 +4,13 @@
 // See LICENSE file in the project root for full license information
 #endregion
 using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using ActivPass.Localization;
+using ActivPass.Models;
+using ActivPass.Crypto;
 
 namespace ActivPass.ViewModels
 {
@@ -81,7 +84,26 @@ namespace ActivPass.ViewModels
         /// <param name="window">Instance to close</param>
         private void CreateContainer(Window window)
         {
-            CloseWindow(window);
+            string[] containerList = ContainerStorage.ContainerProvider.ListContainers();
+
+            //Check if a container already exists with the target name
+            if (containerList.Any(container => container.Equals(ContainerName))) {
+                MessageBox.Show(Localize["ContainerNameExists"], Localize["ContainerCreateFail"], MessageBoxButton.OK, MessageBoxImage.Error);
+                
+            } else {
+                //Create a new empty container
+                PasswordContainer emptyContainer = new PasswordContainer(ContainerName, Environment.UserName);
+
+                //Store the new container
+                bool containerCreated = ContainerStorage.ContainerProvider.SaveContainer(emptyContainer, MasterPasswordBox.Password);
+
+                if (containerCreated) {
+                    CloseWindow(window);
+
+                } else {
+                    MessageBox.Show(Localize["ContainerStoreFail"], Localize["ContainerCreateFail"], MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
         }
 
         /// <summary>
