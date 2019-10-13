@@ -9,6 +9,7 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using ActivPass.Localization;
 using ActivPass.Configuration;
+using ActivPass.Crypto;
 using ActivPass.Views;
 
 namespace ActivPass.ViewModels
@@ -67,8 +68,17 @@ namespace ActivPass.ViewModels
             this.ShowMainMenu = new RelayCommand<UIElement>(DisplayMainMenu);
             this.ExitApp = new RelayCommand(() => Application.Current.Shutdown());
 
-            //ContainerInit containerInitView = new ContainerInit();
-            //containerInitView.ShowDialog();
+            //Get all available container names
+            string[] availableContainer = ContainerStorage.ContainerProvider.ListContainers();
+
+            if (availableContainer.Length == 0) {
+                //Show the init container view
+                ContainerInit containerInitView = new ContainerInit();
+                containerInitView.ShowDialog();
+
+            } else {
+                //Display the list of available containers
+            }
         }
     }
 }
