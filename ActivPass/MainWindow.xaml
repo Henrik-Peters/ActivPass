@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ActivPass"
         xmlns:ViewModels="clr-namespace:ActivPass.ViewModels"
-        Background="#494A52"
+        Background="#303139"
         mc:Ignorable="d"
         Title="ActivPass" Height="830" Width="1640" FontSize="18" WindowStartupLocation="CenterScreen">
 
@@ -21,6 +21,33 @@
     <Window.DataContext>
         <ViewModels:MainViewModel MainMenu="{StaticResource MainMenu}"/>
     </Window.DataContext>
+
+    <Window.Style>
+        <Style TargetType="{x:Type Window}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Login}" Value="false">
+                    <DataTrigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ColorAnimation 
+                                    Storyboard.TargetProperty="(Window.Background).(SolidColorBrush.Color)" 
+                                    FillBehavior="HoldEnd" Duration="0:0:0.2" To="#303139"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.EnterActions>
+                    <DataTrigger.ExitActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ColorAnimation 
+                                    Storyboard.TargetProperty="(Window.Background).(SolidColorBrush.Color)" 
+                                    FillBehavior="HoldEnd" Duration="0:0:0.2" To="#494A52"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.ExitActions>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Style>
 
     <Grid ShowGridLines="True">
         <Grid.ColumnDefinitions>
