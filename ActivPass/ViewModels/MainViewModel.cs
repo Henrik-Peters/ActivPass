@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Collections.ObjectModel;
 using ActivPass.Localization;
 using ActivPass.Configuration;
 using ActivPass.Crypto;
@@ -22,6 +23,19 @@ namespace ActivPass.ViewModels
         public static ConfigData Config { get; set; }
 
         public ContextMenu MainMenu { private get; set; }
+
+        private ObservableCollection<string> _containerNames;
+        public ObservableCollection<string> ContainerNames {
+            get => _containerNames;
+            set => SetProperty(ref _containerNames, value);
+        }
+
+        private bool _login;
+        public bool Login
+        {
+            get => _login;
+            set => SetProperty(ref _login, value);
+        }
 
         public ICommand ShowMainMenu { get; set; }
         public ICommand ExitApp { get; set; }
@@ -68,6 +82,9 @@ namespace ActivPass.ViewModels
             this.ShowMainMenu = new RelayCommand<UIElement>(DisplayMainMenu);
             this.ExitApp = new RelayCommand(() => Application.Current.Shutdown());
 
+            //Default values
+            this.Login = false;
+
             //Get all available container names
             string[] availableContainer = ContainerStorage.ContainerProvider.ListContainers();
 
@@ -78,6 +95,7 @@ namespace ActivPass.ViewModels
 
             } else {
                 //Display the list of available containers
+                ContainerNames = new ObservableCollection<string>(availableContainer);
             }
         }
     }

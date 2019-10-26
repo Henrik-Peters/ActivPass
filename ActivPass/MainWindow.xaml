@@ -33,16 +33,40 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Button x:Name="AddSecretButton" Content="{Binding Localize[AddSecret]}" Grid.Column="2" Width="150" Style="{StaticResource NormalButton}" HorizontalAlignment="Left" Margin="25,0,0,0" VerticalAlignment="Center"/>
-        <TextBox x:Name="SearchBox" Tag="{Binding Localize[Search]}" Text="" Grid.Column="1" Width="700" Height="70" Margin="0,0,0,0" Style="{StaticResource SearchBox}" TextWrapping="NoWrap" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+
+        <TextBox x:Name="SearchBox" Tag="{Binding Localize[Search]}" Text="" Grid.Column="1" Width="700" Height="70" Margin="0,0,0,0" TextWrapping="NoWrap" HorizontalAlignment="Center" VerticalAlignment="Top">
+            <TextBox.Style>
+                <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource SearchBox}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Login}" Value="false">
+                            <DataTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Height" BeginTime="00:00:00">
+                                            <SplineDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
+                                        </DoubleAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.EnterActions>
+                            <DataTrigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Height" BeginTime="00:00:00">
+                                            <SplineDoubleKeyFrame KeyTime="0:0:0.2" Value="70"/>
+                                        </DoubleAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.ExitActions>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBox.Style>
+        </TextBox>
+
         <Button x:Name="MenuButton" Content="{Binding Localize[Menu]}" Command="{Binding ShowMainMenu}" CommandParameter="{Binding ElementName=MenuButton}" Grid.Column="0" Grid.Row="0" Style="{StaticResource MenuButton}" HorizontalAlignment="Left" Margin="40,0,0,0" VerticalAlignment="Center" Width="110" Height="40"/>
 
         <Grid x:Name="LoginGrid" Background="#494A52" Width="700" Height="200" Margin="0,0,0,0" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <ComboBox Grid.Row="1" Width="300" Height="35" HorizontalAlignment="Center" Margin="0,0,0,0" Style="{StaticResource ComboBoxStyle}">
-                <ComboBoxItem Content="BoxItem A"/>
-                <ComboBoxItem Content="BoxItem B"/>
-                <ComboBoxItem Content="BoxItem C"/>
-                <ComboBoxItem Content="BoxItem D"/>
-            </ComboBox>
+            <ComboBox x:Name="ContainerSelector" ItemsSource="{Binding ContainerNames}" Grid.Row="1" Width="300" Height="35" HorizontalAlignment="Center" Margin="0,0,0,0" Style="{StaticResource ComboBoxStyle}"/>
             <PasswordBox x:Name="MasterPassword" Tag="" Style="{StaticResource PasswordBoxStyle}" Margin="0,0,0,0" Grid.Row="1" Width="400" Height="50" VerticalAlignment="Top" HorizontalAlignment="Center"/>
         </Grid>
     </Grid>
