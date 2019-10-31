@@ -39,6 +39,8 @@ namespace ActivPass.ViewModels
 
         public ICommand ShowMainMenu { get; set; }
         public ICommand ExitApp { get; set; }
+        public ICommand ContainerLogin { get; set; }
+        public ICommand ContainerLogout { get; set; }
 
         /// <summary>
         /// Reference for bindings to the translate singleton.
@@ -69,6 +71,11 @@ namespace ActivPass.ViewModels
             this.MainMenu.IsOpen = true;
         }
 
+        private void OpenContainer(string containerName, string masterPassword)
+        {
+
+        }
+
         public MainViewModel()
         {
             //Create a default config when no config exists
@@ -81,6 +88,8 @@ namespace ActivPass.ViewModels
             //Command bindings
             this.ShowMainMenu = new RelayCommand<UIElement>(DisplayMainMenu);
             this.ExitApp = new RelayCommand(() => Application.Current.Shutdown());
+            this.ContainerLogin = new RelayCommand(() => Application.Current.Shutdown());
+            this.ContainerLogout = new RelayCommand(() => Login = false);
 
             //Default values
             this.Login = false;
