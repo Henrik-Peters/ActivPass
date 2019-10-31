@@ -10,14 +10,34 @@
         Title="ActivPass" Height="830" Width="1640" FontSize="18" WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
+        <!-- Container main context menu -->
         <ContextMenu x:Key="MainMenu" Width="150" VerticalOffset="-2" FontSize="18" FontFamily="Segoue UI" FontWeight="Normal">
             <MenuItem x:Name="LockMenuItem" Header="{Binding Localize[Lock]}" Command="{Binding ContainerLogout}"/>
             <MenuItem x:Name="ExportMenuItem" Header="{Binding Localize[Export]}"/>
             <Separator/>
             <MenuItem x:Name="ExitMenuItem" Header="{Binding Localize[Exit]}" Command="{Binding ExitApp}"/>
         </ContextMenu>
+
+        <!-- Trigger for the login fade animation -->
+        <DataTrigger x:Key="LoginFadeoutTrigger" Binding="{Binding Login}" Value="false">
+            <DataTrigger.EnterActions>
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation Storyboard.TargetProperty="Opacity" To="0.0" Duration="0:0:0.2"/>
+                    </Storyboard>
+                </BeginStoryboard>
+            </DataTrigger.EnterActions>
+            <DataTrigger.ExitActions>
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation Storyboard.TargetProperty="Opacity" To="1.0" Duration="0:0:0.2"/>
+                    </Storyboard>
+                </BeginStoryboard>
+            </DataTrigger.ExitActions>
+        </DataTrigger>
     </Window.Resources>
 
+    <!-- View model binding -->
     <Window.DataContext>
         <ViewModels:MainViewModel MainMenu="{StaticResource MainMenu}"/>
     </Window.DataContext>
@@ -59,7 +79,15 @@
             <RowDefinition Height="80"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Button x:Name="AddSecretButton" Content="{Binding Localize[AddSecret]}" Grid.Column="2" Width="150" Style="{StaticResource NormalButton}" HorizontalAlignment="Left" Margin="25,0,0,0" VerticalAlignment="Center"/>
+        <Button x:Name="AddSecretButton" Content="{Binding Localize[AddSecret]}" Grid.Column="2" Width="150" HorizontalAlignment="Left" Margin="25,0,0,0" VerticalAlignment="Center">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}" BasedOn="{StaticResource MenuButton}">
+                    <Style.Triggers>
+                        <StaticResource ResourceKey="LoginFadeoutTrigger"/>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
 
         <TextBox x:Name="SearchBox" Tag="{Binding Localize[Search]}" Text="" Grid.Column="1" Width="700" Height="70" Margin="0,0,0,0" TextWrapping="NoWrap" HorizontalAlignment="Center" VerticalAlignment="Top">
             <TextBox.Style>
@@ -90,7 +118,16 @@
             </TextBox.Style>
         </TextBox>
 
-        <Button x:Name="MenuButton" Content="{Binding Localize[Menu]}" Command="{Binding ShowMainMenu}" CommandParameter="{Binding ElementName=MenuButton}" Grid.Column="0" Grid.Row="0" Style="{StaticResource MenuButton}" HorizontalAlignment="Left" Margin="40,0,0,0" VerticalAlignment="Center" Width="110" Height="40"/>
+        <!-- Container burger menu button -->
+        <Button x:Name="MenuButton" Content="{Binding Localize[Menu]}" Command="{Binding ShowMainMenu}" CommandParameter="{Binding ElementName=MenuButton}" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Margin="40,0,0,0" VerticalAlignment="Center" Width="110" Height="40">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}" BasedOn="{StaticResource MenuButton}">
+                    <Style.Triggers>
+                        <StaticResource ResourceKey="LoginFadeoutTrigger"/>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
 
         <!-- Container login box -->
         <Border Background="#494A52" Padding="10" Width="700" Height="200" Margin="0,0,0,0" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="#1C1D25" BorderThickness="2,2,2,2" CornerRadius="20">
@@ -116,8 +153,32 @@
                 <Button x:Name="LoginButton" Content="{Binding Localize[Login]}" Grid.Row="2" Grid.Column="1" Height="50" Style="{StaticResource NormalButton}" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Top" Click="LoginButton_Click"/>
 
                 <!-- Login failed label -->
-                <Label x:Name="LoginFaildLabel" Content="{Binding LoginInfo}" Style="{StaticResource InfoLabel}" Foreground="#FFFF1D1D" FontFamily="Tahoma" FontSize="14" FontWeight="Bold" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="7,2,0,0"/>
+                <Label x:Name="LoginFaildLabel" Content="{Binding LoginInfo}" Style="{StaticResource InfoLabel}" Visibility="{Binding LoginInfoVisibility}" Foreground="#FFFF1D1D" FontFamily="Tahoma" FontSize="14" FontWeight="Bold" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="7,2,0,0"/>
             </Grid>
+            
+            <!-- Login fadeout animation -->
+            <Border.Style>
+                <Style>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Login}" Value="false">
+                            <DataTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" To="1.0" Duration="0:0:0.2"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.EnterActions>
+                            <DataTrigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" To="0.0" Duration="0:0:0.2"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.ExitActions>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
         </Border>
     </Grid>
 </Window>

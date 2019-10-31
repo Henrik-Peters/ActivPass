@@ -22,8 +22,15 @@ namespace ActivPass.ViewModels
     /// </summary>
     public class MainViewModel : ViewModel
     {
+        /// <summary>
+        /// Global application config
+        /// </summary>
         public static ConfigData Config { get; set; }
 
+        /// <summary>
+        /// Container main conext menu to allow
+        /// custom context menu placement logic
+        /// </summary>
         public ContextMenu MainMenu { private get; set; }
 
         private ObservableCollection<string> _containerNames;
@@ -31,7 +38,7 @@ namespace ActivPass.ViewModels
             get => _containerNames;
             set => SetProperty(ref _containerNames, value);
         }
-
+        
         private string _selectedContainer;
         public string SelectedContainer
         {
@@ -44,6 +51,13 @@ namespace ActivPass.ViewModels
         {
             get => _loginInfo;
             set => SetProperty(ref _loginInfo, value);
+        }
+
+        private Visibility _loginInfoVisibility;
+        public Visibility LoginInfoVisibility
+        {
+            get => _loginInfoVisibility;
+            set => SetProperty(ref _loginInfoVisibility, value);
         }
 
         private bool _login;
@@ -104,13 +118,16 @@ namespace ActivPass.ViewModels
                 if (container == null) {
                     //Decrypting or deserializing has failed
                     this.LoginInfo = Localize["LoginFailed"];
+                    this.LoginInfoVisibility = Visibility.Visible;
 
                 } else {
                     this.Login = true;
+                    this.LoginInfoVisibility = Visibility.Hidden;
                 }
 
             } else {
                 this.LoginInfo = Localize["LoginContainerFailed"];
+                this.LoginInfoVisibility = Visibility.Visible;
             }
         }
 
@@ -132,6 +149,7 @@ namespace ActivPass.ViewModels
             //Default values
             this.Login = false;
             this.LoginInfo = Localize["LoginFailed"];
+            this.LoginInfoVisibility = Visibility.Hidden;
 
             //Get all available container names
             string[] availableContainer = ContainerStorage.ContainerProvider.ListContainers();

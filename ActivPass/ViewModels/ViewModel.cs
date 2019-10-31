@@ -4,6 +4,7 @@
 // See LICENSE file in the project root for full license information
 #endregion
 using System;
+using System.Windows;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
@@ -57,6 +58,22 @@ namespace ActivPass.ViewModels
         /// <param name="value">The new value to store</param>
         /// <param name="propertyName">Leave empty to use the callers name</param>
         protected void SetProperty(ref bool field, bool value, [CallerMemberName] String propertyName = "")
+        {
+            if (field == value)
+                return;
+
+            field = value;
+            PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        /// <summary>
+        /// Perform a setter operation and notify the
+        /// PropertyChanged event when the value has changed.
+        /// </summary>
+        /// <param name="field">Reference of the field to store the new value</param>
+        /// <param name="value">The new value to store</param>
+        /// <param name="propertyName">Leave empty to use the callers name</param>
+        protected void SetProperty(ref Visibility field, Visibility value, [CallerMemberName] String propertyName = "")
         {
             if (field == value)
                 return;
