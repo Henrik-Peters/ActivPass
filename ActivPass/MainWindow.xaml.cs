@@ -5,6 +5,7 @@
 #endregion
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Controls;
 using ActivPass.ViewModels;
 
 namespace ActivPass
@@ -14,9 +15,18 @@ namespace ActivPass
     /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// View model instance for this window.
+        /// </summary>
+        private MainViewModel vm;
+
         public MainWindow()
         {
             InitializeComponent();
+
+            //View model initialisation
+            this.vm = new MainViewModel(this.FindResource("MainMenu") as ContextMenu, this.MasterPassword);
+            this.DataContext = this.vm;
         }
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
@@ -34,9 +44,7 @@ namespace ActivPass
 
         private void ContainerLogin()
         {
-            //Check if all login data are available
-            if (this.DataContext is MainViewModel vm &&
-                this.ContainerSelector.SelectedItem is string containerName) {
+            if (this.ContainerSelector.SelectedItem is string containerName) {
 
                 //Forward the login event to the view model
                 vm.OpenContainer(containerName, this.MasterPassword.Password);

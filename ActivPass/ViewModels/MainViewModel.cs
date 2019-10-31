@@ -31,7 +31,13 @@ namespace ActivPass.ViewModels
         /// Container main conext menu to allow
         /// custom context menu placement logic
         /// </summary>
-        public ContextMenu MainMenu { private get; set; }
+        public ContextMenu MainMenu { get; private set; }
+
+        /// <summary>
+        /// Textbox of the master password
+        /// for the container login.
+        /// </summary>
+        public PasswordBox MasterPasswordBox { get; private set; }
 
         private ObservableCollection<string> _containerNames;
         public ObservableCollection<string> ContainerNames {
@@ -131,8 +137,32 @@ namespace ActivPass.ViewModels
             }
         }
 
-        public MainViewModel()
+        /// <summary>
+        /// Logout off the current container
+        /// and show the login grid dialog.
+        /// </summary>
+        private void LockContainer()
         {
+            //Reset the login password
+            this.MasterPasswordBox.Password = "";
+
+            //Change to login mode
+            Login = false;
+            MasterPasswordBox.Focus();
+        }
+
+        /// <summary>
+        /// Create a new view model instance
+        /// for the activ pass main window.
+        /// </summary>
+        /// <param name="MainMenu">Container burger context menu</param>
+        /// <param name="MasterPasswordBox">Login master password box</param>
+        public MainViewModel(ContextMenu MainMenu, PasswordBox MasterPasswordBox)
+        {
+            //Constructor paramater storage
+            this.MainMenu = MainMenu;
+            this.MasterPasswordBox = MasterPasswordBox;
+
             //Create a default config when no config exists
             if (!ConfigProvider.ConfigExists) {
                 ConfigProvider.SaveConfig(ConfigData.DefaultConfig);
@@ -144,7 +174,7 @@ namespace ActivPass.ViewModels
             this.ShowMainMenu = new RelayCommand<UIElement>(DisplayMainMenu);
             this.ExitApp = new RelayCommand(() => Application.Current.Shutdown());
             this.ContainerLogin = new RelayCommand(() => Application.Current.Shutdown());
-            this.ContainerLogout = new RelayCommand(() => Login = false);
+            this.ContainerLogout = new RelayCommand(LockContainer);
 
             //Default values
             this.Login = false;
