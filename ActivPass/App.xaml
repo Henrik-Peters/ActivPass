@@ -9,6 +9,7 @@
                 <ResourceDictionary Source="Styles/ComboBox.xaml"/>
                 <ResourceDictionary Source="Styles/SearchBox.xaml"/>
                 <ResourceDictionary Source="Styles/ContextMenus.xaml"/>
+                <ResourceDictionary Source="Styles/Labels.xaml"/>
                 <ResourceDictionary Source="Styles/PasswordBox.xaml"/>
                 <ResourceDictionary Source="Styles/TextBox.xaml"/>
             </ResourceDictionary.MergedDictionaries>
