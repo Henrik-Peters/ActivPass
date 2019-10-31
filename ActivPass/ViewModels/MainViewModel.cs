@@ -3,6 +3,7 @@
 // Copyright 2019 Henrik Peters
 // See LICENSE file in the project root for full license information
 #endregion
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Controls;
@@ -10,6 +11,7 @@ using System.Windows.Controls.Primitives;
 using System.Collections.ObjectModel;
 using ActivPass.Localization;
 using ActivPass.Configuration;
+using ActivPass.Models;
 using ActivPass.Crypto;
 using ActivPass.Views;
 
@@ -28,6 +30,20 @@ namespace ActivPass.ViewModels
         public ObservableCollection<string> ContainerNames {
             get => _containerNames;
             set => SetProperty(ref _containerNames, value);
+        }
+
+        private string _selectedContainer;
+        public string SelectedContainer
+        {
+            get => _selectedContainer;
+            set => SetProperty(ref _selectedContainer, value);
+        }
+
+        private string _loginInfo;
+        public string LoginInfo
+        {
+            get => _loginInfo;
+            set => SetProperty(ref _loginInfo, value);
         }
 
         private bool _login;
@@ -71,9 +87,31 @@ namespace ActivPass.ViewModels
             this.MainMenu.IsOpen = true;
         }
 
-        private void OpenContainer(string containerName, string masterPassword)
+        /// <summary>
+        /// Try to perform a container login. The Name and
+        /// master password will be checked before performing
+        /// a valid container login.
+        /// </summary>
+        /// <param name="containerName">Target container name</param>
+        /// <param name="masterPassword">Master password of the container</param>
+        public void OpenContainer(string containerName, string masterPassword)
         {
+            string[] availableContainer = ContainerStorage.ContainerProvider.ListContainers();
 
+            if (availableContainer.Contains(containerName)) {
+                PasswordContainer container = ContainerStorage.ContainerProvider.LoadContainer(containerName, masterPassword);
+
+                if (container == null) {
+                    //Decrypting or deserializing has failed
+                    this.LoginInfo = Localize["LoginFailed"];
+
+                } else {
+                    this.Login = true;
+                }
+
+            } else {
+                this.LoginInfo = Localize["LoginContainerFailed"];
+            }
         }
 
         public MainViewModel()
@@ -93,6 +131,7 @@ namespace ActivPass.ViewModels
 
             //Default values
             this.Login = false;
+            this.LoginInfo = Localize["LoginFailed"];
 
             //Get all available container names
             string[] availableContainer = ContainerStorage.ContainerProvider.ListContainers();
@@ -105,6 +144,7 @@ namespace ActivPass.ViewModels
             } else {
                 //Display the list of available containers
                 ContainerNames = new ObservableCollection<string>(availableContainer);
+                SelectedContainer = ContainerNames[0];
             }
         }
     }

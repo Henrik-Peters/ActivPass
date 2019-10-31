@@ -108,15 +108,15 @@
                 
                 <!-- Container info or selection -->
                 <Label x:Name="ContainerSelectorLabel" Content="{Binding Localize[ContainerSelect]}" Foreground="White" FontFamily="Tahoma" FontSize="14" FontWeight="Bold" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="7,0,0,0"/>
-                <ComboBox x:Name="ContainerSelector" ItemsSource="{Binding ContainerNames}" Grid.Row="0" Width="350" Height="35" HorizontalAlignment="Left" Margin="90,0,0,0" Style="{StaticResource ComboBoxStyle}"/>
+                <ComboBox x:Name="ContainerSelector" ItemsSource="{Binding ContainerNames}" SelectedItem="{Binding SelectedContainer}" Grid.Row="0" Width="350" Height="35" HorizontalAlignment="Left" Margin="90,0,0,0" Style="{StaticResource ComboBoxStyle}"/>
                 
                 <!-- Master password area -->
                 <Label x:Name="MasterPasswordLabel" Content="{Binding Localize[MasterPassword]}" Foreground="White" FontFamily="Tahoma" FontSize="14" FontWeight="Bold" Grid.Row="1" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="7,2,0,0"/>
-                <PasswordBox x:Name="MasterPassword" Tag="" Style="{StaticResource PasswordBoxStyle}" Margin="0,0,0,0" Grid.Row="2" Height="50" VerticalAlignment="Top" HorizontalAlignment="Stretch"/>
-                <Button x:Name="LoginButton" Content="{Binding Localize[Login]}" Grid.Row="2" Grid.Column="1" Height="50" Style="{StaticResource NormalButton}" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Top"/>
+                <PasswordBox x:Name="MasterPassword" Tag="" Style="{StaticResource PasswordBoxStyle}" Margin="0,0,0,0" Grid.Row="2" Height="50" VerticalAlignment="Top" HorizontalAlignment="Stretch" KeyUp="MasterPassword_KeyUp"/>
+                <Button x:Name="LoginButton" Content="{Binding Localize[Login]}" Grid.Row="2" Grid.Column="1" Height="50" Style="{StaticResource NormalButton}" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Top" Click="LoginButton_Click"/>
 
                 <!-- Login failed label -->
-                <Label x:Name="LoginFaildLabel" Content="{Binding Localize[LoginFailed]}" Style="{StaticResource InfoLabel}" Foreground="#FFFF1D1D" FontFamily="Tahoma" FontSize="14" FontWeight="Bold" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="7,2,0,0"/>
+                <Label x:Name="LoginFaildLabel" Content="{Binding LoginInfo}" Style="{StaticResource InfoLabel}" Foreground="#FFFF1D1D" FontFamily="Tahoma" FontSize="14" FontWeight="Bold" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="7,2,0,0"/>
             </Grid>
         </Border>
     </Grid>
