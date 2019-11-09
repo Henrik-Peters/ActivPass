@@ -16,6 +16,9 @@
             <MenuItem x:Name="LockMenuItem" Header="{Binding Localize[Lock]}" Command="{Binding ContainerLogout}"/>
             <MenuItem x:Name="ExportMenuItem" Header="{Binding Localize[Export]}"/>
             <Separator/>
+            <MenuItem x:Name="ContainerInitMenuItem" Header="{Binding Localize[NewContainer]}" Command="{Binding CreateContainer}"/>
+            <MenuItem x:Name="SettingsMenuItem" Header="{Binding Localize[Settings]}"/>
+            <Separator/>
             <MenuItem x:Name="ExitMenuItem" Header="{Binding Localize[Exit]}" Command="{Binding ExitApp}"/>
         </ContextMenu>
 

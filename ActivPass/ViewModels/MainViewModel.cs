@@ -91,6 +91,7 @@ namespace ActivPass.ViewModels
         public ICommand ExitApp { get; set; }
         public ICommand ContainerLogin { get; set; }
         public ICommand ContainerLogout { get; set; }
+        public ICommand CreateContainer { get; set; }
 
         /// <summary>
         /// Reference for bindings to the translate singleton.
@@ -119,6 +120,17 @@ namespace ActivPass.ViewModels
             this.MainMenu.PlacementTarget = placementTarget;
             this.MainMenu.Placement = PlacementMode.Bottom;
             this.MainMenu.IsOpen = true;
+        }
+
+        /// <summary>
+        /// Show the password container init view
+        /// to create a new container instance.
+        /// </summary>
+        private void CreateNewContainer()
+        {
+            //Show the init container view
+            ContainerInit containerInitView = new ContainerInit();
+            containerInitView.ShowDialog();
         }
 
         /// <summary>
@@ -198,6 +210,7 @@ namespace ActivPass.ViewModels
             this.ExitApp = new RelayCommand(() => Application.Current.Shutdown());
             this.ContainerLogin = new RelayCommand(() => Application.Current.Shutdown());
             this.ContainerLogout = new RelayCommand(LockContainer);
+            this.CreateContainer = new RelayCommand(CreateNewContainer);
 
             //Default values
             this.Login = false;
