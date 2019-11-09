@@ -73,6 +73,20 @@ namespace ActivPass.ViewModels
             set => SetProperty(ref _login, value);
         }
 
+        private PasswordContainer _container;
+        public PasswordContainer Container
+        {
+            get => _container;
+            set => SetProperty(ref _container, value);
+        }
+
+        private ObservableCollection<PasswordItemViewModel> _passwordItems;
+        public ObservableCollection<PasswordItemViewModel> PasswordItems
+        {
+            get => _passwordItems;
+            set => SetProperty(ref _passwordItems, value);
+        }
+
         public ICommand ShowMainMenu { get; set; }
         public ICommand ExitApp { get; set; }
         public ICommand ContainerLogin { get; set; }
@@ -127,7 +141,14 @@ namespace ActivPass.ViewModels
                     this.LoginInfoVisibility = Visibility.Visible;
 
                 } else {
+                    //Create the view model instances from the password item collection
+                    PasswordItems = new ObservableCollection<PasswordItemViewModel>(
+                        container.Items.Select(item => new PasswordItemViewModel(item))
+                    );
+
+                    //Sucessful login
                     this.Login = true;
+                    this.Container = container;
                     this.LoginInfoVisibility = Visibility.Hidden;
                 }
 
@@ -148,6 +169,8 @@ namespace ActivPass.ViewModels
 
             //Change to login mode
             Login = false;
+            Container = null;
+            PasswordItems.Clear();
             MasterPasswordBox.Focus();
         }
 
