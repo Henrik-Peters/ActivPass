@@ -28,6 +28,9 @@
                 <BeginStoryboard>
                     <Storyboard>
                         <DoubleAnimation Storyboard.TargetProperty="Opacity" To="0.0" Duration="0:0:0.2"/>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0:0:0.2" Value="{x:Static Visibility.Hidden}"/>
+                        </ObjectAnimationUsingKeyFrames>
                     </Storyboard>
                 </BeginStoryboard>
             </DataTrigger.EnterActions>
@@ -35,6 +38,9 @@
                 <BeginStoryboard>
                     <Storyboard>
                         <DoubleAnimation Storyboard.TargetProperty="Opacity" To="1.0" Duration="0:0:0.2"/>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0:0:0.0" Value="{x:Static Visibility.Visible}"/>
+                        </ObjectAnimationUsingKeyFrames>
                     </Storyboard>
                 </BeginStoryboard>
             </DataTrigger.ExitActions>
@@ -198,7 +204,15 @@
                     </DataTemplate>
                 </ItemsControl.Resources>
             </ItemsControl>
-            
+
+            <!-- Login animation style trigger -->
+            <ScrollViewer.Style>
+                <Style TargetType="{x:Type ScrollViewer}">
+                    <Style.Triggers>
+                        <StaticResource ResourceKey="LoginFadeoutTrigger"/>
+                    </Style.Triggers>
+                </Style>
+            </ScrollViewer.Style>
         </ScrollViewer>
     </Grid>
 </Window>
