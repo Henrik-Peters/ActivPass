@@ -85,7 +85,7 @@
             <RowDefinition Height="80"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Button x:Name="AddSecretButton" Content="{Binding Localize[AddSecret]}" Grid.Column="2" Width="150" HorizontalAlignment="Left" Margin="25,0,0,0" VerticalAlignment="Center">
+        <Button x:Name="AddSecretButton" Content="{Binding Localize[AddSecret]}" Command="{Binding AddPasswordItem}" Grid.Column="2" Width="150" HorizontalAlignment="Left" Margin="25,0,0,0" VerticalAlignment="Center">
             <Button.Style>
                 <Style TargetType="{x:Type Button}" BasedOn="{StaticResource NormalButton}">
                     <Style.Triggers>
@@ -187,21 +187,6 @@
             </Border.Style>
         </Border>
 
-        <!-- Empty container info box -->
-        <Grid Background="#494A52" Width="600" Margin="0,0,0,0" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="40"/>
-            </Grid.RowDefinitions>
-            <ContentPresenter Content="{StaticResource GeneralInfoIcon}" Grid.Row="0" HorizontalAlignment="Center"/>
-            <Label Content="{Binding Localize[EmptyContainerInfo]}" Foreground="White" FontFamily="Tahoma" FontSize="16" FontWeight="Bold" Grid.Row="1" Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,0"/>
-            <Button Content="{Binding Localize[AddSecret]}" Style="{StaticResource NormalButton}" Grid.Row="2" Grid.Column="1" Width="160" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        </Grid>
-        
         <!-- Password items panel -->
         <ScrollViewer x:Name="PasswordItemScroll" Padding="20" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" VerticalScrollBarVisibility="Auto">
             <ItemsControl x:Name="PasswordItemControl" ItemsSource="{Binding PasswordItems}">
@@ -304,5 +289,20 @@
                 </Style>
             </ScrollViewer.Style>
         </ScrollViewer>
+
+        <!-- Empty container info box -->
+        <Grid Visibility="{Binding EmptyContainerInfo}" Width="600" Margin="0,0,0,0" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+            <ContentPresenter Content="{StaticResource GeneralInfoIcon}" Grid.Row="0" HorizontalAlignment="Center"/>
+            <Label Content="{Binding Localize[EmptyContainerInfo]}" Foreground="White" FontFamily="Tahoma" FontSize="16" FontWeight="Bold" Grid.Row="1" Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,0"/>
+            <Button Content="{Binding Localize[AddSecret]}" Style="{StaticResource NormalButton}" Command="{Binding AddPasswordItem}" Grid.Row="2" Grid.Column="1" Width="160" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Grid>
     </Grid>
 </Window>

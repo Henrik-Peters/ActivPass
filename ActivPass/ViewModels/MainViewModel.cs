@@ -66,6 +66,13 @@ namespace ActivPass.ViewModels
             set => SetProperty(ref _loginInfoVisibility, value);
         }
 
+        private Visibility _emptyContainerInfo;
+        public Visibility EmptyContainerInfo
+        {
+            get => _emptyContainerInfo;
+            set => SetProperty(ref _emptyContainerInfo, value);
+        }
+
         private bool _login;
         public bool Login
         {
@@ -93,6 +100,7 @@ namespace ActivPass.ViewModels
         public ICommand ContainerLogout { get; set; }
         public ICommand CreateContainer { get; set; }
         public ICommand OpenPasswordItem { get; set; }
+        public ICommand AddPasswordItem { get; set; }
         public ICommand DeletePasswordItem { get; set; }
 
         /// <summary>
@@ -164,6 +172,11 @@ namespace ActivPass.ViewModels
                     this.Login = true;
                     this.Container = container;
                     this.LoginInfoVisibility = Visibility.Hidden;
+
+                    //Empty container info
+                    if (PasswordItems.Count == 0) {
+                        this.EmptyContainerInfo = Visibility.Visible;
+                    }
                 }
 
             } else {
@@ -186,6 +199,9 @@ namespace ActivPass.ViewModels
             Container = null;
             PasswordItems.Clear();
             MasterPasswordBox.Focus();
+
+            //Hide the empty container info
+            this.EmptyContainerInfo = Visibility.Hidden;
         }
 
         /// <summary>
@@ -194,6 +210,15 @@ namespace ActivPass.ViewModels
         /// </summary>
         /// <param name="item">Password item to display</param>
         private void ShowPasswordItemDetails(PasswordItemViewModel item)
+        {
+
+        }
+
+        /// <summary>
+        /// Show the dialog to create a new password item
+        /// and store the result in the current container.
+        /// </summary>
+        private void CreatePasswordItem()
         {
 
         }
@@ -233,6 +258,7 @@ namespace ActivPass.ViewModels
             this.ContainerLogin = new RelayCommand(() => Application.Current.Shutdown());
             this.ContainerLogout = new RelayCommand(LockContainer);
             this.CreateContainer = new RelayCommand(CreateNewContainer);
+            this.AddPasswordItem = new RelayCommand(CreatePasswordItem);
             this.OpenPasswordItem = new RelayCommand<PasswordItemViewModel>(ShowPasswordItemDetails);
             this.DeletePasswordItem = new RelayCommand<PasswordItemViewModel>(ShowDeleteItemDialog);
 
@@ -240,6 +266,7 @@ namespace ActivPass.ViewModels
             this.Login = false;
             this.LoginInfo = Localize["LoginFailed"];
             this.LoginInfoVisibility = Visibility.Hidden;
+            this.EmptyContainerInfo = Visibility.Hidden;
 
             //Get all available container names
             string[] availableContainer = ContainerStorage.ContainerProvider.ListContainers();
