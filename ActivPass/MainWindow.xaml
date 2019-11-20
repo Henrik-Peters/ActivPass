@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:ActivPass"
         xmlns:ViewModels="clr-namespace:ActivPass.ViewModels"
         Background="#303139"
+        x:Name="ActivPassWindow"
         mc:Ignorable="d"
         FocusManager.FocusedElement="{Binding ElementName=MasterPassword}"
         Title="ActivPass" Height="830" Width="1640" FontSize="18" WindowStartupLocation="CenterScreen">
@@ -202,7 +203,7 @@
                     <DataTemplate DataType="{x:Type ViewModels:PasswordItemViewModel}">
 
                         <!-- Password item control border -->
-                        <Border Margin="10" Padding="3" UseLayoutRounding="True" SnapsToDevicePixels="True">
+                        <Border Tag="{Binding DataContext, ElementName=ActivPassWindow}" Margin="10" Padding="3" UseLayoutRounding="True" SnapsToDevicePixels="True">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="170"/>
@@ -215,12 +216,36 @@
                                 <Label Content="{Binding Name}" Foreground="White" FontFamily="Tahoma" FontSize="16" FontWeight="Bold" Grid.Row="0" Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
                                 <Label Content="{Binding Username}" Margin="0,-5,0,0" Foreground="Gray" FontFamily="Tahoma" FontSize="11" FontWeight="Bold" Grid.Row="1" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
                             </Grid>
+                            
+                            <!-- Input bindings for password items -->
+                            <Border.InputBindings>
+                                <MouseBinding MouseAction="LeftClick" Command="{Binding ElementName=PasswordItemControl, Path=DataContext.OpenPasswordItem}" CommandParameter="{Binding}"/>
+                            </Border.InputBindings>
+                            
+                            <!-- Password item border control effects -->
                             <Border.Effect>
                                 <DropShadowEffect ShadowDepth="5" Direction="315" Color="Black" Opacity="0.2" BlurRadius="8"/>
                             </Border.Effect>
+                            
+                            <!-- Render transform for the mouseOver animation -->
                             <Border.RenderTransform>
                                 <ScaleTransform/>
                             </Border.RenderTransform>
+                            
+                            <!-- Password item context menu -->
+                            <Border.ContextMenu>
+                                <ContextMenu DataContext="{Binding Path=PlacementTarget.Tag, RelativeSource={RelativeSource Self}}">
+                                    <MenuItem Header="{Binding Localize[Open]}"
+                                              Command="{Binding OpenPasswordItem}"
+                                              CommandParameter="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}}"/>
+
+                                    <MenuItem Header="{Binding Localize[Delete]}"
+                                              Command="{Binding DeletePasswordItem}"
+                                              CommandParameter="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}}"/>
+                                </ContextMenu>
+                            </Border.ContextMenu>
+                            
+                            <!-- Style for password item controls -->
                             <Border.Style>
                                 <Style TargetType="{x:Type Border}">
                                     <Setter Property="Background" Value="#444444"/>

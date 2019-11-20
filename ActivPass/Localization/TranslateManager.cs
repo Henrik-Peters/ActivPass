@@ -22,6 +22,8 @@ namespace ActivPass.Localization
             ["Menu"] = new List<string> { "Menu", "Menü" },
             ["AddSecret"] = new List<string> { "Add Secret", "Eintrag erstellen" },
             ["Search"] = new List<string> { "Search", "Suchen" },
+            ["Open"] = new List<string> { "Open", "Öffnen" },
+            ["Delete"] = new List<string> { "Delete", "Löschen" },
             ["Lock"] = new List<string> { "Lock", "Sperren" },
             ["Export"] = new List<string> { "Export", "Exportieren" },
             ["Exit"] = new List<string> { "Exit", "Beenden" },

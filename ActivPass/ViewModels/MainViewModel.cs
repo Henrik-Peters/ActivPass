@@ -92,6 +92,8 @@ namespace ActivPass.ViewModels
         public ICommand ContainerLogin { get; set; }
         public ICommand ContainerLogout { get; set; }
         public ICommand CreateContainer { get; set; }
+        public ICommand OpenPasswordItem { get; set; }
+        public ICommand DeletePasswordItem { get; set; }
 
         /// <summary>
         /// Reference for bindings to the translate singleton.
@@ -187,6 +189,26 @@ namespace ActivPass.ViewModels
         }
 
         /// <summary>
+        /// Show detailed information with the password
+        /// item dialog for a specific password item.
+        /// </summary>
+        /// <param name="item">Password item to display</param>
+        private void ShowPasswordItemDetails(PasswordItemViewModel item)
+        {
+
+        }
+
+        /// <summary>
+        /// Show the dialog for deleting a password
+        /// item before the operation is performed.
+        /// </summary>
+        /// <param name="item">Password itme to delete</param>
+        private void ShowDeleteItemDialog(PasswordItemViewModel item)
+        {
+
+        }
+
+        /// <summary>
         /// Create a new view model instance
         /// for the activ pass main window.
         /// </summary>
@@ -211,6 +233,8 @@ namespace ActivPass.ViewModels
             this.ContainerLogin = new RelayCommand(() => Application.Current.Shutdown());
             this.ContainerLogout = new RelayCommand(LockContainer);
             this.CreateContainer = new RelayCommand(CreateNewContainer);
+            this.OpenPasswordItem = new RelayCommand<PasswordItemViewModel>(ShowPasswordItemDetails);
+            this.DeletePasswordItem = new RelayCommand<PasswordItemViewModel>(ShowDeleteItemDialog);
 
             //Default values
             this.Login = false;
