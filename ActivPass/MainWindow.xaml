@@ -201,7 +201,8 @@
                 <ItemsControl.Resources>
                     <DataTemplate DataType="{x:Type ViewModels:PasswordItemViewModel}">
 
-                        <Border UseLayoutRounding="True" SnapsToDevicePixels="True" Background="#444444" BorderBrush="#353535" BorderThickness="2" Margin="10" Padding="3">
+                        <!-- Password item control border -->
+                        <Border Margin="10" Padding="3" UseLayoutRounding="True" SnapsToDevicePixels="True">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="170"/>
@@ -217,6 +218,37 @@
                             <Border.Effect>
                                 <DropShadowEffect ShadowDepth="5" Direction="315" Color="Black" Opacity="0.2" BlurRadius="8"/>
                             </Border.Effect>
+                            <Border.RenderTransform>
+                                <ScaleTransform/>
+                            </Border.RenderTransform>
+                            <Border.Style>
+                                <Style TargetType="{x:Type Border}">
+                                    <Setter Property="Background" Value="#444444"/>
+                                    <Setter Property="BorderBrush" Value="#353535"/>
+                                    <Setter Property="BorderThickness" Value="2"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Trigger.EnterActions>
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX" To="1.05" Duration="0:0:0.2"/>
+                                                        <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY" To="1.05" Duration="0:0:0.2"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </Trigger.EnterActions>
+                                            <Trigger.ExitActions>
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX" To="1.0" Duration="0:0:0.2"/>
+                                                        <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY" To="1.0" Duration="0:0:0.2"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </Trigger.ExitActions>
+                                            <Setter Property="BorderBrush" Value="#3399FF"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
                         </Border>
                         
                     </DataTemplate>
