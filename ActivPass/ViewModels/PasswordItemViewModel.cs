@@ -35,7 +35,22 @@ namespace ActivPass.ViewModels
                 }
             }
         }
-        
+
+        /// <summary>
+        /// Username of the password item.
+        /// </summary>
+        public string Username
+        {
+            get => _proxy.Username;
+            set
+            {
+                if (_proxy.Username != value) {
+                    _proxy.Username = value;
+                    NotifyPropertyChanged(nameof(_proxy.Username));
+                }
+            }
+        }
+
         /// <summary>
         /// Create a new view model from a password item.
         /// </summary>
