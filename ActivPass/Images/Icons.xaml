@@ -1,0 +1,28 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Info icon -->
+    <Viewbox x:Key="GeneralInfoIcon" Stretch="Uniform">
+        <Canvas Name="SVGRoot" Width="48" Height="48">
+            <Canvas>
+                <Canvas>
+                    <Canvas.RenderTransform>
+                        <MatrixTransform Matrix="1.1458733 0 0 1.1458733 -3.5009589 -3.5009595"/>
+                    </Canvas.RenderTransform>
+                    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path56067" Fill="White" StrokeThickness="3.15067315" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Opacity="1">
+                        <Path.Data>
+                            <PathGeometry Figures="M 24 3.3828125 A 20.351418 20.616581 0 0 0 3.6484375 24 20.351418 20.616581 0 0 0 24 44.617188 20.351418 20.616581 0 0 0 44.351562 24 20.351418 20.616581 0 0 0 24 3.3828125 Z m 0 3.8457031 A 16.572815 16.771688 0 0 1 40.572266 24 16.572815 16.771688 0 0 1 24 40.771484 16.572815 16.771688 0 0 1 7.4277344 24 16.572815 16.771688 0 0 1 24 7.2285156 Z" FillRule="NonZero"/>
+                        </Path.Data>
+                    </Path>
+                    <Ellipse xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Canvas.Left="24.2" Width="7.3" Canvas.Top="9.7" Height="5.8" Name="path5626" Fill="White" StrokeThickness="4.02910995" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Opacity="1"/>
+                    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="rect5640" Fill="White" StrokeThickness="3.73551846" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Opacity="1">
+                        <Path.Data>
+                            <PathGeometry Figures="m 23.644203 17.658956 c 1.243573 -0.218866 2.446952 -0.188719 3.299301 0.3307 0.426175 0.259709 0.871139 0.516894 1.24384 1.264389 0.161662 0.324232 0.352828 1.060752 -0.04876 2.08052 -0.548533 1.392923 -4.918413 13.291608 -4.918413 13.291608 -0.344896 0.877682 0.890551 1.261183 1.724475 0.440127 l 3.569921 -3.325407 -0.01291 1.585489 c 0 0 -1.871483 2.256971 -2.975361 3.055152 -1.103877 0.79818 -2.361003 1.427357 -3.54161 1.70131 -1.180607 0.273952 -2.543397 0.298824 -3.297093 -0.03089 -0.753697 -0.329714 -1.466615 -0.533509 -1.850226 -1.259379 -0.383613 -0.72587 -0.382787 -1.455554 -0.04002 -2.291362 0.342763 -0.835809 4.983223 -13.297934 4.983223 -13.297934 0.320597 -0.870389 -0.83306 -1.238364 -1.701544 -0.430186 l -3.561178 3.349223 -0.0078 -1.606077 c 0 0 1.96937 -2.126042 3.195403 -2.937826 1.226035 -0.811786 2.69516 -1.70059 3.938733 -1.919457 z" FillRule="NonZero"/>
+                        </Path.Data>
+                    </Path>
+                </Canvas>
+            </Canvas>
+        </Canvas>
+    </Viewbox>
+
+</ResourceDictionary>

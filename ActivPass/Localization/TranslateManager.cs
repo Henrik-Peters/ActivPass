@@ -28,6 +28,7 @@ namespace ActivPass.Localization
             ["Export"] = new List<string> { "Export", "Exportieren" },
             ["Exit"] = new List<string> { "Exit", "Beenden" },
             ["ContainerInitTitle"] = new List<string> { "ActivPass - Create container", "ActivPass - Neuen Container anlegen" },
+            ["EmptyContainerInfo"] = new List<string> { "There are no passwords in this container", "Dieser Container enthält keine Passwörter" },
             ["Cancel"] = new List<string> { "Cancel", "Abbrechen" },
             ["Login"] = new List<string> { "Login", "Anmelden" },
             ["Settings"] = new List<string> { "Settings", "Einstellungen" },
