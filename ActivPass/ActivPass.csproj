@@ -70,11 +70,15 @@
     <Compile Include="Models\PasswordItem.cs" />
     <Compile Include="ViewModels\ContainerInitViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\PassItemEditorViewModel.cs" />
     <Compile Include="ViewModels\PasswordItemViewModel.cs" />
     <Compile Include="ViewModels\RelayCommand.cs" />
     <Compile Include="ViewModels\ViewModel.cs" />
     <Compile Include="Views\ContainerInit.xaml.cs">
       <DependentUpon>ContainerInit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PassItemEditor.xaml.cs">
+      <DependentUpon>PassItemEditor.xaml</DependentUpon>
     </Compile>
     <Page Include="Images\Icons.xaml">
       <SubType>Designer</SubType>
@@ -121,6 +125,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ContainerInit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PassItemEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

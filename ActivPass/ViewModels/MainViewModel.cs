@@ -211,7 +211,8 @@ namespace ActivPass.ViewModels
         /// <param name="item">Password item to display</param>
         private void ShowPasswordItemDetails(PasswordItemViewModel item)
         {
-
+            PassItemEditor itemEditor = new PassItemEditor(item.Proxy);
+            itemEditor.ShowDialog();
         }
 
         /// <summary>
