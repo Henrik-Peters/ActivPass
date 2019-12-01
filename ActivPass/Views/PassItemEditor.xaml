@@ -7,8 +7,37 @@
         x:Name="ItemEditorWindow"
         Background="#494A52"
         mc:Ignorable="d"
-        Title="ActivPass" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+        Title="ActivPass" Height="450" Width="800" FontSize="18" WindowStartupLocation="CenterScreen">
     <Grid>
-        <TextBox x:Name="NameBox" Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource NormalTextBox}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Margin="0,0,90,0" Height="40" VerticalAlignment="Top" HorizontalAlignment="Stretch"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="140"/>
+            <ColumnDefinition Width="10"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="15"/>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="15"/>
+        </Grid.RowDefinitions>
+
+        <!-- Name Box -->
+        <Label x:Name="NameLabel" Content="{Binding Localize[Name]}" Foreground="White" FontFamily="Tahoma" FontSize="14" FontWeight="Bold" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="7,2,0,0"/>
+        <TextBox x:Name="NameBox" Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource NormalTextBox}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Margin="0,0,0,0" Height="40" VerticalAlignment="Bottom" HorizontalAlignment="Stretch"/>
+
+        <!-- Username Box -->
+        <Label x:Name="UsernameLabel" Content="{Binding Localize[Username]}" Foreground="White" FontFamily="Tahoma" FontSize="14" FontWeight="Bold" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="7,2,0,0"/>
+        <TextBox x:Name="UsernameBox" Text="{Binding Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource NormalTextBox}" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" Margin="0,0,0,0" Height="40" VerticalAlignment="Bottom" HorizontalAlignment="Stretch"/>
+
+        <!-- Dialog buttons -->
+        <Button x:Name="SaveButton" Command="{Binding SaveItem}" CommandParameter="{Binding ElementName=ItemEditorWindow}" Content="{Binding Localize[Save]}" Style="{StaticResource NormalButton}" Grid.Row="7" Grid.Column="3" Margin="15,0,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        <Button x:Name="CancelButton" Command="{Binding Close}" CommandParameter="{Binding ElementName=ItemEditorWindow}" Content="{Binding Localize[Cancel]}" Style="{StaticResource NormalButton}" Grid.Row="7" Grid.Column="2" Margin="0,0,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
     </Grid>
 </Window>

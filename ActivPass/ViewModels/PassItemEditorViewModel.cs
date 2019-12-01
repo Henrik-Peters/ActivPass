@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
 using ActivPass.Models;
 using ActivPass.Localization;
 
@@ -40,6 +42,31 @@ namespace ActivPass.ViewModels
         }
 
         /// <summary>
+        /// Username of the password item
+        /// </summary>
+        public string Username
+        {
+            get => _item.Username;
+            set
+            {
+                if (_item.Username != value) {
+                    _item.Username = value;
+                    NotifyPropertyChanged(nameof(_item.Username));
+                }
+            }
+        }
+
+        /// <summary>
+        /// Close the passed window instance.
+        /// </summary>
+        public ICommand Close { get; set; }
+
+        /// <summary>
+        /// Save the current item and close the window instance.
+        /// </summary>
+        public ICommand SaveItem { get; set; }
+
+        /// <summary>
         /// Create a new view model instance
         /// for the password item editor.
         /// </summary>
@@ -47,6 +74,21 @@ namespace ActivPass.ViewModels
         public PassItemEditorViewModel(PasswordItem item)
         {
             this._item = item;
+
+            //Command bindings
+            this.Close = new RelayCommand<Window>(CloseWindow);
+            this.SaveItem = new RelayCommand<Window>(CloseWindow);
+        }
+
+        /// <summary>
+        /// Close the passed window instance.
+        /// </summary>
+        /// <param name="window">Instance to close</param>
+        private void CloseWindow(Window window)
+        {
+            if (window != null) {
+                window.Close();
+            }
         }
     }
 }
