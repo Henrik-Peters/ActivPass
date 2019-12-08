@@ -46,7 +46,8 @@ namespace ActivPass.Localization
             ["CreateContainerInfo"] = new List<string> { "Create a new password box and secure it with a master password.\nThe storage of the box will be enrypted with the master password.", "Erstellen Sie eine neue Passwortbox und sichern diese mit dem\nMaster Passwort ab. Der Speicher wird mit damit verschlüsselt." },
             ["ContainerCreateFail"] = new List<string> { "Failed to create new container", "Container konnte nicht erstellt werden" },
             ["ContainerNameExists"] = new List<string> { "Container name already exists", "Ein Container mit diesem Namen existiert bereits" },
-            ["ContainerStoreFail"] = new List<string> { "Failed to store the container", "Container konnte nicht gespeichert werden" }
+            ["ContainerStoreFail"] = new List<string> { "Failed to store the container", "Container konnte nicht gespeichert werden" },
+            ["CopyToClipboard"] = new List<string> { "Copy to clipboard", "In Zwischenablage kopieren" }
         };
 
         /// <summary>
