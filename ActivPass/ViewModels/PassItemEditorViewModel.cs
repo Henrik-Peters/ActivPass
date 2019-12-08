@@ -67,6 +67,11 @@ namespace ActivPass.ViewModels
         public ICommand SaveItem { get; set; }
 
         /// <summary>
+        /// Copy the argument as unicode text to the clipboard.
+        /// </summary>
+        public ICommand CopyToClipboard { get; set; }
+
+        /// <summary>
         /// Create a new view model instance
         /// for the password item editor.
         /// </summary>
@@ -78,6 +83,17 @@ namespace ActivPass.ViewModels
             //Command bindings
             this.Close = new RelayCommand<Window>(CloseWindow);
             this.SaveItem = new RelayCommand<Window>(CloseWindow);
+            this.CopyToClipboard = new RelayCommand<string>(SetClipboardText);
+        }
+
+        /// <summary>
+        /// Set a new text in the clipboard content.
+        /// The data text format will be set to unicode text.
+        /// </summary>
+        /// <param name="text">Copy this text to the clipboard</param>
+        private void SetClipboardText(string text)
+        {
+            Clipboard.SetText(text, TextDataFormat.UnicodeText);
         }
 
         /// <summary>
