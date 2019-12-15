@@ -20,6 +20,11 @@ namespace ActivPass.Views
         private PassItemEditorViewModel vm;
 
         /// <summary>
+        /// If the password is visible as plain text.
+        /// </summary>
+        private bool passwordIsVisible;
+
+        /// <summary>
         /// Create a new password item editor
         /// and viewer window instance.
         /// </summary>
@@ -31,6 +36,10 @@ namespace ActivPass.Views
             //View model initialisation
             this.vm = new PassItemEditorViewModel(item);
             this.DataContext = this.vm;
+
+            //Inital values
+            this.passwordIsVisible = false;
+            this.PassTextBox.Visibility = Visibility.Hidden;
 
             //Set the inital password text value
             this.PassBox.Password = this.vm.Password;
@@ -44,6 +53,24 @@ namespace ActivPass.Views
         private void PassBox_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
         {
             this.vm.Password = PassBox.Password;
+        }
+
+        private void ShowPasswordButton_Click(object sender, RoutedEventArgs e)
+        {
+            //Toggle the password visible flag
+            passwordIsVisible = !passwordIsVisible;
+
+            if (passwordIsVisible) {
+                PassBox.Visibility = Visibility.Hidden;
+                PassTextBox.Visibility = Visibility.Visible;
+                PassTextBox.Focus();
+                PassTextBox.Select(PassTextBox.Text.Length, 0);
+
+            } else {
+                PassBox.Visibility = Visibility.Visible;
+                PassTextBox.Visibility = Visibility.Hidden;
+                PassBox.Focus();
+            }
         }
     }
 }

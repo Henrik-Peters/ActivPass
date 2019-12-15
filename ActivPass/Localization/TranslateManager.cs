@@ -43,6 +43,7 @@ namespace ActivPass.Localization
             ["ContainerName"] = new List<string> { "Container name", "Containername" },
             ["MasterPassword"] = new List<string> { "Master password", "Master Passwort" },
             ["Password"] = new List<string> { "Password", "Passwort" },
+            ["ShowPassword"] = new List<string> { "Show password", "Zeige Passwort" },
             ["MasterPasswordRepeat"] = new List<string> { "Repeat master password", "Master Passwort wiederholen" },
             ["CreateContainerInfo"] = new List<string> { "Create a new password box and secure it with a master password.\nThe storage of the box will be enrypted with the master password.", "Erstellen Sie eine neue Passwortbox und sichern diese mit dem\nMaster Passwort ab. Der Speicher wird mit damit verschlüsselt." },
             ["ContainerCreateFail"] = new List<string> { "Failed to create new container", "Container konnte nicht erstellt werden" },
