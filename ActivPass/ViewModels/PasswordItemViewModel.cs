@@ -52,6 +52,21 @@ namespace ActivPass.ViewModels
         }
 
         /// <summary>
+        /// Password of the password item.
+        /// </summary>
+        public string Password
+        {
+            get => _proxy.Password;
+            set
+            {
+                if (_proxy.Password != value) {
+                    _proxy.Password = value;
+                    NotifyPropertyChanged(nameof(_proxy.Password));
+                }
+            }
+        }
+
+        /// <summary>
         /// Create a new view model from a password item.
         /// </summary>
         /// <param name="proxy">Represented password item</param>

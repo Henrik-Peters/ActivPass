@@ -38,6 +38,13 @@
         <TextBox x:Name="UsernameBox" Text="{Binding Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource NormalTextBox}" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" Margin="0,0,0,0" Height="40" VerticalAlignment="Bottom" HorizontalAlignment="Stretch"/>
         <Button x:Name="UsernameCopyButton" Command="{Binding CopyToClipboard}" CommandParameter="{Binding Username}" Style="{StaticResource CopyButton}" ToolTip="{Binding Localize[CopyToClipboard]}" Grid.Row="3" Grid.Column="3" Margin="0,0,7,1" Padding="7" Height="40" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
 
+        <!-- Password Box -->
+        <Label x:Name="PasswordLabel" Content="{Binding Localize[Password]}" Foreground="White" FontFamily="Tahoma" FontSize="14" FontWeight="Bold" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="7,2,0,0"/>
+        <TextBox x:Name="PassTextBox" Text="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource NormalTextBox}" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3" Margin="0,0,0,0" Height="40" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" KeyUp="PassTextBox_KeyUp"/>
+        <Button x:Name="PasswordCopyButton" Command="{Binding CopyToClipboard}" CommandParameter="{Binding Password}" Style="{StaticResource CopyButton}" ToolTip="{Binding Localize[CopyToClipboard]}" Grid.Row="5" Grid.Column="3" Margin="0,0,7,1" Padding="7" Height="40" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+
+        <PasswordBox x:Name="PassBox" Style="{StaticResource PasswordBoxStyle}" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="3" Margin="0,0,0,0" Height="40" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" KeyUp="PassBox_KeyUp"/>
+
         <!-- Dialog buttons -->
         <Button x:Name="SaveButton" Command="{Binding SaveItem}" CommandParameter="{Binding ElementName=ItemEditorWindow}" Content="{Binding Localize[Save]}" Style="{StaticResource NormalButton}" Grid.Row="7" Grid.Column="3" Margin="15,0,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
         <Button x:Name="CancelButton" Command="{Binding Close}" CommandParameter="{Binding ElementName=ItemEditorWindow}" Content="{Binding Localize[Cancel]}" Style="{StaticResource NormalButton}" Grid.Row="7" Grid.Column="2" Margin="0,0,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>

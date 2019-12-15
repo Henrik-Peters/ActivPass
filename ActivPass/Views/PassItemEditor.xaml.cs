@@ -31,6 +31,19 @@ namespace ActivPass.Views
             //View model initialisation
             this.vm = new PassItemEditorViewModel(item);
             this.DataContext = this.vm;
+
+            //Set the inital password text value
+            this.PassBox.Password = this.vm.Password;
+        }
+
+        private void PassTextBox_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            PassBox.Password = this.vm.Password;
+        }
+
+        private void PassBox_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            this.vm.Password = PassBox.Password;
         }
     }
 }

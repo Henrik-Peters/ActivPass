@@ -57,6 +57,21 @@ namespace ActivPass.ViewModels
         }
 
         /// <summary>
+        /// Password of the password item
+        /// </summary>
+        public string Password
+        {
+            get => _item.Password;
+            set
+            {
+                if (_item.Password != value) {
+                    _item.Password = value;
+                    NotifyPropertyChanged(nameof(_item.Password));
+                }
+            }
+        }
+
+        /// <summary>
         /// Close the passed window instance.
         /// </summary>
         public ICommand Close { get; set; }
