@@ -128,4 +128,48 @@
         </Setter>
     </Style>
 
+    <Style x:Key="EyeButton" TargetType="{x:Type Button}">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="Foreground" Value="#BBC0C4"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+                        <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                            <ContentPresenter.Content>
+                                <Viewbox Stretch="Uniform">
+                                    <Canvas Name="SVGRoot" Width="64" Height="64">
+                                        <Canvas>
+                                            <Path Fill="{TemplateBinding Foreground}" StrokeThickness="2.87446547" StrokeMiterLimit="4" StrokeLineJoin="Miter" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Opacity="1">
+                                                <Path.Data>
+                                                    <PathGeometry Figures="m 32.324845 14.562195 c -20.75901 0.08879 -31.60403378 13.205616 -31.61366506 16.318853 0 3.410185 6.51085916 18.670635 31.28876906 18.556115 20.879334 0 31.287477 -13.494827 31.288768 -17.766493 0.03942 -4.725718 -11.181969 -17.035649 -30.963872 -17.108475 z m -0.324896 3.734254 a 13.702766 13.702766 0 0 1 13.70323 13.70323 13.702766 13.702766 0 0 1 -13.70323 13.70323 13.702766 13.702766 0 0 1 -13.703231 -13.70323 13.702766 13.702766 0 0 1 13.703231 -13.70323 z m 0 5.142824 a 8.5613211 8.5613211 0 0 0 -8.560407 8.560406 8.5613211 8.5613211 0 0 0 8.560407 8.562462 8.5613211 8.5613211 0 0 0 8.560406 -8.562462 8.5613211 8.5613211 0 0 0 -8.560406 -8.560406 z" FillRule="NonZero"/>
+                                                </Path.Data>
+                                            </Path>
+                                        </Canvas>
+                                    </Canvas>
+                                </Viewbox>
+                            </ContentPresenter.Content>
+                        </ContentPresenter>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Foreground" Value="#E3E8EC"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="true">
+                            <Setter Property="Foreground" Value="#A5AAAE"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Opacity" Value="0.56"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 </ResourceDictionary>
