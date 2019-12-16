@@ -3,6 +3,7 @@
 // Copyright 2019 Henrik Peters
 // See LICENSE file in the project root for full license information
 #endregion
+using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
@@ -242,7 +243,36 @@ namespace ActivPass.ViewModels
         /// </summary>
         private void CreatePasswordItem()
         {
+            //Create an empty default item
+            PasswordItem editorItem = new PasswordItem("", "", "");
 
+            //Show the item editor dialog
+            PassItemEditor itemEditor = new PassItemEditor(editorItem);
+            itemEditor.ShowDialog();
+
+            //Check if the editorItem should be created
+            if (itemEditor.vm.SaveEditorItem) {
+
+                //Create a new item array with increased size
+                PasswordItem[] newItems = new PasswordItem[Container.Items.Length + 1];
+
+                //Copy all password items to the new collection
+                for (int i = 0; i < Container.Items.Length; i++) {
+                    newItems[i] = Container.Items[i];
+                }
+
+                //Store the new item
+                newItems[newItems.Length - 1] = editorItem;
+
+                //Overwrite the container item collection
+                Container.Items = newItems;
+                PasswordItems.Add(new PasswordItemViewModel(editorItem));
+
+                //Save the container with the current storage provider
+                if (!ContainerStorage.ContainerProvider.SaveContainer(Container, MasterPasswordBox.Password)) {
+                    MessageBox.Show("Failed to create the container!", "Container creation failed", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
         }
 
         /// <summary>
