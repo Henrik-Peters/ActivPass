@@ -221,10 +221,13 @@ namespace ActivPass.ViewModels
             //Check if the editorItem should be stored
             if (itemEditor.vm.SaveEditorItem) {
 
-                //Apply all item attributes from the editor item
-                item.Proxy.Name = editorItem.Name;
-                item.Proxy.Username = editorItem.Username;
-                item.Proxy.Password = editorItem.Password;
+                //Get the index of edited item
+                int itemIndex = PasswordItems.IndexOf(item);
+
+                //Set the attributes of the item
+                PasswordItems[itemIndex].Name = editorItem.Name;
+                PasswordItems[itemIndex].Username = editorItem.Username;
+                PasswordItems[itemIndex].Password = editorItem.Password;
 
                 //Save the container with the current storage provider
                 if (!ContainerStorage.ContainerProvider.SaveContainer(Container, MasterPasswordBox.Password)) {
