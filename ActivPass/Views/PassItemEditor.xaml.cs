@@ -44,6 +44,9 @@ namespace ActivPass.Views
 
             //Set the inital password text value
             this.PassBox.Password = this.vm.Password;
+
+            //Check if the inital input is valid
+            this.ValidateEditorItem();
         }
 
         private void PassTextBox_KeyUp(object sender, KeyEventArgs e)
