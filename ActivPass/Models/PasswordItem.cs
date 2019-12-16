@@ -8,7 +8,7 @@ using System;
 namespace ActivPass.Models
 {
     [Serializable]
-    public class PasswordItem
+    public class PasswordItem : ICloneable
     {
         public string Name { get; set; }
 
@@ -20,6 +20,11 @@ namespace ActivPass.Models
             Name = name;
             Username = username;
             Password = password;
+        }
+
+        public object Clone()
+        {
+            return this.MemberwiseClone();
         }
     }
 }

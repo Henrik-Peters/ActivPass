@@ -211,8 +211,26 @@ namespace ActivPass.ViewModels
         /// <param name="item">Password item to display</param>
         private void ShowPasswordItemDetails(PasswordItemViewModel item)
         {
-            PassItemEditor itemEditor = new PassItemEditor(item.Proxy);
+            //Create a clone of the item
+            PasswordItem editorItem = item.Proxy.Clone() as PasswordItem;
+
+            //Show the item editor dialog
+            PassItemEditor itemEditor = new PassItemEditor(editorItem);
             itemEditor.ShowDialog();
+
+            //Check if the editorItem should be stored
+            if (itemEditor.vm.SaveEditorItem) {
+
+                //Apply all item attributes from the editor item
+                item.Proxy.Name = editorItem.Name;
+                item.Proxy.Username = editorItem.Username;
+                item.Proxy.Password = editorItem.Password;
+
+                //Save the container with the current storage provider
+                if (!ContainerStorage.ContainerProvider.SaveContainer(Container, MasterPasswordBox.Password)) {
+                    MessageBox.Show("Failed to store the container!", "Container store failed", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
         }
 
         /// <summary>

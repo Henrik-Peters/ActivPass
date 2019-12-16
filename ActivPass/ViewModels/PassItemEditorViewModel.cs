@@ -70,6 +70,13 @@ namespace ActivPass.ViewModels
                 }
             }
         }
+        
+        private bool _saveEditorItem;
+        public bool SaveEditorItem
+        {
+            get => _saveEditorItem;
+            set => SetProperty(ref _saveEditorItem, value);
+        }
 
         /// <summary>
         /// Close the passed window instance.
@@ -95,9 +102,12 @@ namespace ActivPass.ViewModels
         {
             this._item = item;
 
+            //Inital values
+            this.SaveEditorItem = false;
+
             //Command bindings
             this.Close = new RelayCommand<Window>(CloseWindow);
-            this.SaveItem = new RelayCommand<Window>(CloseWindow);
+            this.SaveItem = new RelayCommand<Window>(SaveItemAndClose);
             this.CopyToClipboard = new RelayCommand<string>(SetClipboardText);
         }
 
@@ -109,6 +119,17 @@ namespace ActivPass.ViewModels
         private void SetClipboardText(string text)
         {
             Clipboard.SetText(text, TextDataFormat.UnicodeText);
+        }
+
+        /// <summary>
+        /// Set the flag to store the current
+        /// password item from the editor dialog.
+        /// </summary>
+        /// <param name="window">Instance to close</param>
+        private void SaveItemAndClose(Window window)
+        {
+            this.SaveEditorItem = true;
+            this.CloseWindow(window);
         }
 
         /// <summary>

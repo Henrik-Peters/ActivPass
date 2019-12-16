@@ -17,7 +17,7 @@ namespace ActivPass.Views
         /// <summary>
         /// View model instance for this window.
         /// </summary>
-        private PassItemEditorViewModel vm;
+        public PassItemEditorViewModel vm;
 
         /// <summary>
         /// If the password is visible as plain text.
