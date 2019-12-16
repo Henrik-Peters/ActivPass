@@ -4,6 +4,7 @@
 // See LICENSE file in the project root for full license information
 #endregion
 using System.Windows;
+using System.Windows.Input;
 using ActivPass.Models;
 using ActivPass.ViewModels;
 
@@ -45,14 +46,16 @@ namespace ActivPass.Views
             this.PassBox.Password = this.vm.Password;
         }
 
-        private void PassTextBox_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+        private void PassTextBox_KeyUp(object sender, KeyEventArgs e)
         {
             PassBox.Password = this.vm.Password;
+            ValidateEditorItem();
         }
 
-        private void PassBox_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+        private void PassBox_KeyUp(object sender, KeyEventArgs e)
         {
             this.vm.Password = PassBox.Password;
+            ValidateEditorItem();
         }
 
         private void ShowPasswordButton_Click(object sender, RoutedEventArgs e)
@@ -70,6 +73,30 @@ namespace ActivPass.Views
                 PassBox.Visibility = Visibility.Visible;
                 PassTextBox.Visibility = Visibility.Hidden;
                 PassBox.Focus();
+            }
+        }
+
+        private void UsernameBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            ValidateEditorItem();
+        }
+
+        private void NameBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            ValidateEditorItem();
+        }
+
+        /// <summary>
+        /// Check if the current item could be stored as a valid
+        /// item and enable or disable the the save button.
+        /// </summary>
+        private void ValidateEditorItem()
+        {
+            //Check if all text boxes are non empty
+            if (NameBox.Text == string.Empty || UsernameBox.Text == string.Empty || PassBox.Password == string.Empty) {
+                this.SaveButton.IsEnabled = false;
+            } else {
+                this.SaveButton.IsEnabled = true;
             }
         }
     }
