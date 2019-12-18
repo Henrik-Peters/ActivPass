@@ -32,6 +32,8 @@ namespace ActivPass.Localization
             ["Cancel"] = new List<string> { "Cancel", "Abbrechen" },
             ["Login"] = new List<string> { "Login", "Anmelden" },
             ["Name"] = new List<string> { "Name", "Name" },
+            ["Yes"] = new List<string> { "Yes", "Ja" },
+            ["No"] = new List<string> { "No", "Nein" },
             ["Username"] = new List<string> { "Username", "Benutzername" },
             ["Save"] = new List<string> { "Save", "Speichern" },
             ["Settings"] = new List<string> { "Settings", "Einstellungen" },
@@ -49,7 +51,10 @@ namespace ActivPass.Localization
             ["ContainerCreateFail"] = new List<string> { "Failed to create new container", "Container konnte nicht erstellt werden" },
             ["ContainerNameExists"] = new List<string> { "Container name already exists", "Ein Container mit diesem Namen existiert bereits" },
             ["ContainerStoreFail"] = new List<string> { "Failed to store the container", "Container konnte nicht gespeichert werden" },
-            ["CopyToClipboard"] = new List<string> { "Copy to clipboard", "In Zwischenablage kopieren" }
+            ["CopyToClipboard"] = new List<string> { "Copy to clipboard", "In Zwischenablage kopieren" },
+            ["DeleteDialogTitle"] = new List<string> { "Delete confirmation", "Löschbestätigung" },
+            ["DeleteQuestionPart1"] = new List<string> { "Are you sure that", "Soll" },
+            ["DeleteQuestionPart2"] = new List<string> { "should be deleted?", "wirklich gelöscht werden?" }
         };
 
         /// <summary>

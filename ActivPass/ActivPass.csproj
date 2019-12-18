@@ -72,6 +72,7 @@
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\PassItemEditorViewModel.cs" />
     <Compile Include="ViewModels\PasswordItemViewModel.cs" />
+    <Compile Include="ViewModels\QuestionBoxViewModel.cs" />
     <Compile Include="ViewModels\RelayCommand.cs" />
     <Compile Include="ViewModels\ViewModel.cs" />
     <Compile Include="Views\ContainerInit.xaml.cs">

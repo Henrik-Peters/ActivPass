@@ -282,7 +282,11 @@ namespace ActivPass.ViewModels
         /// <param name="item">Password itme to delete</param>
         private void ShowDeleteItemDialog(PasswordItemViewModel item)
         {
+            QuestionBox deleteDialog = new QuestionBox(
+                Localize["DeleteQuestionPart1"] + " " + item.Name + " " + Localize["DeleteQuestionPart2"],
+                Localize["DeleteDialogTitle"]);
 
+            deleteDialog.ShowDialog();
         }
 
         /// <summary>
