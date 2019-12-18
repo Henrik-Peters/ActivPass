@@ -282,11 +282,42 @@ namespace ActivPass.ViewModels
         /// <param name="item">Password itme to delete</param>
         private void ShowDeleteItemDialog(PasswordItemViewModel item)
         {
+            //Confirm the delete operation
             QuestionBox deleteDialog = new QuestionBox(
                 Localize["DeleteQuestionPart1"] + " " + item.Name + " " + Localize["DeleteQuestionPart2"],
                 Localize["DeleteDialogTitle"]);
 
+            //Wait for the question box dialog result
             deleteDialog.ShowDialog();
+
+            //Check the delete operation should be performed
+            if (deleteDialog.ConfirmResult) {
+
+                //Get the index of the item to delete
+                int itemIndex = PasswordItems.IndexOf(item);
+
+                //Create a new item array with decreased size
+                PasswordItem[] newItems = new PasswordItem[Container.Items.Length - 1];
+
+                //Copy all password items to the new collection
+                for (int i = 0, j = 0; i < Container.Items.Length; i++) {
+
+                    //Skip the item for deletion
+                    if (Container.Items[i] != item.Proxy) {
+                        newItems[j] = Container.Items[i];
+                        j++;
+                    }
+                }
+
+                //Overwrite the container item collection
+                Container.Items = newItems;
+                PasswordItems.Remove(item);
+
+                //Save the container with the current storage provider
+                if (!ContainerStorage.ContainerProvider.SaveContainer(Container, MasterPasswordBox.Password)) {
+                    MessageBox.Show("Failed to delete the container!", "Container deletion failed", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
         }
 
         /// <summary>

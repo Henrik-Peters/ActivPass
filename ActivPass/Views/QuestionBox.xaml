@@ -32,7 +32,7 @@
         <Label x:Name="QuestionLabel" Content="Question Text" Foreground="#E6E6E6" HorizontalAlignment="Left" Margin="70,24.8,10,0" Grid.Row="0" VerticalAlignment="Top" FontSize="20"/>
 
         <!-- Dialog buttons -->
-        <Button Content="{Binding Localize[Yes]}" Style="{StaticResource NormalButton}" Grid.Row="1" Width="120" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="15,0,150,0"/>
-        <Button Content="{Binding Localize[No]}" Style="{StaticResource NormalButton}" Grid.Row="1" Width="120" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="15,0,15,0"/>
+        <Button x:Name="ConfirmButton" Content="{Binding Localize[Yes]}" Style="{StaticResource NormalButton}" Grid.Row="1" Width="120" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="15,0,150,0" Click="ConfirmButton_Click"/>
+        <Button x:Name="CancelButton" Content="{Binding Localize[No]}" Style="{StaticResource NormalButton}" Grid.Row="1" Width="120" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="15,0,15,0" Click="CancelButton_Click"/>
     </Grid>
 </Window>
