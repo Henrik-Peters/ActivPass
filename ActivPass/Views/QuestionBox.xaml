@@ -1,0 +1,31 @@
+﻿<Window x:Class="ActivPass.Views.QuestionBox"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ActivPass.Views"
+        Background="#303139"
+        mc:Ignorable="d"
+        Title="MessageBox" ResizeMode="NoResize" SizeToContent="WidthAndHeight" FontSize="18" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <!-- Question icon -->
+        <Border Grid.Row="0" Margin="10,10,0,0" Width="50" Height="50" BorderBrush="#E6E6E6" HorizontalAlignment="Left" BorderThickness="3" CornerRadius="25" Background="Transparent">
+            <ContentPresenter x:Name="contentPresenter" Content="?" TextBlock.Foreground="#E6E6E6" TextBlock.FontSize="37" TextBlock.FontWeight="Bold" Margin="0,-2.7,0,0" Focusable="False" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Border>
+        
+        <!-- Dialog text -->
+        <Label Content="Question Text" Foreground="#E6E6E6" HorizontalAlignment="Left" Margin="70,24.8,10,0" Grid.Row="0" VerticalAlignment="Top" FontSize="20"/>
+
+        <!-- Dialog buttons -->
+        <Button Content="Yes" Style="{StaticResource NormalButton}" Grid.Row="1" Width="120" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,150,0"/>
+        <Button Content="No" Style="{StaticResource NormalButton}" Grid.Row="1" Width="120" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,15,0"/>
+    </Grid>
+</Window>

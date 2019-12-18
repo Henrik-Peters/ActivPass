@@ -80,6 +80,9 @@
     <Compile Include="Views\PassItemEditor.xaml.cs">
       <DependentUpon>PassItemEditor.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\QuestionBox.xaml.cs">
+      <DependentUpon>QuestionBox.xaml</DependentUpon>
+    </Compile>
     <Page Include="Images\Icons.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -129,6 +132,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\PassItemEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\QuestionBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
