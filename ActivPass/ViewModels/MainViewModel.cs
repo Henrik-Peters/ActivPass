@@ -268,6 +268,11 @@ namespace ActivPass.ViewModels
                 Container.Items = newItems;
                 PasswordItems.Add(new PasswordItemViewModel(editorItem));
 
+                //Empty container info
+                if (PasswordItems.Count > 0) {
+                    this.EmptyContainerInfo = Visibility.Hidden;
+                }
+
                 //Save the container with the current storage provider
                 if (!ContainerStorage.ContainerProvider.SaveContainer(Container, MasterPasswordBox.Password)) {
                     MessageBox.Show("Failed to create the container!", "Container creation failed", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -312,6 +317,11 @@ namespace ActivPass.ViewModels
                 //Overwrite the container item collection
                 Container.Items = newItems;
                 PasswordItems.Remove(item);
+
+                //Empty container info
+                if (PasswordItems.Count == 0) {
+                    this.EmptyContainerInfo = Visibility.Visible;
+                }
 
                 //Save the container with the current storage provider
                 if (!ContainerStorage.ContainerProvider.SaveContainer(Container, MasterPasswordBox.Password)) {
