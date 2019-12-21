@@ -83,6 +83,23 @@ namespace ActivPass.ViewModels
             set => SetProperty(ref _login, value);
         }
 
+        private string _seachText;
+        public string SearchText
+        {
+            get => _seachText;
+            set
+            {
+                if (_seachText != value) {
+                    _seachText = value;
+                    NotifyPropertyChanged(nameof(SearchText));
+
+                    if (PasswordItems != null) {
+                        PasswordItemsView.Refresh();
+                    }
+                }
+            }
+        }
+
         private PasswordContainer _container;
         public PasswordContainer Container
         {
@@ -101,10 +118,11 @@ namespace ActivPass.ViewModels
         {
             get {
                 ICollectionView view = CollectionViewSource.GetDefaultView(PasswordItems);
+                view.Filter = SearchPasswordFilter;
                 return view;
             }
         }
-
+        
         public ICommand ShowMainMenu { get; set; }
         public ICommand ExitApp { get; set; }
         public ICommand ContainerLogin { get; set; }
@@ -141,6 +159,24 @@ namespace ActivPass.ViewModels
             this.MainMenu.PlacementTarget = placementTarget;
             this.MainMenu.Placement = PlacementMode.Bottom;
             this.MainMenu.IsOpen = true;
+        }
+
+        /// <summary>
+        /// Check if a password item passes the name seach.
+        /// Returns true for items which are not password items.
+        /// </summary>
+        /// <param name="item">Password item to check</param>
+        /// <returns></returns>
+        private bool SearchPasswordFilter(object item)
+        {
+            PasswordItemViewModel passwordItem = item as PasswordItemViewModel;
+
+            if (item == null || SearchText == "") {
+                return true;
+
+            } else {
+                return passwordItem.Name.Contains(SearchText);
+            }
         }
 
         /// <summary>
@@ -372,6 +408,7 @@ namespace ActivPass.ViewModels
 
             //Default values
             this.Login = false;
+            this.SearchText = string.Empty;
             this.LoginInfo = Localize["LoginFailed"];
             this.LoginInfoVisibility = Visibility.Hidden;
             this.EmptyContainerInfo = Visibility.Hidden;

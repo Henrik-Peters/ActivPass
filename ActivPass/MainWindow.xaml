@@ -95,7 +95,7 @@
             </Button.Style>
         </Button>
 
-        <TextBox x:Name="SearchBox" Tag="{Binding Localize[Search]}" Text="" Grid.Column="1" Width="700" Height="70" Margin="0,0,0,0" TextWrapping="NoWrap" HorizontalAlignment="Center" VerticalAlignment="Top">
+        <TextBox x:Name="SearchBox" Tag="{Binding Localize[Search]}" Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Width="700" Height="70" Margin="0,0,0,0" TextWrapping="NoWrap" HorizontalAlignment="Center" VerticalAlignment="Top">
             <TextBox.Style>
                 <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource SearchBox}">
                     <Style.Triggers>
