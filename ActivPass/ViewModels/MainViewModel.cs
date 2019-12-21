@@ -5,7 +5,9 @@
 #endregion
 using System;
 using System.Linq;
+using System.ComponentModel;
 using System.Windows;
+using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -95,6 +97,14 @@ namespace ActivPass.ViewModels
             set => SetProperty(ref _passwordItems, value);
         }
 
+        public ICollectionView PasswordItemsView
+        {
+            get {
+                ICollectionView view = CollectionViewSource.GetDefaultView(PasswordItems);
+                return view;
+            }
+        }
+
         public ICommand ShowMainMenu { get; set; }
         public ICommand ExitApp { get; set; }
         public ICommand ContainerLogin { get; set; }
@@ -173,6 +183,7 @@ namespace ActivPass.ViewModels
                     this.Login = true;
                     this.Container = container;
                     this.LoginInfoVisibility = Visibility.Hidden;
+                    NotifyPropertyChanged(nameof(PasswordItemsView));
 
                     //Empty container info
                     if (PasswordItems.Count == 0) {
@@ -364,6 +375,7 @@ namespace ActivPass.ViewModels
             this.LoginInfo = Localize["LoginFailed"];
             this.LoginInfoVisibility = Visibility.Hidden;
             this.EmptyContainerInfo = Visibility.Hidden;
+            this.PasswordItems = new ObservableCollection<PasswordItemViewModel>();
 
             //Get all available container names
             string[] availableContainer = ContainerStorage.ContainerProvider.ListContainers();

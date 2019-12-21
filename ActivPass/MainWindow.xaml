@@ -189,7 +189,7 @@
 
         <!-- Password items panel -->
         <ScrollViewer x:Name="PasswordItemScroll" Padding="20" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" VerticalScrollBarVisibility="Auto">
-            <ItemsControl x:Name="PasswordItemControl" ItemsSource="{Binding PasswordItems}">
+            <ItemsControl x:Name="PasswordItemControl" ItemsSource="{Binding PasswordItemsView}">
                 
                 <!-- Panel control template -->
                 <ItemsControl.ItemsPanel>
