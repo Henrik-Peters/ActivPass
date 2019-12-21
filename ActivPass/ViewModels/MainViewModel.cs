@@ -37,6 +37,11 @@ namespace ActivPass.ViewModels
         public ContextMenu MainMenu { get; private set; }
 
         /// <summary>
+        /// Container item name search text box
+        /// </summary>
+        public TextBox SearchBox { get; private set; }
+
+        /// <summary>
         /// Textbox of the master password
         /// for the container login.
         /// </summary>
@@ -219,6 +224,7 @@ namespace ActivPass.ViewModels
                     this.Login = true;
                     this.Container = container;
                     this.LoginInfoVisibility = Visibility.Hidden;
+                    this.SearchBox.Focus();
                     NotifyPropertyChanged(nameof(PasswordItemsView));
 
                     //Empty container info
@@ -383,11 +389,13 @@ namespace ActivPass.ViewModels
         /// </summary>
         /// <param name="MainMenu">Container burger context menu</param>
         /// <param name="MasterPasswordBox">Login master password box</param>
-        public MainViewModel(ContextMenu MainMenu, PasswordBox MasterPasswordBox)
+        /// <param name="SearchBox">TextBox for searching password items</param>
+        public MainViewModel(ContextMenu MainMenu, PasswordBox MasterPasswordBox, TextBox SearchBox)
         {
             //Constructor paramater storage
             this.MainMenu = MainMenu;
             this.MasterPasswordBox = MasterPasswordBox;
+            this.SearchBox = SearchBox;
 
             //Create a default config when no config exists
             if (!ConfigProvider.ConfigExists) {

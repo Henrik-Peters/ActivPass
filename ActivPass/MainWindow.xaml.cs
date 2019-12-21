@@ -25,7 +25,7 @@ namespace ActivPass
             InitializeComponent();
 
             //View model initialisation
-            this.vm = new MainViewModel(this.FindResource("MainMenu") as ContextMenu, this.MasterPassword);
+            this.vm = new MainViewModel(this.FindResource("MainMenu") as ContextMenu, this.MasterPassword, this.SearchBox);
             this.DataContext = this.vm;
         }
 
