@@ -13,7 +13,7 @@
 
     <Window.Resources>
         <!-- Container main context menu -->
-        <ContextMenu x:Key="MainMenu" Width="150" VerticalOffset="-2" FontSize="18" FontFamily="Segoue UI" FontWeight="Normal">
+        <ContextMenu x:Key="MainMenu" MinWidth="150" VerticalOffset="-2" FontSize="18" FontFamily="Segoue UI" FontWeight="Normal">
             <MenuItem x:Name="LockMenuItem" Header="{Binding Localize[Lock]}" Command="{Binding ContainerLogout}"/>
             <MenuItem x:Name="ExportMenuItem" Header="{Binding Localize[Export]}"/>
             <Separator/>

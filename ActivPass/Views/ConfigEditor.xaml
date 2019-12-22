@@ -8,7 +8,7 @@
         x:Name="ConfigEditorWindow"
         mc:Ignorable="d"
         Background="#494A52"
-        Title="{Binding Localize[Settings]}" Height="270" Width="320" FontSize="18" WindowStartupLocation="CenterScreen">
+        Title="{Binding Localize[Settings]}" Height="270" Width="340" FontSize="18" WindowStartupLocation="CenterScreen">
 
     <!-- View model instance -->
     <Window.DataContext>
