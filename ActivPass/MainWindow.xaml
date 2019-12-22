@@ -9,7 +9,7 @@
         x:Name="ActivPassWindow"
         mc:Ignorable="d"
         FocusManager.FocusedElement="{Binding ElementName=MasterPassword}"
-        Title="ActivPass" Height="830" Width="1640" FontSize="18" WindowStartupLocation="CenterScreen">
+        Title="ActivPass" Height="830" Width="1640" FontSize="18" WindowStartupLocation="CenterScreen" KeyUp="ActivPassWindow_KeyUp">
 
     <Window.Resources>
         <!-- Container main context menu -->
@@ -203,7 +203,7 @@
                     <DataTemplate DataType="{x:Type ViewModels:PasswordItemViewModel}">
 
                         <!-- Password item control border -->
-                        <Border Tag="{Binding DataContext, ElementName=ActivPassWindow}" Margin="10" Padding="3" UseLayoutRounding="True" SnapsToDevicePixels="True">
+                        <Border Name="PassItem" Tag="{Binding DataContext, ElementName=ActivPassWindow}" Margin="10" Padding="3" UseLayoutRounding="True" SnapsToDevicePixels="True" MouseEnter="PassItem_MouseEnter" MouseLeave="PassItem_MouseLeave">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="170"/>
