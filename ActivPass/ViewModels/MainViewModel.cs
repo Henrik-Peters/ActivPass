@@ -138,6 +138,7 @@ namespace ActivPass.ViewModels
         public ICommand DeletePasswordItem { get; set; }
         public ICommand UsernameToClipboard { get; set; }
         public ICommand PasswordToClipboard { get; set; }
+        public ICommand OpenSettings { get; set; }
 
         /// <summary>
         /// Reference for bindings to the translate singleton.
@@ -404,6 +405,15 @@ namespace ActivPass.ViewModels
         }
 
         /// <summary>
+        /// Show the config editor to change the application settings.
+        /// </summary>
+        private void ShowConfigEditor()
+        {
+            ConfigEditor configEditor = new ConfigEditor();
+            configEditor.ShowDialog();
+        }
+
+        /// <summary>
         /// Create a new view model instance
         /// for the activ pass main window.
         /// </summary>
@@ -431,11 +441,12 @@ namespace ActivPass.ViewModels
             this.ContainerLogout = new RelayCommand(LockContainer);
             this.CreateContainer = new RelayCommand(CreateNewContainer);
             this.AddPasswordItem = new RelayCommand(CreatePasswordItem);
+            this.OpenSettings = new RelayCommand(ShowConfigEditor);
             this.OpenPasswordItem = new RelayCommand<PasswordItemViewModel>(ShowPasswordItemDetails);
             this.DeletePasswordItem = new RelayCommand<PasswordItemViewModel>(ShowDeleteItemDialog);
             this.UsernameToClipboard = new RelayCommand<PasswordItemViewModel>(CopyUsernameToClipboard);
             this.PasswordToClipboard = new RelayCommand<PasswordItemViewModel>(CopyPasswordToClipboard);
-
+            
             //Default values
             this.Login = false;
             this.SearchText = string.Empty;

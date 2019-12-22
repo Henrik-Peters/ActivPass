@@ -1,0 +1,20 @@
+﻿<Window x:Class="ActivPass.Views.ConfigEditor"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ActivPass.Views"
+        xmlns:ViewModels="clr-namespace:ActivPass.ViewModels"
+        mc:Ignorable="d"
+        Background="#494A52"
+        Title="{Binding Localize[Settings]}" Height="450" Width="800" FontSize="18" WindowStartupLocation="CenterScreen">
+
+    <!-- View model instance -->
+    <Window.DataContext>
+        <ViewModels:ConfigEditorViewModel/>
+    </Window.DataContext>
+
+    <Grid>
+        
+    </Grid>
+</Window>
