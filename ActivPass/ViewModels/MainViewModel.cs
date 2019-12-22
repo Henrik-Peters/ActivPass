@@ -136,6 +136,8 @@ namespace ActivPass.ViewModels
         public ICommand OpenPasswordItem { get; set; }
         public ICommand AddPasswordItem { get; set; }
         public ICommand DeletePasswordItem { get; set; }
+        public ICommand UsernameToClipboard { get; set; }
+        public ICommand PasswordToClipboard { get; set; }
 
         /// <summary>
         /// Reference for bindings to the translate singleton.
@@ -384,6 +386,24 @@ namespace ActivPass.ViewModels
         }
 
         /// <summary>
+        /// Copy the username of a password item to the clipboard.
+        /// </summary>
+        /// <param name="item">Copy from this view model instance</param>
+        private void CopyUsernameToClipboard(PasswordItemViewModel item)
+        {
+            Clipboard.SetText(item.Username, TextDataFormat.UnicodeText);
+        }
+
+        /// <summary>
+        /// Copy the password of a password item to the clipboard.
+        /// </summary>
+        /// <param name="item">Copy from this view model instance</param>
+        private void CopyPasswordToClipboard(PasswordItemViewModel item)
+        {
+            Clipboard.SetText(item.Password, TextDataFormat.UnicodeText);
+        }
+
+        /// <summary>
         /// Create a new view model instance
         /// for the activ pass main window.
         /// </summary>
@@ -413,6 +433,8 @@ namespace ActivPass.ViewModels
             this.AddPasswordItem = new RelayCommand(CreatePasswordItem);
             this.OpenPasswordItem = new RelayCommand<PasswordItemViewModel>(ShowPasswordItemDetails);
             this.DeletePasswordItem = new RelayCommand<PasswordItemViewModel>(ShowDeleteItemDialog);
+            this.UsernameToClipboard = new RelayCommand<PasswordItemViewModel>(CopyUsernameToClipboard);
+            this.PasswordToClipboard = new RelayCommand<PasswordItemViewModel>(CopyPasswordToClipboard);
 
             //Default values
             this.Login = false;

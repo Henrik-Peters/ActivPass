@@ -238,7 +238,17 @@
                                     <MenuItem Header="{Binding Localize[Open]}"
                                               Command="{Binding OpenPasswordItem}"
                                               CommandParameter="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}}"/>
+                                    <Separator/>
 
+                                    <MenuItem Header="{Binding Localize[CopyUsernameToClipboard]}"
+                                              Command="{Binding UsernameToClipboard}"
+                                              CommandParameter="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}}"/>
+
+                                    <MenuItem Header="{Binding Localize[CopyPasswordToClipboard]}"
+                                              Command="{Binding PasswordToClipboard}"
+                                              CommandParameter="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}}"/>
+
+                                    <Separator/>
                                     <MenuItem Header="{Binding Localize[Delete]}"
                                               Command="{Binding DeletePasswordItem}"
                                               CommandParameter="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}}"/>

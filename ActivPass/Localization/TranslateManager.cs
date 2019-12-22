@@ -54,7 +54,9 @@ namespace ActivPass.Localization
             ["CopyToClipboard"] = new List<string> { "Copy to clipboard", "In Zwischenablage kopieren" },
             ["DeleteDialogTitle"] = new List<string> { "Delete confirmation", "Löschbestätigung" },
             ["DeleteQuestionPart1"] = new List<string> { "Are you sure that", "Soll" },
-            ["DeleteQuestionPart2"] = new List<string> { "should be deleted?", "wirklich gelöscht werden?" }
+            ["DeleteQuestionPart2"] = new List<string> { "should be deleted?", "wirklich gelöscht werden?" },
+            ["CopyUsernameToClipboard"] = new List<string> { "Copy username", "Benutzernamen kopieren" },
+            ["CopyPasswordToClipboard"] = new List<string> { "Copy password", "Passwort kopieren" }
         };
 
         /// <summary>
