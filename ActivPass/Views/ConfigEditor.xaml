@@ -43,7 +43,7 @@
         </ComboBox>
 
         <!-- Maximize window -->
-        <CheckBox x:Name="MaximizeWindowCheckBox" Content="{Binding Localize[MaximizeWindowConfig]}" Foreground="White" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <CheckBox x:Name="MaximizeWindowCheckBox" Content="{Binding Localize[MaximizeWindowConfig]}" Style="{StaticResource NormalCheckBox}" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
         <!-- Dialog buttons -->
         <Button x:Name="SaveButton" Command="{Binding Save}" CommandParameter="{Binding ElementName=ConfigEditorWindow}" Content="{Binding Localize[Save]}" Style="{StaticResource NormalButton}" Focusable="False" Grid.Row="4" Grid.Column="3" Margin="15,0,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
