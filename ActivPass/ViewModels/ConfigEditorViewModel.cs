@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ActivPass.Localization;
+using ActivPass.Configuration;
 
 namespace ActivPass.ViewModels
 {
@@ -21,11 +22,18 @@ namespace ActivPass.ViewModels
         /// </summary>
         public TranslateManager Localize => TranslateManager.GetTranslateManager();
 
-        private string _selectedLanguage;
-        public string SelectedLanguage
+        private int _selectedLanguageIndex;
+        public int SelectedLanguageIndex
         {
-            get => _selectedLanguage;
-            set => SetProperty(ref _selectedLanguage, value);
+            get => _selectedLanguageIndex;
+            set => SetProperty(ref _selectedLanguageIndex, value);
+        }
+
+        private bool _maximizeStartupWindow;
+        public bool MaximizeStartupWindow
+        {
+            get => _maximizeStartupWindow;
+            set => SetProperty(ref _maximizeStartupWindow, value);
         }
 
         /// <summary>
@@ -54,6 +62,40 @@ namespace ActivPass.ViewModels
         /// <param name="window">Instance to close</param>
         private void SaveConfig(Window window)
         {
+            //Config values
+            Language language;
+            WindowStartupState startupState;
+
+            //Select the language based in the selector index
+            switch (SelectedLanguageIndex) {
+                case 0:
+                    language = Language.English;
+                    break;
+
+                case 1:
+                    language = Language.German;
+                    break;
+
+                default:
+                    language = Language.English;
+                    break;
+            }
+
+            //Select the window startup state based on the checkbox value
+            if (MaximizeStartupWindow) {
+                startupState = WindowStartupState.Maximised;
+            } else {
+                startupState = WindowStartupState.Default;
+            }
+
+            //Create the new config instance
+            ConfigData newConfig = new ConfigData(language, startupState);
+
+            //Apply and save the new config
+            MainViewModel.Config = newConfig;
+            ConfigProvider.SaveConfig(newConfig);
+
+            //Close the window
             CloseWindow(window);
         }
 

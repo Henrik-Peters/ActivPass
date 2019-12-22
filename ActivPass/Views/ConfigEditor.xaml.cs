@@ -3,19 +3,9 @@
 // Copyright 2019 Henrik Peters
 // See LICENSE file in the project root for full license information
 #endregion
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using ActivPass.Configuration;
+using ActivPass.ViewModels;
 
 namespace ActivPass.Views
 {
@@ -24,9 +14,26 @@ namespace ActivPass.Views
     /// </summary>
     public partial class ConfigEditor : Window
     {
-        public ConfigEditor()
+        public ConfigEditor(ConfigData config)
         {
             InitializeComponent();
+
+            //Config init
+            ConfigEditorViewModel vm = this.DataContext as ConfigEditorViewModel;
+
+            //Set the current language as selected item
+            switch (config.Language) {
+                case Localization.Language.English:
+                    vm.SelectedLanguageIndex = 0;
+                    break;
+
+                case Localization.Language.German:
+                    vm.SelectedLanguageIndex = 1;
+                    break;
+            }
+
+            //Checked value for the maximize on startup checkbox
+            vm.MaximizeStartupWindow = (config.StartupLayout == WindowStartupState.Maximised);
         }
     }
 }

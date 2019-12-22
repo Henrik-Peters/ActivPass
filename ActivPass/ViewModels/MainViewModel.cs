@@ -409,7 +409,7 @@ namespace ActivPass.ViewModels
         /// </summary>
         private void ShowConfigEditor()
         {
-            ConfigEditor configEditor = new ConfigEditor();
+            ConfigEditor configEditor = new ConfigEditor(Config);
             configEditor.ShowDialog();
         }
 

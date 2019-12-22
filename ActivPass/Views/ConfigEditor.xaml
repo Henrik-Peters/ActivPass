@@ -37,13 +37,13 @@
         
         <!-- Language -->
         <Label x:Name="LanguageInfoLabel" Content="{Binding Localize[Language]}" HorizontalContentAlignment="Center" Grid.ColumnSpan="3" FontFamily="Tahoma" Foreground="White" FontSize="18" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="LanguageSelector" SelectedItem="{Binding SelectedLanguage}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Width="250" Height="30" Margin="0,30,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Style="{StaticResource ComboBoxStyle}">
+        <ComboBox x:Name="LanguageSelector" SelectedIndex="{Binding SelectedLanguageIndex, Mode=TwoWay}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Width="250" Height="30" Margin="0,30,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Style="{StaticResource ComboBoxStyle}">
             <ComboBoxItem Name="English">English</ComboBoxItem>
             <ComboBoxItem Name="German">Deutsch</ComboBoxItem>
         </ComboBox>
 
         <!-- Maximize window -->
-        <CheckBox x:Name="MaximizeWindowCheckBox" Content="{Binding Localize[MaximizeWindowConfig]}" Style="{StaticResource NormalCheckBox}" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <CheckBox x:Name="MaximizeWindowCheckBox" IsChecked="{Binding MaximizeStartupWindow, Mode=TwoWay}" Content="{Binding Localize[MaximizeWindowConfig]}" Style="{StaticResource NormalCheckBox}" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
         <!-- Dialog buttons -->
         <Button x:Name="SaveButton" Command="{Binding Save}" CommandParameter="{Binding ElementName=ConfigEditorWindow}" Content="{Binding Localize[Save]}" Style="{StaticResource NormalButton}" Focusable="False" Grid.Row="4" Grid.Column="3" Margin="15,0,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
