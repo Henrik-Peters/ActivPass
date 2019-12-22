@@ -5,9 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ActivPass.Views"
         xmlns:ViewModels="clr-namespace:ActivPass.ViewModels"
+        x:Name="ConfigEditorWindow"
         mc:Ignorable="d"
         Background="#494A52"
-        Title="{Binding Localize[Settings]}" Height="450" Width="800" FontSize="18" WindowStartupLocation="CenterScreen">
+        Title="{Binding Localize[Settings]}" Height="270" Width="320" FontSize="18" WindowStartupLocation="CenterScreen">
 
     <!-- View model instance -->
     <Window.DataContext>
@@ -15,6 +16,37 @@
     </Window.DataContext>
 
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="140"/>
+            <ColumnDefinition Width="10"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="15"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header info label -->
+        <Label x:Name="HeaderInfoLabel" Content="{Binding Localize[ConfigEditorHeadline]}" HorizontalContentAlignment="Center" Grid.ColumnSpan="3" FontFamily="Tahoma" Foreground="White" FontSize="18" Grid.Column="1" HorizontalAlignment="Left" Margin="0,3,0,0" VerticalAlignment="Top"/>
         
+        <!-- Language -->
+        <Label x:Name="LanguageInfoLabel" Content="{Binding Localize[Language]}" HorizontalContentAlignment="Center" Grid.ColumnSpan="3" FontFamily="Tahoma" Foreground="White" FontSize="18" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="LanguageSelector" SelectedItem="{Binding SelectedLanguage}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Width="250" Height="30" Margin="0,30,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Style="{StaticResource ComboBoxStyle}">
+            <ComboBoxItem Name="English">English</ComboBoxItem>
+            <ComboBoxItem Name="German">Deutsch</ComboBoxItem>
+        </ComboBox>
+
+        <!-- Maximize window -->
+        <CheckBox x:Name="MaximizeWindowCheckBox" Content="{Binding Localize[MaximizeWindowConfig]}" Foreground="White" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
+        <!-- Dialog buttons -->
+        <Button x:Name="SaveButton" Command="{Binding Save}" CommandParameter="{Binding ElementName=ConfigEditorWindow}" Content="{Binding Localize[Save]}" Style="{StaticResource NormalButton}" Focusable="False" Grid.Row="4" Grid.Column="3" Margin="15,0,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        <Button x:Name="CancelButton" Command="{Binding Close}" CommandParameter="{Binding ElementName=ConfigEditorWindow}" Content="{Binding Localize[Cancel]}" Style="{StaticResource NormalButton}" Focusable="False" Grid.Row="4" Grid.Column="2" Margin="0,0,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
     </Grid>
 </Window>

@@ -56,7 +56,10 @@ namespace ActivPass.Localization
             ["DeleteQuestionPart1"] = new List<string> { "Are you sure that", "Soll" },
             ["DeleteQuestionPart2"] = new List<string> { "should be deleted?", "wirklich gelöscht werden?" },
             ["CopyUsernameToClipboard"] = new List<string> { "Copy username", "Benutzernamen kopieren" },
-            ["CopyPasswordToClipboard"] = new List<string> { "Copy password", "Passwort kopieren" }
+            ["CopyPasswordToClipboard"] = new List<string> { "Copy password", "Passwort kopieren" },
+            ["ConfigEditorHeadline"] = new List<string> { "Edit the application configuration", "Bearbeiten Sie die Anwendungskonfiguration" },
+            ["MaximizeWindowConfig"] = new List<string> { "Maximize window on startup", "Fenster beim Start maximieren" },
+            ["Language"] = new List<string> { "Language", "Sprache" }
         };
 
         /// <summary>
