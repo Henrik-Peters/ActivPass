@@ -411,6 +411,9 @@ namespace ActivPass.ViewModels
         {
             ConfigEditor configEditor = new ConfigEditor(Config);
             configEditor.ShowDialog();
+
+            //Apply the new language value
+            SetLanguage(Config.Language);
         }
 
         /// <summary>
@@ -432,7 +435,11 @@ namespace ActivPass.ViewModels
                 ConfigProvider.SaveConfig(ConfigData.DefaultConfig);
             }
 
+            //Load the config
             Config = ConfigProvider.LoadConfig();
+
+            //Apply the config values
+            SetLanguage(Config.Language);
 
             //Command bindings
             this.ShowMainMenu = new RelayCommand<UIElement>(DisplayMainMenu);

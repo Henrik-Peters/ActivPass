@@ -33,6 +33,11 @@ namespace ActivPass
             this.vm = new MainViewModel(this.FindResource("MainMenu") as ContextMenu, this.MasterPassword, this.SearchBox);
             this.DataContext = this.vm;
             this.mouseOverItem = null;
+
+            //Window maximize on startup
+            if (MainViewModel.Config.StartupLayout == Configuration.WindowStartupState.Maximised) {
+                this.WindowState = WindowState.Maximized;
+            }
         }
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)

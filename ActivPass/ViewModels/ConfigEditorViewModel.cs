@@ -3,13 +3,8 @@
 // Copyright 2019 Henrik Peters
 // See LICENSE file in the project root for full license information
 #endregion
-using System;
 using System.Windows;
 using System.Windows.Input;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ActivPass.Localization;
 using ActivPass.Configuration;
 
@@ -94,6 +89,7 @@ namespace ActivPass.ViewModels
             //Apply and save the new config
             MainViewModel.Config = newConfig;
             ConfigProvider.SaveConfig(newConfig);
+            Localize.Language = newConfig.Language;
 
             //Close the window
             CloseWindow(window);
