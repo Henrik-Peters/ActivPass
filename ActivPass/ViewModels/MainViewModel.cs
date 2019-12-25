@@ -199,6 +199,15 @@ namespace ActivPass.ViewModels
             //Show the init container view
             ContainerInit containerInitView = new ContainerInit();
             containerInitView.ShowDialog();
+
+            //Get all available container names
+            string[] availableContainer = ContainerStorage.ContainerProvider.ListContainers();
+            
+            //Display the list of available containers
+            if (availableContainer.Length > 0) {
+                ContainerNames = new ObservableCollection<string>(availableContainer);
+                SelectedContainer = ContainerNames[0];
+            }
         }
 
         /// <summary>
