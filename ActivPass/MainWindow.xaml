@@ -9,7 +9,7 @@
         x:Name="ActivPassWindow"
         mc:Ignorable="d"
         FocusManager.FocusedElement="{Binding ElementName=MasterPassword}"
-        Title="ActivPass" Height="830" Width="1640" FontSize="18" WindowStartupLocation="CenterScreen" KeyUp="ActivPassWindow_KeyUp">
+        Title="ActivPass" Height="830" Width="1640" MinWidth="1200" MinHeight="500" FontSize="18" WindowStartupLocation="CenterScreen" KeyUp="ActivPassWindow_KeyUp">
 
     <Window.Resources>
         <!-- Container main context menu -->

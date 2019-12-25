@@ -7,7 +7,7 @@
         x:Name="ItemEditorWindow"
         Background="#494A52"
         mc:Ignorable="d"
-        Title="ActivPass" Height="450" Width="800" FontSize="18" WindowStartupLocation="CenterScreen">
+        Title="ActivPass" MinHeight="400" MinWidth="400" Height="450" Width="800" FontSize="18" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10"/>

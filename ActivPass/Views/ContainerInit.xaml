@@ -9,7 +9,7 @@
         x:Name="ContainerInitWindow"
         mc:Ignorable="d"
         FocusManager.FocusedElement="{Binding ElementName=ContainerNameBox}"
-        Title="{Binding Localize[ContainerInitTitle]}" Height="450" Width="800" FontSize="18" WindowStartupLocation="CenterScreen">
+        Title="{Binding Localize[ContainerInitTitle]}" MinHeight="420" MinWidth="730" Height="450" Width="800" FontSize="18" WindowStartupLocation="CenterScreen">
 
     <Grid>
         <Grid.ColumnDefinitions>
