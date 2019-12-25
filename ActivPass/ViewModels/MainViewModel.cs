@@ -186,7 +186,7 @@ namespace ActivPass.ViewModels
                 return true;
 
             } else {
-                return passwordItem.Name.Contains(SearchText);
+                return passwordItem.Name.ToLower().Contains(SearchText.ToLower());
             }
         }
 
