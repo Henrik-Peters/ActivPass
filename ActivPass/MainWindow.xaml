@@ -15,7 +15,7 @@
         <!-- Container main context menu -->
         <ContextMenu x:Key="MainMenu" MinWidth="150" VerticalOffset="-2" FontSize="18" FontFamily="Segoue UI" FontWeight="Normal">
             <MenuItem x:Name="LockMenuItem" Header="{Binding Localize[Lock]}" Command="{Binding ContainerLogout}"/>
-            <MenuItem x:Name="ExportMenuItem" Header="{Binding Localize[Export]}"/>
+            <MenuItem x:Name="ExportMenuItem" Header="{Binding Localize[Export]}" Command="{Binding ExportContainer}"/>
             <Separator/>
             <MenuItem x:Name="ContainerInitMenuItem" Header="{Binding Localize[NewContainer]}" Command="{Binding CreateContainer}"/>
             <MenuItem x:Name="SettingsMenuItem" Header="{Binding Localize[Settings]}" Command="{Binding OpenSettings}"/>
@@ -75,7 +75,7 @@
         </Style>
     </Window.Style>
 
-    <Grid ShowGridLines="True">
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
             <ColumnDefinition Width="*"/>

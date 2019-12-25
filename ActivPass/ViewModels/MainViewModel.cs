@@ -4,7 +4,9 @@
 // See LICENSE file in the project root for full license information
 #endregion
 using System;
+using System.IO;
 using System.Linq;
+using Microsoft.Win32;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Data;
@@ -139,6 +141,7 @@ namespace ActivPass.ViewModels
         public ICommand UsernameToClipboard { get; set; }
         public ICommand PasswordToClipboard { get; set; }
         public ICommand OpenSettings { get; set; }
+        public ICommand ExportContainer { get; set; }
 
         /// <summary>
         /// Reference for bindings to the translate singleton.
@@ -417,6 +420,45 @@ namespace ActivPass.ViewModels
         }
 
         /// <summary>
+        /// Show the export dialog of the current container.
+        /// </summary>
+        private void ContainerExport()
+        {
+            //Create the save file dialog
+            SaveFileDialog saveDialog = new SaveFileDialog
+            {
+                FileName = Container.ContainerName,
+                DefaultExt = ".csv",
+                Filter = "Comma-separated values (.csv)|*.csv"
+            };
+
+            //Show the dialog and save the dialog result
+            bool? dialogResult = saveDialog.ShowDialog();
+
+            //Create the csv file when the dialog result is save
+            if (dialogResult == true) {
+                string filename = saveDialog.FileName;
+                string[] csvLines = new string[Container.Items.Length + 1];
+
+                //CSV Headlines
+                csvLines[0] = "Name,Username,Password";
+
+                //CSV item data
+                for (int i = 0; i < Container.Items.Length; i++) {
+                    PasswordItem item = Container.Items[i];
+                    csvLines[i + 1] = item.Name + "," + item.Username + "," + item.Password;
+                }
+                
+                try {
+                    File.WriteAllLines(filename, csvLines);
+
+                } catch (Exception err) {
+                    MessageBox.Show("Failed to save the csv file: " + err.Message, "CSV file export error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+
+        /// <summary>
         /// Create a new view model instance
         /// for the activ pass main window.
         /// </summary>
@@ -449,11 +491,12 @@ namespace ActivPass.ViewModels
             this.CreateContainer = new RelayCommand(CreateNewContainer);
             this.AddPasswordItem = new RelayCommand(CreatePasswordItem);
             this.OpenSettings = new RelayCommand(ShowConfigEditor);
+            this.ExportContainer = new RelayCommand(ContainerExport);
             this.OpenPasswordItem = new RelayCommand<PasswordItemViewModel>(ShowPasswordItemDetails);
             this.DeletePasswordItem = new RelayCommand<PasswordItemViewModel>(ShowDeleteItemDialog);
             this.UsernameToClipboard = new RelayCommand<PasswordItemViewModel>(CopyUsernameToClipboard);
             this.PasswordToClipboard = new RelayCommand<PasswordItemViewModel>(CopyPasswordToClipboard);
-            
+
             //Default values
             this.Login = false;
             this.SearchText = string.Empty;
