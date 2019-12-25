@@ -128,8 +128,11 @@ namespace ActivPass.ViewModels
         /// <param name="window">Instance to close</param>
         private void SaveItemAndClose(Window window)
         {
-            this.SaveEditorItem = true;
-            this.CloseWindow(window);
+            //Check that all fields have values
+            if (Name != string.Empty && Username != string.Empty && Password != string.Empty) {
+                this.SaveEditorItem = true;
+                this.CloseWindow(window);
+            }
         }
 
         /// <summary>

@@ -85,7 +85,7 @@
             <RowDefinition Height="80"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Button x:Name="AddSecretButton" Content="{Binding Localize[AddSecret]}" Command="{Binding AddPasswordItem}" Visibility="Hidden" Grid.Column="2" Width="150" HorizontalAlignment="Left" Margin="25,0,0,0" VerticalAlignment="Center">
+        <Button x:Name="AddSecretButton" Content="{Binding Localize[AddSecret]}" Command="{Binding AddPasswordItem}" Visibility="Hidden" Focusable="False" Grid.Column="2" Width="150" HorizontalAlignment="Left" Margin="25,0,0,0" VerticalAlignment="Center">
             <Button.Style>
                 <Style TargetType="{x:Type Button}" BasedOn="{StaticResource NormalButton}">
                     <Style.Triggers>
@@ -125,7 +125,7 @@
         </TextBox>
 
         <!-- Container burger menu button -->
-        <Button x:Name="MenuButton" Content="{Binding Localize[Menu]}" Command="{Binding ShowMainMenu}" CommandParameter="{Binding ElementName=MenuButton}" Visibility="Hidden" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Margin="40,0,0,0" VerticalAlignment="Center" Width="110" Height="40">
+        <Button x:Name="MenuButton" Content="{Binding Localize[Menu]}" Command="{Binding ShowMainMenu}" CommandParameter="{Binding ElementName=MenuButton}" Visibility="Hidden" Focusable="False" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Margin="40,0,0,0" VerticalAlignment="Center" Width="110" Height="40">
             <Button.Style>
                 <Style TargetType="{x:Type Button}" BasedOn="{StaticResource MenuButton}">
                     <Style.Triggers>
