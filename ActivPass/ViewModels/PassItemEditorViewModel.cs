@@ -57,6 +57,22 @@ namespace ActivPass.ViewModels
         }
 
         /// <summary>
+        /// Url of the password item
+        /// </summary>
+        public string Url
+        {
+            get => _item.Url;
+            set
+            {
+                if (_item.Url != value)
+                {
+                    _item.Url = value;
+                    NotifyPropertyChanged(nameof(_item.Url));
+                }
+            }
+        }
+
+        /// <summary>
         /// Password of the password item
         /// </summary>
         public string Password

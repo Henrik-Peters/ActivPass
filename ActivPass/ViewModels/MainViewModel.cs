@@ -297,6 +297,7 @@ namespace ActivPass.ViewModels
                 PasswordItems[itemIndex].Name = editorItem.Name;
                 PasswordItems[itemIndex].Username = editorItem.Username;
                 PasswordItems[itemIndex].Password = editorItem.Password;
+                PasswordItems[itemIndex].Url = editorItem.Url;
 
                 //Save the container with the current storage provider
                 if (!ContainerStorage.ContainerProvider.SaveContainer(Container, MasterPasswordBox.Password)) {
