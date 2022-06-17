@@ -312,7 +312,7 @@ namespace ActivPass.ViewModels
         private void CreatePasswordItem()
         {
             //Create an empty default item
-            PasswordItem editorItem = new PasswordItem("", "", "");
+            PasswordItem editorItem = new PasswordItem("", "", "", "");
 
             //Show the item editor dialog
             PassItemEditor itemEditor = new PassItemEditor(editorItem);

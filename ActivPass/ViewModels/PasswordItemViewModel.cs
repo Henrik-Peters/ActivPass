@@ -67,6 +67,22 @@ namespace ActivPass.ViewModels
         }
 
         /// <summary>
+        /// Url of the password item.
+        /// </summary>
+        public string Url
+        {
+            get => _proxy.Url;
+            set
+            {
+                if (_proxy.Url != value)
+                {
+                    _proxy.Url = value;
+                    NotifyPropertyChanged(nameof(_proxy.Url));
+                }
+            }
+        }
+
+        /// <summary>
         /// Create a new view model from a password item.
         /// </summary>
         /// <param name="proxy">Represented password item</param>

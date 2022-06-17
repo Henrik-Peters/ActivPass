@@ -14,12 +14,14 @@ namespace ActivPass.Models
 
         public string Username { get; set; }
         public string Password { get; set; }
+        public string Url { get; set; }
 
-        public PasswordItem(string name, string username, string password)
+        public PasswordItem(string name, string username, string password, string url)
         {
             Name = name;
             Username = username;
             Password = password;
+            Url = url;
         }
 
         public object Clone()
