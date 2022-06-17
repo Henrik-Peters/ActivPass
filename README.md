@@ -7,7 +7,7 @@ The following software is required to run or compile ActivPass.
 
 * Windows OS
 * .NET Framework 4.6.1
-* Visual Studio 2017
+* Visual Studio
 
 ## Functionality
 
