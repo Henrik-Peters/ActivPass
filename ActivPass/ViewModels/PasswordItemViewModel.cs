@@ -3,6 +3,8 @@
 // Copyright 2019 Henrik Peters
 // See LICENSE file in the project root for full license information
 #endregion
+using System.Windows;
+using System.Windows.Input;
 using ActivPass.Models;
 
 namespace ActivPass.ViewModels
@@ -78,6 +80,30 @@ namespace ActivPass.ViewModels
                 {
                     _proxy.Url = value;
                     NotifyPropertyChanged(nameof(_proxy.Url));
+                    NotifyPropertyChanged(nameof(ShowOpenBtn));
+                }
+            }
+        }
+
+        /// <summary>
+        /// Open the argument as a new process.
+        /// </summary>
+        public ICommand OpenUrl { get; set; }
+
+        /// <summary>
+        /// If the open url button should be visible.
+        /// </summary>
+        public Visibility ShowOpenBtn
+        {
+            get
+            {
+                if (this._proxy.HasBrowsableUrl())
+                {
+                    return Visibility.Visible;
+                }
+                else
+                {
+                    return Visibility.Hidden;
                 }
             }
         }
@@ -89,6 +115,22 @@ namespace ActivPass.ViewModels
         public PasswordItemViewModel(PasswordItem proxy)
         {
             this._proxy = proxy;
+
+            //Commands
+            this.OpenUrl = new RelayCommand<string>(OpenBrowserUrl);
+        }
+
+        /// <summary>
+        /// Open the url as a new browser process when
+        /// the url is valid to launch a new process.
+        /// </summary>
+        /// <param name="url">Opent this url</param>
+        private void OpenBrowserUrl(string url)
+        {
+            if (this._proxy.HasBrowsableUrl())
+            {
+                System.Diagnostics.Process.Start(url);
+            }
         }
     }
 }
