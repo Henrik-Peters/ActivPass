@@ -453,12 +453,15 @@ namespace ActivPass.ViewModels
                 string[] csvLines = new string[Container.Items.Length + 1];
 
                 //CSV Headlines
-                csvLines[0] = "Name" + separator + "Username" + separator + "Password" + separator + "Url";
+                csvLines[0] = "Name" + separator + "Username" + separator + "Password" + separator + "Url" + separator + "Notes";
 
                 //CSV item data
                 for (int i = 0; i < Container.Items.Length; i++) {
                     PasswordItem item = Container.Items[i];
-                    csvLines[i + 1] = item.Name + separator + item.Username + separator + item.Password + separator + item.Url;
+
+                    //Replace line brakes in notes
+                    string pureNotes = item.Notes is string ? item.Notes.Replace("\r\n", " ") : "";
+                    csvLines[i + 1] = item.Name + separator + item.Username + separator + item.Password + separator + item.Url + separator + pureNotes;
                 }
                 
                 try {

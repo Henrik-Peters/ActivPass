@@ -71,7 +71,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="100"/>
-                <ColumnDefinition Width="140"/>
+                <ColumnDefinition Width="150"/>
             </Grid.ColumnDefinitions>
             <Button x:Name="SaveButton" Command="{Binding SaveItem}" CommandParameter="{Binding ElementName=ItemEditorWindow}" Content="{Binding Localize[Save]}" Style="{StaticResource NormalButton}" Focusable="False" Grid.Row="1" Grid.Column="2" Margin="15,0,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
             <Button x:Name="CancelButton" Command="{Binding Close}" CommandParameter="{Binding ElementName=ItemEditorWindow}" Content="{Binding Localize[Cancel]}" Style="{StaticResource NormalButton}" Focusable="False" Grid.Row="1" Grid.Column="1" Margin="0,0,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
