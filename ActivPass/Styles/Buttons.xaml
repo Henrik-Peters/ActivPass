@@ -172,4 +172,56 @@
         </Setter>
     </Style>
 
+    <Style x:Key="OpenButton" TargetType="{x:Type Button}">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="Foreground" Value="#BBC0C4"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+                        <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                            <ContentPresenter.Content>
+                                <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="Uniform">
+                                    <Canvas Name="SVGRoot" Width="64" Height="64">
+                                        <Canvas>
+                                            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Fill="{TemplateBinding Foreground}" StrokeThickness="1.85231">
+                                                <Path.Data>
+                                                    <PathGeometry Figures="M 30.194288 -27.666934 L 35.272475 -22.588747 L 41.65439 -28.970662 L 41.653009 13.730577 L 48.834562 13.730577 L 48.835943 -28.901609 L 55.147424 -22.590128 L 60.22561 -27.668315 L 50.288827 -37.605099 L 45.21064 -42.683286 L 40.132453 -37.605099 L 30.194288 -27.666934 z " FillRule="NonZero"/>
+                                                </Path.Data>
+                                                <Path.RenderTransform>
+                                                    <RotateTransform Angle="45"/>
+                                                </Path.RenderTransform>
+                                            </Path>
+                                            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Fill="{TemplateBinding Foreground}" StrokeThickness="1.00189">
+                                                <Path.Data>
+                                                    <PathGeometry Figures="m 54.937496 29.062498 h 7.25 c 0 0 0.0016 12.521927 0 23.191626 -6.63e-4 4.364113 -4.198406 9.891473 -8.5625 9.904187 -14.10248 0.04109 -28.8881 0.05929 -42.516548 0.01459 -4.2893045 -0.01407 -9.2384532 -4.645455 -9.2604346 -8.934726 -0.06555 -12.791006 -0.047092 -29.193754 -0.037722 -42.851238 0.00288 -4.202728 5.074141 -8.5394169 9.2768696 -8.5385048 9.718012 0.00211 23.829662 -0.035403 23.829662 -0.035403 l -0.01982 7.1859485 c 0 0 -14.599034 0.039618 -23.844937 -0.061896 -0.965484 -0.0106 -2.0388746 1.0849973 -2.0459331 2.0505143 -0.090829 12.424298 0.00795 29.445262 -0.02991 42.134147 -0.0026 0.871974 0.9477498 1.879831 1.8197281 1.879284 15.79135 -0.0099 29.402386 0.06012 42.235299 10e-4 1.114785 -0.0051 1.900077 -1.633158 1.90625 -2.747937 0.04284 -7.737185 -4e-6 -23.191592 -4e-6 -23.191592 z" FillRule="NonZero"/>
+                                                </Path.Data>
+                                            </Path>
+                                        </Canvas>
+                                    </Canvas>
+                                </Viewbox>
+                            </ContentPresenter.Content>
+                        </ContentPresenter>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Foreground" Value="#E3E8EC"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="true">
+                            <Setter Property="Foreground" Value="#A5AAAE"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Opacity" Value="0.56"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 </ResourceDictionary>
