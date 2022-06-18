@@ -447,16 +447,17 @@ namespace ActivPass.ViewModels
 
             //Create the csv file when the dialog result is save
             if (dialogResult == true) {
+                string separator = ";";
                 string filename = saveDialog.FileName;
                 string[] csvLines = new string[Container.Items.Length + 1];
 
                 //CSV Headlines
-                csvLines[0] = "Name,Username,Password";
+                csvLines[0] = "Name" + separator + "Username" + separator + "Password" + separator + "Url";
 
                 //CSV item data
                 for (int i = 0; i < Container.Items.Length; i++) {
                     PasswordItem item = Container.Items[i];
-                    csvLines[i + 1] = item.Name + "," + item.Username + "," + item.Password;
+                    csvLines[i + 1] = item.Name + separator + item.Username + separator + item.Password + separator + item.Url;
                 }
                 
                 try {
