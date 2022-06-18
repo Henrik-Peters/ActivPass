@@ -94,6 +94,11 @@ namespace ActivPass.Views
             ValidateEditorItem();
         }
 
+        private void NotesBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            ValidateEditorItem();
+        }
+
         /// <summary>
         /// Check if the current item could be stored as a valid
         /// item and enable or disable the the save button.
@@ -107,7 +112,5 @@ namespace ActivPass.Views
                 this.SaveButton.IsEnabled = true;
             }
         }
-
-        
     }
 }

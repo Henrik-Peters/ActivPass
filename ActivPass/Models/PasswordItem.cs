@@ -15,13 +15,15 @@ namespace ActivPass.Models
         public string Username { get; set; }
         public string Password { get; set; }
         public string Url { get; set; }
+        public string Notes { get; set; }
 
-        public PasswordItem(string name, string username, string password, string url)
+        public PasswordItem(string name, string username, string password, string url, string notes)
         {
             Name = name;
             Username = username;
             Password = password;
             Url = url;
+            Notes = notes;
         }
 
         public bool HasBrowsableUrl()

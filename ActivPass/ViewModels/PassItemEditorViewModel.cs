@@ -74,6 +74,22 @@ namespace ActivPass.ViewModels
         }
 
         /// <summary>
+        /// Url of the notes text
+        /// </summary>
+        public string Notes
+        {
+            get => _item.Notes;
+            set
+            {
+                if (_item.Notes != value)
+                {
+                    _item.Notes = value;
+                    NotifyPropertyChanged(nameof(_item.Notes));
+                }
+            }
+        }
+
+        /// <summary>
         /// Password of the password item
         /// </summary>
         public string Password

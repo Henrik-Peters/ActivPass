@@ -298,6 +298,7 @@ namespace ActivPass.ViewModels
                 PasswordItems[itemIndex].Username = editorItem.Username;
                 PasswordItems[itemIndex].Password = editorItem.Password;
                 PasswordItems[itemIndex].Url = editorItem.Url;
+                PasswordItems[itemIndex].Notes = editorItem.Notes;
 
                 //Save the container with the current storage provider
                 if (!ContainerStorage.ContainerProvider.SaveContainer(Container, MasterPasswordBox.Password)) {
@@ -313,7 +314,7 @@ namespace ActivPass.ViewModels
         private void CreatePasswordItem()
         {
             //Create an empty default item
-            PasswordItem editorItem = new PasswordItem("", "", "", "");
+            PasswordItem editorItem = new PasswordItem("", "", "", "", "");
 
             //Show the item editor dialog
             PassItemEditor itemEditor = new PassItemEditor(editorItem);

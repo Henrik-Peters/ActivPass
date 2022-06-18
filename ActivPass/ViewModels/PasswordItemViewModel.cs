@@ -86,6 +86,22 @@ namespace ActivPass.ViewModels
         }
 
         /// <summary>
+        /// Notes of the password item.
+        /// </summary>
+        public string Notes
+        {
+            get => _proxy.Notes;
+            set
+            {
+                if (_proxy.Notes != value)
+                {
+                    _proxy.Notes = value;
+                    NotifyPropertyChanged(nameof(_proxy.Notes));
+                }
+            }
+        }
+
+        /// <summary>
         /// Open the argument as a new process.
         /// </summary>
         public ICommand OpenUrl { get; set; }
