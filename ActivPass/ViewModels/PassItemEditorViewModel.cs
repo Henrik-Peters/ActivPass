@@ -110,6 +110,11 @@ namespace ActivPass.ViewModels
         public ICommand CopyToClipboard { get; set; }
 
         /// <summary>
+        /// Open the argument as a new process.
+        /// </summary>
+        public ICommand OpenUrl { get; set; }
+
+        /// <summary>
         /// Create a new view model instance
         /// for the password item editor.
         /// </summary>
@@ -125,6 +130,7 @@ namespace ActivPass.ViewModels
             this.Close = new RelayCommand<Window>(CloseWindow);
             this.SaveItem = new RelayCommand<Window>(SaveItemAndClose);
             this.CopyToClipboard = new RelayCommand<string>(SetClipboardText);
+            this.OpenUrl = new RelayCommand<string>(OpenBrowserUrl);
         }
 
         /// <summary>
@@ -135,6 +141,19 @@ namespace ActivPass.ViewModels
         private void SetClipboardText(string text)
         {
             Clipboard.SetText(text, TextDataFormat.UnicodeText);
+        }
+
+        /// <summary>
+        /// Open the url as a new browser process when
+        /// the url is valid to launch a new process.
+        /// </summary>
+        /// <param name="url">Opent this url</param>
+        private void OpenBrowserUrl(string url)
+        {
+            if (url.StartsWith("http://") || url.StartsWith("https://"))
+            {
+                System.Diagnostics.Process.Start(url);
+            }
         }
 
         /// <summary>

@@ -45,10 +45,10 @@
 
         <!-- Url Box -->
         <Label x:Name="UrlLabel" Content="{Binding Localize[Url]}" Foreground="White" FontFamily="Tahoma" FontSize="14" FontWeight="Bold" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="1" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="12,2,0,0"/>
-        <TextBox x:Name="UrlBox" Text="{Binding Url, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource NormalTextBox}" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="1" Margin="5,0,0,0" Height="40" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" KeyUp="UsernameBox_KeyUp"/>
+        <TextBox x:Name="UrlBox" Text="{Binding Url, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource NormalTextBox}" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="1" Margin="5,0,0,0" Height="40" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" KeyUp="UrlBox_KeyUp"/>
 
         <!-- Url Box Buttons -->
-        <Button x:Name="OpenButton" Command="{Binding CopyToClipboard}" CommandParameter="{Binding Url}" Style="{StaticResource OpenButton}" ToolTip="{Binding Localize[Open]}" Focusable="False" Grid.Row="3" Grid.Column="2" Margin="0,0,47,1" Padding="8" Height="40" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+        <Button x:Name="OpenButton" Command="{Binding OpenUrl}" CommandParameter="{Binding Url}" Style="{StaticResource OpenButton}" ToolTip="{Binding Localize[Open]}" Focusable="False" Grid.Row="3" Grid.Column="2" Margin="0,0,47,1" Padding="8" Height="40" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
         <Button x:Name="UrlCopyButton" Command="{Binding CopyToClipboard}" CommandParameter="{Binding Url}" Style="{StaticResource CopyButton}" ToolTip="{Binding Localize[CopyToClipboard]}" Focusable="False" Grid.Row="3" Grid.Column="2" Margin="0,0,7,1" Padding="7" Height="40" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
 
         <!-- Password Box -->
