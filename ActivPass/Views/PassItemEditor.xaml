@@ -7,7 +7,7 @@
         x:Name="ItemEditorWindow"
         Background="#494A52"
         mc:Ignorable="d"
-        Title="ActivPass" MinHeight="400" MinWidth="400" Height="450" Width="800" FontSize="18" WindowStartupLocation="CenterScreen">
+        Title="ActivPass" MinHeight="540" MinWidth="600" Height="550" Width="800" FontSize="18" WindowStartupLocation="CenterScreen">
 
     <!-- Shortkey bindings -->
     <Window.InputBindings>
@@ -28,6 +28,8 @@
             <RowDefinition Height="70"/>
             <RowDefinition Height="15"/>
             <RowDefinition Height="70"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="140"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="35"/>
             <RowDefinition Height="15"/>
@@ -59,9 +61,13 @@
         <!-- Password Box Buttons -->
         <Button x:Name="ShowPasswordButton" Style="{StaticResource EyeButton}" ToolTip="{Binding Localize[ShowPassword]}" Focusable="False" Grid.Row="5" Grid.Column="2" Margin="0,0,47,1" Padding="7" Height="40" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="ShowPasswordButton_Click"/>
         <Button x:Name="PasswordCopyButton" Command="{Binding CopyToClipboard}" CommandParameter="{Binding Password}" Style="{StaticResource CopyButton}" ToolTip="{Binding Localize[CopyToClipboard]}" Focusable="False" Grid.Row="5" Grid.Column="2" Margin="0,0,7,1" Padding="7" Height="40" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
-        
+
+        <!-- Notes Box -->
+        <Label x:Name="NotesLabel" Content="{Binding Localize[Notes]}" Foreground="White" FontFamily="Tahoma" FontSize="14" FontWeight="Bold" Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="7,2,0,0"/>
+        <TextBox x:Name="NotesBox" Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource NormalTextBox}" VerticalContentAlignment="Top" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" Padding="3" Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="2" Margin="0,0,0,0" Height="110" VerticalAlignment="Bottom" HorizontalAlignment="Stretch"/>
+
         <!-- Dialog buttons -->
-        <Grid Grid.Row="7" Grid.Column="2" Margin="0,0,0,0">
+        <Grid Grid.Row="9" Grid.Column="2" Margin="0,0,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="100"/>
