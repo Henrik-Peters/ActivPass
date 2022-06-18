@@ -68,6 +68,7 @@ namespace ActivPass.ViewModels
                 {
                     _item.Url = value;
                     NotifyPropertyChanged(nameof(_item.Url));
+                    NotifyPropertyChanged(nameof(ShowOpenBtn));
                 }
             }
         }
@@ -115,6 +116,20 @@ namespace ActivPass.ViewModels
         public ICommand OpenUrl { get; set; }
 
         /// <summary>
+        /// If the open url button should be visible.
+        /// </summary>
+        public Visibility ShowOpenBtn
+        {
+            get {
+                if (this._item.HasBrowsableUrl()) {
+                    return Visibility.Visible;
+                } else {
+                    return Visibility.Hidden;
+                }
+            }
+        }
+
+        /// <summary>
         /// Create a new view model instance
         /// for the password item editor.
         /// </summary>
@@ -150,7 +165,7 @@ namespace ActivPass.ViewModels
         /// <param name="url">Opent this url</param>
         private void OpenBrowserUrl(string url)
         {
-            if (url.StartsWith("http://") || url.StartsWith("https://"))
+            if (this._item.HasBrowsableUrl())
             {
                 System.Diagnostics.Process.Start(url);
             }

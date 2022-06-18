@@ -24,6 +24,11 @@ namespace ActivPass.Models
             Url = url;
         }
 
+        public bool HasBrowsableUrl()
+        {
+            return this.Url.StartsWith("http://") || this.Url.StartsWith("https://") || this.Url.StartsWith("www.");
+        }
+
         public object Clone()
         {
             return this.MemberwiseClone();
