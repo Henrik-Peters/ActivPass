@@ -29,8 +29,8 @@
             <RowDefinition Height="15"/>
             <RowDefinition Height="70"/>
             <RowDefinition Height="20"/>
-            <RowDefinition Height="140"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
             <RowDefinition Height="35"/>
             <RowDefinition Height="15"/>
         </Grid.RowDefinitions>
@@ -64,7 +64,7 @@
 
         <!-- Notes Box -->
         <Label x:Name="NotesLabel" Content="{Binding Localize[Notes]}" Foreground="White" FontFamily="Tahoma" FontSize="14" FontWeight="Bold" Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="7,2,0,0"/>
-        <TextBox x:Name="NotesBox" Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource NormalTextBox}" VerticalContentAlignment="Top" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" Padding="3" Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="2" Margin="0,0,0,0" Height="110" VerticalAlignment="Bottom" HorizontalAlignment="Stretch"/>
+        <TextBox x:Name="NotesBox" Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource NormalTextBox}" VerticalContentAlignment="Top" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" Padding="3" Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="2" Margin="0,30,0,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
 
         <!-- Dialog buttons -->
         <Grid Grid.Row="9" Grid.Column="2" Margin="0,0,0,0">
