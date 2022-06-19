@@ -44,6 +44,7 @@ namespace ActivPass.Localization
             ["LoginContainerFailed"] = new List<string> { "Invalid container name", "Ungültiger Containername" },
             ["CreateContainer"] = new List<string> { "Create container", "Container erstellen" },
             ["NewContainer"] = new List<string> { "New container", "Container erstellen" },
+            ["EditContainer"] = new List<string> { "Edit container", "Container bearbeiten" },
             ["ContainerName"] = new List<string> { "Container name", "Containername" },
             ["MasterPassword"] = new List<string> { "Master password", "Master Passwort" },
             ["Password"] = new List<string> { "Password", "Passwort" },

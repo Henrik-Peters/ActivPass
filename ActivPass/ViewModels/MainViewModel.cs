@@ -135,6 +135,7 @@ namespace ActivPass.ViewModels
         public ICommand ContainerLogin { get; set; }
         public ICommand ContainerLogout { get; set; }
         public ICommand CreateContainer { get; set; }
+        public ICommand EditContainer { get; set; }
         public ICommand OpenPasswordItem { get; set; }
         public ICommand AddPasswordItem { get; set; }
         public ICommand DeletePasswordItem { get; set; }
@@ -208,6 +209,15 @@ namespace ActivPass.ViewModels
                 ContainerNames = new ObservableCollection<string>(availableContainer);
                 SelectedContainer = ContainerNames[0];
             }
+        }
+
+        /// <summary>
+        /// Show the container config editor window.
+        /// </summary>
+        private void EditCurrentContainer()
+        {
+            ContainerEditor containerEditor = new ContainerEditor();
+            containerEditor.ShowDialog();
         }
 
         /// <summary>
@@ -504,6 +514,7 @@ namespace ActivPass.ViewModels
             this.ContainerLogin = new RelayCommand(() => Application.Current.Shutdown());
             this.ContainerLogout = new RelayCommand(LockContainer);
             this.CreateContainer = new RelayCommand(CreateNewContainer);
+            this.EditContainer = new RelayCommand(EditCurrentContainer);
             this.AddPasswordItem = new RelayCommand(CreatePasswordItem);
             this.OpenSettings = new RelayCommand(ShowConfigEditor);
             this.ExportContainer = new RelayCommand(ContainerExport);

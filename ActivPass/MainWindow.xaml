@@ -21,6 +21,7 @@
             <MenuItem x:Name="ExportMenuItem" Header="{Binding Localize[Export]}" Command="{Binding ExportContainer}"/>
             <Separator/>
             <MenuItem x:Name="ContainerInitMenuItem" Header="{Binding Localize[NewContainer]}" Command="{Binding CreateContainer}"/>
+            <MenuItem x:Name="ContainerEditMenuItem" Header="{Binding Localize[EditContainer]}" Command="{Binding EditContainer}"/>
             <MenuItem x:Name="SettingsMenuItem" Header="{Binding Localize[Settings]}" Command="{Binding OpenSettings}"/>
             <Separator/>
             <MenuItem x:Name="ExitMenuItem" Header="{Binding Localize[Exit]}" Command="{Binding ExitApp}"/>

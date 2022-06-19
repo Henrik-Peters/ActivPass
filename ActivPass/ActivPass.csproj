@@ -70,6 +70,7 @@
     <Compile Include="Models\PasswordContainer.cs" />
     <Compile Include="Models\PasswordItem.cs" />
     <Compile Include="ViewModels\ConfigEditorViewModel.cs" />
+    <Compile Include="ViewModels\ContainerEditorViewModel.cs" />
     <Compile Include="ViewModels\ContainerInitViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\PassItemEditorViewModel.cs" />
@@ -79,6 +80,9 @@
     <Compile Include="ViewModels\ViewModel.cs" />
     <Compile Include="Views\ConfigEditor.xaml.cs">
       <DependentUpon>ConfigEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ContainerEditor.xaml.cs">
+      <DependentUpon>ContainerEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ContainerInit.xaml.cs">
       <DependentUpon>ContainerInit.xaml</DependentUpon>
@@ -138,6 +142,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ConfigEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ContainerEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
