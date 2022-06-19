@@ -1,0 +1,31 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Style x:Key="DangerZoneGroupBox" TargetType="{x:Type GroupBox}">
+        <Setter Property="BorderBrush" Value="#C80907"/>
+        <Setter Property="Background" Value="#C80907"/>
+        <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="GroupBox">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Border Grid.Row="0" BorderThickness="0" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}">
+                            <Label Foreground="White">
+                                <ContentPresenter Margin="4" ContentSource="Header" RecognizesAccessKey="True" />
+                            </Label>
+                        </Border>
+                        <Border Grid.Row="1" BorderThickness="2,0,2,2" BorderBrush="{TemplateBinding BorderBrush}">
+                            <ContentPresenter Margin="4" />
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

@@ -13,6 +13,7 @@
                 <ResourceDictionary Source="Styles/Labels.xaml"/>
                 <ResourceDictionary Source="Styles/PasswordBox.xaml"/>
                 <ResourceDictionary Source="Styles/TextBox.xaml"/>
+                <ResourceDictionary Source="Styles/GroupBox.xaml"/>
                 <ResourceDictionary Source="Styles/CheckBox.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

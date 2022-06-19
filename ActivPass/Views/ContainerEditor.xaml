@@ -8,14 +8,14 @@
         Background="#494A52"
         x:Name="ContainerEditorWindow"
         mc:Ignorable="d"
-        Title="{Binding Localize[EditContainer]}" Height="450" Width="800">
+        Title="{Binding Localize[EditContainer]}" MinHeight="540" MinWidth="600" Height="550" Width="800" FontSize="18" WindowStartupLocation="CenterScreen">
 
     <!-- View model instance -->
     <Window.DataContext>
         <ViewModels:ContainerEditorViewModel/>
     </Window.DataContext>
 
-    <Grid ShowGridLines="True">
+    <Grid ShowGridLines="False">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="120"/>
             <ColumnDefinition Width="*"/>
@@ -27,11 +27,12 @@
             <RowDefinition Height="40"/>
             <RowDefinition Height="70"/>
             <RowDefinition Height="15"/>
-            <RowDefinition Height="70"/>
+            <RowDefinition Height="200"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="35"/>
             <RowDefinition Height="15"/>
         </Grid.RowDefinitions>
-        
+        <GroupBox Style="{StaticResource DangerZoneGroupBox}" Header="Danger Zone" Grid.Column="1" Grid.Row="5"/>
+
     </Grid>
 </Window>
