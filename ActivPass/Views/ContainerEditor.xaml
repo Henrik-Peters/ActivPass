@@ -8,7 +8,7 @@
         Background="#494A52"
         x:Name="ContainerEditorWindow"
         mc:Ignorable="d"
-        Title="{Binding Localize[EditContainer]}" MinHeight="540" MinWidth="600" Height="550" Width="800" FontSize="18" WindowStartupLocation="CenterScreen">
+        Title="{Binding Localize[EditContainer]}" MinHeight="540" MinWidth="600" Height="560" Width="800" FontSize="18" WindowStartupLocation="CenterScreen">
 
     <!-- View model instance -->
     <Window.DataContext>
@@ -17,9 +17,9 @@
 
     <Grid ShowGridLines="False">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="120"/>
+            <ColumnDefinition Width="60"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="120"/>
+            <ColumnDefinition Width="60"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
@@ -32,7 +32,16 @@
             <RowDefinition Height="35"/>
             <RowDefinition Height="15"/>
         </Grid.RowDefinitions>
+
+        <!-- Name Box -->
+        <Label x:Name="ContainerNameLabel" Content="{Binding Localize[ContainerName]}" Foreground="White" FontFamily="Tahoma" FontSize="14" FontWeight="Bold" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="1" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="7,2,0,0"/>
+        <TextBox x:Name="ContainerNameBox" Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource NormalTextBox}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="1" Margin="0,0,0,0" Height="40" Width="300" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+        <Button x:Name="RenameButton" Command="{Binding Close}" CommandParameter="{Binding ElementName=ItemEditorWindow}" Content="{Binding Localize[Rename]}" Style="{StaticResource NormalButton}" Focusable="False" Height="40" Padding="25,0,25,0" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="310,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+
         <GroupBox Style="{StaticResource DangerZoneGroupBox}" Header="Danger Zone" Grid.Column="1" Grid.Row="5"/>
+
+        <!-- Dialog Buttons -->
+        <Button x:Name="CloseButton" Command="{Binding Close}" CommandParameter="{Binding ElementName=ContainerEditorWindow}" Content="{Binding Localize[Close]}" Style="{StaticResource NormalButton}" Focusable="False" Grid.Row="7" Grid.Column="1" Margin="0,0,-30,0" Padding="40,0,40,0" HorizontalAlignment="Right" VerticalAlignment="Stretch"/>
 
     </Grid>
 </Window>
