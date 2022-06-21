@@ -19,6 +19,7 @@ namespace ActivPass.Localization
         /// </summary>
         static IDictionary<string, List<string>> TranslateTable = new Dictionary<string, List<string>>
         {
+            ["EditContainerHeader"] = new List<string> { "Edit container settings", "Container Einstellungen bearbeiten" },
             ["DeleteContainer"] = new List<string> { "Delete Container", "Container löschen" },
             ["DeleteContainerDetails"] = new List<string> { "All stored container data will be permanently deleted", "Alle gespeicherten Container Daten werden permanent gelöscht" },
             ["ChangeMasterPassword"] = new List<string> { "If the master password is lost, access to the container is no longer possible", "Beim Verlust des Master Passworts ist kein Zugriff mehr auf den Container möglich" },

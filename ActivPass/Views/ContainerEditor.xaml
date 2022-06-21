@@ -33,6 +33,10 @@
             <RowDefinition Height="15"/>
         </Grid.RowDefinitions>
 
+        <!-- Header Box -->
+        <Label x:Name="HeaderLabel" Content="{Binding Localize[EditContainerHeader]}" Foreground="White" FontFamily="Tahoma" FontSize="20" FontWeight="Bold" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="7,5,0,0"/>
+        <Rectangle Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Height="1" Stroke="Black" StrokeDashArray="1 2" Margin="0,42,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
+
         <!-- Name Box -->
         <Label x:Name="ContainerNameLabel" Content="{Binding Localize[ContainerName]}" Foreground="White" FontFamily="Tahoma" FontSize="14" FontWeight="Bold" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="1" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="7,2,0,0"/>
         <TextBox x:Name="ContainerNameBox" Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource NormalTextBox}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="1" Margin="0,0,0,0" Height="40" Width="300" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
@@ -42,6 +46,7 @@
         <CheckBox x:Name="MaximizeWindowCheckBox" IsEnabled="False" IsChecked="{Binding MaximizeStartupWindow, Mode=TwoWay}" Content="{Binding Localize[AutoLock]}" Style="{StaticResource NormalCheckBox}" Margin="5,0,0,0" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 
         <!-- Danger Zone - Change Master Password -->
+        <Rectangle Grid.Row="5" Grid.Column="1" Height="1" Stroke="Black" StrokeDashArray="1 2" Margin="0,160,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
         <GroupBox Style="{StaticResource DangerZoneGroupBox}" Header="Danger Zone" Grid.Column="1" Grid.Row="5"/>
         <Label x:Name="HeaderMasterPasswordLabel" Content="{Binding Localize[MasterPassword]}" HorizontalContentAlignment="Center" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" FontFamily="Tahoma" Foreground="White" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" Margin="10,47,0,0" VerticalAlignment="Top"/>
         <Label x:Name="DetailsMasterPasswordLabel" Content="{Binding Localize[ChangeMasterPassword]}" HorizontalContentAlignment="Center" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" FontFamily="Tahoma" Foreground="White" FontSize="16" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top"/>
@@ -56,7 +61,7 @@
         
         <!-- Dialog Buttons -->
         <Button x:Name="CloseButton" Command="{Binding Close}" CommandParameter="{Binding ElementName=ContainerEditorWindow}" Content="{Binding Localize[Close]}" Style="{StaticResource NormalButton}" Focusable="False" Grid.Row="7" Grid.Column="1" Margin="0,0,-30,0" Padding="40,0,40,0" HorizontalAlignment="Right" VerticalAlignment="Stretch"/>
-        <Rectangle Grid.Row="5" Grid.Column="1" Height="1" Stroke="Black" StrokeDashArray="1 2" Margin="0,160,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
+        
 
     </Grid>
 </Window>
