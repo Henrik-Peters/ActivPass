@@ -19,6 +19,7 @@ namespace ActivPass.Localization
         /// </summary>
         static IDictionary<string, List<string>> TranslateTable = new Dictionary<string, List<string>>
         {
+            ["AutoLock"] = new List<string> { "Automatically lock container in case of inactivity", "Container bei Inaktivität automatisch sperren" },
             ["Close"] = new List<string> { "Close", "Schließen" },
             ["Rename"] = new List<string> { "Rename", "Umbenennen" },
             ["ContainerName"] = new List<string> { "Container name", "Containername" },

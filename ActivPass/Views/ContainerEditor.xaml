@@ -24,8 +24,8 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
             <RowDefinition Height="70"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="70"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="30"/>
             <RowDefinition Height="15"/>
             <RowDefinition Height="200"/>
             <RowDefinition Height="*"/>
@@ -38,6 +38,10 @@
         <TextBox x:Name="ContainerNameBox" Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource NormalTextBox}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="1" Margin="0,0,0,0" Height="40" Width="300" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
         <Button x:Name="RenameButton" Command="{Binding Close}" CommandParameter="{Binding ElementName=ItemEditorWindow}" Content="{Binding Localize[Rename]}" Style="{StaticResource NormalButton}" Focusable="False" Height="40" Padding="25,0,25,0" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="310,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
 
+        <!-- Check Boxes -->
+        <CheckBox x:Name="MaximizeWindowCheckBox" IsEnabled="False" IsChecked="{Binding MaximizeStartupWindow, Mode=TwoWay}" Content="{Binding Localize[AutoLock]}" Style="{StaticResource NormalCheckBox}" Margin="5,0,0,0" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+
+        <!-- Danger Zone -->
         <GroupBox Style="{StaticResource DangerZoneGroupBox}" Header="Danger Zone" Grid.Column="1" Grid.Row="5"/>
 
         <!-- Dialog Buttons -->
