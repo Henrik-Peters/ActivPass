@@ -8,7 +8,7 @@
         Background="#494A52"
         x:Name="ContainerEditorWindow"
         mc:Ignorable="d"
-        Title="{Binding Localize[EditContainer]}" MinHeight="540" MinWidth="600" Height="560" Width="800" FontSize="18" WindowStartupLocation="CenterScreen">
+        Title="{Binding Localize[EditContainer]}" MinHeight="540" MinWidth="600" Height="570" Width="800" FontSize="18" WindowStartupLocation="CenterScreen">
 
     <!-- View model instance -->
     <Window.DataContext>
@@ -27,7 +27,7 @@
             <RowDefinition Height="50"/>
             <RowDefinition Height="30"/>
             <RowDefinition Height="15"/>
-            <RowDefinition Height="200"/>
+            <RowDefinition Height="235"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="35"/>
             <RowDefinition Height="15"/>
@@ -41,7 +41,7 @@
         <!-- Check Boxes -->
         <CheckBox x:Name="MaximizeWindowCheckBox" IsEnabled="False" IsChecked="{Binding MaximizeStartupWindow, Mode=TwoWay}" Content="{Binding Localize[AutoLock]}" Style="{StaticResource NormalCheckBox}" Margin="5,0,0,0" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 
-        <!-- Danger Zone -->
+        <!-- Danger Zone - Change Master Password -->
         <GroupBox Style="{StaticResource DangerZoneGroupBox}" Header="Danger Zone" Grid.Column="1" Grid.Row="5"/>
         <Label x:Name="HeaderMasterPasswordLabel" Content="{Binding Localize[MasterPassword]}" HorizontalContentAlignment="Center" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" FontFamily="Tahoma" Foreground="White" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" Margin="10,47,0,0" VerticalAlignment="Top"/>
         <Label x:Name="DetailsMasterPasswordLabel" Content="{Binding Localize[ChangeMasterPassword]}" HorizontalContentAlignment="Center" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" FontFamily="Tahoma" Foreground="White" FontSize="16" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top"/>
@@ -49,6 +49,11 @@
         <PasswordBox x:Name="PassBox" Style="{StaticResource PasswordBoxStyle}" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="1" Margin="10,100,0,0" Width="500" Height="40" VerticalAlignment="Top" HorizontalAlignment="Left"/>
         <Button x:Name="ChangePasswordButton" Command="{Binding Close}" CommandParameter="{Binding ElementName=ItemEditorWindow}" Content="{Binding Localize[Change]}" Style="{StaticResource NormalButton}" Focusable="False" Height="40" Padding="30,0,30,0" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" Margin="530,100,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
+        <!-- Danger Zone - Delete Container -->
+        <Label x:Name="DeleteContainerLabel" Content="{Binding Localize[DeleteContainer]}" HorizontalContentAlignment="Center" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" FontFamily="Tahoma" Foreground="White" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" Margin="10,167,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="DetailsDeleteContainerLabel" Content="{Binding Localize[DeleteContainerDetails]}" HorizontalContentAlignment="Center" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" FontFamily="Tahoma" Foreground="White" FontSize="16" HorizontalAlignment="Left" Margin="10,190,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="DeleteContainerButton" Command="{Binding Close}" CommandParameter="{Binding ElementName=ItemEditorWindow}" Content="{Binding Localize[DeleteContainer]}" Style="{StaticResource NormalButton}" Focusable="False" Height="40" Padding="30,0,30,0" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" Margin="0,175,70,0" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+        
         <!-- Dialog Buttons -->
         <Button x:Name="CloseButton" Command="{Binding Close}" CommandParameter="{Binding ElementName=ContainerEditorWindow}" Content="{Binding Localize[Close]}" Style="{StaticResource NormalButton}" Focusable="False" Grid.Row="7" Grid.Column="1" Margin="0,0,-30,0" Padding="40,0,40,0" HorizontalAlignment="Right" VerticalAlignment="Stretch"/>
         <Rectangle Grid.Row="5" Grid.Column="1" Height="1" Stroke="Black" StrokeDashArray="1 2" Margin="0,160,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
