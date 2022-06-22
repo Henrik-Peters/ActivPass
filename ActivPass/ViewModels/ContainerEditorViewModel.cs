@@ -9,6 +9,7 @@ using System.Windows.Controls;
 using ActivPass.Localization;
 using ActivPass.Models;
 using ActivPass.Crypto;
+using ActivPass.Views;
 
 namespace ActivPass.ViewModels
 {
@@ -55,6 +56,11 @@ namespace ActivPass.ViewModels
         /// </summary>
         public ICommand RenameContainer { get; set; }
 
+        /// <summary>
+        /// Delete the current container.
+        /// </summary>
+        public ICommand DeleteContainer { get; set; }
+
         public ContainerEditorViewModel() {
             //Default props
             this.LockContainer = false;
@@ -62,6 +68,7 @@ namespace ActivPass.ViewModels
             //Command bindings
             this.Close = new RelayCommand<Window>(CloseWindow);
             this.RenameContainer = new RelayCommand(RenameCurrentContainer);
+            this.DeleteContainer = new RelayCommand<Window>(DeleteCurrentContainer);
         }
 
         /// <summary>
@@ -89,6 +96,40 @@ namespace ActivPass.ViewModels
 
             //Lock the container after closing the dialog
             this.LockContainer = true;
+        }
+
+        /// <summary>
+        /// Delete the current container and
+        /// close the passed window after deleting.
+        /// </summary>
+        /// <param name="window">Close this window</param>
+        private void DeleteCurrentContainer(Window window)
+        {
+            //Confirm the delete operation
+            QuestionBox deleteDialog = new QuestionBox(
+                Localize["DeleteQuestionPart1"] + " " + Container.ContainerName + " " + Localize["DeleteQuestionPart2"],
+                Localize["DeleteDialogTitle"]);
+
+            //Wait for the question box dialog result
+            deleteDialog.ShowDialog();
+
+            //Check the delete operation should be performed
+            if (deleteDialog.ConfirmResult) {
+                //Delete the container
+                if (!ContainerStorage.ContainerProvider.DeleteContainer(Container.ContainerName)) {
+                    MessageBox.Show("Failed to delete the container!", "Container delete failed", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                else {
+                    MessageBox.Show(Localize["DeleteContainerSuccess"], Localize["DeleteContainer"], MessageBoxButton.OK, MessageBoxImage.Information);
+                    this.LockContainer = true;
+
+                    //Close the window because it makes no sense to edit a not existing container
+                    if (window != null) {
+                        window.Close();
+                    }
+                }
+
+            }
         }
 
         /// <summary>
