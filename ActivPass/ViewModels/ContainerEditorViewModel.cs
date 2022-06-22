@@ -47,6 +47,11 @@ namespace ActivPass.ViewModels
         public PasswordBox MasterPasswordBox { get; set; }
 
         /// <summary>
+        /// Textbox reference of the container editor view.
+        /// </summary>
+        public PasswordBox ChangePasswordBox { get; set; }
+
+        /// <summary>
         /// Close the passed window instance.
         /// </summary>
         public ICommand Close { get; set; }
@@ -55,6 +60,11 @@ namespace ActivPass.ViewModels
         /// Rename the current container.
         /// </summary>
         public ICommand RenameContainer { get; set; }
+
+        /// <summary>
+        /// Change the master password of the container.
+        /// </summary>
+        public ICommand ChangeMasterPassword { get; set; }
 
         /// <summary>
         /// Delete the current container.
@@ -68,6 +78,9 @@ namespace ActivPass.ViewModels
             //Command bindings
             this.Close = new RelayCommand<Window>(CloseWindow);
             this.RenameContainer = new RelayCommand(RenameCurrentContainer);
+
+            //Danger zone command bindings
+            this.ChangeMasterPassword = new RelayCommand(ChangeCurrentMasterPassword);
             this.DeleteContainer = new RelayCommand<Window>(DeleteCurrentContainer);
         }
 
@@ -96,6 +109,17 @@ namespace ActivPass.ViewModels
 
             //Lock the container after closing the dialog
             this.LockContainer = true;
+        }
+
+        private void ChangeCurrentMasterPassword()
+        {
+            //Save the container with the current storage provider
+            if (!ContainerStorage.ContainerProvider.SaveContainer(Container, ChangePasswordBox.Password)) {
+                MessageBox.Show("Failed to store the new container!", "Container store failed", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else {
+                MessageBox.Show(Localize["MasterPasswordChanged"], Localize["MasterPassword"], MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
 
         /// <summary>

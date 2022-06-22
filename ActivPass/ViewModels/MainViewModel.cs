@@ -217,6 +217,7 @@ namespace ActivPass.ViewModels
             vm.ContainerName = this.SelectedContainer;
             vm.Container = this.Container;
             vm.MasterPasswordBox = this.MasterPasswordBox;
+            vm.ChangePasswordBox.Password = this.MasterPasswordBox.Password;
             
             //Show the editor dialog
             containerEditor.ShowDialog();

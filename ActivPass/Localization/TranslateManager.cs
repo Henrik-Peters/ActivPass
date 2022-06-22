@@ -19,6 +19,7 @@ namespace ActivPass.Localization
         /// </summary>
         static IDictionary<string, List<string>> TranslateTable = new Dictionary<string, List<string>>
         {
+            ["MasterPasswordChanged"] = new List<string> { "Master Password was changed", "Master Passwort wurde geändert" },
             ["ContainerRenameDetails"] = new List<string> { "The container name was successfully changed", "Der Container Name wurde erfolgreich geändert" },
             ["ContainerRenameHeader"] = new List<string> { "Rename container", "Container umbenennen" },
             ["EditContainerHeader"] = new List<string> { "Edit container settings", "Container Einstellungen bearbeiten" },

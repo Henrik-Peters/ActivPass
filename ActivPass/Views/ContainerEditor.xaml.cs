@@ -3,19 +3,8 @@
 // Copyright 2019 Henrik Peters
 // See LICENSE file in the project root for full license information
 #endregion
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using ActivPass.ViewModels;
 
 namespace ActivPass.Views
 {
@@ -27,6 +16,20 @@ namespace ActivPass.Views
         public ContainerEditor()
         {
             InitializeComponent();
+
+            //Forward the change master password box to the view model
+            var vm = this.DataContext as ContainerEditorViewModel;
+            vm.ChangePasswordBox = this.ChangePasswordBox;
+        }
+
+        private void ChangePasswordBox_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            //Disable changing to empty passwords
+            if (ChangePasswordBox.Password == "") {
+                ChangePasswordButton.IsEnabled = false;
+            } else {
+                ChangePasswordButton.IsEnabled = true;
+            }
         }
     }
 }
