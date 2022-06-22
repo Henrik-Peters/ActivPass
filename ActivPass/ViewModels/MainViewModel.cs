@@ -217,7 +217,30 @@ namespace ActivPass.ViewModels
         private void EditCurrentContainer()
         {
             ContainerEditor containerEditor = new ContainerEditor();
+
+            //Pass data to the view model
+            var vm = containerEditor.DataContext as ContainerEditorViewModel;
+            vm.ContainerName = this.SelectedContainer;
+            vm.Container = this.Container;
+            vm.MasterPasswordBox = this.MasterPasswordBox;
+            
+            //Show the editor dialog
             containerEditor.ShowDialog();
+
+            //Lock the container when changes were made
+            if (vm.LockContainer) {
+                this.LockContainer();
+
+                //Get all available container names
+                string[] availableContainer = ContainerStorage.ContainerProvider.ListContainers();
+
+                //Display the list of available containers
+                if (availableContainer.Length > 0)
+                {
+                    ContainerNames = new ObservableCollection<string>(availableContainer);
+                    SelectedContainer = ContainerNames[0];
+                }
+            }
         }
 
         /// <summary>

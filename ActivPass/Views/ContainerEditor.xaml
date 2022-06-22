@@ -39,8 +39,8 @@
 
         <!-- Name Box -->
         <Label x:Name="ContainerNameLabel" Content="{Binding Localize[ContainerName]}" Foreground="White" FontFamily="Tahoma" FontSize="14" FontWeight="Bold" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="1" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="7,2,0,0"/>
-        <TextBox x:Name="ContainerNameBox" Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource NormalTextBox}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="1" Margin="0,0,0,0" Height="40" Width="300" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
-        <Button x:Name="RenameButton" Command="{Binding Close}" CommandParameter="{Binding ElementName=ItemEditorWindow}" Content="{Binding Localize[Rename]}" Style="{StaticResource NormalButton}" Focusable="False" Height="40" Padding="25,0,25,0" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="310,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+        <TextBox x:Name="ContainerNameBox" Text="{Binding ContainerName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource NormalTextBox}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="1" Margin="0,0,0,0" Height="40" Width="300" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+        <Button x:Name="RenameButton" Command="{Binding RenameContainer}" Content="{Binding Localize[Rename]}" Style="{StaticResource NormalButton}" Focusable="False" Height="40" Padding="25,0,25,0" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="310,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
 
         <!-- Check Boxes -->
         <CheckBox x:Name="MaximizeWindowCheckBox" IsEnabled="False" IsChecked="{Binding MaximizeStartupWindow, Mode=TwoWay}" Content="{Binding Localize[AutoLock]}" Style="{StaticResource NormalCheckBox}" Margin="5,0,0,0" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Center"/>
