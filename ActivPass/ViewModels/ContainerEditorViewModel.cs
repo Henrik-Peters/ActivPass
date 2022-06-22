@@ -69,14 +69,22 @@ namespace ActivPass.ViewModels
         /// </summary>
         private void RenameCurrentContainer()
         {
+            //Store the old container name for deleting
+            string oldContainerName = Container.ContainerName;
+
             //Set the new name in the container model
             Container.ContainerName = this.ContainerName;
 
             //Save the container with the current storage provider
             if (!ContainerStorage.ContainerProvider.SaveContainer(Container, MasterPasswordBox.Password)) {
-                MessageBox.Show("Failed to store the container!", "Container store failed", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Failed to store the new container!", "Container store failed", MessageBoxButton.OK, MessageBoxImage.Error);
             } else {
-                MessageBox.Show("Container as been renamed", "Container renamed", MessageBoxButton.OK, MessageBoxImage.Information);
+                //Delete the old container
+                if (!ContainerStorage.ContainerProvider.DeleteContainer(oldContainerName)) {
+                    MessageBox.Show("Failed to delete the old container!", "Container delete failed", MessageBoxButton.OK, MessageBoxImage.Error);
+                } else {
+                    MessageBox.Show(Localize["ContainerRenameDetails"], Localize["ContainerRenameHeader"], MessageBoxButton.OK, MessageBoxImage.Information);
+                }
             }
 
             //Lock the container after closing the dialog

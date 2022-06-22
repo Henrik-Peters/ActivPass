@@ -35,5 +35,12 @@ namespace ActivPass.Crypto
         /// <param name="masterKey">Key for the encryption</param>
         /// <returns>True when the operation was sucessful</returns>
         bool SaveContainer(PasswordContainer container, string masterKey);
+
+        /// <summary>
+        /// Delete a container from the storage.
+        /// </summary>
+        /// <param name="containerName">Name of the container</param>
+        /// <returns></returns>
+        bool DeleteContainer(string containerName);
     }
 }

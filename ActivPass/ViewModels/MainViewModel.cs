@@ -201,14 +201,8 @@ namespace ActivPass.ViewModels
             ContainerInit containerInitView = new ContainerInit();
             containerInitView.ShowDialog();
 
-            //Get all available container names
-            string[] availableContainer = ContainerStorage.ContainerProvider.ListContainers();
-            
-            //Display the list of available containers
-            if (availableContainer.Length > 0) {
-                ContainerNames = new ObservableCollection<string>(availableContainer);
-                SelectedContainer = ContainerNames[0];
-            }
+            //Reload all containers
+            this.ReloadAvailableContainers();
         }
 
         /// <summary>
@@ -230,16 +224,23 @@ namespace ActivPass.ViewModels
             //Lock the container when changes were made
             if (vm.LockContainer) {
                 this.LockContainer();
+                this.ReloadAvailableContainers();
+            }
+        }
 
-                //Get all available container names
-                string[] availableContainer = ContainerStorage.ContainerProvider.ListContainers();
+        /// <summary>
+        /// Reload the list of all available containers
+        /// </summary>
+        private void ReloadAvailableContainers()
+        {
+            //Get all available container names
+            string[] availableContainer = ContainerStorage.ContainerProvider.ListContainers();
 
-                //Display the list of available containers
-                if (availableContainer.Length > 0)
-                {
-                    ContainerNames = new ObservableCollection<string>(availableContainer);
-                    SelectedContainer = ContainerNames[0];
-                }
+            //Display the list of available containers
+            if (availableContainer.Length > 0)
+            {
+                ContainerNames = new ObservableCollection<string>(availableContainer);
+                SelectedContainer = ContainerNames[0];
             }
         }
 

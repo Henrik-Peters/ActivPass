@@ -24,6 +24,16 @@ namespace ActivPass.Crypto
             get => ConfigProvider.AppDataPath;
         }
 
+        /// <summary>
+        /// Get the file path for a specific container name.
+        /// </summary>
+        /// <param name="containerName">Name of the container</param>
+        /// <returns></returns>
+        private string GetContainerFilePath(string containerName)
+        {
+            return this.StoragePath + "\\" + containerName + ".bin";
+        }
+
         public string[] ListContainers()
         {
             if (!Directory.Exists(StoragePath)) {
@@ -41,7 +51,7 @@ namespace ActivPass.Crypto
             try {
 
                 //Create the container file path based on the name
-                string containerFilePath = StoragePath + "\\" + containerName + ".bin";
+                string containerFilePath = GetContainerFilePath(containerName);
 
                 PasswordContainer container;
                 byte[] key = GenerateKey(masterKey);
@@ -73,6 +83,26 @@ namespace ActivPass.Crypto
             }
         }
 
+        public bool DeleteContainer(string containerName)
+        {
+            string filePath = GetContainerFilePath(containerName);
+
+            try {
+                //Check if the file exists and delete
+                if (File.Exists(filePath))
+                {
+                    File.Delete(filePath);
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            } catch {
+                return false;
+            }
+        }
+
         public bool SaveContainer(PasswordContainer container, string masterKey)
         {
             if (!Directory.Exists(StoragePath)) {
@@ -80,7 +110,7 @@ namespace ActivPass.Crypto
             }
 
             //Create the container file path based on the name
-            string containerFilePath = StoragePath + "\\" + container.ContainerName + ".bin";
+            string containerFilePath = GetContainerFilePath(container.ContainerName);
 
             byte[] key = GenerateKey(masterKey);
             byte[] iv = GenerateIV(masterKey);
