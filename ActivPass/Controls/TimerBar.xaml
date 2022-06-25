@@ -7,7 +7,7 @@
              x:Name="TimeControl"
              mc:Ignorable="d" 
              d:DesignHeight="45" d:DesignWidth="120" FontSize="18"
-             Foreground="White">
+             Foreground="Orange">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="50"/>
@@ -18,7 +18,7 @@
         </Grid.RowDefinitions>
 
         <!-- Time Bar Elements -->
-        <ContentPresenter Content="{StaticResource TimeIcon}" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <Label Content="{Binding Text, ElementName=TimeControl}" Grid.Column="1" Foreground="{Binding Foreground, ElementName=TimeControl}" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center"/>
+        <ContentPresenter Content="{StaticResource TimeOrangeIcon}" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Label Content="{Binding Text, ElementName=TimeControl}" Grid.Column="1" FontWeight="Bold" Foreground="{Binding Foreground, ElementName=TimeControl}" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center"/>
     </Grid>
 </UserControl>
