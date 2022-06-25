@@ -131,7 +131,7 @@
         </TextBox>
 
         <!-- Auto lock timer bar -->
-        <Border x:Name="AutoLockInfo" Background="#444444" Padding="30,10,30,10" Grid.Column="1" HorizontalAlignment="Right" Margin="0,0,20,0" VerticalAlignment="Center" BorderBrush="#1C1D25" BorderThickness="2,2,2,2" CornerRadius="20">
+        <Border x:Name="AutoLockInfo" Background="#444444" Padding="20,5,30,5" Visibility="Hidden" Grid.Column="1" HorizontalAlignment="Right" Margin="0,0,20,0" VerticalAlignment="Center" BorderBrush="#1C1D25" BorderThickness="2,2,2,2" CornerRadius="20">
             <Controls:TimerBar Text="00:25" Foreground="Orange"/>
             <Border.Style>
                 <Style TargetType="{x:Type Border}">
@@ -140,9 +140,9 @@
                             <DataTrigger.EnterActions>
                                 <BeginStoryboard>
                                     <Storyboard>
-                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" To="0.0" Duration="0:0:0.2"/>
+                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" To="0.0" Duration="0:0:0.5"/>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility">
-                                            <DiscreteObjectKeyFrame KeyTime="0:0:0.2" Value="{x:Static Visibility.Hidden}"/>
+                                            <DiscreteObjectKeyFrame KeyTime="0:0:0.5" Value="{x:Static Visibility.Hidden}"/>
                                         </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </BeginStoryboard>
@@ -150,7 +150,7 @@
                             <DataTrigger.ExitActions>
                                 <BeginStoryboard>
                                     <Storyboard>
-                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" To="1.0" Duration="0:0:0.2"/>
+                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" To="1.0" Duration="0:0:0.5"/>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility">
                                             <DiscreteObjectKeyFrame KeyTime="0:0:0.0" Value="{x:Static Visibility.Visible}"/>
                                         </ObjectAnimationUsingKeyFrames>
