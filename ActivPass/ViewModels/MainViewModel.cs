@@ -69,6 +69,13 @@ namespace ActivPass.ViewModels
             set => SetProperty(ref _loginInfo, value);
         }
 
+        private bool _showLockTimer;
+        public bool ShowLockTimer
+        {
+            get => _showLockTimer;
+            set => SetProperty(ref _showLockTimer, value);
+        }
+
         private Visibility _loginInfoVisibility;
         public Visibility LoginInfoVisibility
         {
@@ -550,6 +557,7 @@ namespace ActivPass.ViewModels
 
             //Default values
             this.Login = false;
+            this.ShowLockTimer = true;
             this.SearchText = string.Empty;
             this.LoginInfo = Localize["LoginFailed"];
             this.LoginInfoVisibility = Visibility.Hidden;

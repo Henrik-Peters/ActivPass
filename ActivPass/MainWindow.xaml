@@ -1,10 +1,11 @@
-﻿<Window x:Class="ActivPass.MainWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ActivPass"
         xmlns:ViewModels="clr-namespace:ActivPass.ViewModels"
+        xmlns:Controls="clr-namespace:ActivPass.Controls" x:Class="ActivPass.MainWindow"
         Background="#303139"
         x:Name="ActivPassWindow"
         mc:Ignorable="d"
@@ -14,7 +15,7 @@
     <Window.Resources>
         <!-- Background color for password item boxes -->
         <SolidColorBrush x:Key="PasswordItemBackground" Color="#444444"/>
-        
+
         <!-- Container main context menu -->
         <ContextMenu x:Key="MainMenu" MinWidth="150" VerticalOffset="-2" FontSize="18" FontFamily="Segoue UI" FontWeight="Normal">
             <MenuItem x:Name="LockMenuItem" Header="{Binding Localize[Lock]}" Command="{Binding ContainerLogout}"/>
@@ -60,7 +61,7 @@
                         <BeginStoryboard>
                             <Storyboard>
                                 <ColorAnimation 
-                                    Storyboard.TargetProperty="(Window.Background).(SolidColorBrush.Color)" 
+                                    Storyboard.TargetProperty="(Control.Background).(SolidColorBrush.Color)" 
                                     FillBehavior="HoldEnd" Duration="0:0:0.2" To="#303139"/>
                             </Storyboard>
                         </BeginStoryboard>
@@ -69,7 +70,7 @@
                         <BeginStoryboard>
                             <Storyboard>
                                 <ColorAnimation 
-                                    Storyboard.TargetProperty="(Window.Background).(SolidColorBrush.Color)" 
+                                    Storyboard.TargetProperty="(Control.Background).(SolidColorBrush.Color)" 
                                     FillBehavior="HoldEnd" Duration="0:0:0.2" To="#494A52"/>
                             </Storyboard>
                         </BeginStoryboard>
@@ -89,6 +90,39 @@
             <RowDefinition Height="80"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+
+        <Border x:Name="AutoLockInfo" Background="#444444" Padding="30,10,30,10" Grid.Column="1" HorizontalAlignment="Right" Margin="0,0,20,0" VerticalAlignment="Center" BorderBrush="#1C1D25" BorderThickness="2,2,2,2" CornerRadius="20">
+            <Controls:TimerBar Text="00:25" />
+            <Border.Style>
+                <Style TargetType="{x:Type Border}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ShowLockTimer}" Value="false">
+                            <DataTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" To="0.0" Duration="0:0:0.2"/>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility">
+                                            <DiscreteObjectKeyFrame KeyTime="0:0:0.2" Value="{x:Static Visibility.Hidden}"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.EnterActions>
+                            <DataTrigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetProperty="Opacity" To="1.0" Duration="0:0:0.2"/>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility">
+                                            <DiscreteObjectKeyFrame KeyTime="0:0:0.0" Value="{x:Static Visibility.Visible}"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.ExitActions>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+        </Border>
+        
         <Button x:Name="AddSecretButton" Content="{Binding Localize[AddSecret]}" Command="{Binding AddPasswordItem}" Visibility="Hidden" Focusable="False" Grid.Column="2" Width="150" HorizontalAlignment="Left" Margin="25,0,0,0" VerticalAlignment="Center">
             <Button.Style>
                 <Style TargetType="{x:Type Button}" BasedOn="{StaticResource NormalButton}">
@@ -152,31 +186,7 @@
 
         <!-- Container login box -->
         <Border Background="#494A52" Padding="10" Width="700" Height="200" Margin="0,0,0,0" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="#1C1D25" BorderThickness="2,2,2,2" CornerRadius="20">
-            <Grid x:Name="LoginGrid">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="120"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="60"/>
-                    <RowDefinition Height="30"/>
-                    <RowDefinition Height="60"/>
-                    <RowDefinition Height="25"/>
-                </Grid.RowDefinitions>
-                
-                <!-- Container info or selection -->
-                <Label x:Name="ContainerSelectorLabel" Content="{Binding Localize[ContainerSelect]}" Foreground="White" FontFamily="Tahoma" FontSize="14" FontWeight="Bold" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="7,0,0,0"/>
-                <ComboBox x:Name="ContainerSelector" ItemsSource="{Binding ContainerNames}" SelectedItem="{Binding SelectedContainer}" Grid.Row="0" Width="350" Height="35" HorizontalAlignment="Left" Margin="90,0,0,0" Style="{StaticResource ComboBoxStyle}"/>
-                
-                <!-- Master password area -->
-                <Label x:Name="MasterPasswordLabel" Content="{Binding Localize[MasterPassword]}" Foreground="White" FontFamily="Tahoma" FontSize="14" FontWeight="Bold" Grid.Row="1" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="7,2,0,0"/>
-                <PasswordBox x:Name="MasterPassword" Tag="" Style="{StaticResource PasswordBoxStyle}" Margin="0,0,0,0" Grid.Row="2" Height="50" VerticalAlignment="Top" HorizontalAlignment="Stretch" KeyUp="MasterPassword_KeyUp"/>
-                <Button x:Name="LoginButton" Content="{Binding Localize[Login]}" Grid.Row="2" Grid.Column="1" Height="50" Style="{StaticResource NormalButton}" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Top" Click="LoginButton_Click"/>
 
-                <!-- Login failed label -->
-                <Label x:Name="LoginFailLabel" Content="{Binding LoginInfo}" Style="{StaticResource InfoLabel}" Visibility="{Binding LoginInfoVisibility}" Foreground="#FFFF1D1D" FontFamily="Tahoma" FontSize="14" FontWeight="Bold" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="7,2,0,0"/>
-            </Grid>
-            
             <!-- Login fadeout animation -->
             <Border.Style>
                 <Style>
@@ -200,59 +210,71 @@
                     </Style.Triggers>
                 </Style>
             </Border.Style>
+            <Grid x:Name="LoginGrid">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="120"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="25"/>
+                </Grid.RowDefinitions>
+
+                <!-- Container info or selection -->
+                <Label x:Name="ContainerSelectorLabel" Content="{Binding Localize[ContainerSelect]}" Foreground="White" FontFamily="Tahoma" FontSize="14" FontWeight="Bold" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="7,0,0,0"/>
+                <ComboBox x:Name="ContainerSelector" ItemsSource="{Binding ContainerNames}" SelectedItem="{Binding SelectedContainer}" Grid.Row="0" Width="350" Height="35" HorizontalAlignment="Left" Margin="90,0,0,0" Style="{StaticResource ComboBoxStyle}"/>
+
+                <!-- Master password area -->
+                <Label x:Name="MasterPasswordLabel" Content="{Binding Localize[MasterPassword]}" Foreground="White" FontFamily="Tahoma" FontSize="14" FontWeight="Bold" Grid.Row="1" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="7,2,0,0"/>
+                <PasswordBox x:Name="MasterPassword" Tag="" Style="{StaticResource PasswordBoxStyle}" Margin="0,0,0,0" Grid.Row="2" Height="50" VerticalAlignment="Top" HorizontalAlignment="Stretch" KeyUp="MasterPassword_KeyUp"/>
+                <Button x:Name="LoginButton" Content="{Binding Localize[Login]}" Grid.Row="2" Grid.Column="1" Height="50" Style="{StaticResource NormalButton}" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Top" Click="LoginButton_Click"/>
+
+                <!-- Login failed label -->
+                <Label x:Name="LoginFailLabel" Content="{Binding LoginInfo}" Style="{StaticResource InfoLabel}" Visibility="{Binding LoginInfoVisibility}" Foreground="#FFFF1D1D" FontFamily="Tahoma" FontSize="14" FontWeight="Bold" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="7,2,0,0"/>
+            </Grid>
+
         </Border>
 
         <!-- Password items panel -->
         <ScrollViewer x:Name="PasswordItemScroll" Padding="20" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" VerticalScrollBarVisibility="Auto">
+
+            <!-- Login animation style trigger -->
+            <ScrollViewer.Style>
+                <Style TargetType="{x:Type ScrollViewer}">
+                    <Style.Triggers>
+                        <StaticResource ResourceKey="LoginFadeoutTrigger"/>
+                    </Style.Triggers>
+                </Style>
+            </ScrollViewer.Style>
             <ItemsControl x:Name="PasswordItemControl" ItemsSource="{Binding PasswordItemsView}">
-                
-                <!-- Panel control template -->
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel x:Name="PasswordItemWrapPanel" FlowDirection="LeftToRight"/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
 
                 <!-- Data templates for password items -->
                 <ItemsControl.Resources>
                     <DataTemplate DataType="{x:Type ViewModels:PasswordItemViewModel}">
 
                         <!-- Password item control border -->
-                        <Border Name="PassItem" Tag="{Binding DataContext, ElementName=ActivPassWindow}" Margin="10" Padding="3" UseLayoutRounding="True" SnapsToDevicePixels="True" MouseEnter="PassItem_MouseEnter" MouseLeave="PassItem_MouseLeave">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="170"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="30"/>
-                                    <RowDefinition Height="20"/>
-                                </Grid.RowDefinitions>
-                                <Label Content="{Binding Name}" MaxWidth="200" Foreground="White" FontFamily="Tahoma" FontSize="16" FontWeight="Bold" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
-                                <Label Content="{Binding Username}" Margin="0,-5,0,0" Foreground="Gray" FontFamily="Tahoma" FontSize="11" FontWeight="Bold" Grid.Row="1" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-                                
-                                <!-- Shortcut buttons -->
-                                <Button Command="{Binding OpenUrl}" CommandParameter="{Binding Url}" Visibility="{Binding ShowOpenBtn}" Style="{StaticResource OpenButton}" ToolTip="{Binding Localize[Open]}" Background="{StaticResource PasswordItemBackground}" Focusable="False" Grid.Row="0" Grid.Column="1" Margin="0,0,0,0" Padding="8" Height="35" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
-                            </Grid>
-                            
+                        <Border x:Name="PassItem" Tag="{Binding DataContext, ElementName=ActivPassWindow}" Margin="10" Padding="3" UseLayoutRounding="True" SnapsToDevicePixels="True" MouseEnter="PassItem_MouseEnter" MouseLeave="PassItem_MouseLeave">
+
                             <!-- Input bindings for password items -->
                             <Border.InputBindings>
-                                <MouseBinding MouseAction="LeftClick" Command="{Binding ElementName=PasswordItemControl, Path=DataContext.OpenPasswordItem}" CommandParameter="{Binding}"/>
+                                <MouseBinding MouseAction="LeftClick" Command="{Binding DataContext.OpenPasswordItem, ElementName=PasswordItemControl}" CommandParameter="{Binding}"/>
                             </Border.InputBindings>
-                            
+
                             <!-- Password item border control effects -->
                             <Border.Effect>
                                 <DropShadowEffect ShadowDepth="5" Direction="315" Color="Black" Opacity="0.2" BlurRadius="8"/>
                             </Border.Effect>
-                            
+
                             <!-- Render transform for the mouseOver animation -->
                             <Border.RenderTransform>
                                 <ScaleTransform/>
                             </Border.RenderTransform>
-                            
+
                             <!-- Password item context menu -->
                             <Border.ContextMenu>
-                                <ContextMenu DataContext="{Binding Path=PlacementTarget.Tag, RelativeSource={RelativeSource Self}}">
+                                <ContextMenu DataContext="{Binding PlacementTarget.Tag, RelativeSource={RelativeSource Self}}">
                                     <MenuItem Header="{Binding Localize[Open]}"
                                               Command="{Binding OpenPasswordItem}"
                                               CommandParameter="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}}"/>
@@ -272,7 +294,7 @@
                                               CommandParameter="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}}"/>
                                 </ContextMenu>
                             </Border.ContextMenu>
-                            
+
                             <!-- Style for password item controls -->
                             <Border.Style>
                                 <Style TargetType="{x:Type Border}">
@@ -302,20 +324,36 @@
                                     </Style.Triggers>
                                 </Style>
                             </Border.Style>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="170"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="20"/>
+                                </Grid.RowDefinitions>
+                                <Label Content="{Binding Name}" MaxWidth="200" Foreground="White" FontFamily="Tahoma" FontSize="16" FontWeight="Bold" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+                                <Label Content="{Binding Username}" Margin="0,-5,0,0" Foreground="Gray" FontFamily="Tahoma" FontSize="11" FontWeight="Bold" Grid.Row="1" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+
+                                <!-- Shortcut buttons -->
+                                <Button Command="{Binding OpenUrl}" CommandParameter="{Binding Url}" Visibility="{Binding ShowOpenBtn}" Style="{StaticResource OpenButton}" ToolTip="{Binding Localize[Open]}" Background="{StaticResource PasswordItemBackground}" Focusable="False" Grid.Row="0" Grid.Column="1" Margin="0,0,0,0" Padding="8" Height="35" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+                            </Grid>
+
                         </Border>
-                        
+
                     </DataTemplate>
                 </ItemsControl.Resources>
+
+                <!-- Panel control template -->
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel x:Name="PasswordItemWrapPanel" FlowDirection="LeftToRight"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+
             </ItemsControl>
 
-            <!-- Login animation style trigger -->
-            <ScrollViewer.Style>
-                <Style TargetType="{x:Type ScrollViewer}">
-                    <Style.Triggers>
-                        <StaticResource ResourceKey="LoginFadeoutTrigger"/>
-                    </Style.Triggers>
-                </Style>
-            </ScrollViewer.Style>
         </ScrollViewer>
 
         <!-- Empty container info box -->
