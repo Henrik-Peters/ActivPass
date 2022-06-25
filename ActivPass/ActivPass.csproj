@@ -62,6 +62,9 @@
     <Compile Include="Configuration\ConfigData.cs" />
     <Compile Include="Configuration\ConfigProvider.cs" />
     <Compile Include="Configuration\WindowStartupState.cs" />
+    <Compile Include="Controls\TimerBar.xaml.cs">
+      <DependentUpon>TimerBar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Crypto\ContainerStorage.cs" />
     <Compile Include="Crypto\FileSystemProvider.cs" />
     <Compile Include="Crypto\IContainerProvider.cs" />
@@ -93,6 +96,10 @@
     <Compile Include="Views\QuestionBox.xaml.cs">
       <DependentUpon>QuestionBox.xaml</DependentUpon>
     </Compile>
+    <Page Include="Controls\TimerBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Images\Icons.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

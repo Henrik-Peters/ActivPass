@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="ActivPass.Controls.TimerBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ActivPass.Controls"
+             x:Name="TimeControl"
+             mc:Ignorable="d" 
+             d:DesignHeight="45" d:DesignWidth="120" FontSize="18"
+             Foreground="White">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+
+        <!-- Time Bar Elements -->
+        <ContentPresenter Content="{StaticResource TimeIcon}" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Label Content="{Binding Text, ElementName=TimeControl}" Grid.Column="1" Foreground="{Binding Foreground, ElementName=TimeControl}" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Center"/>
+    </Grid>
+</UserControl>
