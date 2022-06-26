@@ -171,6 +171,11 @@ namespace ActivPass.ViewModels
         /// </summary>
         private readonly DispatcherTimer IdleTimer;
 
+        /// <summary>
+        /// Window instances to close during auto lock
+        /// </summary>
+        private Window OpenWindow = null;
+
         public ICommand ShowMainMenu { get; set; }
         public ICommand ExitApp { get; set; }
         public ICommand ContainerLogin { get; set; }
@@ -261,15 +266,19 @@ namespace ActivPass.ViewModels
             vm.ChangePasswordBox.Password = this.MasterPasswordBox.Password;
 
             //Show the editor dialog
+            this.OpenWindow = containerEditor;
             containerEditor.ShowDialog();
+            this.OpenWindow = null;
 
-            //Save changes of the container
-            this.SaveContainer();
+            //The container may be null in case of auto lock
+            if (Container != null) {
+                this.SaveContainer();
 
-            //Lock the container when changes were made
-            if (vm.LockContainer) {
-                this.LockContainer();
-                this.ReloadAvailableContainers();
+                //Lock the container when changes were made
+                if (vm.LockContainer) {
+                    this.LockContainer();
+                    this.ReloadAvailableContainers();
+                }
             }
         }
 
@@ -361,6 +370,11 @@ namespace ActivPass.ViewModels
             PasswordItems.Clear();
             MasterPasswordBox.Focus();
 
+            //Close open dialog windows
+            if (this.OpenWindow != null) {
+                this.OpenWindow.Close();
+            }
+
             //Hide the empty container info
             this.EmptyContainerInfo = Visibility.Hidden;
 
@@ -380,7 +394,9 @@ namespace ActivPass.ViewModels
 
             //Show the item editor dialog
             PassItemEditor itemEditor = new PassItemEditor(editorItem);
+            this.OpenWindow = itemEditor;
             itemEditor.ShowDialog();
+            this.OpenWindow = null;
 
             //Check if the editorItem should be stored
             if (itemEditor.vm.SaveEditorItem) {
@@ -411,7 +427,9 @@ namespace ActivPass.ViewModels
 
             //Show the item editor dialog
             PassItemEditor itemEditor = new PassItemEditor(editorItem);
+            this.OpenWindow = itemEditor;
             itemEditor.ShowDialog();
+            this.OpenWindow = null;
 
             //Check if the editorItem should be created
             if (itemEditor.vm.SaveEditorItem) {
@@ -454,7 +472,9 @@ namespace ActivPass.ViewModels
                 Localize["DeleteDialogTitle"]);
 
             //Wait for the question box dialog result
+            this.OpenWindow = deleteDialog;
             deleteDialog.ShowDialog();
+            this.OpenWindow = null;
 
             //Check the delete operation should be performed
             if (deleteDialog.ConfirmResult) {
@@ -513,7 +533,9 @@ namespace ActivPass.ViewModels
         private void ShowConfigEditor()
         {
             ConfigEditor configEditor = new ConfigEditor(Config);
+            this.OpenWindow = configEditor;
             configEditor.ShowDialog();
+            this.OpenWindow = null;
 
             //Apply the new language value
             SetLanguage(Config.Language);
