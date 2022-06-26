@@ -131,7 +131,7 @@
         </TextBox>
 
         <!-- Auto lock timer bar -->
-        <Border x:Name="AutoLockInfo" Background="#444444" Padding="20,5,30,5" Grid.Column="1" HorizontalAlignment="Right" Margin="0,0,20,0" VerticalAlignment="Center" BorderBrush="#1C1D25" BorderThickness="2,2,2,2" CornerRadius="20">
+        <Border x:Name="AutoLockInfo" Background="#444444" Opacity="0.0" Padding="20,5,30,5" Grid.Column="1" HorizontalAlignment="Right" Margin="0,0,20,0" VerticalAlignment="Center" BorderBrush="#1C1D25" BorderThickness="2,2,2,2" CornerRadius="20">
             <Controls:TimerBar Text="{Binding AutoLockText}" Foreground="Orange"/>
             <Border.Style>
                 <Style TargetType="{x:Type Border}">

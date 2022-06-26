@@ -314,12 +314,15 @@ namespace ActivPass.ViewModels
                         container.Items.Select(item => new PasswordItemViewModel(item))
                     );
 
-                    //Sucessful login
+                    //Successful login
                     this.Login = true;
                     this.Container = container;
                     this.LoginInfoVisibility = Visibility.Hidden;
                     this.SearchBox.Focus();
                     NotifyPropertyChanged(nameof(PasswordItemsView));
+
+                    //Reset the inactivity timer
+                    this.ResetInactivityTimer();
 
                     //Empty container info
                     if (PasswordItems.Count == 0) {
@@ -360,6 +363,9 @@ namespace ActivPass.ViewModels
 
             //Hide the empty container info
             this.EmptyContainerInfo = Visibility.Hidden;
+
+            //Hide the auto lock info
+            this.ShowLockTimer = false;
         }
 
         /// <summary>
@@ -581,7 +587,6 @@ namespace ActivPass.ViewModels
                 //Lock the container below zero
                 if (RemainingIdleTime < TimeSpan.Zero) {
                     this.LockContainer();
-                    this.ShowLockTimer = false;
 
                     //Set the remaning idle time back to start
                     RemainingIdleTime = new TimeSpan(
