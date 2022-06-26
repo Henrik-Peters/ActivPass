@@ -271,14 +271,15 @@ namespace ActivPass.ViewModels
             this.OpenWindow = null;
 
             //The container may be null in case of auto lock
-            if (Container != null) {
+            if (Container != null && vm.Container != null) {
                 this.SaveContainer();
+            }
 
-                //Lock the container when changes were made
-                if (vm.LockContainer) {
-                    this.LockContainer();
-                    this.ReloadAvailableContainers();
-                }
+            //Lock the container when changes were made
+            if (vm.LockContainer)
+            {
+                this.LockContainer();
+                this.ReloadAvailableContainers();
             }
         }
 

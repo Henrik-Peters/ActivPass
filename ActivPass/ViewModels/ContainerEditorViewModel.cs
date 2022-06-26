@@ -113,6 +113,9 @@ namespace ActivPass.ViewModels
 
         private void ChangeCurrentMasterPassword()
         {
+            //Store back the new password
+            MasterPasswordBox.Password = ChangePasswordBox.Password;
+
             //Save the container with the current storage provider
             if (!ContainerStorage.ContainerProvider.SaveContainer(Container, ChangePasswordBox.Password)) {
                 MessageBox.Show("Failed to store the new container!", "Container store failed", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -146,6 +149,7 @@ namespace ActivPass.ViewModels
                 else {
                     MessageBox.Show(Localize["DeleteContainerSuccess"], Localize["DeleteContainer"], MessageBoxButton.OK, MessageBoxImage.Information);
                     this.LockContainer = true;
+                    this.Container = null;
 
                     //Close the window because it makes no sense to edit a not existing container
                     if (window != null) {
