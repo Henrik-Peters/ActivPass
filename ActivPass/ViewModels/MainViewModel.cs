@@ -149,13 +149,13 @@ namespace ActivPass.ViewModels
         /// After this amount of time the container will be
         /// auto locked if inactivity locking is enabled
         /// </summary>
-        private static readonly TimeSpan AUTO_LOCK_TIME = new TimeSpan(0, 0, 13);
+        private static readonly TimeSpan AUTO_LOCK_TIME = new TimeSpan(0, 5, 0);
 
         /// <summary>
         /// Show the auto lock bar when the remaining
         /// idle time drops below this time span
         /// </summary>
-        private static readonly TimeSpan INFO_LOCK_TIME = new TimeSpan(0, 0, 10);
+        private static readonly TimeSpan INFO_LOCK_TIME = new TimeSpan(0, 1, 0);
 
         /// <summary>
         /// Time until the auto lock will kick in
