@@ -1,18 +1,19 @@
-# ActivPass
+# <img src="https://raw.githubusercontent.com/wiki/Henrik-Peters/ActivPass/images/logo-wide.svg" width="200">
 ActivPass is a simple and local password management tool
 
-## Prerequisites / Tools
+[![License](https://img.shields.io/github/license/Henrik-Peters/ActivPass)](LICENSE)
 
+## Prerequisites / Tools
 The following software is required to run or compile ActivPass.
 
 * Windows OS
-* .NET Framework 4.6.1
+* .NET Framework 4.8
 * Visual Studio
+* C# with WPF
 
 ## Functionality
-
 ### Usage
-Password items are grouped into so-called "Containers". For safety reasons,
+Password items are grouped into so-called `Containers`. For safety reasons,
 a container is an isolated unit. This means a password item exists in only
 one specific container. Items can not be shared between containers. ActivPass
 stores containers as an encrypted file on the local disk. The so-called
@@ -31,8 +32,17 @@ You can backup and restore containers, simply by copying and replacing the conta
 files. It is possible to export unlocked containers as unencrypted CSV documents, for
 backup or exchange purposes.
 
+### User Interface
+The user interface is implemented with WPF. Most elements are styled with their own
+design to create a modern user interface. The interface can be configured for different
+languages, but currently only for German and English. You can find detailed screenshots
+of the user interface in the [wiki ui screenshots](https://github.com/Henrik-Peters/ActivPass/wiki/UI-Screenshots).
+
 ## Configuration
 The application stores the configuration in the file `Configuration.xml` in
 `AppData\Roaming\ActivPass`. The configuration can be changed in the user interface.
 When no configuration exists, a default configuration is used and a new configuration
 file will be created.
+
+## Documentation
+The documentation for ActivPass is hosted in the [GitHub Wiki](https://github.com/Henrik-Peters/ActivPass/wiki).
