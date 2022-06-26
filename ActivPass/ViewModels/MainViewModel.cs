@@ -587,13 +587,6 @@ namespace ActivPass.ViewModels
                 //Lock the container below zero
                 if (RemainingIdleTime < TimeSpan.Zero) {
                     this.LockContainer();
-
-                    //Set the remaning idle time back to start
-                    RemainingIdleTime = new TimeSpan(
-                        AUTO_LOCK_TIME.Hours,
-                        AUTO_LOCK_TIME.Minutes,
-                        AUTO_LOCK_TIME.Seconds
-                    );
                 }
             }
         }
@@ -602,7 +595,7 @@ namespace ActivPass.ViewModels
         /// This will reset the inactivity time, this should
         /// be called for in general activity user input
         /// </summary>
-        private void ResetInactivityTimer()
+        public void ResetInactivityTimer()
         {
             //Set the remaning idle time back to start
             RemainingIdleTime = new TimeSpan(
@@ -668,7 +661,7 @@ namespace ActivPass.ViewModels
             //Auto lock timer
             IdleTimer = new DispatcherTimer(
                 TimeSpan.FromSeconds(1),
-                DispatcherPriority.ApplicationIdle,
+                DispatcherPriority.Normal,
                 new EventHandler(IdleTimer_Tick),
                 Application.Current.Dispatcher
             );

@@ -77,10 +77,23 @@ namespace ActivPass
 
         private void ActivPassWindow_KeyUp(object sender, KeyEventArgs e)
         {
+            //Reset inactivity
+            vm.ResetInactivityTimer();
+
             //Copy the password to clipboard from the current hovered password item
             if (e.Key == Key.C && Keyboard.Modifiers == ModifierKeys.Control && mouseOverItem != null) {
                 Clipboard.SetText(mouseOverItem.Password, TextDataFormat.UnicodeText);
             }
+        }
+
+        private void ActivPassWindow_MouseEnter(object sender, MouseEventArgs e)
+        {
+            vm.ResetInactivityTimer();
+        }
+
+        private void ActivPassWindow_MouseMove(object sender, MouseEventArgs e)
+        {
+            vm.ResetInactivityTimer();
         }
     }
 }
