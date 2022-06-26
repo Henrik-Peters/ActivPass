@@ -2,6 +2,7 @@
 ActivPass is a simple and local password management tool
 
 [![License](https://img.shields.io/github/license/Henrik-Peters/ActivPass)](LICENSE)
+[![Release](https://img.shields.io/github/v/release/Henrik-Peters/ActivPass)](https://github.com/Henrik-Peters/ActivPass/releases)
 
 ## Prerequisites / Tools
 The following software is required to run or compile ActivPass.
