@@ -54,7 +54,7 @@ namespace ActivPass.ViewModels
             get => _containerNames;
             set => SetProperty(ref _containerNames, value);
         }
-        
+
         private string _selectedContainer;
         public string SelectedContainer
         {
@@ -136,7 +136,7 @@ namespace ActivPass.ViewModels
                 return view;
             }
         }
-        
+
         public ICommand ShowMainMenu { get; set; }
         public ICommand ExitApp { get; set; }
         public ICommand ContainerLogin { get; set; }
@@ -225,9 +225,12 @@ namespace ActivPass.ViewModels
             vm.Container = this.Container;
             vm.MasterPasswordBox = this.MasterPasswordBox;
             vm.ChangePasswordBox.Password = this.MasterPasswordBox.Password;
-            
+
             //Show the editor dialog
             containerEditor.ShowDialog();
+
+            //Save changes of the container
+            this.SaveContainer();
 
             //Lock the container when changes were made
             if (vm.LockContainer) {
@@ -297,6 +300,16 @@ namespace ActivPass.ViewModels
         }
 
         /// <summary>
+        /// Save the current container data
+        /// </summary>
+        private void SaveContainer() {
+            //Save the container with the current storage provider
+            if (!ContainerStorage.ContainerProvider.SaveContainer(Container, MasterPasswordBox.Password)) {
+                MessageBox.Show("Failed to delete the container!", "Container deletion failed", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        /// <summary>
         /// Logout off the current container
         /// and show the login grid dialog.
         /// </summary>
@@ -343,9 +356,7 @@ namespace ActivPass.ViewModels
                 PasswordItems[itemIndex].Notes = editorItem.Notes;
 
                 //Save the container with the current storage provider
-                if (!ContainerStorage.ContainerProvider.SaveContainer(Container, MasterPasswordBox.Password)) {
-                    MessageBox.Show("Failed to store the container!", "Container store failed", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+                this.SaveContainer();
             }
         }
 
@@ -386,9 +397,7 @@ namespace ActivPass.ViewModels
                 }
 
                 //Save the container with the current storage provider
-                if (!ContainerStorage.ContainerProvider.SaveContainer(Container, MasterPasswordBox.Password)) {
-                    MessageBox.Show("Failed to create the container!", "Container creation failed", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+                this.SaveContainer();
             }
         }
 
@@ -436,9 +445,7 @@ namespace ActivPass.ViewModels
                 }
 
                 //Save the container with the current storage provider
-                if (!ContainerStorage.ContainerProvider.SaveContainer(Container, MasterPasswordBox.Password)) {
-                    MessageBox.Show("Failed to delete the container!", "Container deletion failed", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+                this.SaveContainer();
             }
         }
 
