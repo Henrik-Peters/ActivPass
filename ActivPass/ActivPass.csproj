@@ -10,9 +10,6 @@
     <ApplicationIcon>ActivPassIcon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="PresentationFramework.Aero2" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\ActivPassIcon.ico" />
   </ItemGroup>
   <ItemGroup>
