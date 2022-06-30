@@ -145,7 +145,8 @@ namespace ActivPass.ViewModels
         {
             if (this._proxy.HasBrowsableUrl())
             {
-                System.Diagnostics.Process.Start(url);
+                var startInfo = new System.Diagnostics.ProcessStartInfo { FileName = @url, UseShellExecute = true };
+                System.Diagnostics.Process.Start(startInfo);
             }
         }
     }
