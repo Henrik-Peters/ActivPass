@@ -5,9 +5,9 @@
 #endregion
 using System.IO;
 using System.Linq;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.Json;
 using ActivPass.Configuration;
 using ActivPass.Models;
 
@@ -70,8 +70,7 @@ namespace ActivPass.Crypto
                     using (var fstream = new FileStream(containerFilePath, FileMode.Open)) {
                         using (CryptoStream csDecrypt = new CryptoStream(fstream, decryptor, CryptoStreamMode.Read)) {
 
-                            BinaryFormatter formatter = new BinaryFormatter();
-                            container = (PasswordContainer)formatter.Deserialize(csDecrypt);
+                            container = JsonSerializer.Deserialize<PasswordContainer>(csDecrypt);
                         }
                     }
                 }
@@ -129,8 +128,7 @@ namespace ActivPass.Crypto
                     using (var fstream = new FileStream(containerFilePath, FileMode.Create)) {
                         using (CryptoStream csEncrypt = new CryptoStream(fstream, encryptor, CryptoStreamMode.Write)) {
 
-                            BinaryFormatter formatter = new BinaryFormatter();
-                            formatter.Serialize(csEncrypt, container);
+                            JsonSerializer.Serialize(csEncrypt, container);
                         }
                     }
                 }
