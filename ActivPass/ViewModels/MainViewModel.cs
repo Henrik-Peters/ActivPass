@@ -15,6 +15,7 @@ using System.Windows.Threading;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using ActivPass.Localization;
 using ActivPass.Configuration;
 using ActivPass.Models;
@@ -146,6 +147,11 @@ namespace ActivPass.ViewModels
         }
 
         /// <summary>
+        /// Separator char for csv column separation
+        /// </summary>
+        private readonly string CSV_SEPARATOR = ";";
+
+        /// <summary>
         /// After this amount of time the container will be
         /// auto locked if inactivity locking is enabled
         /// </summary>
@@ -188,6 +194,7 @@ namespace ActivPass.ViewModels
         public ICommand UsernameToClipboard { get; set; }
         public ICommand PasswordToClipboard { get; set; }
         public ICommand OpenSettings { get; set; }
+        public ICommand ImportContainer { get; set; }
         public ICommand ExportContainer { get; set; }
 
         /// <summary>
@@ -543,6 +550,102 @@ namespace ActivPass.ViewModels
         }
 
         /// <summary>
+        /// Show the import dialog for the current container.
+        /// </summary>
+        private void ContainerImport()
+        {
+            //Create the open file dialog
+            OpenFileDialog openDialog = new() {
+                DefaultExt = ".csv",
+                Filter = "Comma-separated values (.csv)|*.csv"
+            };
+
+            //Show and dialog and save the dialog result
+            bool? dialogResult = openDialog.ShowDialog();
+
+            //Perform the import for positive results
+            if (dialogResult == true) {
+                List<PasswordItem> importItems = new List<PasswordItem>();
+
+                //Init import variables
+                string filename = openDialog.FileName;
+                string separator = this.CSV_SEPARATOR;
+
+                try {
+                    string[] lines = File.ReadAllLines(filename);
+
+                    //Validate the csv header
+                    if (lines[0] != "Name" + separator + "Username" + separator + "Password" + separator + "Url" + separator + "Notes") {
+                        throw new Exception("Invalid csv header");
+                    }
+
+                    //Import each line
+                    for (int i = 1; i < lines.Length; i++) {
+                        string[] lineSplit = lines[i].Split(separator);
+
+                        //Validate the amount of columns
+                        if (lineSplit.Length != 5) {
+                            throw new Exception("Invalid csv column length");
+                        }
+
+                        //Create the password item instance
+                        PasswordItem newItem = new PasswordItem(lineSplit[0], lineSplit[1], lineSplit[2], lineSplit[3], lineSplit[4]);
+                        importItems.Add(newItem);
+
+                    }
+                } catch (Exception err) {
+                    MessageBox.Show("Failed to import the csv file: " + err.Message, "CSV file import error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+
+                //Merge and save the imported items
+                PasswordItem[] newItems = importItems.ToArray();
+                this.MergePasswordItems(newItems);
+            }
+        }
+
+        /// <summary>
+        /// Merge an array of password items into the
+        /// current container and save the result
+        /// </summary>
+        /// <param name="newItems">New items to add</param>
+        private void MergePasswordItems(PasswordItem[] newItems)
+        {
+            List<PasswordItem> mergedItems = new();
+
+            //First add all items of the current container
+            foreach (PasswordItem item in Container.Items) {
+                mergedItems.Add(item);
+            }
+
+            //Second add all items of the list
+            foreach (PasswordItem item in newItems) {
+                bool alreadyExists = mergedItems.Exists(existingItem => existingItem.Name == item.Name);
+
+                //Ask the user for overwrite when required
+                if (!alreadyExists) {
+                    mergedItems.Add(item);
+                } else {
+                    //Confirm the overwrite operation
+                    QuestionBox overwriteDialog = new QuestionBox(
+                        Localize["OverwriteQuestionPart1"] + " " + item.Name + " " + Localize["OverwriteQuestionPart2"],
+                        Localize["OverwriteDialogTitle"]);
+
+                    //Wait for the question box dialog result
+                    this.OpenWindow = overwriteDialog;
+                    overwriteDialog.ShowDialog();
+                    this.OpenWindow = null;
+
+                    //Check if the item should be overwritten
+                    if (overwriteDialog.ConfirmResult) {
+                        //Delete the old item and add the new one
+                        mergedItems.RemoveAll(existingItem => existingItem.Name == item.Name);
+                        mergedItems.Add(item);
+                    }    
+                }
+            }
+        }
+
+        /// <summary>
         /// Show the export dialog of the current container.
         /// </summary>
         private void ContainerExport()
@@ -560,7 +663,7 @@ namespace ActivPass.ViewModels
 
             //Create the csv file when the dialog result is save
             if (dialogResult == true) {
-                string separator = ";";
+                string separator = this.CSV_SEPARATOR;
                 string filename = saveDialog.FileName;
                 string[] csvLines = new string[Container.Items.Length + 1];
 
@@ -665,6 +768,7 @@ namespace ActivPass.ViewModels
             this.EditContainer = new RelayCommand(EditCurrentContainer);
             this.AddPasswordItem = new RelayCommand(CreatePasswordItem);
             this.OpenSettings = new RelayCommand(ShowConfigEditor);
+            this.ImportContainer = new RelayCommand(ContainerImport);
             this.ExportContainer = new RelayCommand(ContainerExport);
             this.OpenPasswordItem = new RelayCommand<PasswordItemViewModel>(ShowPasswordItemDetails);
             this.DeletePasswordItem = new RelayCommand<PasswordItemViewModel>(ShowDeleteItemDialog);
