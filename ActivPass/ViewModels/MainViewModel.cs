@@ -599,7 +599,26 @@ namespace ActivPass.ViewModels
 
                 //Merge and save the imported items
                 PasswordItem[] newItems = importItems.ToArray();
-                this.MergePasswordItems(newItems);
+                PasswordItem[] mergedItems = this.MergePasswordItems(newItems);
+
+                //Store the merged items in the container and view model
+                Container.Items = mergedItems;
+                PasswordItems = new ObservableCollection<PasswordItemViewModel>(
+                    mergedItems.Select(item => new PasswordItemViewModel(item))
+                );
+
+                //Trigger password item view rerender
+                NotifyPropertyChanged(nameof(PasswordItemsView));
+
+                //Empty container info
+                if (PasswordItems.Count > 0) {
+                    this.EmptyContainerInfo = Visibility.Hidden;
+                }
+
+                //The container may be null in case of auto lock
+                if (Container != null) {
+                    this.SaveContainer();
+                }
             }
         }
 
@@ -608,7 +627,7 @@ namespace ActivPass.ViewModels
         /// current container and save the result
         /// </summary>
         /// <param name="newItems">New items to add</param>
-        private void MergePasswordItems(PasswordItem[] newItems)
+        private PasswordItem[] MergePasswordItems(PasswordItem[] newItems)
         {
             List<PasswordItem> mergedItems = new();
 
@@ -626,7 +645,7 @@ namespace ActivPass.ViewModels
                     mergedItems.Add(item);
                 } else {
                     //Confirm the overwrite operation
-                    QuestionBox overwriteDialog = new QuestionBox(
+                    QuestionBox overwriteDialog = new(
                         Localize["OverwriteQuestionPart1"] + " " + item.Name + " " + Localize["OverwriteQuestionPart2"],
                         Localize["OverwriteDialogTitle"]);
 
@@ -643,6 +662,9 @@ namespace ActivPass.ViewModels
                     }    
                 }
             }
+
+            //Create the result as array
+            return mergedItems.ToArray();
         }
 
         /// <summary>
