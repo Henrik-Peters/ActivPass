@@ -339,7 +339,7 @@
                                 <Label Content="{Binding Username}" Margin="0,-5,0,0" Foreground="Gray" FontFamily="Tahoma" FontSize="11" FontWeight="Bold" Grid.Row="1" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
 
                                 <!-- Shortcut buttons -->
-                                <Button Command="{Binding OpenUrl}" CommandParameter="{Binding Url}" Visibility="{Binding ShowOpenBtn}" Style="{StaticResource OpenButton}" ToolTip="{Binding Localize[Open]}" Background="{StaticResource PasswordItemBackground}" Focusable="False" Grid.Row="0" Grid.Column="1" Margin="0,0,0,0" Padding="8" Height="35" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+                                <Button Command="{Binding OpenUrl}" CommandParameter="{Binding Url}" Visibility="{Binding ShowOpenBtn}" Style="{StaticResource OpenButton}" Background="{StaticResource PasswordItemBackground}" Focusable="False" Grid.Row="0" Grid.Column="1" Margin="0,0,0,0" Padding="8" Height="35" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
                             </Grid>
 
                         </Border>
