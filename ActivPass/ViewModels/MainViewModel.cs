@@ -240,7 +240,8 @@ namespace ActivPass.ViewModels
                 return true;
 
             } else {
-                return passwordItem.Name.ToLower().Contains(SearchText.ToLower());
+                return passwordItem.Name.ToLower().Contains(SearchText.ToLower()) ||
+                    passwordItem.Url.ToLower().Contains(SearchText.ToLower());
             }
         }
 
