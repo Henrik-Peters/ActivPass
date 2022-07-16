@@ -24,7 +24,7 @@ namespace ActivPass.Controls
         /// Identifies the TextProperty dependency property
         /// </summary>
         public static readonly DependencyProperty StrengthScoreProperty = DependencyProperty.Register(
-            "StrengthScore", typeof(PasswordStrength), typeof(PasswordStrengthBar), new PropertyMetadata(null));
+            "StrengthScore", typeof(PasswordStrength), typeof(PasswordStrengthBar), new PropertyMetadata(StrengthScore_PropertyChanged));
 
         /// <summary>
         /// Gets or sets the text to be displayed
@@ -54,6 +54,13 @@ namespace ActivPass.Controls
 
             //Update inital score state
             this.UpdateScore(this.StrengthScore);
+        }
+
+        private static void StrengthScore_PropertyChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
+        {
+            if (obj is PasswordStrengthBar instance) {
+                instance.UpdateScore(instance.StrengthScore);
+            }
         }
 
         /// <summary>

@@ -169,7 +169,7 @@ namespace ActivPass.ViewModels
 
             //Inital values
             this.SaveEditorItem = false;
-            this.PasswordStrength = PasswordStrength.NONE;
+            this.UpdatePasswordScore();
 
             //Command bindings
             this.Close = new RelayCommand<Window>(CloseWindow);
