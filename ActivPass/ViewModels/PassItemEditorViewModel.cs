@@ -117,10 +117,9 @@ namespace ActivPass.ViewModels
             get => _passwordStrength;
             set
             {
-                if (_passwordStrength != value)
-                {
+                if (_passwordStrength != value) {
                     _passwordStrength = value;
-                    NotifyPropertyChanged(nameof(_passwordStrength));
+                    NotifyPropertyChanged(nameof(PasswordStrength));
                 }
             }
         }
@@ -177,6 +176,16 @@ namespace ActivPass.ViewModels
             this.SaveItem = new RelayCommand<Window>(SaveItemAndClose);
             this.CopyToClipboard = new RelayCommand<string>(SetClipboardText);
             this.OpenUrl = new RelayCommand<string>(OpenBrowserUrl);
+        }
+
+        /// <summary>
+        /// Update the score rating of the current password
+        /// </summary>
+        public void UpdatePasswordScore()
+        {
+            //Calculate and apply the score
+            PasswordStrength score = PasswordScores.GetScore(this.Password);
+            this.PasswordStrength = score;
         }
 
         /// <summary>

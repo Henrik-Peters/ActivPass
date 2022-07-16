@@ -52,12 +52,14 @@ namespace ActivPass.Views
         private void PassTextBox_KeyUp(object sender, KeyEventArgs e)
         {
             PassBox.Password = this.vm.Password;
+            this.vm.UpdatePasswordScore();
             ValidateEditorItem();
         }
 
         private void PassBox_KeyUp(object sender, KeyEventArgs e)
         {
             this.vm.Password = PassBox.Password;
+            this.vm.UpdatePasswordScore();
             ValidateEditorItem();
         }
 
