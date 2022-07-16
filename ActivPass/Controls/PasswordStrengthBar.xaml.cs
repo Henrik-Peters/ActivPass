@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Shapes;
+using ActivPass.Localization;
 using ActivPass.Models;
 
 namespace ActivPass.Controls
@@ -42,6 +43,11 @@ namespace ActivPass.Controls
 
         #endregion
 
+        /// <summary>
+        /// Reference for bindings to the translate singleton.
+        /// </summary>
+        public static TranslateManager Localize => TranslateManager.GetTranslateManager();
+
         public PasswordStrengthBar()
         {
             InitializeComponent();
@@ -56,40 +62,39 @@ namespace ActivPass.Controls
         /// <param name="score">Show this score</param>
         private void UpdateScore(PasswordStrength score)
         {
-            switch (score)
-            {
+            switch (score) {
                 case PasswordStrength.VERY_WEAK:
-                    this.ScoreLabel.Content = "Very Weak";
+                    this.ScoreLabel.Content = Localize["ScoreVeryWeak"];
                     this.ApplyColor(this.Resources["BarColor0"] as Brush, this.Bar0);
                     this.ApplyBaseColor(this.Bar1, this.Bar2, this.Bar3, this.Bar4, this.Bar5);
                     break;
 
                 case PasswordStrength.WEAK:
-                    this.ScoreLabel.Content = "Weak";
+                    this.ScoreLabel.Content = Localize["ScoreWeak"];
                     this.ApplyColor(this.Resources["BarColor1"] as Brush, this.Bar0, this.Bar1);
                     this.ApplyBaseColor(this.Bar2, this.Bar3, this.Bar4, this.Bar5);
                     break;
 
                 case PasswordStrength.MEDIUM:
-                    this.ScoreLabel.Content = "Medium";
+                    this.ScoreLabel.Content = Localize["ScoreMedium"];
                     this.ApplyColor(this.Resources["BarColor2"] as Brush, this.Bar0, this.Bar1, this.Bar2);
                     this.ApplyBaseColor(this.Bar3, this.Bar4, this.Bar5);
                     break;
 
                 case PasswordStrength.STRONG:
-                    this.ScoreLabel.Content = "Strong";
+                    this.ScoreLabel.Content = Localize["ScoreStrong"];
                     this.ApplyColor(this.Resources["BarColor3"] as Brush, this.Bar0, this.Bar1, this.Bar2, this.Bar3);
                     this.ApplyBaseColor(this.Bar4, this.Bar5);
                     break;
 
                 case PasswordStrength.VERY_STRONG:
-                    this.ScoreLabel.Content = "Very Strong";
+                    this.ScoreLabel.Content = Localize["ScoreVeryStrong"];
                     this.ApplyColor(this.Resources["BarColor4"] as Brush, this.Bar0, this.Bar1, this.Bar2, this.Bar3, this.Bar4);
                     this.ApplyBaseColor(this.Bar5);
                     break;
 
                 case PasswordStrength.EXTREME_STRONG:
-                    this.ScoreLabel.Content = "Extreme Strong";
+                    this.ScoreLabel.Content = Localize["ScoreExtremeStrong"];
                     this.ApplyColor(this.Resources["BarColor5"] as Brush, this.Bar0, this.Bar1, this.Bar2, this.Bar3, this.Bar4, this.Bar5);
                     break;
             }
