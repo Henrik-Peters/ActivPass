@@ -3,11 +3,7 @@
 // Copyright 2019 Henrik Peters
 // See LICENSE file in the project root for full license information
 #endregion
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ActivPass.Models
 {
@@ -15,37 +11,116 @@ namespace ActivPass.Models
     {
         /// <summary>
         /// Rate the strength of a password and calculate
-        /// the password strength enum value
+        /// the password strength score enum value
         /// </summary>
         /// <param name="password">Rate this password</param>
         /// <returns>Score of the password</returns>
         public static PasswordStrength GetScore(string password)
         {
-            switch (password.Length) {
-                case 0:
-                    return PasswordStrength.NONE;
+            //Handle empty passwords
+            if (password == null || password.Length == 0) {
+                return PasswordStrength.NONE;
 
-                case 1:
-                    return PasswordStrength.VERY_WEAK;
+            } else if (password.Length <= 6) {
+                //Short passwords with 6 chars or less are always very weak
+                return PasswordStrength.VERY_WEAK;
 
-                case 2:
-                    return PasswordStrength.WEAK;
+            } else {
+                //Start with weak because length is 7 or above
+                int score = 2;
 
-                case 3:
-                    return PasswordStrength.MEDIUM;
+                //1 score point for long passwords
+                if (password.Length >= 20) {
+                    score++;
+                }
 
-                case 4:
-                    return PasswordStrength.STRONG;
+                //1 score point for mixed lower and uppercase
+                if (ContainsLowercase(password) && ContainsUppercase(password)) {
+                    score++;
+                }
 
-                case 5:
-                    return PasswordStrength.VERY_STRONG;
+                //1 score point for numbers and symbols
+                if (ContainsNumbers(password) && ContainsSymbols(password)) {
+                    score++;
+                }
 
-                case 6:
-                    return PasswordStrength.EXTREME_STRONG;
+                //1 score point for complexity
+                if (HasComplexScore(password)) {
+                    score++;
+                }
 
-                default:
-                    return PasswordStrength.NONE;
+                //Max score is 6
+                return (PasswordStrength)score;
             }
+        }
+
+        /// <summary>
+        /// Check if a password passes the high requirement
+        /// check to get all points for extremly strong
+        /// </summary>
+        /// <param name="password">Check this password</param>
+        /// <returns>True when the password is very complex</returns>
+        private static bool HasComplexScore(string password)
+        {
+            //Check the length first
+            if (password.Length < 64){
+                return false;
+            } else {
+                //Check that it contains chars from all groups
+                bool differentCharGroups =
+                    ContainsLowercase(password) &&
+                    ContainsUppercase(password) &&
+                    ContainsNumbers(password) &&
+                    ContainsSymbols(password);
+
+                if (!differentCharGroups) {
+                    return false;
+                } else{
+                    //Count the amount of distinct charts
+                    int distinctChars = password.Distinct().Count();
+                    return distinctChars >= 40;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Check if the password has chars which are lowercase
+        /// </summary>
+        /// <param name="password">Check this password</param>
+        /// <returns>True when lowercase chars were found</returns>
+        private static bool ContainsLowercase(string password)
+        {
+            return password.Any(char.IsLower);
+        }
+
+        /// <summary>
+        /// Check if the password has chars which are uppercase
+        /// </summary>
+        /// <param name="password">Check this password</param>
+        /// <returns>True when uppercase chars were found</returns>
+        private static bool ContainsUppercase(string password)
+        {
+            return password.Any(char.IsUpper);
+        }
+
+        /// <summary>
+        /// Check if the password has chars which are numbers
+        /// </summary>
+        /// <param name="password">Check this password</param>
+        /// <returns>True when numbers chars were found</returns>
+        private static bool ContainsNumbers(string password)
+        {
+            return password.Any(char.IsNumber);
+        }
+
+        /// <summary>
+        /// Check if the password has symbols which are numbers
+        /// </summary>
+        /// <param name="password">Check this password</param>
+        /// <returns>True when symbols chars were found</returns>
+        private static bool ContainsSymbols(string password)
+        {
+            return password.Any(c => char.IsSymbol(c) || char.IsPunctuation(c));
         }
     }
 }
