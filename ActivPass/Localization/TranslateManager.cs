@@ -19,6 +19,7 @@ namespace ActivPass.Localization
         /// </summary>
         static IDictionary<string, List<string>> TranslateTable = new Dictionary<string, List<string>>
         {
+            ["ScoreNone"] = new List<string> { "Score: None", "Stärke: Keine" },
             ["ScoreVeryWeak"] = new List<string> { "Score: Very weak", "Stärke: Sehr schwach" },
             ["ScoreWeak"] = new List<string> { "Score: Weak", "Stärke: Schwach" },
             ["ScoreMedium"] = new List<string> { "Score: Medium", "Stärke: Mittel" },

@@ -111,6 +111,20 @@ namespace ActivPass.ViewModels
             set => SetProperty(ref _saveEditorItem, value);
         }
 
+        private PasswordStrength _passwordStrength;
+        public PasswordStrength PasswordStrength
+        {
+            get => _passwordStrength;
+            set
+            {
+                if (_passwordStrength != value)
+                {
+                    _passwordStrength = value;
+                    NotifyPropertyChanged(nameof(_passwordStrength));
+                }
+            }
+        }
+
         /// <summary>
         /// Close the passed window instance.
         /// </summary>
@@ -156,6 +170,7 @@ namespace ActivPass.ViewModels
 
             //Inital values
             this.SaveEditorItem = false;
+            this.PasswordStrength = PasswordStrength.NONE;
 
             //Command bindings
             this.Close = new RelayCommand<Window>(CloseWindow);

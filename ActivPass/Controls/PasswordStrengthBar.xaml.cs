@@ -63,6 +63,11 @@ namespace ActivPass.Controls
         private void UpdateScore(PasswordStrength score)
         {
             switch (score) {
+                case PasswordStrength.NONE:
+                    this.ScoreLabel.Content = Localize["ScoreNone"];
+                    this.ApplyBaseColor(this.Bar0, this.Bar1, this.Bar2, this.Bar3, this.Bar4, this.Bar5);
+                    break;
+
                 case PasswordStrength.VERY_WEAK:
                     this.ScoreLabel.Content = Localize["ScoreVeryWeak"];
                     this.ApplyColor(this.Resources["BarColor0"] as Brush, this.Bar0);

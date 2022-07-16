@@ -10,11 +10,12 @@ namespace ActivPass.Models
     /// </summary>
     public enum PasswordStrength
     {
-        VERY_WEAK = 0,
-        WEAK = 1,
-        MEDIUM = 2,
-        STRONG = 3,
-        VERY_STRONG = 4,
-        EXTREME_STRONG = 5
+        NONE = 0,
+        VERY_WEAK = 1,
+        WEAK = 2,
+        MEDIUM = 3,
+        STRONG = 4,
+        VERY_STRONG = 5,
+        EXTREME_STRONG = 6
     }
 }
