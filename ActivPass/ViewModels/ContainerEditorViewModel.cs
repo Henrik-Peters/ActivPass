@@ -61,7 +61,31 @@ namespace ActivPass.ViewModels
         public PasswordContainer Container
         {
             get => _container;
-            set => SetProperty(ref _container, value);
+            set
+            {
+                _container = value;
+                NotifyPropertyChanged(nameof(Container));
+                NotifyPropertyChanged(nameof(CustomAutoLock));
+            }
+        }
+
+        /// <summary>
+        /// Toggles custom inactivity lock time
+        /// </summary>
+        public bool CustomAutoLock
+        {
+            get => Container?.CustomAutoLock ?? false;
+            set {
+                Container.CustomAutoLock = value;
+
+                //Apply default time for disabled custom lock
+                if (value == false) {
+                    this.SelectedInactivityTime = "5 min";
+                }
+
+                NotifyPropertyChanged(nameof(Container));
+                NotifyPropertyChanged(nameof(CustomAutoLock));
+            }
         }
 
         /// <summary>
