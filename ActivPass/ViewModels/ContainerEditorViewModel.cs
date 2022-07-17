@@ -37,7 +37,7 @@ namespace ActivPass.ViewModels
             set => SetProperty(ref _lockContainer, value);
         }
 
-        private static string[] INACTIVITY_TIME_OPTIONS = new string[] { "1 min", "2 min", "5 min" };
+        private static string[] INACTIVITY_TIME_OPTIONS = new string[] { "1 min", "2 min", "5 min", "15 min", "30 min" };
 
         private ObservableCollection<string> _inactivityTimes;
         public ObservableCollection<string> InactivityTimes
@@ -95,7 +95,7 @@ namespace ActivPass.ViewModels
             this.LockContainer = false;
             
             this.InactivityTimes = new ObservableCollection<string>(INACTIVITY_TIME_OPTIONS);
-            this.SelectedInactivityTime = INACTIVITY_TIME_OPTIONS[0];
+            this.SelectedInactivityTime = INACTIVITY_TIME_OPTIONS[3];
 
             //Command bindings
             this.Close = new RelayCommand<Window>(CloseWindow);
