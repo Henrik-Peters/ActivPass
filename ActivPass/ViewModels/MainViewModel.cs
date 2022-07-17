@@ -278,6 +278,9 @@ namespace ActivPass.ViewModels
             containerEditor.ShowDialog();
             this.OpenWindow = null;
 
+            //Update the custom auto lock time
+            this.Container.AutoLockSeconds = vm.GetAutoLockSeconds();
+
             //The container may be null in case of auto lock
             if (Container != null && vm.Container != null) {
                 this.SaveContainer();

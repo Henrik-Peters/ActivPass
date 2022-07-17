@@ -92,7 +92,7 @@ namespace ActivPass.ViewModels
                 
             } else {
                 //Create a new empty container
-                PasswordContainer emptyContainer = new PasswordContainer(ContainerName, Environment.UserName, true);
+                PasswordContainer emptyContainer = new PasswordContainer(ContainerName, Environment.UserName, true, false, 300);
 
                 //Store the new container
                 bool containerCreated = ContainerStorage.ContainerProvider.SaveContainer(emptyContainer, MasterPasswordBox.Password);

@@ -7,12 +7,11 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Controls;
 using System.Collections.ObjectModel;
-using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using ActivPass.Localization;
 using ActivPass.Models;
 using ActivPass.Crypto;
 using ActivPass.Views;
-
 
 namespace ActivPass.ViewModels
 {
@@ -37,7 +36,12 @@ namespace ActivPass.ViewModels
             set => SetProperty(ref _lockContainer, value);
         }
 
-        private static string[] INACTIVITY_TIME_OPTIONS = new string[] { "1 min", "2 min", "5 min", "15 min", "30 min" };
+        /// <summary>
+        /// Selection options for custom auto lock times
+        /// </summary>
+        private static string[] INACTIVITY_TIME_OPTIONS = new string[] {
+            "1 min", "2 min", "5 min", "15 min", "30 min"
+        };
 
         private ObservableCollection<string> _inactivityTimes;
         public ObservableCollection<string> InactivityTimes
@@ -94,8 +98,9 @@ namespace ActivPass.ViewModels
             //Default props
             this.LockContainer = false;
             
+            //Auto lock props
             this.InactivityTimes = new ObservableCollection<string>(INACTIVITY_TIME_OPTIONS);
-            this.SelectedInactivityTime = INACTIVITY_TIME_OPTIONS[3];
+            this.SelectedInactivityTime = "5 min";
 
             //Command bindings
             this.Close = new RelayCommand<Window>(CloseWindow);
@@ -104,6 +109,21 @@ namespace ActivPass.ViewModels
             //Danger zone command bindings
             this.ChangeMasterPassword = new RelayCommand(ChangeCurrentMasterPassword);
             this.DeleteContainer = new RelayCommand<Window>(DeleteCurrentContainer);
+        }
+
+        /// <summary>
+        /// Get the amount of seconds to apply
+        /// for the container auto lock time
+        /// </summary>
+        /// <returns>Selected amount of seconds</returns>
+        public int GetAutoLockSeconds()
+        {
+            //Parse the amount of minutes
+            string result = Regex.Replace(this.SelectedInactivityTime, "\\s*min", "");
+            int minutes = int.Parse(result);
+
+            //Convert to seconds
+            return minutes * 60;
         }
 
         /// <summary>

@@ -48,11 +48,9 @@
 
         <!-- Custom AutoLock Stack -->
         <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Center">
-            <CheckBox x:Name="CustomInactivityTime" IsChecked="{Binding Container.AutoLock, Mode=TwoWay}" Content="{Binding Localize[CustomAutoLock]}" Style="{StaticResource NormalCheckBox}" Margin="5,0,0,0" VerticalAlignment="Center"/>
-            <ComboBox x:Name="InactivityTimeSelector" ItemsSource="{Binding InactivityTimes}" SelectedItem="{Binding SelectedInactivityTime}" Grid.Row="3" Grid.Column="1" Width="85" Height="33" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Style="{StaticResource ComboBoxStyle}"/>
+            <CheckBox x:Name="CustomInactivityTime" IsChecked="{Binding Container.CustomAutoLock, Mode=TwoWay}" IsEnabled="{Binding Container.AutoLock}" Content="{Binding Localize[CustomAutoLock]}" Style="{StaticResource NormalCheckBox}" Margin="5,0,0,0" VerticalAlignment="Center"/>
+            <ComboBox x:Name="InactivityTimeSelector" ItemsSource="{Binding InactivityTimes}" SelectedItem="{Binding SelectedInactivityTime}" IsEnabled="{Binding Container.CustomAutoLock}" Grid.Row="3" Grid.Column="1" Width="85" Height="33" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Style="{StaticResource ComboBoxStyle}"/>
         </StackPanel>
-
-        
 
         <!-- Danger Zone - Change Master Password -->
         <Rectangle Grid.Row="6" Grid.Column="1" Height="1" Stroke="Black" StrokeDashArray="1 2" Margin="0,160,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
