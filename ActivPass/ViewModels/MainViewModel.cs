@@ -155,22 +155,18 @@ namespace ActivPass.ViewModels
         /// After this amount of time the container will be
         /// auto locked if inactivity locking is enabled
         /// </summary>
-        private static readonly TimeSpan AUTO_LOCK_TIME = new TimeSpan(0, 5, 0);
+        private TimeSpan AutoLockTime;
 
         /// <summary>
         /// Show the auto lock bar when the remaining
         /// idle time drops below this time span
         /// </summary>
-        private static readonly TimeSpan INFO_LOCK_TIME = new TimeSpan(0, 1, 0);
+        private TimeSpan InfoLockTime;
 
         /// <summary>
         /// Time until the auto lock will kick in
         /// </summary>
-        private TimeSpan RemainingIdleTime = new TimeSpan(
-            AUTO_LOCK_TIME.Hours,
-            AUTO_LOCK_TIME.Minutes,
-            AUTO_LOCK_TIME.Seconds
-        );
+        private TimeSpan RemainingIdleTime;
 
         /// <summary>
         /// Timer for the inactivity auto lock
@@ -273,6 +269,10 @@ namespace ActivPass.ViewModels
             vm.MasterPasswordBox = this.MasterPasswordBox;
             vm.ChangePasswordBox.Password = this.MasterPasswordBox.Password;
 
+            //Pass the custom auto lock time
+            int minutes = this.Container.AutoLockSeconds / 60;
+            vm.SelectedInactivityTime = $"{minutes} min";
+
             //Show the editor dialog
             this.OpenWindow = containerEditor;
             containerEditor.ShowDialog();
@@ -280,6 +280,8 @@ namespace ActivPass.ViewModels
 
             //Update the custom auto lock time
             this.Container.AutoLockSeconds = vm.GetAutoLockSeconds();
+            this.UpdateAutoLockTimes();
+            this.ResetInactivityTimer();
 
             //The container may be null in case of auto lock
             if (Container != null && vm.Container != null) {
@@ -342,7 +344,8 @@ namespace ActivPass.ViewModels
                     this.SearchBox.Focus();
                     NotifyPropertyChanged(nameof(PasswordItemsView));
 
-                    //Reset the inactivity timer
+                    //Reset the auto lock
+                    this.UpdateAutoLockTimes();
                     this.ResetInactivityTimer();
 
                     //Empty container info
@@ -355,6 +358,20 @@ namespace ActivPass.ViewModels
                 this.LoginInfo = Localize["LoginContainerFailed"];
                 this.LoginInfoVisibility = Visibility.Visible;
             }
+        }
+
+        /// <summary>
+        /// Update the auto lock times from the container
+        /// </summary>
+        private void UpdateAutoLockTimes()
+        {
+            //Apply the auto lock time
+            this.AutoLockTime = Container.CustomAutoLock
+                ? TimeSpan.FromSeconds(Container.AutoLockSeconds)
+                : new TimeSpan(0, 5, 0);
+
+            //Apply 20 percent as info time with 1 minute limit
+            this.InfoLockTime = TimeSpan.FromSeconds(Math.Min(60, this.AutoLockTime.TotalSeconds * 0.2));
         }
 
         /// <summary>
@@ -732,7 +749,7 @@ namespace ActivPass.ViewModels
                     RemainingIdleTime.Seconds.ToString().PadLeft(2, '0');
 
                 //Show the idle lock timer
-                if (RemainingIdleTime < INFO_LOCK_TIME) {
+                if (RemainingIdleTime < InfoLockTime) {
                     this.ShowLockTimer = true;
                 }
 
@@ -751,9 +768,9 @@ namespace ActivPass.ViewModels
         {
             //Set the remaning idle time back to start
             RemainingIdleTime = new TimeSpan(
-                AUTO_LOCK_TIME.Hours,
-                AUTO_LOCK_TIME.Minutes,
-                AUTO_LOCK_TIME.Seconds
+                AutoLockTime.Hours,
+                AutoLockTime.Minutes,
+                AutoLockTime.Seconds
             );
 
             //Hide the lock timer bar

@@ -100,7 +100,6 @@ namespace ActivPass.ViewModels
             
             //Auto lock props
             this.InactivityTimes = new ObservableCollection<string>(INACTIVITY_TIME_OPTIONS);
-            this.SelectedInactivityTime = "5 min";
 
             //Command bindings
             this.Close = new RelayCommand<Window>(CloseWindow);
