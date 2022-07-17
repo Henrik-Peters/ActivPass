@@ -6,10 +6,13 @@
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Controls;
+using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using ActivPass.Localization;
 using ActivPass.Models;
 using ActivPass.Crypto;
 using ActivPass.Views;
+
 
 namespace ActivPass.ViewModels
 {
@@ -32,6 +35,22 @@ namespace ActivPass.ViewModels
         {
             get => _lockContainer;
             set => SetProperty(ref _lockContainer, value);
+        }
+
+        private static string[] INACTIVITY_TIME_OPTIONS = new string[] { "1 min", "2 min", "5 min" };
+
+        private ObservableCollection<string> _inactivityTimes;
+        public ObservableCollection<string> InactivityTimes
+        {
+            get => _inactivityTimes;
+            set => SetProperty(ref _inactivityTimes, value);
+        }
+
+        private string _selectedInactivityTime;
+        public string SelectedInactivityTime
+        {
+            get => _selectedInactivityTime;
+            set => SetProperty(ref _selectedInactivityTime, value);
         }
 
         private PasswordContainer _container;
@@ -74,6 +93,9 @@ namespace ActivPass.ViewModels
         public ContainerEditorViewModel() {
             //Default props
             this.LockContainer = false;
+            
+            this.InactivityTimes = new ObservableCollection<string>(INACTIVITY_TIME_OPTIONS);
+            this.SelectedInactivityTime = INACTIVITY_TIME_OPTIONS[0];
 
             //Command bindings
             this.Close = new RelayCommand<Window>(CloseWindow);

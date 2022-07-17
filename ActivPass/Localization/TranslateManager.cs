@@ -35,6 +35,7 @@ namespace ActivPass.Localization
             ["DeleteContainerDetails"] = new List<string> { "All stored container data will be permanently deleted", "Alle gespeicherten Daten werden permanent gelöscht" },
             ["ChangeMasterPassword"] = new List<string> { "If the master password is lost, access to the container is no longer possible", "Beim Verlust des Master Passworts ist kein Zugriff mehr auf den Container möglich" },
             ["AutoLock"] = new List<string> { "Automatically lock container in case of inactivity", "Container bei Inaktivität automatisch sperren" },
+            ["CustomAutoLock"] = new List<string> { "Use custom auto lock time", "Benutzerdefinierte automatische Sperrzeit verwenden" },
             ["Change"] = new List<string> { "Change", "Ändern" },
             ["Close"] = new List<string> { "Close", "Schließen" },
             ["Rename"] = new List<string> { "Rename", "Umbenennen" },
