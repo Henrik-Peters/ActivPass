@@ -5,10 +5,10 @@ ActivPass is a simple and local password management tool
 [![Release](https://img.shields.io/github/v/release/Henrik-Peters/ActivPass)](https://github.com/Henrik-Peters/ActivPass/releases)
 
 ## Prerequisites / Tools
-The following software is required to run or compile ActivPass.
+The following software is required to run or compile ActivPass:
 
 * Windows OS
-* .NET Framework 4.8
+* .NET 6.0
 * Visual Studio
 * C# with WPF
 
@@ -25,13 +25,14 @@ important to use a strong password as the master password, to secure the contain
 against brute force attacks.
 
 ### Storage
-Each container is stored as a binary file (*.bin) in `AppData\Roaming\ActivPass`.
+Each container is stored as encrypted json file (*.bin) in `AppData\Roaming\ActivPass`.
 Container files are encrypted with AES-256 CBC. The key for the encryption is the
 first 32 bytes block of the SHA256 hashed master password. When the container is
 unlocked, the container data are stored in memory. Data on disk is always encrypted.
 You can backup and restore containers, simply by copying and replacing the container
 files. It is possible to export unlocked containers as unencrypted CSV documents, for
-backup or exchange purposes.
+backup or exchange purposes. CSV documents can be imported and also merged into other
+containers with a different data set.
 
 ### User Interface
 The user interface is implemented with WPF. Most elements are styled with their own
