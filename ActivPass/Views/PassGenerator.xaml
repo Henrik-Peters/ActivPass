@@ -16,6 +16,31 @@
     </Window.DataContext>
 
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="10"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="15"/>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="15"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="15"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header Box -->
+        <Label x:Name="HeaderLabel" Content="{Binding Localize[GeneratePassword]}" Foreground="White" FontFamily="Tahoma" FontSize="20" FontWeight="Bold" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="7,5,0,0"/>
+        <Rectangle Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Height="1" Stroke="Black" StrokeDashArray="1 2" Margin="0,42,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
+
+
     </Grid>
 </Window>
