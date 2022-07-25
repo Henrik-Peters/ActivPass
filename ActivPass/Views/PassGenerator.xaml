@@ -1,0 +1,21 @@
+﻿<Window x:Class="ActivPass.Views.PassGenerator"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ActivPass.Views"
+        xmlns:ViewModels="clr-namespace:ActivPass.ViewModels"
+        x:Name="PassGeneratorWindow"
+        Background="#494A52"
+        mc:Ignorable="d"
+        Title="{Binding Localize[PasswordGenerator]}" MinHeight="540" MinWidth="600" Height="580" Width="800" FontSize="18" WindowStartupLocation="CenterScreen">
+
+    <!-- View model instance -->
+    <Window.DataContext>
+        <ViewModels:PassGeneratorViewModel/>
+    </Window.DataContext>
+
+    <Grid>
+        
+    </Grid>
+</Window>
