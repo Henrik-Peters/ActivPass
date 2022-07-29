@@ -19,6 +19,7 @@ namespace ActivPass.Localization
         /// </summary>
         static IDictionary<string, List<string>> TranslateTable = new Dictionary<string, List<string>>
         {
+            ["PasswordLength"] = new List<string> { "Password length", "Passwortlänge" },
             ["GeneratePassword"] = new List<string> { "Generate password", "Password generieren" },
             ["PasswordGenerator"] = new List<string> { "Password generator", "Passwortgenerator" },
             ["ScoreNone"] = new List<string> { "Score: None", "Stärke: Keine" },

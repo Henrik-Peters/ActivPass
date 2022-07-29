@@ -27,8 +27,8 @@
             <RowDefinition Height="60"/>
             <RowDefinition Height="70"/>
             <RowDefinition Height="50"/>
-            <RowDefinition Height="70"/>
             <RowDefinition Height="15"/>
+            <RowDefinition Height="70"/>
             <RowDefinition Height="70"/>
             <RowDefinition Height="50"/>
             <RowDefinition Height="15"/>
@@ -53,5 +53,9 @@
         <!-- Password Score Bar -->
         <Controls:PasswordStrengthBar x:Name="StrengthBar" StrengthScore="{Binding PasswordStrength}" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" Margin="0,10,0,0" VerticalAlignment="Top"/>
 
+        <!-- Password length area -->
+        <Label x:Name="PasswordLengthlabel" Content="{Binding Localize[PasswordLength]}" HorizontalAlignment="Left" Margin="0,2,0,0" Foreground="White" FontFamily="Tahoma" FontSize="14" FontWeight="Bold" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Top"/>
+        <TextBox x:Name="LengthTextBox" Text="{Binding PasswordLength, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource NormalTextBox}" TextAlignment="Center" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Margin="0,0,0,0" Height="40" Width="40" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+        <Slider x:Name="LengthSlider" Margin="45,0,0,10" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Value="3"/>
     </Grid>
 </Window>
