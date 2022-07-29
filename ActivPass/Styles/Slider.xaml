@@ -1,0 +1,100 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <!-- General slider style -->
+    <sys:Double x:Key="BlueSlider.Height">6</sys:Double>
+    <SolidColorBrush x:Key="BlueSlider.Default.Color" Color="#D0D3D3"/>
+    <SolidColorBrush x:Key="BlueSlider.Default.Border.Color" Color="#D6D6D6"/>
+    <SolidColorBrush x:Key="BlueSlider.Value.Color" Color="#008AFF"/>
+    <SolidColorBrush x:Key="BlueSlider.Value.Border.Color" Color="Gray"/>
+    <SolidColorBrush x:Key="BlueSlider.Thumb.Border.Color" Color="#2E8AE6"/>
+    <SolidColorBrush x:Key="BlueSlider.Thumb.Border.HoverColor" Color="#008AFF"/>
+    <SolidColorBrush x:Key="BlueSlider.Thumb.Hover.Color" Color="#79BCE2"/>
+    <LinearGradientBrush x:Key="BlueSlider.Thumb.Default.Color" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Offset="0" Color="#3399FF"/>
+        <GradientStop Offset="1" Color="#2E8AE6"/>
+    </LinearGradientBrush>
+
+    <!-- Slider thumb selector style -->
+    <ControlTemplate x:Key="BlueSliderThumbStyle" TargetType="{x:Type Thumb}">
+        <Ellipse Name="Ellipse" Fill="{StaticResource BlueSlider.Thumb.Default.Color}" Stroke="{StaticResource BlueSlider.Thumb.Border.Color}" StrokeThickness="1"/>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter TargetName="Ellipse" Property="Fill" Value="#EEEEEE"/>
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Cursor" Value="Hand" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <!-- Slider area left to the thumb selector -->
+    <Style x:Key="ActiveValueBlueSliderStyle" TargetType="{x:Type RepeatButton}">
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
+        <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type RepeatButton}">
+                    <Border Height="{StaticResource BlueSlider.Height}" BorderThickness="0" CornerRadius="2,0,0,2" BorderBrush="{StaticResource BlueSlider.Value.Border.Color}" Background="{StaticResource BlueSlider.Value.Color}" Margin="0,0,-12,0" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Slider area right to the thumb selector -->
+    <Style x:Key="InactiveValueBlueSliderStyle" TargetType="{x:Type RepeatButton}">
+        <Setter Property="OverridesDefaultStyle" Value="true"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Focusable" Value="false"/>
+        <Setter Property="IsTabStop" Value="false"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type RepeatButton}">
+                    <Rectangle Fill="{TemplateBinding Background}" Height="{TemplateBinding Height}" Width="{TemplateBinding Width}"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Slider style -->
+    <Style x:Key="BlueSliderStyle" TargetType="{x:Type Slider}">
+        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Slider}">
+                    <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto" MinHeight="{TemplateBinding MinHeight}"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Border x:Name="TrackBackground" CornerRadius="2" Height="{StaticResource BlueSlider.Height}" BorderBrush="{StaticResource BlueSlider.Default.Border.Color}" BorderThickness="0" Background="{StaticResource BlueSlider.Default.Color}" Margin="5,0" Grid.Row="1" VerticalAlignment="center">
+                                <Canvas Margin="-6,-1">
+                                    <Rectangle x:Name="PART_SelectionRange" Fill="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" Height="4.0" Visibility="Hidden"/>
+                                </Canvas>
+                            </Border>
+                            <Track x:Name="PART_Track" Grid.Row="1">
+                                <Track.DecreaseRepeatButton>
+                                    <RepeatButton x:Name="LeftRepeatButton" Command="{x:Static Slider.DecreaseLarge}" Style="{StaticResource ActiveValueBlueSliderStyle}"/>
+                                </Track.DecreaseRepeatButton>
+                                <Track.IncreaseRepeatButton>
+                                    <RepeatButton x:Name="RightRepeatButton" Command="{x:Static Slider.IncreaseLarge}" Style="{StaticResource InactiveValueBlueSliderStyle}"/>
+                                </Track.IncreaseRepeatButton>
+                                <Track.Thumb>
+                                    <Thumb x:Name="Thumb" Focusable="False" Width="17" Height="17" OverridesDefaultStyle="True" Template="{StaticResource BlueSliderThumbStyle}" VerticalAlignment="Center"/>
+                                </Track.Thumb>
+                            </Track>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+</ResourceDictionary>
