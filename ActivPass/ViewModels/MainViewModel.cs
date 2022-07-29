@@ -184,6 +184,7 @@ namespace ActivPass.ViewModels
         public ICommand ContainerLogout { get; set; }
         public ICommand CreateContainer { get; set; }
         public ICommand EditContainer { get; set; }
+        public ICommand GeneratePassword { get; set; }
         public ICommand OpenPasswordItem { get; set; }
         public ICommand AddPasswordItem { get; set; }
         public ICommand DeletePasswordItem { get; set; }
@@ -486,6 +487,17 @@ namespace ActivPass.ViewModels
                 //Save the container with the current storage provider
                 this.SaveContainer();
             }
+        }
+
+        /// <summary>
+        /// Show the password generator dialog
+        /// </summary>
+        private void OpenPasswordGenerator()
+        {
+            PassGenerator passGenerator = new();
+            this.OpenWindow = passGenerator;
+            passGenerator.ShowDialog();
+            this.OpenWindow = null;
         }
 
         /// <summary>
@@ -809,6 +821,7 @@ namespace ActivPass.ViewModels
             this.ContainerLogout = new RelayCommand(LockContainer);
             this.CreateContainer = new RelayCommand(CreateNewContainer);
             this.EditContainer = new RelayCommand(EditCurrentContainer);
+            this.GeneratePassword = new RelayCommand(OpenPasswordGenerator);
             this.AddPasswordItem = new RelayCommand(CreatePasswordItem);
             this.OpenSettings = new RelayCommand(ShowConfigEditor);
             this.ImportContainer = new RelayCommand(ContainerImport);
