@@ -21,10 +21,8 @@ namespace ActivPass.ViewModels
         public string Password
         {
             get => _password;
-            set
-            {
-                if (_password != value)
-                {
+            set {
+                if (_password != value) {
                     //Apply the new value
                     _password = value;
                     NotifyPropertyChanged(nameof(Password));
@@ -39,12 +37,26 @@ namespace ActivPass.ViewModels
         public PasswordStrength PasswordStrength
         {
             get => _passwordStrength;
-            set
-            {
-                if (_passwordStrength != value)
-                {
+            set {
+                if (_passwordStrength != value) {
                     _passwordStrength = value;
                     NotifyPropertyChanged(nameof(PasswordStrength));
+                }
+            }
+        }
+
+        private int _length;
+        public int Length
+        {
+            get => _length;
+            set {
+                if (_length != value && value > 0) {
+                    //Apply the new value
+                    _length = value;
+                    NotifyPropertyChanged(nameof(Length));
+
+                    //Generate new password
+                    this.GeneratePassword();
                 }
             }
         }
@@ -67,6 +79,7 @@ namespace ActivPass.ViewModels
         public PassGeneratorViewModel()
         {
             //Initial values
+            this.Length = 32;
             this.GeneratePassword();
 
             //Command bindings
@@ -81,7 +94,13 @@ namespace ActivPass.ViewModels
         /// </summary>
         private void GeneratePassword()
         {
-            this.Password = "abc";
+            string pass = "";
+
+            for (int i = 0; i < this.Length; i++) {
+                pass += "a";
+            }
+
+            this.Password = pass;
         }
 
         /// <summary>

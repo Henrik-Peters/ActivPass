@@ -55,7 +55,7 @@
 
         <!-- Password length area -->
         <Label x:Name="PasswordLengthlabel" Content="{Binding Localize[PasswordLength]}" HorizontalAlignment="Left" Margin="0,2,0,0" Foreground="White" FontFamily="Tahoma" FontSize="14" FontWeight="Bold" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Top"/>
-        <TextBox x:Name="LengthTextBox" Text="{Binding PasswordLength, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource NormalTextBox}" TextAlignment="Center" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Margin="0,0,0,0" Height="40" Width="40" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
-        <Slider x:Name="LengthSlider" Margin="45,0,0,10" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Style="{StaticResource BlueSliderStyle}" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Value="3"/>
+        <TextBox x:Name="LengthTextBox" Text="{Binding Length, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource NormalTextBox}" TextAlignment="Center" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Margin="0,0,0,0" Height="40" Width="40" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+        <Slider x:Name="LengthSlider" Value="{Binding Length}" Minimum="1" Maximum="128" Margin="45,0,0,10" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Style="{StaticResource BlueSliderStyle}" VerticalAlignment="Bottom" HorizontalAlignment="Stretch"/>
     </Grid>
 </Window>
