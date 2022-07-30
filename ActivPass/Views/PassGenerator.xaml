@@ -47,8 +47,8 @@
         <TextBox x:Name="PassTextBox" Text="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource NormalTextBox}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="0,0,0,0" Height="40" VerticalAlignment="Bottom" HorizontalAlignment="Stretch"/>
 
         <!-- Password Box Buttons -->
-        <Button x:Name="PasswordCopyButton" Command="{Binding CopyToClipboard}" CommandParameter="{Binding Password}" Style="{StaticResource CopyButton}" ToolTip="{Binding Localize[CopyToClipboard]}" Focusable="False" Grid.Row="1" Grid.Column="2" Margin="0,0,7,1" Padding="7" Height="40" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
-        <Button x:Name="PasswordRefreshButton" Command="{Binding CopyToClipboard}" CommandParameter="{Binding Password}" Style="{StaticResource CopyButton}" ToolTip="{Binding Localize[CopyToClipboard]}" Focusable="False" Grid.Row="1" Grid.Column="2" Margin="0,0,47,1" Padding="7" Height="40" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+        <Button x:Name="PasswordRefreshButton" Command="{Binding CopyToClipboard}" CommandParameter="{Binding Password}" Style="{StaticResource RefreshButton}" ToolTip="{Binding Localize[Refresh]}" Focusable="False" Grid.Row="1" Grid.Column="2" Margin="0,0,7,1" Padding="7" Height="40" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+        <Button x:Name="PasswordCopyButton" Command="{Binding CopyToClipboard}" CommandParameter="{Binding Password}" Style="{StaticResource CopyButton}" ToolTip="{Binding Localize[CopyToClipboard]}" Focusable="False" Grid.Row="1" Grid.Column="2" Margin="0,0,47,1" Padding="7" Height="40" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
 
         <!-- Password Score Bar -->
         <Controls:PasswordStrengthBar x:Name="StrengthBar" StrengthScore="{Binding PasswordStrength}" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" Margin="0,10,0,0" VerticalAlignment="Top"/>

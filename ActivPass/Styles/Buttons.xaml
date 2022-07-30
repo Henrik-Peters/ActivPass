@@ -257,4 +257,53 @@
         </Setter>
     </Style>
 
+    <Style x:Key="RefreshButton" TargetType="{x:Type Button}">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="Foreground" Value="#BBC0C4"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+                        <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                            <ContentPresenter.Content>
+                                <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="Uniform">
+                                    <Canvas Name="SVGRoot" Width="64" Height="64">
+                                        <Canvas Name="layer1">
+                                            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Fill="{TemplateBinding Foreground}" StrokeThickness="0.888632">
+                                                <Path.Data>
+                                                    <PathGeometry Figures="m 28.24816 3.9833795 c -4.236469 0.6447874 -6.997375 1.966643 -10.957031 4.3496094 -3.182681 1.9153741 -5.894331 4.4610071 -8.2089844 7.1992181 -1.7608055 2.083014 -2.9501614 4.17463 -3.7382813 6.716797 -0.189856 0.612401 -0.3669576 1.962759 -0.1152343 2.658203 0.3158095 0.872497 0.8133204 1.353442 1.5117187 1.900391 0.7424366 0.581438 2.1524311 0.927814 3.1953125 0.808594 0.8460348 -0.09672 1.9049768 -0.851532 2.6874998 -1.970703 0 0 3.551441 -6.629237 6.181641 -8.736328 3.755243 -3.008382 6.39317 -4.561018 11.892578 -5.341797 4.969487 -0.705544 8.396239 0.438021 11.902343 2.304687 2.464376 1.312045 4.525532 3.18137 5.820313 4.50586 -0.881393 0.147469 -2.063586 0.351532 -3.251953 0.589843 -0.670153 0.13439 -1.434681 0.584728 -1.634766 1.238281 -0.172541 0.563583 0.03792 1.418993 0.570313 1.671876 4.481796 2.128806 8.537443 3.933188 12.316406 5.613281 0.62522 0.277967 1.394333 0.118972 1.777344 -0.181641 0.381986 -0.29981 0.653873 -0.815189 0.654297 -1.300781 0.0038 -4.282178 -0.03508 -8.380549 0 -13.371094 0.0052 -0.74457 -0.909806 -1.48795 -1.654297 -1.5 -0.746065 -0.01208 -1.24741 0.861421 -1.707031 1.449219 -0.247483 0.316498 -0.544191 0.702002 -0.847657 1.099609 C 53.55829 12.539462 51.802008 10.879604 49.478629 9.3974421 46.364239 7.4106665 43.908052 5.9640575 39.351676 4.7197077 35.478035 3.5858681 31.820237 3.4491339 28.24816 3.9833795 Z" FillRule="NonZero"/>
+                                                </Path.Data>
+                                            </Path>
+                                            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Fill="{TemplateBinding Foreground}" StrokeThickness="0.888632">
+                                                <Path.Data>
+                                                    <PathGeometry Figures="m 36.812693 61.26349 c 4.236469 -0.644787 6.997375 -1.966643 10.957031 -4.349609 3.182681 -1.915374 5.894331 -4.461007 8.208985 -7.199218 1.760805 -2.083014 2.950161 -4.17463 3.738281 -6.716797 0.189856 -0.612401 0.366958 -1.962759 0.115234 -2.658203 -0.315809 -0.872497 -0.81332 -1.353442 -1.511719 -1.900391 -0.742436 -0.581438 -2.152431 -0.927814 -3.195312 -0.808594 -0.846035 0.09672 -1.904977 0.851532 -2.6875 1.970703 0 0 -3.551441 6.629237 -6.181641 8.736328 -3.755243 3.008382 -6.39317 4.561018 -11.892578 5.341797 -4.969487 0.705544 -8.396239 -0.438021 -11.902343 -2.304687 -2.464376 -1.312045 -4.525532 -3.18137 -5.820313 -4.50586 0.881393 -0.147469 2.063586 -0.351532 3.251953 -0.589843 0.670153 -0.13439 1.434681 -0.584728 1.634766 -1.238281 0.172541 -0.563583 -0.03792 -1.418993 -0.570313 -1.671876 -4.481796 -2.128806 -8.537443 -3.933188 -12.3164066 -5.613281 -0.62522 -0.277967 -1.394333 -0.118972 -1.777344 0.181641 -0.381986 0.29981 -0.653873 0.815189 -0.654297 1.300781 -0.0038 4.282178 0.03508 8.380549 0 13.371094 -0.0052 0.74457 0.909806 1.48795 1.654297 1.5 0.746065 0.01208 1.24741 -0.861421 1.707031 -1.449219 0.247483 -0.316498 0.5441906 -0.702002 0.8476566 -1.099609 1.084401 1.147042 2.840684 2.8069 5.164063 4.289062 3.11439 1.986775 5.570577 3.433384 10.126953 4.677734 3.873641 1.13384 7.531439 1.270574 11.103516 0.736328 z" FillRule="NonZero"/>
+                                                </Path.Data>
+                                            </Path>
+                                        </Canvas>
+                                    </Canvas>
+                                </Viewbox>
+                            </ContentPresenter.Content>
+                        </ContentPresenter>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Foreground" Value="#E3E8EC"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="true">
+                            <Setter Property="Foreground" Value="#A5AAAE"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Opacity" Value="0.56"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 </ResourceDictionary>

@@ -40,6 +40,7 @@ namespace ActivPass.Localization
             ["AutoLock"] = new List<string> { "Automatically lock container in case of inactivity", "Container bei Inaktivität automatisch sperren" },
             ["CustomAutoLock"] = new List<string> { "Use custom auto lock time", "Benutzerdefinierte Sperrzeit" },
             ["Change"] = new List<string> { "Change", "Ändern" },
+            ["Refresh"] = new List<string> { "Refresh", "Aktualisieren" },
             ["Close"] = new List<string> { "Close", "Schließen" },
             ["Rename"] = new List<string> { "Rename", "Umbenennen" },
             ["ContainerName"] = new List<string> { "Container name", "Containername" },
