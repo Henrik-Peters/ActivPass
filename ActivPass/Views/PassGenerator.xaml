@@ -9,7 +9,7 @@
         x:Name="PassGeneratorWindow"
         Background="#494A52"
         mc:Ignorable="d"
-        Title="{Binding Localize[PasswordGenerator]}" MinHeight="540" MinWidth="600" Height="580" Width="800" FontSize="18" WindowStartupLocation="CenterScreen">
+        Title="{Binding Localize[PasswordGenerator]}" Width="800" MinWidth="400" MinHeight="590" Height="590" FontSize="18" WindowStartupLocation="CenterScreen">
 
     <!-- View model instance -->
     <Window.DataContext>
@@ -38,7 +38,7 @@
         </Grid.RowDefinitions>
 
         <!-- Header Box -->
-        <Label x:Name="HeaderLabel" Content="{Binding Localize[GeneratePassword]}" Foreground="White" FontFamily="Tahoma" FontSize="20" FontWeight="Bold" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="7,5,0,0"/>
+        <Label x:Name="HeaderLabel" Content="{Binding Localize[GeneratePassword]}" Foreground="White" FontFamily="Tahoma" FontSize="20" FontWeight="Bold" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="7,5,0,0"/>
         <Rectangle Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Height="1" Stroke="Black" StrokeDashArray="1 2" Margin="0,42,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
 
         <!-- Password Box -->
@@ -65,5 +65,10 @@
         <CheckBox x:Name="SymbolsLettersCheckbox" IsChecked="{Binding Symbols, Mode=TwoWay}" Content="{Binding Localize[Symbols]}" Style="{StaticResource NormalCheckBox}" HorizontalAlignment="Left" Margin="5,120,0,0" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="6" VerticalAlignment="Top"/>
         <CheckBox x:Name="SpacesLettersCheckbox" IsChecked="{Binding Spaces, Mode=TwoWay}" Content="{Binding Localize[Spaces]}" Style="{StaticResource NormalCheckBox}" HorizontalAlignment="Left" Margin="5,150,0,0" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="6" VerticalAlignment="Top"/>
         
+        <!-- Dialog buttons -->
+        <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="9">
+            <Button x:Name="SaveButton" Command="{Binding SaveItem}" CommandParameter="{Binding ElementName=PassGeneratorWindow}" Content="{Binding Localize[Save]}" Style="{StaticResource NormalButton}" Width="140" Focusable="False" Margin="5,0,0,0"/>
+            <Button x:Name="CancelButton" Command="{Binding Close}" CommandParameter="{Binding ElementName=PassGeneratorWindow}" Content="{Binding Localize[Cancel]}" Style="{StaticResource NormalButton}" Width="110" Focusable="False" Margin="15,0,0,0"/>
+        </StackPanel>
     </Grid>
 </Window>
