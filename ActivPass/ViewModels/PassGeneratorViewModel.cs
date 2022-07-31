@@ -61,6 +61,41 @@ namespace ActivPass.ViewModels
             }
         }
 
+        private bool _capitalLetters;
+        public bool CapitalLetters
+        {
+            get => _capitalLetters;
+            set => SetProperty(ref _capitalLetters, value);
+        }
+
+        private bool _lowercaseLetters;
+        public bool LowercaseLetters
+        {
+            get => _lowercaseLetters;
+            set => SetProperty(ref _lowercaseLetters, value);
+        }
+
+        private bool _digits;
+        public bool Digits
+        {
+            get => _digits;
+            set => SetProperty(ref _digits, value);
+        }
+
+        private bool _symbols;
+        public bool Symbols
+        {
+            get => _symbols;
+            set => SetProperty(ref _symbols, value);
+        }
+
+        private bool _spaces;
+        public bool Spaces
+        {
+            get => _spaces;
+            set => SetProperty(ref _spaces, value);
+        }
+
         /// <summary>
         /// Close the passed window instance.
         /// </summary>
@@ -81,6 +116,13 @@ namespace ActivPass.ViewModels
             //Initial values
             this.Length = 32;
             this.GeneratePassword();
+
+            //Inital option values
+            this.CapitalLetters = true;
+            this.LowercaseLetters = true;
+            this.Digits = true;
+            this.Symbols = true;
+            this.Spaces = false;
 
             //Command bindings
             this.Close = new RelayCommand<Window>(CloseWindow);

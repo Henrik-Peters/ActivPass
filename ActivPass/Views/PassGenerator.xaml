@@ -29,9 +29,8 @@
             <RowDefinition Height="50"/>
             <RowDefinition Height="15"/>
             <RowDefinition Height="70"/>
-            <RowDefinition Height="70"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="15"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="180"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="20"/>
             <RowDefinition Height="35"/>
@@ -57,5 +56,14 @@
         <Label x:Name="PasswordLengthlabel" Content="{Binding Localize[PasswordLength]}" HorizontalAlignment="Left" Margin="0,2,0,0" Foreground="White" FontFamily="Tahoma" FontSize="14" FontWeight="Bold" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Top"/>
         <TextBox x:Name="LengthTextBox" Text="{Binding Length, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource NormalTextBox}" TextAlignment="Center" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Margin="0,0,0,0" Height="40" Width="40" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
         <Slider x:Name="LengthSlider" Value="{Binding Length}" Minimum="1" Maximum="128" Margin="45,0,0,10" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Style="{StaticResource BlueSliderStyle}" VerticalAlignment="Bottom" HorizontalAlignment="Stretch"/>
+
+        <!-- Password options area -->
+        <Label x:Name="PasswordOptionslabel" Content="{Binding Localize[Options]}" HorizontalAlignment="Left" Margin="0,2,0,0" Foreground="White" FontFamily="Tahoma" FontSize="14" FontWeight="Bold" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Top"/>
+        <CheckBox x:Name="UpperLettersCheckbox" IsChecked="{Binding CapitalLetters, Mode=TwoWay}" Content="{Binding Localize[CapitalLetters]}" Style="{StaticResource NormalCheckBox}" HorizontalAlignment="Left" Margin="5,30,0,0" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="6" VerticalAlignment="Top"/>
+        <CheckBox x:Name="LowerLettersCheckbox" IsChecked="{Binding LowercaseLetters, Mode=TwoWay}" Content="{Binding Localize[LowercaseLetters]}" Style="{StaticResource NormalCheckBox}" HorizontalAlignment="Left" Margin="5,60,0,0" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="6" VerticalAlignment="Top"/>
+        <CheckBox x:Name="DigitsLettersCheckbox" IsChecked="{Binding Digits, Mode=TwoWay}" Content="{Binding Localize[Digits]}" Style="{StaticResource NormalCheckBox}" HorizontalAlignment="Left" Margin="5,90,0,0" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="6" VerticalAlignment="Top"/>
+        <CheckBox x:Name="SymbolsLettersCheckbox" IsChecked="{Binding Symbols, Mode=TwoWay}" Content="{Binding Localize[Symbols]}" Style="{StaticResource NormalCheckBox}" HorizontalAlignment="Left" Margin="5,120,0,0" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="6" VerticalAlignment="Top"/>
+        <CheckBox x:Name="SpacesLettersCheckbox" IsChecked="{Binding Spaces, Mode=TwoWay}" Content="{Binding Localize[Spaces]}" Style="{StaticResource NormalCheckBox}" HorizontalAlignment="Left" Margin="5,150,0,0" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="6" VerticalAlignment="Top"/>
+        
     </Grid>
 </Window>
