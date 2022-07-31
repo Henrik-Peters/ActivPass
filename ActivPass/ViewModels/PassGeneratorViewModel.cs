@@ -96,10 +96,37 @@ namespace ActivPass.ViewModels
             set => SetProperty(ref _spaces, value);
         }
 
+        private Visibility _cancelButtonVisible;
+        public Visibility CancelButtonVisible
+        {
+            get => _cancelButtonVisible;
+            set => SetProperty(ref _cancelButtonVisible, value);
+        }
+
+        private string _dialogButtonText;
+        public string DialogButtonText
+        {
+            get => _dialogButtonText;
+            set => SetProperty(ref _dialogButtonText, value);
+        }
+
+        private bool _applyResult;
+        public bool ApplyResult
+        {
+            get => _applyResult;
+            set => SetProperty(ref _applyResult, value);
+        }
+
         /// <summary>
         /// Close the passed window instance.
         /// </summary>
         public ICommand Close { get; set; }
+
+        /// <summary>
+        /// Set the apply state to true and
+        /// close the passed window instance.
+        /// </summary>
+        public ICommand Apply { get; set; }
 
         /// <summary>
         /// Copy the argument as unicode text to the clipboard.
@@ -124,10 +151,26 @@ namespace ActivPass.ViewModels
             this.Symbols = true;
             this.Spaces = false;
 
+            //Inital button values
+            this.CancelButtonVisible = Visibility.Visible;
+            this.DialogButtonText = Localize["Apply"];
+            this.ApplyResult = false;
+
             //Command bindings
             this.Close = new RelayCommand<Window>(CloseWindow);
+            this.Apply = new RelayCommand<Window>(ApplyWindow);
             this.CopyToClipboard = new RelayCommand<string>(SetClipboardText);
             this.GenerateNextPassword = new RelayCommand(GeneratePassword);
+        }
+
+        /// <summary>
+        /// This will hide the apply button and rename
+        /// cancel to close for standalone dialog mode
+        /// </summary>
+        public void EnableStandaloneMode()
+        {
+            this.CancelButtonVisible = Visibility.Collapsed;
+            this.DialogButtonText = Localize["Close"];
         }
 
         /// <summary>
@@ -166,13 +209,22 @@ namespace ActivPass.ViewModels
         }
 
         /// <summary>
+        /// Set the apply state and close the window instance.
+        /// </summary>
+        /// <param name="window">Instance to close</param>
+        private void ApplyWindow(Window window)
+        {
+            this.ApplyResult = true;
+            this.CloseWindow(window);
+        }
+
+        /// <summary>
         /// Close the passed window instance.
         /// </summary>
         /// <param name="window">Instance to close</param>
         private void CloseWindow(Window window)
         {
-            if (window != null)
-            {
+            if (window != null) {
                 window.Close();
             }
         }

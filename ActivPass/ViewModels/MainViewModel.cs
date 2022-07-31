@@ -496,6 +496,12 @@ namespace ActivPass.ViewModels
         {
             PassGenerator passGenerator = new();
             this.OpenWindow = passGenerator;
+
+            //Enable standalone mode in the view model
+            var vm = passGenerator.DataContext as PassGeneratorViewModel;
+            vm.EnableStandaloneMode();
+
+            //Show the dialog view
             passGenerator.ShowDialog();
             this.OpenWindow = null;
         }

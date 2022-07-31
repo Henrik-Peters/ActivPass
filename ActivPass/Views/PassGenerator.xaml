@@ -67,8 +67,8 @@
         
         <!-- Dialog buttons -->
         <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="9">
-            <Button x:Name="SaveButton" Command="{Binding SaveItem}" CommandParameter="{Binding ElementName=PassGeneratorWindow}" Content="{Binding Localize[Save]}" Style="{StaticResource NormalButton}" Width="140" Focusable="False" Margin="5,0,0,0"/>
-            <Button x:Name="CancelButton" Command="{Binding Close}" CommandParameter="{Binding ElementName=PassGeneratorWindow}" Content="{Binding Localize[Cancel]}" Style="{StaticResource NormalButton}" Width="110" Focusable="False" Margin="15,0,0,0"/>
+            <Button x:Name="ApplyButton" Command="{Binding Apply}" CommandParameter="{Binding ElementName=PassGeneratorWindow}" Content="{Binding DialogButtonText}" Style="{StaticResource NormalButton}" Width="140" Focusable="False" Margin="5,0,0,0"/>
+            <Button x:Name="CancelButton" Command="{Binding Close}" CommandParameter="{Binding ElementName=PassGeneratorWindow}" Content="{Binding Localize[Cancel]}" Style="{StaticResource NormalButton}" Visibility="{Binding CancelButtonVisible}" Width="110" Focusable="False" Margin="15,0,0,0"/>
         </StackPanel>
     </Grid>
 </Window>
