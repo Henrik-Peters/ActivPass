@@ -14,7 +14,7 @@ namespace ActivPass.Models
         private readonly static string CAPITAL_LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         private readonly static string LOWERCASE_LETTERS = "abcdefghijklmnopqrstuvwxyz";
         private readonly static string DIGITS = "0123456789";
-        private readonly static string ASCII_SYMBOLS = "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
+        private readonly static string SYMBOLS = "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
 
         /// <summary>
         /// Generate a random password with the specified
@@ -43,7 +43,7 @@ namespace ActivPass.Models
             }
 
             if (symbols) {
-                charPool += ASCII_SYMBOLS;
+                charPool += SYMBOLS;
             }
 
             if (spaces) {

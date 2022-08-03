@@ -65,35 +65,65 @@ namespace ActivPass.ViewModels
         public bool CapitalLetters
         {
             get => _capitalLetters;
-            set => SetProperty(ref _capitalLetters, value);
+            set {
+                if (_capitalLetters != value) {
+                    _capitalLetters = value;
+                    NotifyPropertyChanged(nameof(CapitalLetters));
+                    this.GeneratePassword();
+                }
+            }
         }
 
         private bool _lowercaseLetters;
         public bool LowercaseLetters
         {
             get => _lowercaseLetters;
-            set => SetProperty(ref _lowercaseLetters, value);
+            set {
+                if (_lowercaseLetters != value) {
+                    _lowercaseLetters = value;
+                    NotifyPropertyChanged(nameof(LowercaseLetters));
+                    this.GeneratePassword();
+                }
+            }
         }
 
         private bool _digits;
         public bool Digits
         {
             get => _digits;
-            set => SetProperty(ref _digits, value);
+            set {
+                if (_digits != value) {
+                    _digits = value;
+                    NotifyPropertyChanged(nameof(Digits));
+                    this.GeneratePassword();
+                }
+            }
         }
 
         private bool _symbols;
         public bool Symbols
         {
             get => _symbols;
-            set => SetProperty(ref _symbols, value);
+            set {
+                if (_symbols != value) {
+                    _symbols = value;
+                    NotifyPropertyChanged(nameof(Symbols));
+                    this.GeneratePassword();
+                }
+            }
         }
 
         private bool _spaces;
         public bool Spaces
         {
             get => _spaces;
-            set => SetProperty(ref _spaces, value);
+            set {
+                if (_spaces != value) {
+                    _spaces = value;
+                    NotifyPropertyChanged(nameof(Spaces));
+                    this.GeneratePassword();
+                }
+            }
         }
 
         private Visibility _cancelButtonVisible;
