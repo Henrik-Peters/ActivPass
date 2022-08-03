@@ -179,13 +179,12 @@ namespace ActivPass.ViewModels
         /// </summary>
         private void GeneratePassword()
         {
-            string pass = "";
+            //Generate random password
+            string password = PasswordGenerator.GeneratePassword((uint)this.Length,
+                new(this.CapitalLetters, this.LowercaseLetters, this.Digits, this.Symbols, this.Spaces)
+            );
 
-            for (int i = 0; i < this.Length; i++) {
-                pass += "a";
-            }
-
-            this.Password = pass;
+            this.Password = password;
         }
 
         /// <summary>
