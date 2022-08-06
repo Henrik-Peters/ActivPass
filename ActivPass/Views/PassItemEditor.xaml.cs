@@ -81,6 +81,25 @@ namespace ActivPass.Views
             }
         }
 
+        private void GeneratePasswordButton_Click(object sender, RoutedEventArgs e)
+        {
+            //Show the password generator view
+            PassGenerator passGenerator = new();
+            passGenerator.ShowDialog();
+
+            //Get the view model of the dialog
+            var dialogVm = passGenerator.DataContext as PassGeneratorViewModel;
+
+            if (dialogVm.ApplyResult) {
+                this.vm.Password = dialogVm.Password;
+
+                //Sync the view model password with the password box
+                PassBox.Password = this.vm.Password;
+                this.vm.UpdatePasswordScore();
+                ValidateEditorItem();
+            }
+        }
+
         private void UsernameBox_KeyUp(object sender, KeyEventArgs e)
         {
             ValidateEditorItem();
