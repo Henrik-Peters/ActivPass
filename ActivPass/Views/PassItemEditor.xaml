@@ -40,11 +40,13 @@
         <!-- Name Box -->
         <Label x:Name="NameLabel" Content="{Binding Localize[Name]}" Foreground="White" FontFamily="Tahoma" FontSize="14" FontWeight="Bold" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="7,2,0,0"/>
         <TextBox x:Name="NameBox" Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource NormalTextBox}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="0,0,0,0" Height="40" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" KeyUp="NameBox_KeyUp"/>
+        <Rectangle Fill="#444444" Margin="0,0,1,6" Width="40" Height="30" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
         <Button x:Name="NameCopyButton" Command="{Binding CopyToClipboard}" CommandParameter="{Binding Name}" Style="{StaticResource CopyButton}" ToolTip="{Binding Localize[CopyToClipboard]}" Focusable="False" Grid.Row="1" Grid.Column="2" Margin="0,0,7,1" Padding="7" Height="40" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
 
         <!-- Username Box -->
         <Label x:Name="UsernameLabel" Content="{Binding Localize[Username]}" Foreground="White" FontFamily="Tahoma" FontSize="14" FontWeight="Bold" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="1" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="7,2,0,0"/>
         <TextBox x:Name="UsernameBox" Text="{Binding Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource NormalTextBox}" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="1" Margin="0,0,5,0" Height="40" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" KeyUp="UsernameBox_KeyUp"/>
+        <Rectangle Fill="#444444" Margin="0,0,6,6" Width="40" Height="30" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
         <Button x:Name="UsernameCopyButton" Command="{Binding CopyToClipboard}" CommandParameter="{Binding Username}" Style="{StaticResource CopyButton}" ToolTip="{Binding Localize[CopyToClipboard]}" Focusable="False" Grid.Row="3" Grid.Column="1" Margin="0,0,12,1" Padding="7" Height="40" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
 
         <!-- Url Box -->
@@ -52,6 +54,7 @@
         <TextBox x:Name="UrlBox" Text="{Binding Url, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource NormalTextBox}" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="1" Margin="5,0,0,0" Height="40" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" KeyUp="UrlBox_KeyUp"/>
 
         <!-- Url Box Buttons -->
+        <Rectangle Fill="#444444" Margin="0,0,1,6" Width="80" Height="30" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
         <Button x:Name="OpenButton" Command="{Binding OpenUrl}" CommandParameter="{Binding Url}" Visibility="{Binding ShowOpenBtn}" Style="{StaticResource OpenButton}" ToolTip="{Binding Localize[Open]}" Focusable="False" Grid.Row="3" Grid.Column="2" Margin="0,0,47,1" Padding="8" Height="40" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
         <Button x:Name="UrlCopyButton" Command="{Binding CopyToClipboard}" CommandParameter="{Binding Url}" Style="{StaticResource CopyButton}" ToolTip="{Binding Localize[CopyToClipboard]}" Focusable="False" Grid.Row="3" Grid.Column="2" Margin="0,0,7,1" Padding="7" Height="40" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
 
@@ -61,6 +64,7 @@
         <PasswordBox x:Name="PassBox" Style="{StaticResource PasswordBoxStyle}" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" Margin="0,0,0,0" Height="40" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" KeyUp="PassBox_KeyUp"/>
 
         <!-- Password Box Buttons -->
+        <Rectangle Fill="#444444" Margin="0,0,1,6" Width="125" Height="30" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
         <Button x:Name="ShowPasswordButton" Style="{StaticResource EyeButton}" ToolTip="{Binding Localize[ShowPassword]}" Focusable="False" Grid.Row="5" Grid.Column="2" Margin="0,0,87,1" Padding="7" Height="40" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="ShowPasswordButton_Click"/>
         <Button x:Name="GeneratePasswordButton" Style="{StaticResource LightningButton}" ToolTip="{Binding Localize[GeneratePassword]}" Focusable="False" Grid.Row="5" Grid.Column="2" Margin="0,0,47,1" Padding="7" Height="40" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="GeneratePasswordButton_Click"/>
         <Button x:Name="PasswordCopyButton" Command="{Binding CopyToClipboard}" CommandParameter="{Binding Password}" Style="{StaticResource CopyButton}" ToolTip="{Binding Localize[CopyToClipboard]}" Focusable="False" Grid.Row="5" Grid.Column="2" Margin="0,0,7,1" Padding="7" Height="40" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
