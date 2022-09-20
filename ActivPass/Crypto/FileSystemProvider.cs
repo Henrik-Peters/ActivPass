@@ -108,9 +108,11 @@ namespace ActivPass.Crypto
                 Directory.CreateDirectory(StoragePath);
             }
 
-            //Create the container file path based on the name
-            string containerFilePath = GetContainerFilePath(container.ContainerName);
+            return this.SaveContainer(container, masterKey, GetContainerFilePath(container.ContainerName));
+        }
 
+        public bool SaveContainer(PasswordContainer container, string masterKey, string containerFilePath)
+        {
             byte[] key = GenerateKey(masterKey);
             byte[] iv = GenerateIV(masterKey);
 

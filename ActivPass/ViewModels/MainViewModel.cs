@@ -756,9 +756,10 @@ namespace ActivPass.ViewModels
         private void ContainerBackup()
         {
             //Create the save file dialog
-            SaveFileDialog saveDialog = new SaveFileDialog
+            SaveFileDialog saveDialog = new()
             {
                 FileName = Container.ContainerName,
+                Title = Localize["BackupDialogTitle"],
                 DefaultExt = ".bin",
                 Filter = "Encrypted binary (.bin)|*.bin"
             };
@@ -766,15 +767,12 @@ namespace ActivPass.ViewModels
             //Show the dialog and save the dialog result
             bool? dialogResult = saveDialog.ShowDialog();
 
-            //Create the csv file when the dialog result is save
+            //Use the file system provider for saving
             if (dialogResult == true) {
-                string filename = saveDialog.FileName;
-
-                //Use the file system provider for saving
                 FileSystemProvider fsProvider = new();
 
                 //Save the container with the current storage provider
-                if (!ContainerStorage.ContainerProvider.SaveContainer(Container, MasterPasswordBox.Password)) {
+                if (!fsProvider.SaveContainer(Container, MasterPasswordBox.Password, saveDialog.FileName)) {
                     MessageBox.Show("Failed to save the container!", "Container saving failed", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
