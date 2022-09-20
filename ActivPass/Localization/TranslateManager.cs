@@ -19,6 +19,7 @@ namespace ActivPass.Localization
         /// </summary>
         static IDictionary<string, List<string>> TranslateTable = new Dictionary<string, List<string>>
         {
+            ["BackupContainer"] = new List<string> { "Backup", "Datensicherung" },
             ["Apply"] = new List<string> { "Apply", "Übernehmen" },
             ["Spaces"] = new List<string> { "Spaces", "Leerzeichen" },
             ["Symbols"] = new List<string> { "Symbols", "Symbole" },

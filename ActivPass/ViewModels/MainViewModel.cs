@@ -184,6 +184,7 @@ namespace ActivPass.ViewModels
         public ICommand ContainerLogout { get; set; }
         public ICommand CreateContainer { get; set; }
         public ICommand EditContainer { get; set; }
+        public ICommand BackupContainer { get; set; }
         public ICommand GeneratePassword { get; set; }
         public ICommand OpenPasswordItem { get; set; }
         public ICommand AddPasswordItem { get; set; }
@@ -750,6 +751,36 @@ namespace ActivPass.ViewModels
         }
 
         /// <summary>
+        /// Show the backup dialog for the current container.
+        /// </summary>
+        private void ContainerBackup()
+        {
+            //Create the save file dialog
+            SaveFileDialog saveDialog = new SaveFileDialog
+            {
+                FileName = Container.ContainerName,
+                DefaultExt = ".bin",
+                Filter = "Encrypted binary (.bin)|*.bin"
+            };
+
+            //Show the dialog and save the dialog result
+            bool? dialogResult = saveDialog.ShowDialog();
+
+            //Create the csv file when the dialog result is save
+            if (dialogResult == true) {
+                string filename = saveDialog.FileName;
+
+                //Use the file system provider for saving
+                FileSystemProvider fsProvider = new();
+
+                //Save the container with the current storage provider
+                if (!ContainerStorage.ContainerProvider.SaveContainer(Container, MasterPasswordBox.Password)) {
+                    MessageBox.Show("Failed to save the container!", "Container saving failed", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+
+        /// <summary>
         /// Callback for the inactivity timer
         /// </summary>
         /// <param name="sender">Sending object</param>
@@ -827,6 +858,7 @@ namespace ActivPass.ViewModels
             this.ContainerLogout = new RelayCommand(LockContainer);
             this.CreateContainer = new RelayCommand(CreateNewContainer);
             this.EditContainer = new RelayCommand(EditCurrentContainer);
+            this.BackupContainer = new RelayCommand(ContainerBackup);
             this.GeneratePassword = new RelayCommand(OpenPasswordGenerator);
             this.AddPasswordItem = new RelayCommand(CreatePasswordItem);
             this.OpenSettings = new RelayCommand(ShowConfigEditor);
