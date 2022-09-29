@@ -401,6 +401,7 @@ namespace ActivPass.ViewModels
             Container = null;
             PasswordItems.Clear();
             MasterPasswordBox.Focus();
+            SearchText = "";
 
             //Close open dialog windows
             if (this.OpenWindow != null) {
