@@ -591,6 +591,48 @@ namespace ActivPass.ViewModels
         }
 
         /// <summary>
+        /// Decode splitted csv columns based
+        /// on the csv column separator
+        /// </summary>
+        /// <param name="values">Raw columns</param>
+        /// <returns>Fully parsed csv columns</returns>
+        private string[] DecodeQuoteValues(string[] values)
+        {
+            //Check if the input sequence has encoded quot
+            bool containesEncodedValues = values.Any(e => e.StartsWith('"')) && values.Any(e => e.EndsWith('"'));
+
+            //Check if quotes need to be decoded
+            if (!containesEncodedValues) {
+                return values;
+            } else {
+                //List with all decoded values
+                List<string> decoded = new();
+                bool parseNextValue = true;
+
+                foreach (string value in values) {
+                    if (value.StartsWith('"') && parseNextValue) {
+                        parseNextValue = false;
+                        decoded.Add(value.Substring(1));
+                    }
+                    else if (value.EndsWith('"')) {
+                        parseNextValue = true;
+                        decoded[^1] = string.Concat(decoded.Last(), this.CSV_SEPARATOR, value.AsSpan(0, value.Length - 1));
+
+                    } else {
+                        //Create or append the value
+                        if (parseNextValue) {
+                            decoded.Add(value);
+                        } else {
+                            decoded[decoded.Count - 1] = string.Concat(decoded.Last(), this.CSV_SEPARATOR, value);
+                        }
+                    }
+                }
+
+                return decoded.ToArray();
+            }
+        }
+
+        /// <summary>
         /// Show the import dialog for the current container.
         /// </summary>
         private void ContainerImport()
@@ -623,14 +665,15 @@ namespace ActivPass.ViewModels
                     //Import each line
                     for (int i = 1; i < lines.Length; i++) {
                         string[] lineSplit = lines[i].Split(separator);
+                        string[] parsedSplit = this.DecodeQuoteValues(lineSplit);
 
                         //Validate the amount of columns
-                        if (lineSplit.Length != 5) {
+                        if (parsedSplit.Length != 5) {
                             throw new Exception("Invalid csv column length");
                         }
 
                         //Create the password item instance
-                        PasswordItem newItem = new PasswordItem(lineSplit[0], lineSplit[1], lineSplit[2], lineSplit[3], lineSplit[4]);
+                        PasswordItem newItem = new PasswordItem(parsedSplit[0], parsedSplit[1], parsedSplit[2], parsedSplit[3], parsedSplit[4]);
                         importItems.Add(newItem);
 
                     }
