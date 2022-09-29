@@ -21,6 +21,7 @@ using ActivPass.Configuration;
 using ActivPass.Models;
 using ActivPass.Crypto;
 using ActivPass.Views;
+using System.Security.AccessControl;
 
 namespace ActivPass.ViewModels
 {
@@ -738,7 +739,12 @@ namespace ActivPass.ViewModels
 
                     //Replace line brakes in notes
                     string pureNotes = item.Notes is string ? item.Notes.Replace("\r\n", " ") : "";
-                    csvLines[i + 1] = item.Name + separator + item.Username + separator + item.Password + separator + item.Url + separator + pureNotes;
+                    csvLines[i + 1] =
+                        this.encodeCsvValue(item.Name) + separator +
+                        this.encodeCsvValue(item.Username) + separator +
+                        this.encodeCsvValue(item.Password) + separator +
+                        this.encodeCsvValue(item.Url) + separator +
+                        this.encodeCsvValue(pureNotes);
                 }
                 
                 try {
@@ -747,6 +753,21 @@ namespace ActivPass.ViewModels
                 } catch (Exception err) {
                     MessageBox.Show("Failed to save the csv file: " + err.Message, "CSV file export error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
+            }
+        }
+
+        /// <summary>
+        /// Encode a raw csv text value
+        /// </summary>
+        /// <param name="raw">Raw input value</param>
+        /// <returns>Csv encodes text</returns>
+        private string encodeCsvValue(string raw)
+        {
+            //Add quotes when the raw value contains the separator
+            if (raw.Contains(this.CSV_SEPARATOR)) {
+                return $"\"{raw}\"";
+            } else {
+                return raw;
             }
         }
 
