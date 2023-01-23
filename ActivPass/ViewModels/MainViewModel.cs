@@ -143,6 +143,9 @@ namespace ActivPass.ViewModels
             get {
                 ICollectionView view = CollectionViewSource.GetDefaultView(PasswordItems);
                 view.Filter = SearchPasswordFilter;
+
+                //Add sort description
+                view.SortDescriptions.Add(new SortDescription("Name", ListSortDirection.Ascending));
                 return view;
             }
         }
