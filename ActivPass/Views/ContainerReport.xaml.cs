@@ -3,7 +3,6 @@
 // Copyright 2023 Henrik Peters
 // See LICENSE file in the project root for full license information
 #endregion
-using ActivPass.ViewModels;
 using System.Windows;
 
 namespace ActivPass.Views
@@ -16,9 +15,6 @@ namespace ActivPass.Views
         public ContainerReport()
         {
             InitializeComponent();
-
-            //Init view model
-            this.DataContext = new ContainerReportViewModel();
         }
     }
 }

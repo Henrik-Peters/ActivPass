@@ -13,8 +13,13 @@
 
     <!-- View model instance -->
     <Window.DataContext>
-        <ViewModels:PassGeneratorViewModel/>
+        <ViewModels:ContainerReportViewModel/>
     </Window.DataContext>
+
+    <Window.Resources>
+        <!-- Background color for password item boxes -->
+        <SolidColorBrush x:Key="PasswordItemBackground" Color="#444444"/>
+    </Window.Resources>
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -36,7 +41,68 @@
         <Label x:Name="HeaderLabel" Content="{Binding Localize[ContainerSecurityReport]}" Foreground="White" FontFamily="Tahoma" FontSize="20" FontWeight="Bold" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="7,5,0,0"/>
         <Rectangle Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Height="1" Stroke="Black" StrokeDashArray="1 2" Margin="0,42,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
 
-        <!-- Buttons -->
+        <!-- Password items panel -->
+        <ScrollViewer x:Name="PasswordItemScroll" Padding="20" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="3" VerticalScrollBarVisibility="Auto">
+            <ItemsControl x:Name="PasswordItemControl" ItemsSource="{Binding PasswordItemsView}">
+
+                <!-- Data templates for password items -->
+                <ItemsControl.Resources>
+                    <DataTemplate DataType="{x:Type ViewModels:PassReportViewModel}">
+
+                        <!-- Password item control border -->
+                        <Border x:Name="PassItem" Tag="{Binding DataContext, ElementName=ContainerReportWindow}" Margin="10" Padding="3" UseLayoutRounding="True" SnapsToDevicePixels="True">
+
+                            <!-- Input bindings for password items -->
+                            <Border.InputBindings>
+                                <MouseBinding MouseAction="LeftClick" Command="{Binding DataContext.OpenPasswordItem, ElementName=PasswordItemControl}" CommandParameter="{Binding}"/>
+                            </Border.InputBindings>
+
+                            <!-- Password item border control effects -->
+                            <Border.Effect>
+                                <DropShadowEffect ShadowDepth="5" Direction="315" Color="Black" Opacity="0.2" BlurRadius="8"/>
+                            </Border.Effect>
+
+                            <!-- Style for password item controls -->
+                            <Border.Style>
+                                <Style TargetType="{x:Type Border}">
+                                    <Setter Property="Background" Value="{StaticResource PasswordItemBackground}"/>
+                                    <Setter Property="BorderBrush" Value="#353535"/>
+                                    <Setter Property="BorderThickness" Value="2"/>
+                                </Style>
+                            </Border.Style>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="170"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="20"/>
+                                </Grid.RowDefinitions>
+                                <Label Content="{Binding Name}" MaxWidth="200" Foreground="White" FontFamily="Tahoma" FontSize="16" FontWeight="Bold" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+                                <Label Content="{Binding Username}" Margin="0,-5,0,0" Foreground="Gray" FontFamily="Tahoma" FontSize="11" FontWeight="Bold" Grid.Row="1" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+
+                                <!-- Shortcut buttons -->
+                                <Button Command="{Binding OpenUrl}" CommandParameter="{Binding Url}" Visibility="{Binding ShowOpenBtn}" Style="{StaticResource OpenButton}" Background="{StaticResource PasswordItemBackground}" Focusable="False" Grid.Row="0" Grid.Column="1" Margin="0,0,0,0" Padding="8" Height="35" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+                            </Grid>
+
+                        </Border>
+
+                    </DataTemplate>
+                </ItemsControl.Resources>
+
+                <!-- Panel control template -->
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel x:Name="PasswordItemWrapPanel" FlowDirection="LeftToRight"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+
+            </ItemsControl>
+
+        </ScrollViewer>
+
+        <!-- Dialog buttons -->
         <Button x:Name="CloseButton" Command="{Binding Close}" CommandParameter="{Binding ElementName=ContainerReportWindow}" Content="{Binding Localize[Close]}" Style="{StaticResource NormalButton}" Focusable="False" Grid.Row="4" Grid.Column="2" Width="110" Margin="0,0,30,0" HorizontalAlignment="Right" VerticalAlignment="Stretch"/>
     </Grid>
 </Window>

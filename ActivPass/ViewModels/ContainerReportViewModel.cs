@@ -49,6 +49,8 @@ namespace ActivPass.ViewModels
         {
             //Command bindings
             this.Close = new RelayCommand<Window>(CloseWindow);
+
+            PasswordItems = new ObservableCollection<PassReportViewModel>();
         }
 
         /// <summary>
@@ -62,6 +64,9 @@ namespace ActivPass.ViewModels
             PasswordItems = new ObservableCollection<PassReportViewModel>(
                 container.Items.Select(item => new PassReportViewModel(item))
             );
+
+            //Notify view change
+            NotifyPropertyChanged(nameof(PasswordItemsView));
         }
 
         /// <summary>
