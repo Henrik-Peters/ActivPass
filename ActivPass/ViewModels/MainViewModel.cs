@@ -188,6 +188,7 @@ namespace ActivPass.ViewModels
         public ICommand ContainerLogout { get; set; }
         public ICommand CreateContainer { get; set; }
         public ICommand EditContainer { get; set; }
+        public ICommand ShowContainerReport { get; set; }
         public ICommand BackupContainer { get; set; }
         public ICommand GeneratePassword { get; set; }
         public ICommand OpenPasswordItem { get; set; }
@@ -300,6 +301,15 @@ namespace ActivPass.ViewModels
                 this.LockContainer();
                 this.ReloadAvailableContainers();
             }
+        }
+
+        /// <summary>
+        /// Show the container report window
+        /// </summary>
+        private void OpenContainerReport()
+        {
+            ContainerReport containerReport = new();
+            containerReport.ShowDialog();
         }
 
         /// <summary>
@@ -924,6 +934,7 @@ namespace ActivPass.ViewModels
             this.ContainerLogout = new RelayCommand(LockContainer);
             this.CreateContainer = new RelayCommand(CreateNewContainer);
             this.EditContainer = new RelayCommand(EditCurrentContainer);
+            this.ShowContainerReport = new RelayCommand(OpenContainerReport);
             this.BackupContainer = new RelayCommand(ContainerBackup);
             this.GeneratePassword = new RelayCommand(OpenPasswordGenerator);
             this.AddPasswordItem = new RelayCommand(CreatePasswordItem);

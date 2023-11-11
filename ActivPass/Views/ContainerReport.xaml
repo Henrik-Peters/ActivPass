@@ -37,6 +37,6 @@
         <Rectangle Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Height="1" Stroke="Black" StrokeDashArray="1 2" Margin="0,42,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
 
         <!-- Buttons -->
-        <Button x:Name="CloseButton" Command="{Binding Close}" CommandParameter="{Binding ElementName=ContainerReportWindow}" Content="{Binding Localize[Cancel]}" Style="{StaticResource NormalButton}" Focusable="False" Grid.Row="4" Grid.Column="2" Width="110" Margin="0,0,30,0" HorizontalAlignment="Right" VerticalAlignment="Stretch"/>
+        <Button x:Name="CloseButton" Command="{Binding Close}" CommandParameter="{Binding ElementName=ContainerReportWindow}" Content="{Binding Localize[Close]}" Style="{StaticResource NormalButton}" Focusable="False" Grid.Row="4" Grid.Column="2" Width="110" Margin="0,0,30,0" HorizontalAlignment="Right" VerticalAlignment="Stretch"/>
     </Grid>
 </Window>

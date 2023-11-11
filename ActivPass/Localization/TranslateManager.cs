@@ -19,6 +19,7 @@ namespace ActivPass.Localization
         /// </summary>
         static IDictionary<string, List<string>> TranslateTable = new Dictionary<string, List<string>>
         {
+            ["OpenContainerReport"] = new List<string> { "Report", "Sicherheitsbericht" },
             ["ContainerSecurityReport"] = new List<string> { "Container security report", "Container-Sicherheitsbericht" },
             ["ContainerReportTitle"] = new List<string> { "ActivPass - Container report", "ActivPass - Container Report" },
             ["BackupDialogTitle"] = new List<string> { "Save encrypted container", "Verschlüsselten Container speichern" },
