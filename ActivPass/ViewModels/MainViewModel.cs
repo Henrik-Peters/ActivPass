@@ -309,6 +309,12 @@ namespace ActivPass.ViewModels
         private void OpenContainerReport()
         {
             ContainerReport containerReport = new();
+
+            //Init the report data via the view model
+            var vm = containerReport.DataContext as ContainerReportViewModel;
+            vm.InitReportData(this.Container);
+
+            //Show report dialog
             containerReport.ShowDialog();
         }
 
