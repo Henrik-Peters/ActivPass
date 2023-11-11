@@ -8,8 +8,10 @@
         xmlns:ViewModels="clr-namespace:ActivPass.ViewModels"
         x:Name="ContainerReportWindow"
         Background="#494A52"
+        UseLayoutRounding="True"
+        TextOptions.TextFormattingMode="Display"
         mc:Ignorable="d"
-        Title="{Binding Localize[ContainerReportTitle]}" Width="800" MinWidth="400" MinHeight="590" Height="590" FontSize="18" WindowStartupLocation="CenterScreen">
+        Title="{Binding Localize[ContainerReportTitle]}" Width="1100" MinWidth="400" MinHeight="590" Height="590" FontSize="18" WindowStartupLocation="CenterScreen">
 
     <!-- View model instance -->
     <Window.DataContext>
@@ -42,7 +44,7 @@
         <Rectangle Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Height="1" Stroke="Black" StrokeDashArray="1 2" Margin="0,42,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
 
         <!-- Password items panel -->
-        <ScrollViewer x:Name="PasswordItemScroll" Padding="20" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="3" VerticalScrollBarVisibility="Auto">
+        <ScrollViewer x:Name="PasswordItemScroll" Padding="20" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" VerticalScrollBarVisibility="Auto">
             <ItemsControl x:Name="PasswordItemControl" ItemsSource="{Binding PasswordItemsView}">
 
                 <!-- Data templates for password items -->
@@ -51,11 +53,6 @@
 
                         <!-- Password item control border -->
                         <Border x:Name="PassItem" Tag="{Binding DataContext, ElementName=ContainerReportWindow}" Margin="10" Padding="3" UseLayoutRounding="True" SnapsToDevicePixels="True">
-
-                            <!-- Input bindings for password items -->
-                            <Border.InputBindings>
-                                <MouseBinding MouseAction="LeftClick" Command="{Binding DataContext.OpenPasswordItem, ElementName=PasswordItemControl}" CommandParameter="{Binding}"/>
-                            </Border.InputBindings>
 
                             <!-- Password item border control effects -->
                             <Border.Effect>
@@ -81,9 +78,6 @@
                                 </Grid.RowDefinitions>
                                 <Label Content="{Binding Name}" MaxWidth="200" Foreground="White" FontFamily="Tahoma" FontSize="16" FontWeight="Bold" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
                                 <Label Content="{Binding Username}" Margin="0,-5,0,0" Foreground="Gray" FontFamily="Tahoma" FontSize="11" FontWeight="Bold" Grid.Row="1" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-
-                                <!-- Shortcut buttons -->
-                                <Button Command="{Binding OpenUrl}" CommandParameter="{Binding Url}" Visibility="{Binding ShowOpenBtn}" Style="{StaticResource OpenButton}" Background="{StaticResource PasswordItemBackground}" Focusable="False" Grid.Row="0" Grid.Column="1" Margin="0,0,0,0" Padding="8" Height="35" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
                             </Grid>
 
                         </Border>
