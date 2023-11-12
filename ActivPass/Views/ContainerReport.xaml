@@ -11,7 +11,7 @@
         UseLayoutRounding="True"
         TextOptions.TextFormattingMode="Display"
         mc:Ignorable="d"
-        Title="{Binding Localize[ContainerReportTitle]}" Width="1100" MinWidth="400" MinHeight="590" Height="590" FontSize="18" WindowStartupLocation="CenterScreen">
+        Title="{Binding Localize[ContainerReportTitle]}" Width="1000" MinWidth="400" MinHeight="590" Height="590" FontSize="18" WindowStartupLocation="CenterScreen">
 
     <!-- View model instance -->
     <Window.DataContext>
@@ -33,6 +33,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
             <RowDefinition Height="70"/>
+            <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="20"/>
             <RowDefinition Height="35"/>
@@ -43,8 +44,13 @@
         <Label x:Name="HeaderLabel" Content="{Binding Localize[ContainerSecurityReport]}" Foreground="White" FontFamily="Tahoma" FontSize="20" FontWeight="Bold" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="7,5,0,0"/>
         <Rectangle Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Height="1" Stroke="Black" StrokeDashArray="1 2" Margin="0,42,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
 
+        <!-- Table header labels -->
+        <Label Content="{Binding Localize[Name]}" MaxWidth="200" Margin="20,0,0,2" Foreground="White" FontFamily="Tahoma" FontSize="16" FontWeight="Bold" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="1" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+        <Label Content="{Binding Localize[Username]}" MaxWidth="200" Margin="150,0,0,2" Foreground="White" FontFamily="Tahoma" FontSize="16" FontWeight="Bold" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="1" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+
+
         <!-- Password items panel -->
-        <ScrollViewer x:Name="PasswordItemScroll" Padding="20" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" VerticalScrollBarVisibility="Auto">
+        <ScrollViewer x:Name="PasswordItemScroll" Padding="0,0,0,0" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2" VerticalScrollBarVisibility="Auto">
             <ItemsControl x:Name="PasswordItemControl" ItemsSource="{Binding PasswordItemsView}">
 
                 <!-- Data templates for password items -->
@@ -52,7 +58,7 @@
                     <DataTemplate DataType="{x:Type ViewModels:PassReportViewModel}">
 
                         <!-- Password item control border -->
-                        <Border x:Name="PassItem" Tag="{Binding DataContext, ElementName=ContainerReportWindow}" Margin="10" Padding="3" UseLayoutRounding="True" SnapsToDevicePixels="True">
+                        <Border x:Name="PassItem" Tag="{Binding DataContext, ElementName=ContainerReportWindow}" Margin="10,5,10,5" Padding="3" UseLayoutRounding="True" SnapsToDevicePixels="True">
 
                             <!-- Password item border control effects -->
                             <Border.Effect>
@@ -67,17 +73,17 @@
                                     <Setter Property="BorderThickness" Value="2"/>
                                 </Style>
                             </Border.Style>
-                            <Grid>
+                            <Grid ShowGridLines="True">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="170"/>
+                                    <ColumnDefinition Width="230"/>
+                                    <ColumnDefinition Width="200"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="30"/>
-                                    <RowDefinition Height="20"/>
                                 </Grid.RowDefinitions>
-                                <Label Content="{Binding Name}" MaxWidth="200" Foreground="White" FontFamily="Tahoma" FontSize="16" FontWeight="Bold" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
-                                <Label Content="{Binding Username}" Margin="0,-5,0,0" Foreground="Gray" FontFamily="Tahoma" FontSize="11" FontWeight="Bold" Grid.Row="1" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                                <Label Content="{Binding Name}" MaxWidth="230" Foreground="White" FontFamily="Tahoma" FontSize="16" FontWeight="Bold" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="1" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                <Label Content="{Binding Username}" MaxWidth="200" Margin="0,-5,0,0" Foreground="Gray" FontFamily="Tahoma" FontSize="16" FontWeight="Bold" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                             </Grid>
 
                         </Border>
@@ -88,7 +94,7 @@
                 <!-- Panel control template -->
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <WrapPanel x:Name="PasswordItemWrapPanel" FlowDirection="LeftToRight"/>
+                        <WrapPanel x:Name="PasswordItemWrapPanel" Orientation="Vertical" FlowDirection="LeftToRight"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
 
@@ -97,6 +103,6 @@
         </ScrollViewer>
 
         <!-- Dialog buttons -->
-        <Button x:Name="CloseButton" Command="{Binding Close}" CommandParameter="{Binding ElementName=ContainerReportWindow}" Content="{Binding Localize[Close]}" Style="{StaticResource NormalButton}" Focusable="False" Grid.Row="4" Grid.Column="2" Width="110" Margin="0,0,30,0" HorizontalAlignment="Right" VerticalAlignment="Stretch"/>
+        <Button x:Name="CloseButton" Command="{Binding Close}" CommandParameter="{Binding ElementName=ContainerReportWindow}" Content="{Binding Localize[Close]}" Style="{StaticResource NormalButton}" Focusable="False" Grid.Row="5" Grid.Column="2" Width="110" Margin="0,0,30,0" HorizontalAlignment="Right" VerticalAlignment="Stretch"/>
     </Grid>
 </Window>
