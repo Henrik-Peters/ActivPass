@@ -80,6 +80,20 @@ namespace ActivPass.ViewModels
             }
         }
 
+        private PasswordStrength _passwordStrength;
+        public PasswordStrength PasswordStrength
+        {
+            get => _passwordStrength;
+            set
+            {
+                if (_passwordStrength != value)
+                {
+                    _passwordStrength = value;
+                    NotifyPropertyChanged(nameof(PasswordStrength));
+                }
+            }
+        }
+
         /// <summary>
         /// Create a new view model from a password item.
         /// </summary>
@@ -87,6 +101,19 @@ namespace ActivPass.ViewModels
         public PassReportViewModel(PasswordItem proxy)
         {
             this._proxy = proxy;
+
+            //Init report values
+            this.UpdatePasswordScore();
+        }
+
+        /// <summary>
+        /// Update the score rating of the current password
+        /// </summary>
+        public void UpdatePasswordScore()
+        {
+            //Calculate and apply the score
+            PasswordStrength score = PasswordScores.GetScore(this.Password);
+            this.PasswordStrength = score;
         }
     }
 }

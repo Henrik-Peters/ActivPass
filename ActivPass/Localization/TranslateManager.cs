@@ -31,6 +31,8 @@ namespace ActivPass.Localization
             ["LowercaseLetters"] = new List<string> { "Lowercase letters", "Kleinbuchstaben" },
             ["CapitalLetters"] = new List<string> { "Capital letters", "Großbuchstaben" },
             ["Options"] = new List<string> { "Options", "Optionen" },
+            ["Duplicate"] = new List<string> { "Duplicate", "Dupklikat" },
+            ["PasswordStrength"] = new List<string> { "Password strength", "Passwortstärke" },
             ["PasswordLength"] = new List<string> { "Password length", "Passwortlänge" },
             ["GeneratePassword"] = new List<string> { "Generate password", "Password generieren" },
             ["PasswordGenerator"] = new List<string> { "Password generator", "Passwortgenerator" },
