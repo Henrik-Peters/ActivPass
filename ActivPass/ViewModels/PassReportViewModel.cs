@@ -4,6 +4,8 @@
 // See LICENSE file in the project root for full license information
 #endregion
 using ActivPass.Models;
+using System.Windows;
+using System.Windows.Input;
 
 namespace ActivPass.ViewModels
 {
@@ -76,6 +78,7 @@ namespace ActivPass.ViewModels
                 if (_proxy.Url != value) {
                     _proxy.Url = value;
                     NotifyPropertyChanged(nameof(_proxy.Url));
+                    NotifyPropertyChanged(nameof(ShowOpenBtn));
                 }
             }
         }
@@ -95,6 +98,25 @@ namespace ActivPass.ViewModels
         }
 
         /// <summary>
+        /// If the open url button should be visible.
+        /// </summary>
+        public Visibility ShowOpenBtn
+        {
+            get {
+                if (this._proxy.HasBrowsableUrl()) {
+                    return Visibility.Visible;
+                } else {
+                    return Visibility.Hidden;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Open the argument as a new process.
+        /// </summary>
+        public ICommand OpenUrl { get; set; }
+
+        /// <summary>
         /// Create a new view model from a password item.
         /// </summary>
         /// <param name="proxy">Represented password item</param>
@@ -104,6 +126,9 @@ namespace ActivPass.ViewModels
 
             //Init report values
             this.UpdatePasswordScore();
+
+            //Command bindings
+            this.OpenUrl = new RelayCommand<string>(OpenBrowserUrl);
         }
 
         /// <summary>
@@ -114,6 +139,20 @@ namespace ActivPass.ViewModels
             //Calculate and apply the score
             PasswordStrength score = PasswordScores.GetScore(this.Password);
             this.PasswordStrength = score;
+        }
+
+        /// <summary>
+        /// Open the url as a new browser process when
+        /// the url is valid to launch a new process.
+        /// </summary>
+        /// <param name="url">Opent this url</param>
+        private void OpenBrowserUrl(string url)
+        {
+            if (this._proxy.HasBrowsableUrl())
+            {
+                var startInfo = new System.Diagnostics.ProcessStartInfo { FileName = @url, UseShellExecute = true };
+                System.Diagnostics.Process.Start(startInfo);
+            }
         }
     }
 }
