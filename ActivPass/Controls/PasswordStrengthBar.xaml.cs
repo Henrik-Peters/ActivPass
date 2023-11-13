@@ -41,6 +41,26 @@ namespace ActivPass.Controls
             }
         }
 
+        /// <summary>
+        /// Identifies the LabelVisibility dependency property
+        /// </summary>
+        public static readonly DependencyProperty LabelVisibilityProperty = DependencyProperty.Register(
+            "LabelVisibility", typeof(Visibility), typeof(PasswordStrengthBar), new PropertyMetadata(LabelVisibility_PropertyChanged));
+
+        /// <summary>
+        /// Gets or sets the score label visibility
+        /// </summary>
+        [Bindable(true)]
+        public Visibility LabelVisibility
+        {
+            get => (Visibility)this.GetValue(LabelVisibilityProperty);
+            set
+            {
+                this.SetValue(LabelVisibilityProperty, value);
+                this.UpdateLabelVisibility();
+            }
+        }
+
         #endregion
 
         /// <summary>
@@ -60,6 +80,37 @@ namespace ActivPass.Controls
         {
             if (obj is PasswordStrengthBar instance) {
                 instance.UpdateScore(instance.StrengthScore);
+            }
+        }
+
+        private static void LabelVisibility_PropertyChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
+        {
+            if (obj is PasswordStrengthBar instance)
+            {
+                instance.UpdateLabelVisibility();
+            }
+        }
+        
+        /// <summary>
+        /// Update the row span of the bars
+        /// </summary>
+        private void UpdateLabelVisibility()
+        {
+            if (this.LabelVisibility == Visibility.Collapsed) {
+                Grid.SetRowSpan(Bar0, 2);
+                Grid.SetRowSpan(Bar1, 2);
+                Grid.SetRowSpan(Bar2, 2);
+                Grid.SetRowSpan(Bar3, 2);
+                Grid.SetRowSpan(Bar4, 2);
+                Grid.SetRowSpan(Bar5, 2);
+
+            } else if (this.LabelVisibility == Visibility.Visible) {
+                Grid.SetRowSpan(Bar0, 1);
+                Grid.SetRowSpan(Bar1, 1);
+                Grid.SetRowSpan(Bar2, 1);
+                Grid.SetRowSpan(Bar3, 1);
+                Grid.SetRowSpan(Bar4, 1);
+                Grid.SetRowSpan(Bar5, 1);
             }
         }
 

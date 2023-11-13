@@ -89,7 +89,7 @@
                                 <Label Content="{Binding Name}" MaxWidth="240" Foreground="White" FontFamily="Tahoma" FontSize="16" FontWeight="Bold" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="1" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                                 <Label Content="{Binding Username}" MaxWidth="220" Margin="0,-5,0,0" Foreground="Gray" FontFamily="Tahoma" FontSize="16" FontWeight="Bold" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left"/>
 
-                                <Controls:PasswordStrengthBar x:Name="StrengthBar" StrengthScore="{Binding PasswordStrength}" Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="1" HorizontalAlignment="Stretch" Margin="10,0,0,0" VerticalAlignment="Top"/>
+                                <Controls:PasswordStrengthBar x:Name="StrengthBar" StrengthScore="{Binding PasswordStrength}" LabelVisibility="Collapsed" Height="20" Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="1" HorizontalAlignment="Stretch" Margin="10,0,0,0" VerticalAlignment="Center"/>
                             </Grid>
 
                         </Border>
