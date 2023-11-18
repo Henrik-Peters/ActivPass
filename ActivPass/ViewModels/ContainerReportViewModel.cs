@@ -11,6 +11,7 @@ using System.Windows.Data;
 using System.Windows.Input;
 using ActivPass.Localization;
 using ActivPass.Models;
+using ActivPass.Views;
 
 namespace ActivPass.ViewModels
 {
@@ -41,15 +42,22 @@ namespace ActivPass.ViewModels
         }
 
         /// <summary>
-        /// Close the passed window instance.
+        /// Close the passed window instance
         /// </summary>
         public ICommand Close { get; set; }
+
+        /// <summary>
+        /// Show the password item editor
+        /// </summary>
+        public ICommand OpenPasswordItem { get; set; }
 
         public ContainerReportViewModel()
         {
             //Command bindings
             this.Close = new RelayCommand<Window>(CloseWindow);
+            this.OpenPasswordItem = new RelayCommand<PassReportViewModel>(ShowPasswordItemDetails);
 
+            //Initial values
             PasswordItems = new ObservableCollection<PassReportViewModel>();
         }
 
@@ -67,6 +75,38 @@ namespace ActivPass.ViewModels
 
             //Notify view change
             NotifyPropertyChanged(nameof(PasswordItemsView));
+        }
+
+        /// <summary>
+        /// Show detailed information with the password
+        /// item dialog for a specific password item.
+        /// </summary>
+        /// <param name="item">Password item to display</param>
+        private void ShowPasswordItemDetails(PassReportViewModel item)
+        {
+            //Create a clone of the item
+            PasswordItem editorItem = item.Proxy.Clone() as PasswordItem;
+
+            //Show the item editor dialog
+            PassItemEditor itemEditor = new PassItemEditor(editorItem);
+            itemEditor.ShowDialog();
+
+            //Check if the editorItem should be stored
+            if (itemEditor.vm.SaveEditorItem) {
+
+                //Get the index of edited item
+                int itemIndex = PasswordItems.IndexOf(item);
+
+                //Set the attributes of the item
+                PasswordItems[itemIndex].Name = editorItem.Name;
+                PasswordItems[itemIndex].Username = editorItem.Username;
+                PasswordItems[itemIndex].Password = editorItem.Password;
+                PasswordItems[itemIndex].Url = editorItem.Url;
+                PasswordItems[itemIndex].Notes = editorItem.Notes;
+
+                //Save the container with the current storage provider
+                //this.SaveContainer();
+            }
         }
 
         /// <summary>

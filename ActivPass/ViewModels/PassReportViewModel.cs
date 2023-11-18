@@ -79,12 +79,26 @@ namespace ActivPass.ViewModels
         public string Url
         {
             get => _proxy.Url;
-            set
+            set 
             {
                 if (_proxy.Url != value) {
                     _proxy.Url = value;
                     NotifyPropertyChanged(nameof(_proxy.Url));
                     NotifyPropertyChanged(nameof(ShowOpenBtn));
+                }
+            }
+        }
+
+        /// <summary>
+        /// Notes of the password item.
+        /// </summary>
+        public string Notes
+        {
+            get => _proxy.Notes;
+            set {
+                if (_proxy.Notes != value) {
+                    _proxy.Notes = value;
+                    NotifyPropertyChanged(nameof(_proxy.Notes));
                 }
             }
         }
