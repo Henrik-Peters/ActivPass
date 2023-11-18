@@ -310,9 +310,15 @@ namespace ActivPass.ViewModels
         {
             ContainerReport containerReport = new();
 
+            //Callback for saving container data
+            ICommand saveContainerCallback = new RelayCommand(() =>
+            {
+                this.SaveContainer();
+            });
+
             //Init the report data via the view model
             var vm = containerReport.DataContext as ContainerReportViewModel;
-            vm.InitReportData(this.Container);
+            vm.InitReportData(this.Container, saveContainerCallback);
 
             //Show report dialog
             containerReport.ShowDialog();

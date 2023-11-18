@@ -51,6 +51,11 @@ namespace ActivPass.ViewModels
         /// </summary>
         public ICommand OpenPasswordItem { get; set; }
 
+        /// <summary>
+        /// Save the container after items have been modified
+        /// </summary>
+        public ICommand SaveContainer { get; set; }
+
         public ContainerReportViewModel()
         {
             //Command bindings
@@ -66,7 +71,7 @@ namespace ActivPass.ViewModels
         /// password container and all the items
         /// </summary>
         /// <param name="container">Generate report for this container</param>
-        public void InitReportData(PasswordContainer container)
+        public void InitReportData(PasswordContainer container, ICommand SaveContainerCallback)
         {
             //Create the view model instances from the password item collection
             PasswordItems = new ObservableCollection<PassReportViewModel>(
@@ -75,6 +80,8 @@ namespace ActivPass.ViewModels
 
             //Notify view change
             NotifyPropertyChanged(nameof(PasswordItemsView));
+
+            this.SaveContainer = SaveContainerCallback;
         }
 
         /// <summary>
@@ -104,8 +111,11 @@ namespace ActivPass.ViewModels
                 PasswordItems[itemIndex].Url = editorItem.Url;
                 PasswordItems[itemIndex].Notes = editorItem.Notes;
 
+                //Calculate the password score when the password has changed
+                item.UpdatePasswordScore();
+
                 //Save the container with the current storage provider
-                //this.SaveContainer();
+                SaveContainer.Execute(null);
             }
         }
 
