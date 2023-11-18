@@ -322,6 +322,9 @@ namespace ActivPass.ViewModels
 
             //Show report dialog
             containerReport.ShowDialog();
+
+            //Update view if the container was modified
+            NotifyPropertyChanged(nameof(PasswordItemsView));
         }
 
         /// <summary>
