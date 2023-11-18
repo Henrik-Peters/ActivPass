@@ -44,7 +44,7 @@
         <Rectangle Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Height="1" Stroke="Black" StrokeDashArray="1 2" Margin="0,42,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
 
         <!-- Table header labels -->
-        <Border BorderBrush="#353535" Background="#676870" BorderThickness="2" Grid.Row="2" Grid.Column="1" Margin="10,0,10,2" Padding="3,0,3,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Border BorderBrush="#353535" Background="#676870" BorderThickness="2" Grid.Row="2" Grid.Column="1" Margin="5,0,10,2" Padding="8,0,3,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="5*"/>
@@ -61,8 +61,6 @@
             </Grid>
         </Border>
         
-
-
         <!-- Password items panel -->
         <ScrollViewer x:Name="PasswordItemScroll" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="1" VerticalScrollBarVisibility="Auto">
             <ItemsControl x:Name="PasswordItemControl" ItemsSource="{Binding PasswordItemsView}">
@@ -98,16 +96,18 @@
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="30"/>
                                 </Grid.RowDefinitions>
+                                <!-- Item labels -->
                                 <Label Content="{Binding Name}" Width="{Binding ActualWidth,RelativeSource={RelativeSource AncestorType=Grid}}" Foreground="White" FontFamily="Tahoma" FontSize="16" FontWeight="Bold" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="1" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                                 <Label Content="{Binding Username}" Width="{Binding ActualWidth,RelativeSource={RelativeSource AncestorType=Grid}}" Margin="0,0,0,0" Foreground="Gray" FontFamily="Tahoma" FontSize="16" FontWeight="Bold" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left"/>
 
+                                <!-- Item password bar -->
                                 <Controls:PasswordStrengthBar x:Name="StrengthBar" StrengthScore="{Binding PasswordStrength}" LabelVisibility="Collapsed" Height="20" Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="1" HorizontalAlignment="Stretch" Margin="10,0,0,0" VerticalAlignment="Center"/>
 
+                                <!-- Item actions -->
                                 <Button x:Name="EditButton" Command="{Binding DataContext.OpenPasswordItem, ElementName=PasswordItemControl}" CommandParameter="{Binding}" Visibility="Visible" Style="{StaticResource EditButton}" ToolTip="{Binding Localize[Edit]}" Focusable="False" Grid.Row="1" Grid.Column="4" Margin="5,0,0,0" Padding="8" Height="37" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                                 <Button x:Name="OpenButton" Command="{Binding OpenUrl}" CommandParameter="{Binding Url}" Visibility="{Binding ShowOpenBtn}" Style="{StaticResource OpenButton}" ToolTip="{Binding Localize[Open]}" Focusable="False" Grid.Row="1" Grid.Column="4" Margin="40,0,0,0" Padding="8" Height="37" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                             </Grid>
                         </Border>
-
                     </DataTemplate>
                 </ItemsControl.Resources>
 
@@ -117,9 +117,7 @@
                         <WrapPanel x:Name="PasswordItemWrapPanel" Orientation="Vertical" FlowDirection="LeftToRight"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
-
             </ItemsControl>
-
         </ScrollViewer>
 
         <!-- Dialog buttons -->
