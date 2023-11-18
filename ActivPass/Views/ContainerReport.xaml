@@ -23,7 +23,7 @@
         <SolidColorBrush x:Key="PasswordItemBackground" Color="#444444"/>
     </Window.Resources>
 
-    <Grid>
+    <Grid ShowGridLines="True">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10"/>
             <ColumnDefinition Width="*"/>
@@ -75,10 +75,10 @@
                                     <Setter Property="BorderThickness" Value="2"/>
                                 </Style>
                             </Border.Style>
-                            <Grid>
+                            <Grid ShowGridLines="True" HorizontalAlignment="Stretch">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="270"/>
-                                    <ColumnDefinition Width="220"/>
+                                    <ColumnDefinition Width="4*"/>
+                                    <ColumnDefinition Width="4*"/>
                                     <ColumnDefinition Width="70"/>
                                     <ColumnDefinition Width="220"/>
                                     <ColumnDefinition Width="90"/>
@@ -86,8 +86,8 @@
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="30"/>
                                 </Grid.RowDefinitions>
-                                <Label Content="{Binding Name}" MaxWidth="250" Foreground="White" FontFamily="Tahoma" FontSize="16" FontWeight="Bold" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="1" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                                <Label Content="{Binding Username}" MaxWidth="220" Margin="0,0,0,0" Foreground="Gray" FontFamily="Tahoma" FontSize="16" FontWeight="Bold" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                <Label Content="{Binding Name}" Width="{Binding ActualWidth,RelativeSource={RelativeSource AncestorType=Grid}}" Foreground="White" FontFamily="Tahoma" FontSize="16" FontWeight="Bold" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="1" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                <Label Content="{Binding Username}" Width="{Binding ActualWidth,RelativeSource={RelativeSource AncestorType=Grid}}" Margin="0,0,0,0" Foreground="Gray" FontFamily="Tahoma" FontSize="16" FontWeight="Bold" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left"/>
 
                                 <Controls:PasswordStrengthBar x:Name="StrengthBar" StrengthScore="{Binding PasswordStrength}" LabelVisibility="Collapsed" Height="20" Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="1" HorizontalAlignment="Stretch" Margin="10,0,0,0" VerticalAlignment="Center"/>
 
