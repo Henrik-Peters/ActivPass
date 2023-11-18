@@ -69,6 +69,7 @@ namespace ActivPass.Localization
             ["Lock"] = new List<string> { "Lock", "Sperren" },
             ["Export"] = new List<string> { "Export", "Exportieren" },
             ["Import"] = new List<string> { "Import", "Importieren" },
+            ["Edit"] = new List<string> { "Edit", "Bearbeiten" },
             ["Exit"] = new List<string> { "Exit", "Beenden" },
             ["OverwriteDialogTitle"] = new List<string> { "Overwrite item", "Eintrag überschreiben" },
             ["OverwriteQuestionPart1"] = new List<string> { "Should the entry", "Soll der Eintrag" },

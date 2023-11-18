@@ -79,9 +79,9 @@
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="240"/>
                                     <ColumnDefinition Width="220"/>
-                                    <ColumnDefinition Width="40"/>
+                                    <ColumnDefinition Width="60"/>
                                     <ColumnDefinition Width="220"/>
-                                    <ColumnDefinition Width="50"/>
+                                    <ColumnDefinition Width="100"/>
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="30"/>
@@ -91,7 +91,8 @@
 
                                 <Controls:PasswordStrengthBar x:Name="StrengthBar" StrengthScore="{Binding PasswordStrength}" LabelVisibility="Collapsed" Height="20" Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="1" HorizontalAlignment="Stretch" Margin="10,0,0,0" VerticalAlignment="Center"/>
 
-                                <Button x:Name="OpenButton" Command="{Binding OpenUrl}" CommandParameter="{Binding Url}" Visibility="{Binding ShowOpenBtn}" Style="{StaticResource OpenButton}" ToolTip="{Binding Localize[Open]}" Focusable="False" Grid.Row="1" Grid.Column="4" Margin="5,0,0,0" Padding="8" Height="37" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                <Button x:Name="EditButton" Command="{Binding OpenUrl}" CommandParameter="{Binding Url}" Visibility="Visible" Style="{StaticResource EditButton}" ToolTip="{Binding Localize[Edit]}" Focusable="False" Grid.Row="1" Grid.Column="4" Margin="5,0,0,0" Padding="8" Height="37" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                <Button x:Name="OpenButton" Command="{Binding OpenUrl}" CommandParameter="{Binding Url}" Visibility="{Binding ShowOpenBtn}" Style="{StaticResource OpenButton}" ToolTip="{Binding Localize[Open]}" Focusable="False" Grid.Row="1" Grid.Column="4" Margin="40,0,0,0" Padding="8" Height="37" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                             </Grid>
 
                         </Border>
