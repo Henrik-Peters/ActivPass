@@ -23,10 +23,9 @@
         <SolidColorBrush x:Key="PasswordItemBackground" Color="#444444"/>
     </Window.Resources>
 
-    <Grid ShowGridLines="True">
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10"/>
-            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="10"/>
         </Grid.ColumnDefinitions>
@@ -45,14 +44,23 @@
         <Rectangle Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Height="1" Stroke="Black" StrokeDashArray="1 2" Margin="0,42,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
 
         <!-- Table header labels -->
-        <Label Content="{Binding Localize[Name]}" MaxWidth="200" Margin="15,0,0,2" Foreground="White" FontFamily="Tahoma" FontSize="16" FontWeight="Bold" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
-        <Label Content="{Binding Localize[Username]}" MaxWidth="200" Margin="280,0,0,2" Foreground="White" FontFamily="Tahoma" FontSize="16" FontWeight="Bold" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
-        <Label Content="{Binding Localize[Warnings]}" MaxWidth="200" Margin="490,0,0,2" Foreground="White" FontFamily="Tahoma" FontSize="16" FontWeight="Bold" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
-        <Label Content="{Binding Localize[PasswordStrength]}" MaxWidth="200" Margin="610,0,0,2" Foreground="White" FontFamily="Tahoma" FontSize="16" FontWeight="Bold" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
-        
+        <Grid Grid.Row="2" Grid.Column="1" Margin="13,0,13,2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="70"/>
+                <ColumnDefinition Width="220"/>
+                <ColumnDefinition Width="107"/>
+            </Grid.ColumnDefinitions>
+            <Label Content="{Binding Localize[Name]}" Margin="0,0,0,0" Foreground="White" FontFamily="Tahoma" FontSize="16" FontWeight="Bold" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+            <Label Content="{Binding Localize[Username]}" Margin="0,0,0,0" Foreground="White" FontFamily="Tahoma" FontSize="16" FontWeight="Bold" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+            <Label Content="{Binding Localize[Warnings]}" Margin="-10,0,0,0" Foreground="White" FontFamily="Tahoma" FontSize="16" FontWeight="Bold" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+            <Label Content="{Binding Localize[PasswordStrength]}" Margin="25,0,0,0" Foreground="White" FontFamily="Tahoma" FontSize="16" FontWeight="Bold" Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+        </Grid>
+
 
         <!-- Password items panel -->
-        <ScrollViewer x:Name="PasswordItemScroll" Padding="0,0,0,0" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2" VerticalScrollBarVisibility="Auto">
+        <ScrollViewer x:Name="PasswordItemScroll" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="1" VerticalScrollBarVisibility="Auto">
             <ItemsControl x:Name="PasswordItemControl" ItemsSource="{Binding PasswordItemsView}">
 
                 <!-- Data templates for password items -->
@@ -75,9 +83,9 @@
                                     <Setter Property="BorderThickness" Value="2"/>
                                 </Style>
                             </Border.Style>
-                            <Grid ShowGridLines="True" HorizontalAlignment="Stretch">
+                            <Grid HorizontalAlignment="Stretch">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="4*"/>
+                                    <ColumnDefinition Width="5*"/>
                                     <ColumnDefinition Width="4*"/>
                                     <ColumnDefinition Width="70"/>
                                     <ColumnDefinition Width="220"/>
@@ -111,6 +119,6 @@
         </ScrollViewer>
 
         <!-- Dialog buttons -->
-        <Button x:Name="CloseButton" Command="{Binding Close}" CommandParameter="{Binding ElementName=ContainerReportWindow}" Content="{Binding Localize[Close]}" Style="{StaticResource NormalButton}" Focusable="False" Grid.Row="5" Grid.Column="2" Width="110" Margin="0,0,30,0" HorizontalAlignment="Right" VerticalAlignment="Stretch"/>
+        <Button x:Name="CloseButton" Command="{Binding Close}" CommandParameter="{Binding ElementName=ContainerReportWindow}" Content="{Binding Localize[Close]}" Style="{StaticResource NormalButton}" Focusable="False" Grid.Row="5" Grid.Column="1" Width="110" Margin="0,0,30,0" HorizontalAlignment="Right" VerticalAlignment="Stretch"/>
     </Grid>
 </Window>
