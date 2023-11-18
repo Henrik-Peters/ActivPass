@@ -11,7 +11,7 @@
         UseLayoutRounding="True"
         TextOptions.TextFormattingMode="Display"
         mc:Ignorable="d"
-        Title="{Binding Localize[ContainerReportTitle]}" Width="960" MinWidth="400" MinHeight="590" Height="590" FontSize="18" WindowStartupLocation="CenterScreen">
+        Title="{Binding Localize[ContainerReportTitle]}" Width="1300" MinWidth="800" MinHeight="450" Height="770" FontSize="18" WindowStartupLocation="CenterScreen">
 
     <!-- View model instance -->
     <Window.DataContext>
@@ -44,19 +44,23 @@
         <Rectangle Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Height="1" Stroke="Black" StrokeDashArray="1 2" Margin="0,42,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
 
         <!-- Table header labels -->
-        <Grid Grid.Row="2" Grid.Column="1" Margin="13,0,13,2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="5*"/>
-                <ColumnDefinition Width="4*"/>
-                <ColumnDefinition Width="70"/>
-                <ColumnDefinition Width="220"/>
-                <ColumnDefinition Width="107"/>
-            </Grid.ColumnDefinitions>
-            <Label Content="{Binding Localize[Name]}" Margin="0,0,0,0" Foreground="White" FontFamily="Tahoma" FontSize="16" FontWeight="Bold" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
-            <Label Content="{Binding Localize[Username]}" Margin="0,0,0,0" Foreground="White" FontFamily="Tahoma" FontSize="16" FontWeight="Bold" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
-            <Label Content="{Binding Localize[Warnings]}" Margin="-10,0,0,0" Foreground="White" FontFamily="Tahoma" FontSize="16" FontWeight="Bold" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
-            <Label Content="{Binding Localize[PasswordStrength]}" Margin="25,0,0,0" Foreground="White" FontFamily="Tahoma" FontSize="16" FontWeight="Bold" Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
-        </Grid>
+        <Border BorderBrush="#353535" Background="#676870" BorderThickness="2" Grid.Row="2" Grid.Column="1" Margin="10,0,10,2" Padding="3,0,3,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="5*"/>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="220"/>
+                    <ColumnDefinition Width="107"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="{Binding Localize[Name]}" Margin="0,0,0,0" Foreground="White" FontFamily="Tahoma" FontSize="16" FontWeight="Bold" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+                <Label Content="{Binding Localize[Username]}" Margin="0,0,0,0" Foreground="White" FontFamily="Tahoma" FontSize="16" FontWeight="Bold" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+                <Label Content="{Binding Localize[Warnings]}" Margin="-10,0,0,0" Foreground="White" FontFamily="Tahoma" FontSize="16" FontWeight="Bold" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+                <Label Content="{Binding Localize[PasswordStrength]}" Margin="25,0,0,0" Foreground="White" FontFamily="Tahoma" FontSize="16" FontWeight="Bold" Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+                <Label Content="{Binding Localize[Actions]}" Margin="10,0,0,0" Foreground="White" FontFamily="Tahoma" FontSize="16" FontWeight="Bold" Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="2" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+            </Grid>
+        </Border>
+        
 
 
         <!-- Password items panel -->
