@@ -399,4 +399,40 @@
         </Setter>
     </Style>
 
+    <Style x:Key="WarnIconButton" TargetType="{x:Type Button}">
+        <Setter Property="Background" Value="#FFE63C46"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="2"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Margin="{TemplateBinding Padding}" Background="Transparent" SnapsToDevicePixels="true">
+                        <Viewbox Stretch="Uniform">
+                            <Canvas Width="64" Height="64">
+                                <Canvas>
+                                    <Path Fill="{TemplateBinding Background}" StrokeThickness="0.932253">
+                                        <Path.Data>
+                                            <PathGeometry Figures="m 32.035639 4.4169156 c -1.486273 0 -3.371163 0.4640366 -4.096301 1.761409 C 19.18838 21.834976 9.7423193 37.946146 1.4280764 52.28629 c -0.85817482 1.480154 -0.60542079 3.677812 0.3113189 5.122425 0.8371902 1.319256 2.5502133 2.248832 4.1126864 2.250917 17.5947133 0.02348 35.8573803 -0.04582 52.7603593 0 1.685675 0.0046 3.499084 -1.219948 4.260153 -2.72404 0.76039 -1.502755 0.502801 -3.577377 -0.327704 -5.042547 C 54.193816 37.160166 45.486308 22.2591 36.13194 6.1783246 35.384607 4.893609 33.521912 4.4169156 32.035639 4.4169156 Z M 32.17901 20.939345 c 1.181871 0 3.08661 1.048564 3.086562 2.230436 -2.25e-4 5.480309 0.0039 11.352977 0 16.020634 -9.94e-4 1.191898 -2.042131 2.318506 -3.234029 2.318506 -1.191898 0 -3.235106 -1.126608 -3.236079 -2.318506 -0.0039 -4.765968 -0.008 -10.638636 0 -16.020634 0.0018 -1.181871 2.201675 -2.230436 3.383546 -2.230436 z m -0.08602 25.153337 a 3.3016189 3.3016189 0 0 1 3.301619 3.30162 3.3016189 3.3016189 0 0 1 -3.301619 3.301618 3.3016189 3.3016189 0 0 1 -3.301619 -3.301618 3.3016189 3.3016189 0 0 1 3.301619 -3.30162 z" FillRule="NonZero"/>
+                                        </Path.Data>
+                                    </Path>
+                                </Canvas>
+                            </Canvas>
+                        </Viewbox>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Background" Value="#FA505A"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="true">
+                            <Setter Property="Background" Value="#C81E28"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 </ResourceDictionary>
