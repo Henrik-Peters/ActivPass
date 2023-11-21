@@ -5,6 +5,7 @@
 #endregion
 using ActivPass.Localization;
 using ActivPass.Models;
+using ActivPass.Views;
 using System.Windows;
 using System.Windows.Input;
 
@@ -158,6 +159,11 @@ namespace ActivPass.ViewModels
         public ICommand OpenUrl { get; set; }
 
         /// <summary>
+        /// Open the warning text dialog box.
+        /// </summary>
+        public ICommand ShowWarningText { get; set; }
+
+        /// <summary>
         /// Create a new view model from a password item.
         /// </summary>
         /// <param name="proxy">Represented password item</param>
@@ -171,6 +177,7 @@ namespace ActivPass.ViewModels
 
             //Command bindings
             this.OpenUrl = new RelayCommand<string>(OpenBrowserUrl);
+            this.ShowWarningText = new RelayCommand(OpenWarningTextDialog);
         }
 
         /// <summary>
@@ -190,8 +197,7 @@ namespace ActivPass.ViewModels
         {
             if (!this._proxy.HasEncryptedTrafficUrl()) {
                 this.WarningText = Localize["NonEncryptionTrafficUrl"];
-            }
-            else {
+            } else {
                 this.WarningText = string.Empty;
             }
         }
@@ -203,11 +209,29 @@ namespace ActivPass.ViewModels
         /// <param name="url">Opent this url</param>
         private void OpenBrowserUrl(string url)
         {
-            if (this._proxy.HasBrowsableUrl())
-            {
+            if (this._proxy.HasBrowsableUrl()) {
                 var startInfo = new System.Diagnostics.ProcessStartInfo { FileName = @url, UseShellExecute = true };
                 System.Diagnostics.Process.Start(startInfo);
             }
+        }
+
+        /// <summary>
+        /// Show the dialog box to display the warning text
+        /// </summary>
+        private void OpenWarningTextDialog()
+        {
+            //Prepare the question box dialog
+            QuestionBox warnTextDialog = new QuestionBox(
+                this.WarningText,
+                Localize["Warnings"] + " - " + this.Name);
+
+            //Set dialog props
+            warnTextDialog.contentPresenter.Content = "!";
+            warnTextDialog.ConfirmButton.Visibility = Visibility.Hidden;
+            warnTextDialog.CancelButton.Content = Localize["Close"];
+
+            //Wait for the question box dialog result
+            warnTextDialog.ShowDialog();
         }
     }
 }
