@@ -103,6 +103,13 @@ namespace ActivPass.ViewModels
             }
         }
 
+        private string _warningText;
+        public string WarningText
+        {
+            get => _warningText;
+            set => SetProperty(ref _warningText, value);
+        }
+
         private PasswordStrength _passwordStrength;
         public PasswordStrength PasswordStrength
         {
@@ -132,6 +139,20 @@ namespace ActivPass.ViewModels
         }
 
         /// <summary>
+        /// If the warning icon should be visible
+        /// </summary>
+        public Visibility WarningVisibility
+        {
+            get {
+                if (!this._proxy.HasEncryptedTrafficUrl()) {
+                    return Visibility.Visible;
+                } else {
+                    return Visibility.Hidden;
+                }
+            }
+        }
+
+        /// <summary>
         /// Open the argument as a new process.
         /// </summary>
         public ICommand OpenUrl { get; set; }
@@ -146,6 +167,7 @@ namespace ActivPass.ViewModels
 
             //Init report values
             this.UpdatePasswordScore();
+            this.UpdateWarnings();
 
             //Command bindings
             this.OpenUrl = new RelayCommand<string>(OpenBrowserUrl);
@@ -159,6 +181,19 @@ namespace ActivPass.ViewModels
             //Calculate and apply the score
             PasswordStrength score = PasswordScores.GetScore(this.Password);
             this.PasswordStrength = score;
+        }
+
+        /// <summary>
+        /// Update the warning status and warning text
+        /// </summary>
+        public void UpdateWarnings()
+        {
+            if (!this._proxy.HasEncryptedTrafficUrl()) {
+                this.WarningText = Localize["NonEncryptionTrafficUrl"];
+            }
+            else {
+                this.WarningText = string.Empty;
+            }
         }
 
         /// <summary>

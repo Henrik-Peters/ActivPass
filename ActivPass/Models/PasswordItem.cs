@@ -31,6 +31,11 @@ namespace ActivPass.Models
             return this.Url.StartsWith("http://") || this.Url.StartsWith("https://") || this.Url.StartsWith("www.");
         }
 
+        public bool HasEncryptedTrafficUrl()
+        {
+            return this.Url.StartsWith("https://");
+        }
+
         public object Clone()
         {
             return this.MemberwiseClone();
