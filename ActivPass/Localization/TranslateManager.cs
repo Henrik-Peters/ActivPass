@@ -33,6 +33,7 @@ namespace ActivPass.Localization
             ["LowercaseLetters"] = new List<string> { "Lowercase letters", "Kleinbuchstaben" },
             ["CapitalLetters"] = new List<string> { "Capital letters", "Großbuchstaben" },
             ["Options"] = new List<string> { "Options", "Optionen" },
+            ["PasswordDuplicat"] = new List<string> { "Password duplicate", "Password Duplikat" },
             ["Duplicate"] = new List<string> { "Duplicate", "Dupklikat" },
             ["Warnings"] = new List<string> { "Warnings", "Warnungen" },
             ["PasswordStrength"] = new List<string> { "Password strength", "Passwortstärke" },

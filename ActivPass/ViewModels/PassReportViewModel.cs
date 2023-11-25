@@ -6,6 +6,8 @@
 using ActivPass.Localization;
 using ActivPass.Models;
 using ActivPass.Views;
+using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Input;
 
@@ -111,6 +113,13 @@ namespace ActivPass.ViewModels
             set => SetProperty(ref _warningText, value);
         }
 
+        private string[] _duplicateNames;
+        public string[] DuplicateNames
+        {
+            get => _duplicateNames;
+            set => SetProperty(ref _duplicateNames, value);
+        }
+
         private PasswordStrength _passwordStrength;
         public PasswordStrength PasswordStrength
         {
@@ -145,7 +154,7 @@ namespace ActivPass.ViewModels
         public Visibility WarningVisibility
         {
             get {
-                if (!this._proxy.HasEncryptedTrafficUrl()) {
+                if (this.WarningText != string.Empty) {
                     return Visibility.Visible;
                 } else {
                     return Visibility.Hidden;
@@ -171,6 +180,9 @@ namespace ActivPass.ViewModels
         {
             this._proxy = proxy;
 
+            //Init values
+            this.DuplicateNames = Array.Empty<string>();
+
             //Init report values
             this.UpdatePasswordScore();
             this.UpdateWarnings();
@@ -195,8 +207,21 @@ namespace ActivPass.ViewModels
         /// </summary>
         public void UpdateWarnings()
         {
+            List<string> warnings = new();
+
+            //Password duplicates
+            if (this.DuplicateNames.Length > 0) {
+                warnings.Add(Localize["PasswordDuplicat"] + ": " + string.Join(", ", this.DuplicateNames));
+            }
+
+            //Url warning
             if (!this._proxy.HasEncryptedTrafficUrl()) {
-                this.WarningText = Localize["NonEncryptionTrafficUrl"];
+                warnings.Add(Localize["NonEncryptionTrafficUrl"]);
+            }
+
+            //Apply the warning text
+            if (warnings.Count > 0) {
+                this.WarningText = string.Join("; ", warnings);
             } else {
                 this.WarningText = string.Empty;
             }

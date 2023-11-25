@@ -3,6 +3,7 @@
 // Copyright 2023 Henrik Peters
 // See LICENSE file in the project root for full license information
 #endregion
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -78,6 +79,9 @@ namespace ActivPass.ViewModels
                 container.Items.Select(item => new PassReportViewModel(item))
             );
 
+            //Update duplicate name info
+            this.UpdateDuplicateNames();
+
             //Notify view change
             NotifyPropertyChanged(nameof(PasswordItemsView));
 
@@ -116,6 +120,27 @@ namespace ActivPass.ViewModels
 
                 //Save the container with the current storage provider
                 SaveContainer.Execute(null);
+            }
+        }
+
+        /// <summary>
+        /// Update the duplicate names of all items
+        /// </summary>
+        private void UpdateDuplicateNames()
+        {
+            foreach (var passItem in this.PasswordItems) {
+                List<string> currDuplicates = new();
+
+                //Compare with all other items
+                foreach (var cmpItem in this.PasswordItems) {
+                    if (passItem.Password == cmpItem.Password && passItem.Name != cmpItem.Name) {
+                        currDuplicates.Add(cmpItem.Name);
+                    }
+                }
+
+                //Set the duplicate names in the item view model
+                passItem.DuplicateNames = currDuplicates.ToArray();
+                passItem.UpdateWarnings();
             }
         }
 
