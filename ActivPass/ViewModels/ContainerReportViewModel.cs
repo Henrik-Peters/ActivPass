@@ -84,7 +84,6 @@ namespace ActivPass.ViewModels
 
             //Notify view change
             NotifyPropertyChanged(nameof(PasswordItemsView));
-
             this.SaveContainer = SaveContainerCallback;
         }
 
@@ -115,7 +114,7 @@ namespace ActivPass.ViewModels
                 PasswordItems[itemIndex].Url = editorItem.Url;
                 PasswordItems[itemIndex].Notes = editorItem.Notes;
 
-                //Calculate the password score when the password has changed
+                //Update container report values
                 item.UpdatePasswordScore();
                 this.UpdateDuplicateNames();
 

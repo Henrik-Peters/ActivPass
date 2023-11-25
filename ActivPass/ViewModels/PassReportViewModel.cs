@@ -216,6 +216,11 @@ namespace ActivPass.ViewModels
         {
             List<string> warnings = new();
 
+            //Weak password
+            if (this.PasswordStrength == PasswordStrength.VERY_WEAK || this.PasswordStrength == PasswordStrength.WEAK) {
+                warnings.Add(Localize["WeakPassword"]);
+            }
+
             //Password duplicates
             if (this.DuplicateNames.Length > 0) {
                 warnings.Add(Localize["PasswordDuplicat"] + ": " + string.Join(", ", this.DuplicateNames));
