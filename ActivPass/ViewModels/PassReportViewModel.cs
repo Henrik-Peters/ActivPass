@@ -110,7 +110,14 @@ namespace ActivPass.ViewModels
         public string WarningText
         {
             get => _warningText;
-            set => SetProperty(ref _warningText, value);
+            set
+            {
+                if (_warningText != value) {
+                    _warningText = value;
+                    NotifyPropertyChanged(nameof(WarningText));
+                    NotifyPropertyChanged(nameof(WarningVisibility));
+                }
+            }
         }
 
         private string[] _duplicateNames;
@@ -215,7 +222,7 @@ namespace ActivPass.ViewModels
             }
 
             //Url warning
-            if (!this._proxy.HasEncryptedTrafficUrl()) {
+            if (this._proxy.Url != string.Empty && !this._proxy.HasEncryptedTrafficUrl()) {
                 warnings.Add(Localize["NonEncryptionTrafficUrl"]);
             }
 

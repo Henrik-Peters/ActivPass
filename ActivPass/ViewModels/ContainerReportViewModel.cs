@@ -117,6 +117,7 @@ namespace ActivPass.ViewModels
 
                 //Calculate the password score when the password has changed
                 item.UpdatePasswordScore();
+                this.UpdateDuplicateNames();
 
                 //Save the container with the current storage provider
                 SaveContainer.Execute(null);
