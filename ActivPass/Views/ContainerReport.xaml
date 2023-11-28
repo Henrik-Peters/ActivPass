@@ -44,8 +44,8 @@
         <Rectangle Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Height="1" Stroke="Black" StrokeDashArray="1 2" Margin="0,42,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Top"/>
 
         <!-- Strength score header -->
-        <Controls:StrengthReportBarLegend Grid.Column="1" HorizontalAlignment="Left" Margin="0,0,0,37" Grid.Row="1" VerticalAlignment="Bottom"/>
-        <Controls:StrengthReportBar Grid.Column="1" HorizontalAlignment="Stretch" Margin="5,0,10,10" Grid.Row="1" VerticalAlignment="Bottom" Height="25"/>
+        <Controls:StrengthReportBarLegend Grid.Column="1" HorizontalAlignment="Left" Margin="5,0,0,37" Grid.Row="1" VerticalAlignment="Bottom"/>
+        <Controls:StrengthReportBar Width0="{Binding ExtremeStrongWidth}" Width1="{Binding VeryStrongWidth}" Width2="{Binding StrongWidth}" Width3="{Binding MediumWidth}" Width4="{Binding WeakWidth}" Width5="{Binding VeryWeakWidth}" Grid.Column="1" HorizontalAlignment="Stretch" Margin="5,0,10,10" Grid.Row="1" VerticalAlignment="Bottom" Height="25"/>
 
         <!-- Table header labels -->
         <Border BorderBrush="#353535" Background="#676870" BorderThickness="2" Grid.Row="2" Grid.Column="1" Margin="5,0,10,2" Padding="8,0,3,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">

@@ -42,6 +42,89 @@ namespace ActivPass.ViewModels
             }
         }
 
+        private GridLength _extremeStrongWidth;
+        public GridLength ExtremeStrongWidth
+        {
+            get => _extremeStrongWidth;
+            set
+            {
+                if (!_extremeStrongWidth.Equals(value)) {
+                    _extremeStrongWidth = value;
+                    NotifyPropertyChanged(nameof(ExtremeStrongWidth));
+                }
+            }
+        }
+
+        private GridLength _veryStrongWidth;
+        public GridLength VeryStrongWidth
+        {
+            get => _veryStrongWidth;
+            set
+            {
+                if (!_veryStrongWidth.Equals(value))
+                {
+                    _veryStrongWidth = value;
+                    NotifyPropertyChanged(nameof(VeryStrongWidth));
+                }
+            }
+        }
+
+        private GridLength _strongWidth;
+        public GridLength StrongWidth
+        {
+            get => _strongWidth;
+            set
+            {
+                if (!_strongWidth.Equals(value))
+                {
+                    _strongWidth = value;
+                    NotifyPropertyChanged(nameof(StrongWidth));
+                }
+            }
+        }
+
+        private GridLength _mediumWidth;
+        public GridLength MediumWidth
+        {
+            get => _mediumWidth;
+            set
+            {
+                if (!_mediumWidth.Equals(value))
+                {
+                    _mediumWidth = value;
+                    NotifyPropertyChanged(nameof(MediumWidth));
+                }
+            }
+        }
+
+        private GridLength _weakWidth;
+        public GridLength WeakWidth
+        {
+            get => _weakWidth;
+            set
+            {
+                if (!_weakWidth.Equals(value))
+                {
+                    _weakWidth = value;
+                    NotifyPropertyChanged(nameof(WeakWidth));
+                }
+            }
+        }
+
+        private GridLength _veryWeakWidth;
+        public GridLength VeryWeakWidth
+        {
+            get => _veryWeakWidth;
+            set
+            {
+                if (!_veryWeakWidth.Equals(value))
+                {
+                    _veryWeakWidth = value;
+                    NotifyPropertyChanged(nameof(VeryWeakWidth));
+                }
+            }
+        }
+
         /// <summary>
         /// Close the passed window instance
         /// </summary>
@@ -81,6 +164,7 @@ namespace ActivPass.ViewModels
 
             //Update duplicate name info
             this.UpdateDuplicateNames();
+            this.UpdateScoreBar();
 
             //Notify view change
             NotifyPropertyChanged(nameof(PasswordItemsView));
@@ -117,6 +201,7 @@ namespace ActivPass.ViewModels
                 //Update container report values
                 item.UpdatePasswordScore();
                 this.UpdateDuplicateNames();
+                this.UpdateScoreBar();
 
                 //Save the container with the current storage provider
                 SaveContainer.Execute(null);
@@ -142,6 +227,39 @@ namespace ActivPass.ViewModels
                 passItem.DuplicateNames = currDuplicates.ToArray();
                 passItem.UpdateWarnings();
             }
+        }
+
+        /// <summary>
+        /// Update the width sizing of the score report bar
+        /// </summary>
+        private void UpdateScoreBar()
+        {
+            //Get total item amount
+            int total = PasswordItems.Count;
+
+            //Get the amount for each password score
+            int extremeStrong = PasswordItems.Where(item => item.PasswordStrength == PasswordStrength.EXTREME_STRONG).Count();
+            int veryStrong = PasswordItems.Where(item => item.PasswordStrength == PasswordStrength.VERY_STRONG).Count();
+            int strong = PasswordItems.Where(item => item.PasswordStrength == PasswordStrength.STRONG).Count();
+            int medium = PasswordItems.Where(item => item.PasswordStrength == PasswordStrength.MEDIUM).Count();
+            int weak = PasswordItems.Where(item => item.PasswordStrength == PasswordStrength.WEAK).Count();
+            int veryWeak = PasswordItems.Where(item => item.PasswordStrength == PasswordStrength.VERY_WEAK).Count();
+
+            //Calculate percentage values between 0 and 1
+            float pExtremeStrongPer = (float)extremeStrong / total;
+            float pVeryStrong = (float)veryStrong / total;
+            float pStrong = (float)strong / total;
+            float pMedium = (float)medium / total;
+            float pWeak = (float)weak / total;
+            float pVeryWeak = (float)veryWeak / total;
+
+            //Apply grid length sizing
+            this.ExtremeStrongWidth = new GridLength(pExtremeStrongPer, GridUnitType.Star);
+            this.VeryStrongWidth = new GridLength(pVeryStrong, GridUnitType.Star);
+            this.StrongWidth = new GridLength(pStrong, GridUnitType.Star);
+            this.MediumWidth = new GridLength(pMedium, GridUnitType.Star);
+            this.WeakWidth = new GridLength(pWeak, GridUnitType.Star);
+            this.VeryWeakWidth = new GridLength(pVeryWeak, GridUnitType.Star);
         }
 
         /// <summary>
