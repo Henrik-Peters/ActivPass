@@ -66,15 +66,15 @@
         </Border>
         
         <!-- Password items panel -->
-        <ScrollViewer x:Name="PasswordItemScroll" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="1" VerticalScrollBarVisibility="Auto">
-            <ItemsControl x:Name="PasswordItemControl" ItemsSource="{Binding PasswordItemsView}">
+        <ScrollViewer x:Name="PasswordItemScroll" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="1" VerticalScrollBarVisibility="Auto" Focusable="False">
+            <ItemsControl x:Name="PasswordItemControl" ItemsSource="{Binding PasswordItemsView}" Focusable="False">
 
                 <!-- Data templates for password items -->
                 <ItemsControl.Resources>
                     <DataTemplate DataType="{x:Type ViewModels:PassReportViewModel}">
 
                         <!-- Password item control border -->
-                        <Border x:Name="PassItem" Tag="{Binding DataContext, ElementName=ContainerReportWindow}" Margin="10,5,10,5" Padding="3" UseLayoutRounding="True" SnapsToDevicePixels="True">
+                        <Border x:Name="PassItem" Tag="{Binding DataContext, ElementName=ContainerReportWindow}" Margin="10,5,10,5" Padding="3" Focusable="False" UseLayoutRounding="True" SnapsToDevicePixels="True">
 
                             <!-- Password item border control effects -->
                             <Border.Effect>

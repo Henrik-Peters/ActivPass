@@ -235,7 +235,7 @@
                 <!-- Master password area -->
                 <Label x:Name="MasterPasswordLabel" Content="{Binding Localize[MasterPassword]}" Foreground="White" FontFamily="Tahoma" FontSize="14" FontWeight="Bold" Grid.Row="1" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="7,2,0,0"/>
                 <PasswordBox x:Name="MasterPassword" Tag="" Style="{StaticResource PasswordBoxStyle}" Margin="0,0,0,0" Grid.Row="2" Height="50" VerticalAlignment="Top" HorizontalAlignment="Stretch" KeyUp="MasterPassword_KeyUp"/>
-                <Button x:Name="LoginButton" Content="{Binding Localize[Login]}" Grid.Row="2" Grid.Column="1" Height="50" Style="{StaticResource NormalButton}" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Top" Click="LoginButton_Click"/>
+                <Button x:Name="LoginButton" Content="{Binding Localize[Login]}" Grid.Row="2" Grid.Column="1" Height="50" Style="{StaticResource NormalButton}" Focusable="False" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Top" Click="LoginButton_Click"/>
 
                 <!-- Login failed label -->
                 <Label x:Name="LoginFailLabel" Content="{Binding LoginInfo}" Style="{StaticResource InfoLabel}" Visibility="{Binding LoginInfoVisibility}" Foreground="#FFFF1D1D" FontFamily="Tahoma" FontSize="14" FontWeight="Bold" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="7,2,0,0"/>
@@ -244,7 +244,7 @@
         </Border>
 
         <!-- Password items panel -->
-        <ScrollViewer x:Name="PasswordItemScroll" Padding="20" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" VerticalScrollBarVisibility="Auto">
+        <ScrollViewer x:Name="PasswordItemScroll" Padding="20" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" VerticalScrollBarVisibility="Auto" Focusable="False">
 
             <!-- Login animation style trigger -->
             <ScrollViewer.Style>
@@ -254,14 +254,14 @@
                     </Style.Triggers>
                 </Style>
             </ScrollViewer.Style>
-            <ItemsControl x:Name="PasswordItemControl" ItemsSource="{Binding PasswordItemsView}">
+            <ItemsControl x:Name="PasswordItemControl" ItemsSource="{Binding PasswordItemsView}" Focusable="False">
 
                 <!-- Data templates for password items -->
                 <ItemsControl.Resources>
                     <DataTemplate DataType="{x:Type ViewModels:PasswordItemViewModel}">
 
                         <!-- Password item control border -->
-                        <Border x:Name="PassItem" Tag="{Binding DataContext, ElementName=ActivPassWindow}" Margin="10" Padding="3" UseLayoutRounding="True" SnapsToDevicePixels="True" MouseEnter="PassItem_MouseEnter" MouseLeave="PassItem_MouseLeave">
+                        <Border x:Name="PassItem" Tag="{Binding DataContext, ElementName=ActivPassWindow}" Margin="10" Padding="3" Focusable="False" UseLayoutRounding="True" SnapsToDevicePixels="True" MouseEnter="PassItem_MouseEnter" MouseLeave="PassItem_MouseLeave">
 
                             <!-- Input bindings for password items -->
                             <Border.InputBindings>
