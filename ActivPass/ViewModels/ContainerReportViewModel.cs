@@ -42,6 +42,20 @@ namespace ActivPass.ViewModels
             }
         }
 
+        private string _warningsBoxText;
+        public string WarningsBoxText
+        {
+            get => _warningsBoxText;
+            set
+            {
+                if (_warningsBoxText != value)
+                {
+                    _warningsBoxText = value;
+                    NotifyPropertyChanged(nameof(WarningsBoxText));
+                }
+            }
+        }
+
         private GridLength _extremeStrongWidth;
         public GridLength ExtremeStrongWidth
         {
@@ -243,6 +257,7 @@ namespace ActivPass.ViewModels
             //Update duplicate name info
             this.UpdateDuplicateNames();
             this.UpdateScoreBar();
+            this.UpdateWarningsBox();
 
             //Notify view change
             NotifyPropertyChanged(nameof(PasswordItemsView));
@@ -280,6 +295,7 @@ namespace ActivPass.ViewModels
                 item.UpdatePasswordScore();
                 this.UpdateDuplicateNames();
                 this.UpdateScoreBar();
+                this.UpdateWarningsBox();
 
                 //Save the container with the current storage provider
                 SaveContainer.Execute(null);
@@ -346,6 +362,20 @@ namespace ActivPass.ViewModels
             this.MediumVisibility = medium > 0 ? Visibility.Visible : Visibility.Collapsed;
             this.WeakVisibility = weak > 0 ? Visibility.Visible : Visibility.Collapsed;
             this.VeryWeakVisibility = veryWeak > 0 ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        /// <summary>
+        /// Update the warning header box text
+        /// </summary>
+        private void UpdateWarningsBox()
+        {
+            //Calculate the amount of items with warnings
+            int totalWarnings = PasswordItems.Aggregate(0, (totalWarnings, item) => {
+                return item.WarningText != string.Empty ? totalWarnings + 1 : totalWarnings;
+            });
+
+            //Update the box text
+            this.WarningsBoxText = totalWarnings + " " + Localize["Warnings"];
         }
 
         /// <summary>

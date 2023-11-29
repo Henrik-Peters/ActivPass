@@ -51,7 +51,19 @@
                                           MediumVisibility="{Binding MediumVisibility}"
                                           WeakVisibility="{Binding WeakVisibility}"
                                           VeryWeakVisibility="{Binding VeryWeakVisibility}"/>
-        <Controls:StrengthReportBar Width0="{Binding ExtremeStrongWidth}" Width1="{Binding VeryStrongWidth}" Width2="{Binding StrongWidth}" Width3="{Binding MediumWidth}" Width4="{Binding WeakWidth}" Width5="{Binding VeryWeakWidth}" Grid.Column="1" HorizontalAlignment="Stretch" Margin="5,0,10,10" Grid.Row="1" VerticalAlignment="Bottom" Height="25"/>
+        <Controls:StrengthReportBar Grid.Column="1" HorizontalAlignment="Stretch" Margin="5,0,10,10" Grid.Row="1" VerticalAlignment="Bottom" Height="25"
+                                    Width0="{Binding ExtremeStrongWidth}"
+                                    Width1="{Binding VeryStrongWidth}"
+                                    Width2="{Binding StrongWidth}"
+                                    Width3="{Binding MediumWidth}"
+                                    Width4="{Binding WeakWidth}"
+                                    Width5="{Binding VeryWeakWidth}"/>
+
+        <!-- Warning box -->
+        <WrapPanel Orientation="Horizontal" Margin="0,0,10,42" Height="37" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+            <Button Style="{StaticResource WarnIconButton}" Margin="0,0,0,0" Focusable="False" IsEnabled="False" Padding="5" Height="37"/>
+            <Label Content="{Binding WarningsBoxText}" Margin="-4,0,0,0" Foreground="White" FontFamily="Tahoma" FontSize="17" FontWeight="Bold" VerticalContentAlignment="Center"/>
+        </WrapPanel>
 
         <!-- Table header labels -->
         <Border BorderBrush="#353535" Background="#676870" BorderThickness="2" Grid.Row="2" Grid.Column="1" Margin="5,0,10,2" Padding="8,0,3,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
