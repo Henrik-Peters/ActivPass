@@ -11,7 +11,7 @@
         UseLayoutRounding="True"
         TextOptions.TextFormattingMode="Display"
         mc:Ignorable="d"
-        Title="{Binding Localize[ContainerReportTitle]}" Width="1300" MinWidth="800" MinHeight="450" Height="770" FontSize="18" WindowStartupLocation="CenterScreen">
+        Title="{Binding Localize[ContainerReportTitle]}" Width="1300" MinWidth="800" MinHeight="450" Height="765" FontSize="18" WindowStartupLocation="CenterScreen">
 
     <!-- View model instance -->
     <Window.DataContext>
@@ -51,7 +51,7 @@
                                           MediumVisibility="{Binding MediumVisibility}"
                                           WeakVisibility="{Binding WeakVisibility}"
                                           VeryWeakVisibility="{Binding VeryWeakVisibility}"/>
-        <Controls:StrengthReportBar Grid.Column="1" HorizontalAlignment="Stretch" Margin="5,0,10,10" Grid.Row="1" VerticalAlignment="Bottom" Height="25"
+        <Controls:StrengthReportBar Grid.Column="1" HorizontalAlignment="Stretch" Margin="5,0,10,10" Grid.Row="1" VerticalAlignment="Bottom" Height="25" ToolTip="{Binding Localize[PasswordStrength]}"
                                     Width0="{Binding ExtremeStrongWidth}"
                                     Width1="{Binding VeryStrongWidth}"
                                     Width2="{Binding StrongWidth}"
@@ -92,7 +92,7 @@
                     <DataTemplate DataType="{x:Type ViewModels:PassReportViewModel}">
 
                         <!-- Password item control border -->
-                        <Border x:Name="PassItem" Tag="{Binding DataContext, ElementName=ContainerReportWindow}" Margin="10,5,10,5" Padding="3" Focusable="False" UseLayoutRounding="True" SnapsToDevicePixels="True">
+                        <Border x:Name="PassItem" Tag="{Binding DataContext, ElementName=ContainerReportWindow}" Margin="10,5,10,0" Padding="3" Focusable="False" UseLayoutRounding="True" SnapsToDevicePixels="True">
 
                             <!-- Password item border control effects -->
                             <Border.Effect>
