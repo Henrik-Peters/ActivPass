@@ -33,22 +33,22 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Border BorderBrush="#1C1D25" BorderThickness="2" Grid.Column="0" Grid.Row="0" Background="{StaticResource BarColor0}" Margin="3,0,2,0" Width="25" Height="25" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-        <Label Content="{Binding Localize[ExtremeStrong], ElementName=ReportBarLegend}" Grid.Column="1" Foreground="White" FontFamily="Tahoma" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Center"/>
+        <Border x:Name="BorderExtremeStrong" Visibility="{Binding ExtremeStrongVisibility, ElementName=ReportBarLegend}" BorderBrush="#1C1D25" BorderThickness="2" Grid.Column="0" Grid.Row="0" Background="{StaticResource BarColor0}" Margin="3,0,2,0" Width="25" Height="25" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        <Label x:Name="LabelExtremeStrong" Visibility="{Binding ExtremeStrongVisibility, ElementName=ReportBarLegend}" Content="{Binding Localize[ExtremeStrong], ElementName=ReportBarLegend}" Grid.Column="1" Foreground="White" FontFamily="Tahoma" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Center"/>
 
-        <Border BorderBrush="#1C1D25" BorderThickness="2" Grid.Column="2" Grid.Row="0" Background="{StaticResource BarColor1}" Margin="3,0,2,0" Width="25" Height="25" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-        <Label Content="{Binding Localize[VeryStrong], ElementName=ReportBarLegend}" Grid.Column="3" Foreground="White" FontFamily="Tahoma" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Center"/>
+        <Border x:Name="BorderVeryStrong" Visibility="{Binding VeryStrongVisibility, ElementName=ReportBarLegend}" BorderBrush="#1C1D25" BorderThickness="2" Grid.Column="2" Grid.Row="0" Background="{StaticResource BarColor1}" Margin="3,0,2,0" Width="25" Height="25" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        <Label x:Name="LabelVeryStrong" Visibility="{Binding VeryStrongVisibility, ElementName=ReportBarLegend}" Content="{Binding Localize[VeryStrong], ElementName=ReportBarLegend}" Grid.Column="3" Foreground="White" FontFamily="Tahoma" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Center"/>
 
-        <Border BorderBrush="#1C1D25" BorderThickness="2" Grid.Column="4" Grid.Row="0" Background="{StaticResource BarColor2}" Margin="3,0,2,0" Width="25" Height="25" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-        <Label Content="{Binding Localize[Strong], ElementName=ReportBarLegend}" Grid.Column="5" Foreground="White" FontFamily="Tahoma" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Center"/>
+        <Border x:Name="BorderStrong" Visibility="{Binding StrongVisibility, ElementName=ReportBarLegend}" BorderBrush="#1C1D25" BorderThickness="2" Grid.Column="4" Grid.Row="0" Background="{StaticResource BarColor2}" Margin="3,0,2,0" Width="25" Height="25" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        <Label x:Name="LabelStrong" Visibility="{Binding StrongVisibility, ElementName=ReportBarLegend}" Content="{Binding Localize[Strong], ElementName=ReportBarLegend}" Grid.Column="5" Foreground="White" FontFamily="Tahoma" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Center"/>
 
-        <Border BorderBrush="#1C1D25" BorderThickness="2" Grid.Column="6" Grid.Row="0" Background="{StaticResource BarColor3}" Margin="3,0,2,0" Width="25" Height="25" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-        <Label Content="{Binding Localize[Medium], ElementName=ReportBarLegend}" Grid.Column="7" Foreground="White" FontFamily="Tahoma" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Center"/>
+        <Border x:Name="BorderMedium" Visibility="{Binding MediumVisibility, ElementName=ReportBarLegend}" BorderBrush="#1C1D25" BorderThickness="2" Grid.Column="6" Grid.Row="0" Background="{StaticResource BarColor3}" Margin="3,0,2,0" Width="25" Height="25" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        <Label x:Name="LabelMedium" Visibility="{Binding MediumVisibility, ElementName=ReportBarLegend}" Content="{Binding Localize[Medium], ElementName=ReportBarLegend}" Grid.Column="7" Foreground="White" FontFamily="Tahoma" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Center"/>
 
-        <Border BorderBrush="#1C1D25" BorderThickness="2" Grid.Column="8" Grid.Row="0" Background="{StaticResource BarColor4}" Margin="3,0,2,0" Width="25" Height="25" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-        <Label Content="{Binding Localize[Weak], ElementName=ReportBarLegend}" Grid.Column="9" Foreground="White" FontFamily="Tahoma" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Center"/>
+        <Border x:Name="BorderWeak" Visibility="{Binding WeakVisibility, ElementName=ReportBarLegend}" BorderBrush="#1C1D25" BorderThickness="2" Grid.Column="8" Grid.Row="0" Background="{StaticResource BarColor4}" Margin="3,0,2,0" Width="25" Height="25" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        <Label x:Name="LabelWeak" Visibility="{Binding WeakVisibility, ElementName=ReportBarLegend}" Content="{Binding Localize[Weak], ElementName=ReportBarLegend}" Grid.Column="9" Foreground="White" FontFamily="Tahoma" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Center"/>
 
-        <Border BorderBrush="#1C1D25" BorderThickness="2" Grid.Column="10" Grid.Row="0" Background="{StaticResource BarColor5}" Margin="3,0,2,0" Width="25" Height="25" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-        <Label Content="{Binding Localize[VeryWeak], ElementName=ReportBarLegend}" Grid.Column="11" Foreground="White" FontFamily="Tahoma" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Center"/>
+        <Border x:Name="BorderVeryWeak" Visibility="{Binding VeryWeakVisibility, ElementName=ReportBarLegend}" BorderBrush="#1C1D25" BorderThickness="2" Grid.Column="10" Grid.Row="0" Background="{StaticResource BarColor5}" Margin="3,0,2,0" Width="25" Height="25" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        <Label x:Name="LabelVeryWeak" Visibility="{Binding VeryWeakVisibility, ElementName=ReportBarLegend}" Content="{Binding Localize[VeryWeak], ElementName=ReportBarLegend}" Grid.Column="11" Foreground="White" FontFamily="Tahoma" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Center"/>
     </Grid>
 </UserControl>
