@@ -125,6 +125,84 @@ namespace ActivPass.ViewModels
             }
         }
 
+        private Visibility _extremeStrongVisibility;
+        public Visibility ExtremeStrongVisibility
+        {
+            get => _extremeStrongVisibility;
+            set
+            {
+                if (_extremeStrongVisibility != value) {
+                    _extremeStrongVisibility = value;
+                    NotifyPropertyChanged(nameof(ExtremeStrongVisibility));
+                }
+            }
+        }
+
+        private Visibility _veryStrongVisibility;
+        public Visibility VeryStrongVisibility
+        {
+            get => _veryStrongVisibility;
+            set
+            {
+                if (_veryStrongVisibility != value) {
+                    _veryStrongVisibility = value;
+                    NotifyPropertyChanged(nameof(VeryStrongVisibility));
+                }
+            }
+        }
+
+        private Visibility _strongVisibility;
+        public Visibility StrongVisibility
+        {
+            get => _strongVisibility;
+            set
+            {
+                if (_strongVisibility != value) {
+                    _strongVisibility = value;
+                    NotifyPropertyChanged(nameof(StrongVisibility));
+                }
+            }
+        }
+
+        private Visibility _mediumVisibility;
+        public Visibility MediumVisibility
+        {
+            get => _mediumVisibility;
+            set
+            {
+                if (_mediumVisibility != value) {
+                    _mediumVisibility = value;
+                    NotifyPropertyChanged(nameof(MediumVisibility));
+                }
+            }
+        }
+
+        private Visibility _weakVisibility;
+        public Visibility WeakVisibility
+        {
+            get => _weakVisibility;
+            set
+            {
+                if (_weakVisibility != value) {
+                    _weakVisibility = value;
+                    NotifyPropertyChanged(nameof(WeakVisibility));
+                }
+            }
+        }
+
+        private Visibility _veryWeakVisibility;
+        public Visibility VeryWeakVisibility
+        {
+            get => _veryWeakVisibility;
+            set
+            {
+                if (_veryWeakVisibility != value) {
+                    _veryWeakVisibility = value;
+                    NotifyPropertyChanged(nameof(VeryWeakVisibility));
+                }
+            }
+        }
+
         /// <summary>
         /// Close the passed window instance
         /// </summary>
@@ -260,6 +338,14 @@ namespace ActivPass.ViewModels
             this.MediumWidth = new GridLength(pMedium, GridUnitType.Star);
             this.WeakWidth = new GridLength(pWeak, GridUnitType.Star);
             this.VeryWeakWidth = new GridLength(pVeryWeak, GridUnitType.Star);
+
+            //Apply legend visibility
+            this.ExtremeStrongVisibility = extremeStrong > 0 ? Visibility.Visible : Visibility.Collapsed;
+            this.VeryStrongVisibility = veryStrong > 0 ? Visibility.Visible : Visibility.Collapsed;
+            this.StrongVisibility = strong > 0 ? Visibility.Visible : Visibility.Collapsed;
+            this.MediumVisibility = medium > 0 ? Visibility.Visible : Visibility.Collapsed;
+            this.WeakVisibility = weak > 0 ? Visibility.Visible : Visibility.Collapsed;
+            this.VeryWeakVisibility = veryWeak > 0 ? Visibility.Visible : Visibility.Collapsed;
         }
 
         /// <summary>
