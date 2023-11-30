@@ -11,7 +11,7 @@
         UseLayoutRounding="True"
         TextOptions.TextFormattingMode="Display"
         mc:Ignorable="d"
-        Title="{Binding Localize[ContainerReportTitle]}" Width="1300" MinWidth="800" MinHeight="450" Height="765" FontSize="18" WindowStartupLocation="CenterScreen">
+        Title="{Binding Localize[ContainerReportTitle]}" Width="1300" MinWidth="900" MinHeight="450" Height="765" FontSize="18" WindowStartupLocation="CenterScreen">
 
     <!-- View model instance -->
     <Window.DataContext>
@@ -61,8 +61,8 @@
 
         <!-- Warning box -->
         <WrapPanel Orientation="Horizontal" Margin="0,0,10,42" Height="37" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-            <Button Style="{StaticResource WarnIconButton}" Margin="0,0,0,0" Focusable="False" IsEnabled="False" Padding="5" Height="37"/>
-            <Button Style="{StaticResource OkayIconButton}" Margin="0,0,0,0" Focusable="False" IsEnabled="False" Padding="5" Height="37"/>
+            <Button Style="{StaticResource WarnIconButton}" Visibility="{Binding WarningIconVisibility}" Margin="0,0,0,0" Focusable="False" IsEnabled="False" Padding="5" Height="37"/>
+            <Button Style="{StaticResource OkayIconButton}" Visibility="{Binding OkayIconVisibility}" Margin="0,0,0,0" Focusable="False" IsEnabled="False" Padding="5" Height="37"/>
             <Label Content="{Binding WarningsBoxText}" Margin="-4,0,0,0" Foreground="White" FontFamily="Tahoma" FontSize="17" FontWeight="Bold" VerticalContentAlignment="Center"/>
         </WrapPanel>
 

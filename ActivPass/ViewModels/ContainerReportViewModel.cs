@@ -3,6 +3,7 @@
 // Copyright 2023 Henrik Peters
 // See LICENSE file in the project root for full license information
 #endregion
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -52,6 +53,32 @@ namespace ActivPass.ViewModels
                 {
                     _warningsBoxText = value;
                     NotifyPropertyChanged(nameof(WarningsBoxText));
+                }
+            }
+        }
+
+        private Visibility _warningIconVisibility;
+        public Visibility WarningIconVisibility
+        {
+            get => _warningIconVisibility;
+            set
+            {
+                if (_warningIconVisibility != value) {
+                    _warningIconVisibility = value;
+                    NotifyPropertyChanged(nameof(WarningIconVisibility));
+                }
+            }
+        }
+
+        private Visibility _okayIconVisibility;
+        public Visibility OkayIconVisibility
+        {
+            get => _okayIconVisibility;
+            set
+            {
+                if (_okayIconVisibility != value) {
+                    _okayIconVisibility = value;
+                    NotifyPropertyChanged(nameof(OkayIconVisibility));
                 }
             }
         }
@@ -331,37 +358,47 @@ namespace ActivPass.ViewModels
             //Get total item amount
             int total = PasswordItems.Count;
 
-            //Get the amount for each password score
-            int extremeStrong = PasswordItems.Where(item => item.PasswordStrength == PasswordStrength.EXTREME_STRONG).Count();
-            int veryStrong = PasswordItems.Where(item => item.PasswordStrength == PasswordStrength.VERY_STRONG).Count();
-            int strong = PasswordItems.Where(item => item.PasswordStrength == PasswordStrength.STRONG).Count();
-            int medium = PasswordItems.Where(item => item.PasswordStrength == PasswordStrength.MEDIUM).Count();
-            int weak = PasswordItems.Where(item => item.PasswordStrength == PasswordStrength.WEAK).Count();
-            int veryWeak = PasswordItems.Where(item => item.PasswordStrength == PasswordStrength.VERY_WEAK).Count();
+            if (total > 0) {
+                //Get the amount for each password score
+                int extremeStrong = PasswordItems.Where(item => item.PasswordStrength == PasswordStrength.EXTREME_STRONG).Count();
+                int veryStrong = PasswordItems.Where(item => item.PasswordStrength == PasswordStrength.VERY_STRONG).Count();
+                int strong = PasswordItems.Where(item => item.PasswordStrength == PasswordStrength.STRONG).Count();
+                int medium = PasswordItems.Where(item => item.PasswordStrength == PasswordStrength.MEDIUM).Count();
+                int weak = PasswordItems.Where(item => item.PasswordStrength == PasswordStrength.WEAK).Count();
+                int veryWeak = PasswordItems.Where(item => item.PasswordStrength == PasswordStrength.VERY_WEAK).Count();
 
-            //Calculate percentage values between 0 and 1
-            float pExtremeStrongPer = (float)extremeStrong / total;
-            float pVeryStrong = (float)veryStrong / total;
-            float pStrong = (float)strong / total;
-            float pMedium = (float)medium / total;
-            float pWeak = (float)weak / total;
-            float pVeryWeak = (float)veryWeak / total;
+                //Calculate percentage values between 0 and 1
+                float pExtremeStrongPer = (float)extremeStrong / total;
+                float pVeryStrong = (float)veryStrong / total;
+                float pStrong = (float)strong / total;
+                float pMedium = (float)medium / total;
+                float pWeak = (float)weak / total;
+                float pVeryWeak = (float)veryWeak / total;
 
-            //Apply grid length sizing
-            this.ExtremeStrongWidth = new GridLength(pExtremeStrongPer, GridUnitType.Star);
-            this.VeryStrongWidth = new GridLength(pVeryStrong, GridUnitType.Star);
-            this.StrongWidth = new GridLength(pStrong, GridUnitType.Star);
-            this.MediumWidth = new GridLength(pMedium, GridUnitType.Star);
-            this.WeakWidth = new GridLength(pWeak, GridUnitType.Star);
-            this.VeryWeakWidth = new GridLength(pVeryWeak, GridUnitType.Star);
+                //Apply grid length sizing
+                this.ExtremeStrongWidth = new GridLength(pExtremeStrongPer, GridUnitType.Star);
+                this.VeryStrongWidth = new GridLength(pVeryStrong, GridUnitType.Star);
+                this.StrongWidth = new GridLength(pStrong, GridUnitType.Star);
+                this.MediumWidth = new GridLength(pMedium, GridUnitType.Star);
+                this.WeakWidth = new GridLength(pWeak, GridUnitType.Star);
+                this.VeryWeakWidth = new GridLength(pVeryWeak, GridUnitType.Star);
 
-            //Apply legend visibility
-            this.ExtremeStrongVisibility = extremeStrong > 0 ? Visibility.Visible : Visibility.Collapsed;
-            this.VeryStrongVisibility = veryStrong > 0 ? Visibility.Visible : Visibility.Collapsed;
-            this.StrongVisibility = strong > 0 ? Visibility.Visible : Visibility.Collapsed;
-            this.MediumVisibility = medium > 0 ? Visibility.Visible : Visibility.Collapsed;
-            this.WeakVisibility = weak > 0 ? Visibility.Visible : Visibility.Collapsed;
-            this.VeryWeakVisibility = veryWeak > 0 ? Visibility.Visible : Visibility.Collapsed;
+                //Apply legend visibility
+                this.ExtremeStrongVisibility = extremeStrong > 0 ? Visibility.Visible : Visibility.Collapsed;
+                this.VeryStrongVisibility = veryStrong > 0 ? Visibility.Visible : Visibility.Collapsed;
+                this.StrongVisibility = strong > 0 ? Visibility.Visible : Visibility.Collapsed;
+                this.MediumVisibility = medium > 0 ? Visibility.Visible : Visibility.Collapsed;
+                this.WeakVisibility = weak > 0 ? Visibility.Visible : Visibility.Collapsed;
+                this.VeryWeakVisibility = veryWeak > 0 ? Visibility.Visible : Visibility.Collapsed;
+            } else {
+                //Empty container
+                this.ExtremeStrongWidth = new GridLength(1, GridUnitType.Star);
+                this.VeryStrongWidth = new GridLength(1, GridUnitType.Star);
+                this.StrongWidth = new GridLength(1, GridUnitType.Star);
+                this.MediumWidth = new GridLength(1, GridUnitType.Star);
+                this.WeakWidth = new GridLength(1, GridUnitType.Star);
+                this.VeryWeakWidth = new GridLength(1, GridUnitType.Star);
+            }
         }
 
         /// <summary>
@@ -376,6 +413,15 @@ namespace ActivPass.ViewModels
 
             //Update the box text
             this.WarningsBoxText = totalWarnings + " " + Localize["Warnings"];
+
+            //Update warning icons
+            if (totalWarnings == 0) {
+                this.WarningIconVisibility = Visibility.Collapsed;
+                this.OkayIconVisibility = Visibility.Visible;
+            } else {
+                this.WarningIconVisibility = Visibility.Visible;
+                this.OkayIconVisibility = Visibility.Collapsed;
+            }
         }
 
         /// <summary>
