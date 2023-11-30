@@ -62,6 +62,7 @@
         <!-- Warning box -->
         <WrapPanel Orientation="Horizontal" Margin="0,0,10,42" Height="37" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" HorizontalAlignment="Right" VerticalAlignment="Bottom">
             <Button Style="{StaticResource WarnIconButton}" Margin="0,0,0,0" Focusable="False" IsEnabled="False" Padding="5" Height="37"/>
+            <Button Style="{StaticResource OkayIconButton}" Margin="0,0,0,0" Focusable="False" IsEnabled="False" Padding="5" Height="37"/>
             <Label Content="{Binding WarningsBoxText}" Margin="-4,0,0,0" Foreground="White" FontFamily="Tahoma" FontSize="17" FontWeight="Bold" VerticalContentAlignment="Center"/>
         </WrapPanel>
 

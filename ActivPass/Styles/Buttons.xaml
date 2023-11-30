@@ -1,6 +1,42 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
+    <Style x:Key="OkayIconButton" TargetType="{x:Type Button}">
+        <Setter Property="Background" Value="#45A049"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="2"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Margin="{TemplateBinding Padding}" Background="Transparent" SnapsToDevicePixels="true">
+                        <Viewbox Stretch="Uniform">
+                            <Canvas Width="64" Height="64">
+                                <Canvas>
+                                    <Path Fill="{TemplateBinding Background}" StrokeThickness="0.878092">
+                                        <Path.Data>
+                                            <PathGeometry Figures="M 32.084972 1.9416676 A 30.187502 30.187502 0 0 0 1.8974723 32.129167 a 30.187502 30.187502 0 0 0 30.1874997 30.1875 30.187502 30.187502 0 0 0 30.1875 -30.1875 30.187502 30.187502 0 0 0 -30.1875 -30.1874994 z M 44.270519 18.115495 c 0.264612 -0.0039 0.528821 0.07375 0.691406 0.238281 1.620158 1.639551 3.13698 3.163835 4.580078 4.59961 0.31646 0.314853 0.292243 1.022267 -0.02148 1.339843 -3.65753 3.702425 -16.136222 16.236514 -21.595703 21.703126 -0.337489 0.337929 -1.094543 0.355894 -1.433594 0.01953 -3.40993 -3.382891 -7.843682 -7.900367 -11.904301 -12.011718 -0.214298 -0.216976 -0.233607 -0.702738 -0.01563 -0.916016 1.977104 -1.934476 3.334352 -3.245957 4.792969 -4.746093 0.334015 -0.343522 0.967838 -0.288007 1.308594 0.04883 2.243105 2.217303 6.441406 6.324219 6.441406 6.324219 0 0 11.133816 -11.23229 16.458984 -16.34961 0.166784 -0.160274 0.432654 -0.246111 0.697266 -0.25 z" FillRule="NonZero"/>
+                                        </Path.Data>
+                                    </Path>
+                                </Canvas>
+                            </Canvas>
+                        </Viewbox>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Background" Value="#60BB64"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="true">
+                            <Setter Property="Background" Value="#3D9841"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style x:Key="NormalButton" TargetType="{x:Type Button}">
         <Setter Property="Background" Value="#454545"/>
         <Setter Property="BorderBrush" Value="#222222"/>
