@@ -83,6 +83,20 @@ namespace ActivPass.ViewModels
             }
         }
 
+        private Visibility _emptyContainerInfo;
+        public Visibility EmptyContainerInfo
+        {
+            get => _emptyContainerInfo;
+            set
+            {
+                if (_emptyContainerInfo != value)
+                {
+                    _emptyContainerInfo = value;
+                    NotifyPropertyChanged(nameof(EmptyContainerInfo));
+                }
+            }
+        }
+
         private GridLength _extremeStrongWidth;
         public GridLength ExtremeStrongWidth
         {
@@ -390,6 +404,9 @@ namespace ActivPass.ViewModels
                 this.MediumVisibility = medium > 0 ? Visibility.Visible : Visibility.Collapsed;
                 this.WeakVisibility = weak > 0 ? Visibility.Visible : Visibility.Collapsed;
                 this.VeryWeakVisibility = veryWeak > 0 ? Visibility.Visible : Visibility.Collapsed;
+
+                //Empty container info
+                this.EmptyContainerInfo = Visibility.Collapsed;
             } else {
                 //Empty container
                 this.ExtremeStrongWidth = new GridLength(1, GridUnitType.Star);
@@ -398,6 +415,9 @@ namespace ActivPass.ViewModels
                 this.MediumWidth = new GridLength(1, GridUnitType.Star);
                 this.WeakWidth = new GridLength(1, GridUnitType.Star);
                 this.VeryWeakWidth = new GridLength(1, GridUnitType.Star);
+
+                //Empty container info
+                this.EmptyContainerInfo = Visibility.Visible;
             }
         }
 

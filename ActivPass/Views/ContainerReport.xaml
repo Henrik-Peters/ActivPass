@@ -146,6 +146,19 @@
             </ItemsControl>
         </ScrollViewer>
 
+        <!-- Empty container info box -->
+        <Grid Visibility="{Binding EmptyContainerInfo}" Width="600" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+            <ContentPresenter Content="{StaticResource GeneralInfoIcon}" Grid.Row="0" HorizontalAlignment="Center"/>
+            <Label Content="{Binding Localize[EmptyContainerInfo]}" Foreground="White" FontFamily="Tahoma" FontSize="16" FontWeight="Bold" Grid.Row="1" Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
+        </Grid>
+
         <!-- Dialog buttons -->
         <Button x:Name="CloseButton" Command="{Binding Close}" CommandParameter="{Binding ElementName=ContainerReportWindow}" Content="{Binding Localize[Close]}" Style="{StaticResource NormalButton}" Focusable="False" Grid.Row="5" Grid.Column="1" Width="110" Margin="0,0,30,0" HorizontalAlignment="Right" VerticalAlignment="Stretch"/>
     </Grid>
