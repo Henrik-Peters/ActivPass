@@ -5,11 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ActivPass.Views"
         xmlns:ViewModels="clr-namespace:ActivPass.ViewModels"
+        xmlns:Controls="clr-namespace:ActivPass.Controls"
         Background="#494A52"
         x:Name="ContainerInitWindow"
         mc:Ignorable="d"
         FocusManager.FocusedElement="{Binding ElementName=ContainerNameBox}"
-        Title="{Binding Localize[ContainerInitTitle]}" MinHeight="470" Height="480" MinWidth="730" Width="800" FontSize="18" WindowStartupLocation="CenterScreen" Closed="ContainerInitWindow_Closed">
+        Title="{Binding Localize[ContainerInitTitle]}" MinHeight="520" Height="530" MinWidth="730" Width="800" FontSize="18" WindowStartupLocation="CenterScreen" Closed="ContainerInitWindow_Closed">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -25,7 +26,7 @@
             <RowDefinition Height="70"/>
             <RowDefinition Height="40"/>
             <RowDefinition Height="70"/>
-            <RowDefinition Height="15"/>
+            <RowDefinition Height="60"/>
             <RowDefinition Height="70"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="35"/>
@@ -43,10 +44,14 @@
         <Label x:Name="ContainerNameLabel" Content="{Binding Localize[ContainerName]}" Foreground="White" FontFamily="Tahoma" FontSize="14" FontWeight="Bold" Grid.Row="2" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="7,2,0,0"/>
         <TextBox x:Name="ContainerNameBox" Text="{Binding ContainerName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource NormalTextBox}" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Margin="0,0,90,0" Height="40" VerticalAlignment="Bottom" HorizontalAlignment="Stretch"/>
 
-        <!-- Password boxes -->
+        <!-- Password main box -->
         <Label x:Name="FirstPasswordLabel" Content="{Binding Localize[MasterPassword]}" Foreground="White" FontFamily="Tahoma" FontSize="14" FontWeight="Bold" Grid.Row="4" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="7,2,0,0"/>
         <PasswordBox x:Name="FirstPasswordBox" Style="{StaticResource PasswordBoxStyle}" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" Margin="0,0,90,0" Height="40" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" PasswordChanged="FirstPasswordBox_PasswordChanged"/>
 
+        <!-- Password Score Bar -->
+        <Controls:PasswordStrengthBar x:Name="StrengthBar" StrengthScore="{Binding PasswordStrength}" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="2" HorizontalAlignment="Stretch" Margin="0,10,90,0" VerticalAlignment="Top"/>
+
+        <!-- Password second box -->
         <Label x:Name="SecondPasswordLabel" Content="{Binding Localize[MasterPasswordRepeat]}" Foreground="White" FontFamily="Tahoma" FontSize="14" FontWeight="Bold" Grid.Row="6" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="7,2,0,0"/>
         <PasswordBox x:Name="SecondPasswordBox" Tag="" Style="{StaticResource PasswordBoxStyle}" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="3" Margin="0,0,90,0" Height="40" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" PasswordChanged="SecondPasswordBox_PasswordChanged"/>
 

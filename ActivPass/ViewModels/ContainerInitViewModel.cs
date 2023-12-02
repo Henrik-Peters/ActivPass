@@ -31,6 +31,20 @@ namespace ActivPass.ViewModels
             }
         }
 
+        private PasswordStrength _passwordStrength;
+        public PasswordStrength PasswordStrength
+        {
+            get => _passwordStrength;
+            set
+            {
+                if (_passwordStrength != value)
+                {
+                    _passwordStrength = value;
+                    NotifyPropertyChanged(nameof(PasswordStrength));
+                }
+            }
+        }
+
         private PasswordBox MasterPasswordBox;
         private PasswordBox RepeatPasswordBox;
 
@@ -104,6 +118,16 @@ namespace ActivPass.ViewModels
                     MessageBox.Show(Localize["ContainerStoreFail"], Localize["ContainerCreateFail"], MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
+        }
+
+        /// <summary>
+        /// Update the score rating of the current password
+        /// </summary>
+        public void UpdatePasswordScore()
+        {
+            //Calculate and apply the score
+            PasswordStrength score = PasswordScores.GetScore(this.MasterPasswordBox.Password);
+            this.PasswordStrength = score;
         }
 
         /// <summary>

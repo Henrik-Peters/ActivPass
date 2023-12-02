@@ -30,6 +30,7 @@ namespace ActivPass.Views
         private void FirstPasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
         {
             this.vm.ValidateInput();
+            this.vm.UpdatePasswordScore();
         }
 
         private void SecondPasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
