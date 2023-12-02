@@ -45,6 +45,16 @@ namespace ActivPass.ViewModels
             }
         }
 
+        private bool _containerAutoLock = true;
+        public bool ContainerAutoLock
+        {
+            get => _containerAutoLock;
+            set
+            {
+                SetProperty(ref _containerAutoLock, value);
+            }
+        }
+
         private PasswordBox MasterPasswordBox;
         private PasswordBox RepeatPasswordBox;
 
@@ -106,7 +116,7 @@ namespace ActivPass.ViewModels
                 
             } else {
                 //Create a new empty container
-                PasswordContainer emptyContainer = new PasswordContainer(ContainerName, Environment.UserName, true, false, 300);
+                PasswordContainer emptyContainer = new PasswordContainer(ContainerName, Environment.UserName, this.ContainerAutoLock, false, 300);
 
                 //Store the new container
                 bool containerCreated = ContainerStorage.ContainerProvider.SaveContainer(emptyContainer, MasterPasswordBox.Password);
