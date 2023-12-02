@@ -39,7 +39,7 @@ namespace ActivPass.ViewModels
         /// <summary>
         /// Selection options for custom auto lock times
         /// </summary>
-        private static string[] INACTIVITY_TIME_OPTIONS = new string[] {
+        public static string[] INACTIVITY_TIME_OPTIONS = new string[] {
             "1 min", "2 min", "5 min", "15 min", "30 min"
         };
 

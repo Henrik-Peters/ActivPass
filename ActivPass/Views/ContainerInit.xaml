@@ -10,7 +10,7 @@
         x:Name="ContainerInitWindow"
         mc:Ignorable="d"
         FocusManager.FocusedElement="{Binding ElementName=ContainerNameBox}"
-        Title="{Binding Localize[ContainerInitTitle]}" MinHeight="560" Height="565" MinWidth="730" Width="800" FontSize="18" WindowStartupLocation="CenterScreen" Closed="ContainerInitWindow_Closed">
+        Title="{Binding Localize[ContainerInitTitle]}" MinHeight="650" Height="660" MinWidth="730" Width="800" FontSize="18" WindowStartupLocation="CenterScreen" Closed="ContainerInitWindow_Closed">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -29,7 +29,7 @@
             <RowDefinition Height="60"/>
             <RowDefinition Height="70"/>
             <RowDefinition Height="30"/>
-            <RowDefinition Height="55"/>
+            <RowDefinition Height="100"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="35"/>
             <RowDefinition Height="15"/>
@@ -60,6 +60,12 @@
         <!-- Additional config -->
         <Label x:Name="ConfigLabel" Content="{Binding Localize[AdditionalConfig]}" Foreground="White" FontFamily="Tahoma" FontSize="14" FontWeight="Bold" Grid.Row="8" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="7,2,0,0"/>
         <CheckBox x:Name="InactivityLockCheckBox" IsChecked="{Binding ContainerAutoLock, Mode=TwoWay}" Content="{Binding Localize[AutoLock]}" Style="{StaticResource NormalCheckBox}" Margin="5,30,0,0" Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+
+        <!-- Custom AutoLock Stack -->
+        <StackPanel Orientation="Horizontal" Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,65,0,0">
+            <CheckBox x:Name="CustomInactivityTime" IsChecked="{Binding CustomAutoLock, Mode=TwoWay}" Content="{Binding Localize[CustomAutoLock]}" Style="{StaticResource NormalCheckBox}" Margin="5,0,0,0" VerticalAlignment="Center"/>
+            <ComboBox x:Name="InactivityTimeSelector" ItemsSource="{Binding InactivityTimes}" SelectedItem="{Binding SelectedInactivityTime}" IsEnabled="{Binding CustomAutoLock}" Grid.Row="3" Grid.Column="1" Width="85" Height="33" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Style="{StaticResource ComboBoxStyle}"/>
+        </StackPanel>
 
         <!-- Dialog buttons -->
         <Button x:Name="CreateContainerButton" Command="{Binding InitContainer}" CommandParameter="{Binding ElementName=ContainerInitWindow}" IsEnabled="{Binding ValidInput}" Content="{Binding Localize[CreateContainer]}" Style="{StaticResource NormalButton}" Grid.Row="10" Grid.Column="3" Margin="15,0,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>

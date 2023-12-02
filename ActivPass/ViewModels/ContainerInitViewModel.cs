@@ -11,6 +11,9 @@ using System.Windows.Input;
 using ActivPass.Localization;
 using ActivPass.Models;
 using ActivPass.Crypto;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Text.RegularExpressions;
 
 namespace ActivPass.ViewModels
 {
@@ -45,6 +48,17 @@ namespace ActivPass.ViewModels
             }
         }
 
+        private PasswordBox MasterPasswordBox;
+        private PasswordBox RepeatPasswordBox;
+
+        public bool ValidInput
+        {
+            get => ContainerName != String.Empty &&
+                    MasterPasswordBox.Password != String.Empty &&
+                    RepeatPasswordBox.Password != String.Empty &&
+                    MasterPasswordBox.Password == RepeatPasswordBox.Password;
+        }
+
         private bool _containerAutoLock = true;
         public bool ContainerAutoLock
         {
@@ -55,15 +69,36 @@ namespace ActivPass.ViewModels
             }
         }
 
-        private PasswordBox MasterPasswordBox;
-        private PasswordBox RepeatPasswordBox;
-
-        public bool ValidInput
+        private ObservableCollection<string> _inactivityTimes;
+        public ObservableCollection<string> InactivityTimes
         {
-            get => ContainerName != String.Empty &&
-                    MasterPasswordBox.Password != String.Empty &&
-                    RepeatPasswordBox.Password != String.Empty &&
-                    MasterPasswordBox.Password == RepeatPasswordBox.Password;
+            get => _inactivityTimes;
+            set => SetProperty(ref _inactivityTimes, value);
+        }
+
+        private string _selectedInactivityTime;
+        public string SelectedInactivityTime
+        {
+            get => _selectedInactivityTime;
+            set => SetProperty(ref _selectedInactivityTime, value);
+        }
+
+        private bool _customAutoLock = false;
+        public bool CustomAutoLock
+        {
+            get => _customAutoLock;
+            set
+            {
+                _customAutoLock = value;
+
+                //Apply default time for disabled custom lock
+                if (value == false)
+                {
+                    this.SelectedInactivityTime = "5 min";
+                }
+
+                NotifyPropertyChanged(nameof(CustomAutoLock));
+            }
         }
 
         /// <summary>
@@ -84,9 +119,15 @@ namespace ActivPass.ViewModels
         /// <param name="repeatPasswordBox">Repeat master password box</param>
         public ContainerInitViewModel(PasswordBox MasterPasswordBox, PasswordBox RepeatPasswordBox)
         {
+            //Initial values
+            this.InactivityTimes = new ObservableCollection<string>(ContainerEditorViewModel.INACTIVITY_TIME_OPTIONS);
+            this.CustomAutoLock = false;
+
+            //Password boxes
             this.MasterPasswordBox = MasterPasswordBox;
             this.RepeatPasswordBox = RepeatPasswordBox;
 
+            //Command bindings
             this.Close = new RelayCommand<Window>(CloseWindow);
             this.InitContainer = new RelayCommand<Window>(CreateContainer);
         }
@@ -116,7 +157,8 @@ namespace ActivPass.ViewModels
                 
             } else {
                 //Create a new empty container
-                PasswordContainer emptyContainer = new PasswordContainer(ContainerName, Environment.UserName, this.ContainerAutoLock, false, 300);
+                PasswordContainer emptyContainer = new PasswordContainer(ContainerName, Environment.UserName,
+                    this.ContainerAutoLock, this.CustomAutoLock, this.GetAutoLockSeconds());
 
                 //Store the new container
                 bool containerCreated = ContainerStorage.ContainerProvider.SaveContainer(emptyContainer, MasterPasswordBox.Password);
@@ -138,6 +180,21 @@ namespace ActivPass.ViewModels
             //Calculate and apply the score
             PasswordStrength score = PasswordScores.GetScore(this.MasterPasswordBox.Password);
             this.PasswordStrength = score;
+        }
+
+        /// <summary>
+        /// Get the amount of seconds to apply
+        /// for the container auto lock time
+        /// </summary>
+        /// <returns>Selected amount of seconds</returns>
+        public int GetAutoLockSeconds()
+        {
+            //Parse the amount of minutes
+            string result = Regex.Replace(this.SelectedInactivityTime, "\\s*min", "");
+            int minutes = int.Parse(result);
+
+            //Convert to seconds
+            return minutes * 60;
         }
 
         /// <summary>
