@@ -28,8 +28,8 @@
             <RowDefinition Height="70"/>
             <RowDefinition Height="60"/>
             <RowDefinition Height="70"/>
-            <RowDefinition Height="15"/>
-            <RowDefinition Height="35"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="55"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="35"/>
             <RowDefinition Height="15"/>
@@ -58,7 +58,8 @@
         <PasswordBox x:Name="SecondPasswordBox" Tag="" Style="{StaticResource PasswordBoxStyle}" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="3" Margin="0,0,90,0" Height="40" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" PasswordChanged="SecondPasswordBox_PasswordChanged"/>
 
         <!-- Additional config -->
-        <CheckBox x:Name="InactivityLockCheckBox" IsChecked="{Binding ContainerAutoLock, Mode=TwoWay}" Content="{Binding Localize[AutoLock]}" Style="{StaticResource NormalCheckBox}" Margin="5,0,0,0" Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Label x:Name="ConfigLabel" Content="{Binding Localize[AdditionalConfig]}" Foreground="White" FontFamily="Tahoma" FontSize="14" FontWeight="Bold" Grid.Row="8" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="7,2,0,0"/>
+        <CheckBox x:Name="InactivityLockCheckBox" IsChecked="{Binding ContainerAutoLock, Mode=TwoWay}" Content="{Binding Localize[AutoLock]}" Style="{StaticResource NormalCheckBox}" Margin="5,30,0,0" Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
         <!-- Dialog buttons -->
         <Button x:Name="CreateContainerButton" Command="{Binding InitContainer}" CommandParameter="{Binding ElementName=ContainerInitWindow}" IsEnabled="{Binding ValidInput}" Content="{Binding Localize[CreateContainer]}" Style="{StaticResource NormalButton}" Grid.Row="10" Grid.Column="3" Margin="15,0,0,0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>

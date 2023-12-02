@@ -19,6 +19,8 @@ namespace ActivPass.Localization
         /// </summary>
         static IDictionary<string, List<string>> TranslateTable = new Dictionary<string, List<string>>
         {
+            
+            ["AdditionalConfig"] = new List<string> { "Additional config", "Zusätzliche Konfiguration" },
             ["WeakPassword"] = new List<string> { "Weak password", "Schwaches Passwort" },
             ["NonEncryptionTrafficUrl"] = new List<string> { "Url does not guarantee an encrypted connection", "Url garantiert keine verschlüsselte Verbindung" },
             ["Actions"] = new List<string> { "Actions", "Aktionen" },
