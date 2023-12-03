@@ -50,5 +50,16 @@ namespace ActivPass.Models
             CustomAutoLock = customAutoLock;
             AutoLockSeconds = autoLockSeconds;  
         }
+
+        public bool CheckPasswordDuplicates(string password, int excludeIndex)
+        {
+            for (int i = 0; i < this.Items.Length; i++) {
+                if (i != excludeIndex && password == this.Items[i].Password) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
     }
 }

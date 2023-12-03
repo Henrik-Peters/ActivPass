@@ -151,6 +151,11 @@ namespace ActivPass.ViewModels
         public ICommand OpenUrl { get; set; }
 
         /// <summary>
+        /// Callback to check for password duplicates
+        /// </summary>
+        private Predicate<string> CheckPasswordDuplicates { get; set; }
+
+        /// <summary>
         /// If the open url button should be visible.
         /// </summary>
         public Visibility ShowOpenBtn
@@ -201,12 +206,16 @@ namespace ActivPass.ViewModels
         /// for the password item editor.
         /// </summary>
         /// <param name="item">Init with these values</param>
-        public PassItemEditorViewModel(PasswordItem item)
+        /// <param name="checkPasswordDuplicatesCallback">Callback for multi usage passwords</param>
+        public PassItemEditorViewModel(PasswordItem item, Predicate<string> checkPasswordDuplicatesCallback)
         {
             this._item = item;
 
-            //Inital values
+            //Initial values
             this.SaveEditorItem = false;
+            this.CheckPasswordDuplicates = checkPasswordDuplicatesCallback;
+
+            //Init calculated values
             this.UpdatePasswordScore();
             this.UpdateMultiPasswordWarning();
             this.UpdateUrlWarning();
@@ -245,7 +254,11 @@ namespace ActivPass.ViewModels
         /// </summary>
         private void UpdateMultiPasswordWarning()
         {
-
+            if (this.Password == string.Empty || this.CheckPasswordDuplicates(this.Password)) {
+                ShowMultiPasswordWarning = Visibility.Visible;
+            } else {
+                ShowMultiPasswordWarning = Visibility.Collapsed;
+            }
         }
 
         /// <summary>

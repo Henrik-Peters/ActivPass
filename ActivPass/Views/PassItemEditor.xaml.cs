@@ -3,6 +3,7 @@
 // Copyright 2019 Henrik Peters
 // See LICENSE file in the project root for full license information
 #endregion
+using System;
 using System.Windows;
 using System.Windows.Input;
 using ActivPass.Models;
@@ -30,12 +31,13 @@ namespace ActivPass.Views
         /// and viewer window instance.
         /// </summary>
         /// <param name="item">Init the editor values with this item</param>
-        public PassItemEditor(PasswordItem item)
+        /// <param name="checkPasswordDuplicatesCallback">Callback for multi usage passwords</param>
+        public PassItemEditor(PasswordItem item, Predicate<string> checkPasswordDuplicatesCallback)
         {
             InitializeComponent();
 
             //View model initialisation
-            this.vm = new PassItemEditorViewModel(item);
+            this.vm = new PassItemEditorViewModel(item, checkPasswordDuplicatesCallback);
             this.DataContext = this.vm;
 
             //Inital values

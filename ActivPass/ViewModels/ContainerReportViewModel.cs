@@ -315,16 +315,27 @@ namespace ActivPass.ViewModels
             //Create a clone of the item
             PasswordItem editorItem = item.Proxy.Clone() as PasswordItem;
 
+            //Get the index of edited item
+            int itemIndex = PasswordItems.IndexOf(item);
+
             //Show the item editor dialog
-            PassItemEditor itemEditor = new PassItemEditor(editorItem);
+            PassItemEditor itemEditor = new PassItemEditor(editorItem, (password) => {
+
+                foreach (var passItem in this.PasswordItems)
+                {
+                    if (editorItem.Name != passItem.Name && password == passItem.Password) {
+                        return true;
+                    }
+                }
+
+                return false;
+            });
+
+            //Show editor dialog
             itemEditor.ShowDialog();
 
             //Check if the editorItem should be stored
             if (itemEditor.vm.SaveEditorItem) {
-
-                //Get the index of edited item
-                int itemIndex = PasswordItems.IndexOf(item);
-
                 //Set the attributes of the item
                 PasswordItems[itemIndex].Name = editorItem.Name;
                 PasswordItems[itemIndex].Username = editorItem.Username;
