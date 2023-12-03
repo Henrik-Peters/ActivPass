@@ -55,7 +55,7 @@
 
         <!-- Url warning box -->
         <WrapPanel Orientation="Horizontal" Visibility="{Binding ShowUnsafeUrlWarning}" Margin="0,0,5,0" Height="30" Grid.Column="2" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Top">
-            <Button Style="{StaticResource WarnIconButton}" Margin="0,0,0,0" Focusable="False" IsEnabled="False" Padding="5" Height="30"/>
+            <Button Style="{StaticResource WarnIconButton}" Margin="0,0,0,0" Focusable="False" IsEnabled="False" Padding="4" Height="30"/>
             <Label Content="{Binding Localize[UnsafeUrl]}" Margin="-5,0,0,0" Foreground="#FFE63C46" FontFamily="Tahoma" FontSize="15" FontWeight="Bold" VerticalContentAlignment="Center"/>
         </WrapPanel>
 
@@ -74,6 +74,12 @@
         <Button x:Name="ShowPasswordButton" Style="{StaticResource EyeButton}" ToolTip="{Binding Localize[ShowPassword]}" Focusable="False" Grid.Row="5" Grid.Column="2" Margin="0,0,87,1" Padding="7" Height="40" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="ShowPasswordButton_Click"/>
         <Button x:Name="GeneratePasswordButton" Style="{StaticResource LightningButton}" ToolTip="{Binding Localize[GeneratePassword]}" Focusable="False" Grid.Row="5" Grid.Column="2" Margin="0,0,47,1" Padding="7" Height="40" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="GeneratePasswordButton_Click"/>
         <Button x:Name="PasswordCopyButton" Command="{Binding CopyToClipboard}" CommandParameter="{Binding Password}" Style="{StaticResource CopyButton}" ToolTip="{Binding Localize[CopyToClipboard]}" Focusable="False" Grid.Row="5" Grid.Column="2" Margin="0,0,7,1" Padding="7" Height="40" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+
+        <!-- Multi usage password box -->
+        <WrapPanel Orientation="Horizontal" Visibility="{Binding ShowMultiPasswordWarning}" Margin="0,0,5,0" Height="30" Grid.Column="2" Grid.Row="5" HorizontalAlignment="Right" VerticalAlignment="Top">
+            <Button Style="{StaticResource WarnIconButton}" Margin="0,0,0,0" Focusable="False" IsEnabled="False" Padding="4" Height="30"/>
+            <Label Content="{Binding Localize[MultiUsedPassword]}" Margin="-5,0,0,0" Foreground="#FFE63C46" FontFamily="Tahoma" FontSize="15" FontWeight="Bold" VerticalContentAlignment="Center"/>
+        </WrapPanel>
 
         <!-- Password Score Bar -->
         <Controls:PasswordStrengthBar x:Name="StrengthBar" StrengthScore="{Binding PasswordStrength}" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" Margin="0,10,0,0" VerticalAlignment="Top"/>

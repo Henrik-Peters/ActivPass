@@ -103,6 +103,9 @@ namespace ActivPass.ViewModels
                 if (_item.Password != value) {
                     _item.Password = value;
                     NotifyPropertyChanged(nameof(_item.Password));
+
+                    //Update multi usage password warning
+                    this.UpdateMultiPasswordWarning();
                 }
             }
         }
@@ -174,7 +177,22 @@ namespace ActivPass.ViewModels
                     _showUnsafeUrlWarning = value;
                     NotifyPropertyChanged(nameof(ShowUnsafeUrlWarning));
                 }
-                
+            }
+        }
+
+        private Visibility _showMultiPasswordWarning;
+        /// <summary>
+        /// If the multi usage password warning should be visible.
+        /// </summary>
+        public Visibility ShowMultiPasswordWarning
+        {
+            get => _showMultiPasswordWarning;
+            set
+            {
+                if (_showMultiPasswordWarning != value) {
+                    _showMultiPasswordWarning = value;
+                    NotifyPropertyChanged(nameof(ShowMultiPasswordWarning));
+                }
             }
         }
 
@@ -190,8 +208,9 @@ namespace ActivPass.ViewModels
             //Inital values
             this.SaveEditorItem = false;
             this.UpdatePasswordScore();
+            this.UpdateMultiPasswordWarning();
             this.UpdateUrlWarning();
-
+            
             //Command bindings
             this.Close = new RelayCommand<Window>(CloseWindow);
             this.SaveItem = new RelayCommand<Window>(SaveItemAndClose);
@@ -219,6 +238,14 @@ namespace ActivPass.ViewModels
             } else {
                 ShowUnsafeUrlWarning = Visibility.Collapsed;
             }
+        }
+
+        /// <summary>
+        /// Update the state of the multi usage password warning
+        /// </summary>
+        private void UpdateMultiPasswordWarning()
+        {
+
         }
 
         /// <summary>
