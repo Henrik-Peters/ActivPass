@@ -133,5 +133,10 @@ namespace ActivPass.Views
                 this.SaveButton.IsEnabled = true;
             }
         }
+
+        private void UrlBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            this.vm.UpdateUrlWarning();
+        }
     }
 }

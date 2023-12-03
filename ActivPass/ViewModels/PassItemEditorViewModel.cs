@@ -69,6 +69,9 @@ namespace ActivPass.ViewModels
                     _item.Url = value;
                     NotifyPropertyChanged(nameof(_item.Url));
                     NotifyPropertyChanged(nameof(ShowOpenBtn));
+
+                    //Update unsafe url warning
+                    this.UpdateUrlWarning();
                 }
             }
         }
@@ -158,6 +161,23 @@ namespace ActivPass.ViewModels
             }
         }
 
+        private Visibility _showUnsafeUrlWarning;
+        /// <summary>
+        /// If the unsafe url warning text should be visible.
+        /// </summary>
+        public Visibility ShowUnsafeUrlWarning
+        {
+            get => _showUnsafeUrlWarning;
+            set
+            {
+                if (_showUnsafeUrlWarning != value) {
+                    _showUnsafeUrlWarning = value;
+                    NotifyPropertyChanged(nameof(ShowUnsafeUrlWarning));
+                }
+                
+            }
+        }
+
         /// <summary>
         /// Create a new view model instance
         /// for the password item editor.
@@ -170,6 +190,7 @@ namespace ActivPass.ViewModels
             //Inital values
             this.SaveEditorItem = false;
             this.UpdatePasswordScore();
+            this.UpdateUrlWarning();
 
             //Command bindings
             this.Close = new RelayCommand<Window>(CloseWindow);
@@ -186,6 +207,18 @@ namespace ActivPass.ViewModels
             //Calculate and apply the score
             PasswordStrength score = PasswordScores.GetScore(this.Password);
             this.PasswordStrength = score;
+        }
+
+        /// <summary>
+        /// Update the state of the unsafe url warning text
+        /// </summary>
+        public void UpdateUrlWarning()
+        {
+            if (Url != string.Empty && !Url.StartsWith("https://")) {
+                ShowUnsafeUrlWarning = Visibility.Visible;
+            } else {
+                ShowUnsafeUrlWarning = Visibility.Collapsed;
+            }
         }
 
         /// <summary>
