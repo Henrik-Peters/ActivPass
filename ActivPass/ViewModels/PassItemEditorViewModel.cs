@@ -12,6 +12,7 @@ using System.Windows;
 using System.Windows.Input;
 using ActivPass.Models;
 using ActivPass.Localization;
+using System.ComponentModel;
 
 namespace ActivPass.ViewModels
 {
@@ -131,6 +132,16 @@ namespace ActivPass.ViewModels
         }
 
         /// <summary>
+        /// Automatically delete clipboard after copying secret data
+        /// </summary>
+        public bool AutoClearClipboard { get; set; }
+
+        /// <summary>
+        /// Time before the clipboard is cleared in seconds
+        /// </summary>
+        public int ClipboardClearSeconds { get; set; }
+
+        /// <summary>
         /// Close the passed window instance.
         /// </summary>
         public ICommand Close { get; set; }
@@ -207,13 +218,16 @@ namespace ActivPass.ViewModels
         /// </summary>
         /// <param name="item">Init with these values</param>
         /// <param name="checkPasswordDuplicatesCallback">Callback for multi usage passwords</param>
-        public PassItemEditorViewModel(PasswordItem item, Predicate<string> checkPasswordDuplicatesCallback)
+        public PassItemEditorViewModel(PasswordItem item, Predicate<string> checkPasswordDuplicatesCallback,
+            bool autoClearClipboard, int clipboardClearSeconds)
         {
             this._item = item;
 
             //Initial values
             this.SaveEditorItem = false;
             this.CheckPasswordDuplicates = checkPasswordDuplicatesCallback;
+            this.AutoClearClipboard = autoClearClipboard;
+            this.ClipboardClearSeconds = clipboardClearSeconds;
 
             //Init calculated values
             this.UpdatePasswordScore();
@@ -269,6 +283,11 @@ namespace ActivPass.ViewModels
         private void SetClipboardText(string text)
         {
             Clipboard.SetText(text, TextDataFormat.UnicodeText);
+
+            //Launch clipboard auto clear
+            if (AutoClearClipboard) {
+                ClipboardAutoClear.ScheduleTimer(TimeSpan.FromSeconds(ClipboardClearSeconds), text);
+            }
         }
 
         /// <summary>

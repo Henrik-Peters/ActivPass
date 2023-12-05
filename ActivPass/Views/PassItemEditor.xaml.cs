@@ -32,12 +32,14 @@ namespace ActivPass.Views
         /// </summary>
         /// <param name="item">Init the editor values with this item</param>
         /// <param name="checkPasswordDuplicatesCallback">Callback for multi usage passwords</param>
-        public PassItemEditor(PasswordItem item, Predicate<string> checkPasswordDuplicatesCallback)
+        /// <param name="autoClearClipboard">If the clipboard should be auto cleared</param>
+        /// <param name="clipboardClearSeconds">Time in seconds to wait before performing clipboard cleanups</param>
+        public PassItemEditor(PasswordItem item, Predicate<string> checkPasswordDuplicatesCallback, bool autoClearClipboard, int clipboardClearSeconds)
         {
             InitializeComponent();
 
             //View model initialisation
-            this.vm = new PassItemEditorViewModel(item, checkPasswordDuplicatesCallback);
+            this.vm = new PassItemEditorViewModel(item, checkPasswordDuplicatesCallback, autoClearClipboard, clipboardClearSeconds);
             this.DataContext = this.vm;
 
             //Inital values

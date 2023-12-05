@@ -259,6 +259,16 @@ namespace ActivPass.ViewModels
         }
 
         /// <summary>
+        /// Automatically delete clipboard after copying secret data
+        /// </summary>
+        public bool AutoClearClipboard { get; set; }
+
+        /// <summary>
+        /// Time before the clipboard is cleared in seconds
+        /// </summary>
+        public int ClipboardClearSeconds { get; set; }
+
+        /// <summary>
         /// Close the passed window instance
         /// </summary>
         public ICommand Close { get; set; }
@@ -300,6 +310,10 @@ namespace ActivPass.ViewModels
             this.UpdateScoreBar();
             this.UpdateWarningsBox();
 
+            //Clipboard clearing
+            this.AutoClearClipboard = container.ClipboardAutoClear;
+            this.ClipboardClearSeconds = container.ClipboardClearSeconds;
+
             //Notify view change
             NotifyPropertyChanged(nameof(PasswordItemsView));
             this.SaveContainer = SaveContainerCallback;
@@ -329,7 +343,7 @@ namespace ActivPass.ViewModels
                 }
 
                 return false;
-            });
+            }, AutoClearClipboard, ClipboardClearSeconds);
 
             //Show editor dialog
             itemEditor.ShowDialog();

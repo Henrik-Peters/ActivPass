@@ -463,7 +463,9 @@ namespace ActivPass.ViewModels
             int itemIndex = PasswordItems.IndexOf(item);
 
             //Show the item editor dialog
-            PassItemEditor itemEditor = new PassItemEditor(editorItem, (password) => Container.CheckPasswordDuplicates(password, itemIndex));
+            PassItemEditor itemEditor = new PassItemEditor(editorItem, (password) => Container.CheckPasswordDuplicates(password, itemIndex),
+                Container.ClipboardAutoClear, Container.ClipboardClearSeconds);
+
             this.OpenWindow = itemEditor;
             itemEditor.ShowDialog();
             this.OpenWindow = null;
@@ -492,7 +494,9 @@ namespace ActivPass.ViewModels
             PasswordItem editorItem = new PasswordItem("", "", "", "", "");
 
             //Show the item editor dialog
-            PassItemEditor itemEditor = new PassItemEditor(editorItem, (password) => Container.CheckPasswordDuplicates(password, -1));
+            PassItemEditor itemEditor = new PassItemEditor(editorItem, (password) => Container.CheckPasswordDuplicates(password, -1),
+                Container.ClipboardAutoClear, Container.ClipboardClearSeconds);
+
             this.OpenWindow = itemEditor;
             itemEditor.ShowDialog();
             this.OpenWindow = null;
@@ -608,6 +612,11 @@ namespace ActivPass.ViewModels
         private void CopyPasswordToClipboard(PasswordItemViewModel item)
         {
             Clipboard.SetText(item.Password, TextDataFormat.UnicodeText);
+
+            //Launch clipboard auto clear
+            if (Container.ClipboardAutoClear) {
+                ClipboardAutoClear.ScheduleTimer(TimeSpan.FromSeconds(Container.ClipboardClearSeconds), item.Password);
+            }
         }
 
         /// <summary>
