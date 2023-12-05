@@ -57,6 +57,27 @@ namespace ActivPass.ViewModels
             set => SetProperty(ref _selectedInactivityTime, value);
         }
 
+        /// <summary>
+        /// Selection options for custom clipboard auto clear times
+        /// </summary>
+        public static string[] CLIPBOARD_CLEAR_TIME_OPTIONS = new string[] {
+            "1 sec", "2 sec", "5 sec", "10 sec", "15 sec", "20 sec", "30 sec", "60 sec"
+        };
+
+        private ObservableCollection<string> _clipboardClearTimes;
+        public ObservableCollection<string> ClipboardClearTimes
+        {
+            get => _clipboardClearTimes;
+            set => SetProperty(ref _clipboardClearTimes, value);
+        }
+
+        private string _selectedClipboardClearTime;
+        public string SelectedClipboardClearTime
+        {
+            get => _selectedClipboardClearTime;
+            set => SetProperty(ref _selectedClipboardClearTime, value);
+        }
+
         private PasswordContainer _container;
         public PasswordContainer Container
         {
@@ -125,6 +146,9 @@ namespace ActivPass.ViewModels
             //Auto lock props
             this.InactivityTimes = new ObservableCollection<string>(INACTIVITY_TIME_OPTIONS);
 
+            //Clipboard auto clear props
+            this.ClipboardClearTimes = new ObservableCollection<string>(CLIPBOARD_CLEAR_TIME_OPTIONS);
+
             //Command bindings
             this.Close = new RelayCommand<Window>(CloseWindow);
             this.RenameContainer = new RelayCommand(RenameCurrentContainer);
@@ -147,6 +171,18 @@ namespace ActivPass.ViewModels
 
             //Convert to seconds
             return minutes * 60;
+        }
+
+        /// <summary>
+        /// Get the amount of seconds to apply
+        /// for the container clipboard clearing
+        /// </summary>
+        /// <returns>Selected amount of seconds</returns>
+        public int GetClipboardClearSeconds()
+        {
+            //Parse the amount of minutes
+            string result = Regex.Replace(this.SelectedClipboardClearTime, "\\s*sec", "");
+            return int.Parse(result);
         }
 
         /// <summary>

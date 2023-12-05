@@ -19,6 +19,7 @@ namespace ActivPass.Localization
         /// </summary>
         static IDictionary<string, List<string>> TranslateTable = new Dictionary<string, List<string>>
         {
+            ["AutoClearClipboardAfter"] = new List<string> { "Automatically clear clipboard after", "Automatisch Zwischenablage bereinigen nach" },
             ["MultiUsedPassword"] = new List<string> { "Password used multiple times", "Password mehrfach verwendet" },
             ["AdditionalConfig"] = new List<string> { "Additional config", "Zusätzliche Konfiguration" },
             ["WeakPassword"] = new List<string> { "Weak password", "Schwaches Passwort" },

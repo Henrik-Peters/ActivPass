@@ -280,6 +280,9 @@ namespace ActivPass.ViewModels
             int minutes = this.Container.AutoLockSeconds / 60;
             vm.SelectedInactivityTime = $"{minutes} min";
 
+            //Pass the clipboard clear time
+            vm.SelectedClipboardClearTime = $"{this.Container.ClipboardClearSeconds} sec";
+
             //Show the editor dialog
             this.OpenWindow = containerEditor;
             containerEditor.ShowDialog();
@@ -289,6 +292,9 @@ namespace ActivPass.ViewModels
             this.Container.AutoLockSeconds = vm.GetAutoLockSeconds();
             this.UpdateAutoLockTimes();
             this.ResetInactivityTimer();
+
+            //Update clipboard clear config
+            this.Container.ClipboardClearSeconds = vm.GetClipboardClearSeconds();
 
             //The container may be null in case of auto lock
             if (Container != null && vm.Container != null) {
