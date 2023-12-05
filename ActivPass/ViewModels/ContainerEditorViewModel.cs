@@ -61,7 +61,7 @@ namespace ActivPass.ViewModels
         /// Selection options for custom clipboard auto clear times
         /// </summary>
         public static string[] CLIPBOARD_CLEAR_TIME_OPTIONS = new string[] {
-            "1 sec", "2 sec", "5 sec", "10 sec", "15 sec", "20 sec", "30 sec", "60 sec"
+            "1 sec", "2 sec", "3 sec", "5 sec", "10 sec", "15 sec", "20 sec", "30 sec", "60 sec"
         };
 
         private ObservableCollection<string> _clipboardClearTimes;

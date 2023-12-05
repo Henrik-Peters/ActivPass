@@ -22,7 +22,8 @@ namespace ActivPass.Models
         /// <param name="clipboardText">Only cleanup with this text in clipboard</param>
         public static void ScheduleTimer(TimeSpan timeSpan, string clipboardText)
         {
-            ClipboardText = clipboardText;
+            ClipboardText = (string)clipboardText.Clone();
+            ClipboardCleanupTimer?.Stop();
 
             //Start the cleanup timer
             ClipboardCleanupTimer = new DispatcherTimer(
@@ -43,12 +44,13 @@ namespace ActivPass.Models
         {
             string text = Clipboard.GetText(TextDataFormat.UnicodeText);
 
-            if (text.Equals(ClipboardText)) {
+            if (text.Equals(ClipboardText) && ClipboardText != string.Empty) {
                 Clipboard.Clear();
             }
 
             //Delete possible secret data from static memory
             ClipboardText = string.Empty;
+            ClipboardCleanupTimer = null;
         }
     }
 }
