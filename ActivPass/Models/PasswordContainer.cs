@@ -36,19 +36,37 @@ namespace ActivPass.Models
         public int AutoLockSeconds { get; set; }
 
         /// <summary>
+        /// Automatically delete clipboard after copying secret data
+        /// </summary>
+        public bool ClipboardAutoClear { get; set; }
+
+        /// <summary>
+        /// Time before the clipboard is cleared in seconds
+        /// </summary>
+        public int ClipboardClearSeconds { get; set; }
+
+        /// <summary>
         /// All stored password entries
         /// </summary>
         public PasswordItem[] Items { get; set; }
 
-        public PasswordContainer(string ContainerName, string Owner, bool autoLock, bool customAutoLock, int autoLockSeconds)
+        public PasswordContainer(string ContainerName, string Owner,
+            bool autoLock, bool customAutoLock, int autoLockSeconds,
+            bool clipboardAutoClear, int clipboardClearSeconds)
         {
             this.ContainerName = ContainerName;
             this.Owner = Owner;
 
             this.Items = Array.Empty<PasswordItem>();
-            AutoLock = autoLock;
-            CustomAutoLock = customAutoLock;
-            AutoLockSeconds = autoLockSeconds;  
+
+            //Auto lock config
+            this.AutoLock = autoLock;
+            this.CustomAutoLock = customAutoLock;
+            this.AutoLockSeconds = autoLockSeconds;
+
+            //Clipboard clearing config
+            this.ClipboardAutoClear = clipboardAutoClear;
+            this.ClipboardClearSeconds = clipboardClearSeconds;
         }
 
         public bool CheckPasswordDuplicates(string password, int excludeIndex)
