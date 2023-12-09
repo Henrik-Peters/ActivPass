@@ -85,7 +85,7 @@
         </Border>
         
         <!-- Password items panel -->
-        <ScrollViewer x:Name="PasswordItemScroll" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="1" VerticalScrollBarVisibility="Auto" Focusable="False">
+        <ScrollViewer x:Name="PasswordItemScroll" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="1" VerticalScrollBarVisibility="Visible" Focusable="False">
             <ItemsControl x:Name="PasswordItemControl" ItemsSource="{Binding PasswordItemsView}" Focusable="False">
 
                 <!-- Data templates for password items -->
