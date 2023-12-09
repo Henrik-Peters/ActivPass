@@ -6,7 +6,6 @@
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
-using System.Text;
 using System.Text.Json;
 using ActivPass.Configuration;
 using ActivPass.Models;
@@ -22,6 +21,16 @@ namespace ActivPass.Crypto
         private string StoragePath
         {
             get => ConfigProvider.AppDataPath;
+        }
+
+        /// <summary>
+        /// Instance for handling encryption keys
+        /// </summary>
+        private EncryptionKeys EncryptionKeys { get; }
+
+        public FileSystemProvider()
+        {
+            this.EncryptionKeys = new EncryptionKeys(null, null);
         }
 
         /// <summary>
@@ -54,8 +63,8 @@ namespace ActivPass.Crypto
                 string containerFilePath = GetContainerFilePath(containerName);
 
                 PasswordContainer container;
-                byte[] key = GenerateKey(masterKey);
-                byte[] iv = GenerateIV(masterKey);
+                byte[] key = EncryptionKeys.GenerateKey(masterKey);
+                byte[] iv = EncryptionKeys.GenerateIV(masterKey);
 
                 using (Aes aes = Aes.Create()) {
                     aes.Mode = CipherMode.CBC;
@@ -113,8 +122,8 @@ namespace ActivPass.Crypto
 
         public bool SaveContainer(PasswordContainer container, string masterKey, string containerFilePath)
         {
-            byte[] key = GenerateKey(masterKey);
-            byte[] iv = GenerateIV(masterKey);
+            byte[] key = EncryptionKeys.GenerateKey(masterKey);
+            byte[] iv = EncryptionKeys.GenerateIV(masterKey);
 
             try {
                 using (Aes aes = Aes.Create()) {
@@ -139,38 +148,6 @@ namespace ActivPass.Crypto
             } catch {
                 return false;
             }
-        }
-
-        private byte[] GenerateIV(string masterKey)
-        {
-            byte[] iv = new byte[16];
-            byte[] masterKeyBytes = Encoding.UTF8.GetBytes(masterKey);
-
-            using (SHA256 sha256 = SHA256.Create()) {
-                byte[] masterKeyHash = sha256.ComputeHash(masterKeyBytes);
-
-                for (int i = 0; i < iv.Length; i++) {
-                    iv[i] = masterKeyHash[(i * 2) % masterKeyHash.Length];
-                }
-            }
-
-            return iv;
-        }
-
-        private byte[] GenerateKey(string masterKey)
-        {
-            byte[] key = new byte[32];
-            byte[] masterKeyBytes = Encoding.UTF8.GetBytes(masterKey);
-
-            using (SHA256 sha256 = SHA256.Create()) {
-                byte[] masterKeyHash = sha256.ComputeHash(masterKeyBytes);
-
-                for (int i = 0; i < key.Length; i++) {
-                    key[i] = masterKeyHash[i % masterKeyHash.Length];
-                }
-            }
-
-            return key;
         }
     }
 }
