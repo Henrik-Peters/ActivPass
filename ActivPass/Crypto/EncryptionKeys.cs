@@ -3,12 +3,9 @@
 // Copyright 2023 Henrik Peters
 // See LICENSE file in the project root for full license information
 #endregion
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Security.Cryptography;
-using System.Threading.Tasks;
+using Konscious.Security.Cryptography;
 
 namespace ActivPass.Crypto
 {
@@ -52,7 +49,7 @@ namespace ActivPass.Crypto
         public byte[] GenerateIV(string masterKey)
         {
             byte[] iv = new byte[16];
-            byte[] masterKeyBytes = Encoding.UTF8.GetBytes(masterKey);
+            byte[] masterKeyBytes = Encoding.UTF32.GetBytes(masterKey);
             byte[] inputBytes = (byte[])[.. this.hashSalt, .. masterKeyBytes];
 
             using (SHA256 sha256 = SHA256.Create()) {
@@ -74,9 +71,27 @@ namespace ActivPass.Crypto
         /// <returns>Byte array with 32 bytes of hash data</returns>
         public byte[] GenerateKey(string masterKey)
         {
+            //Prepare the hash input
+            byte[] keyInput = this.GeneratePreHash(masterKey);
+
+            //Perform argon2 hashing
+            var argon2 = new Argon2i(keyInput) {
+                DegreeOfParallelism = 32,
+                MemorySize = 8192,
+                Iterations = 100,
+                Salt = this.argonSalt
+            };
+
+            //Get bytes from the hash
+            var hash = argon2.GetBytes(32);
+            return hash;
+        }
+
+        private byte[] GeneratePreHash(string masterKey)
+        {
             byte[] key = new byte[32];
-            byte[] masterKeyBytes = Encoding.UTF8.GetBytes(masterKey);
-            byte[] inputBytes = (byte[])[..this.hashSalt, ..masterKeyBytes];
+            byte[] masterKeyBytes = Encoding.UTF32.GetBytes(masterKey);
+            byte[] inputBytes = (byte[])[.. this.hashSalt, .. masterKeyBytes];
 
             using (SHA256 sha256 = SHA256.Create()) {
                 byte[] masterKeyHash = sha256.ComputeHash(inputBytes);
