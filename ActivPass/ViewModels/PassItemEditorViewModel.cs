@@ -268,7 +268,7 @@ namespace ActivPass.ViewModels
         /// </summary>
         private void UpdateMultiPasswordWarning()
         {
-            if (this.Password == string.Empty || this.CheckPasswordDuplicates(this.Password)) {
+            if (this.Password != string.Empty && this.CheckPasswordDuplicates(this.Password)) {
                 ShowMultiPasswordWarning = Visibility.Visible;
             } else {
                 ShowMultiPasswordWarning = Visibility.Collapsed;
