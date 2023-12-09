@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <!-- Info icon -->
-    <Viewbox x:Key="GeneralInfoIcon" Stretch="Uniform">
+    <Viewbox x:Key="GeneralInfoIcon" x:Shared="False" Stretch="Uniform">
         <Canvas Width="48" Height="48">
             <Canvas>
                 <Canvas>
