@@ -33,7 +33,18 @@ namespace ActivPass.Models
 
         public bool HasEncryptedTrafficUrl()
         {
-            return this.Url.StartsWith("https://");
+            return UrlGrantsEncryptedTraffic(this.Url);
+        }
+
+        public static bool UrlGrantsEncryptedTraffic(string url)
+        {
+            return url.StartsWith("https://") ||
+                url.StartsWith("sftp://") ||
+                url.StartsWith("wss://") ||
+                url.StartsWith("ldaps://") ||
+                url.StartsWith("ftps://") ||
+                url.StartsWith("ssh://") ||
+                url.StartsWith("smtps://");
         }
 
         public object Clone()

@@ -256,7 +256,7 @@ namespace ActivPass.ViewModels
         /// </summary>
         public void UpdateUrlWarning()
         {
-            if (Url != string.Empty && !Url.StartsWith("https://")) {
+            if (Url != string.Empty && !PasswordItem.UrlGrantsEncryptedTraffic(Url)) {
                 ShowUnsafeUrlWarning = Visibility.Visible;
             } else {
                 ShowUnsafeUrlWarning = Visibility.Collapsed;
